@@ -45,6 +45,14 @@ body {
     background-color: #045594; }
     .header-menu .navbar-nav .nav-item.active .nav-link:hover {
       background-color: transparent; }
+  .header-menu .navbar-nav .nav-item.nav-item-user {
+    background-color: #157bb1; }
+    .header-menu .navbar-nav .nav-item.nav-item-user .nav-link {
+      color: #D9F0FD; }
+      .header-menu .navbar-nav .nav-item.nav-item-user .nav-link:hover {
+        color: #fff;
+        -webkit-box-shadow: none;
+        box-shadow: none; }
   @media (max-width: 991px) {
     .header-menu .navbar-nav {
       padding-top: 0.5rem;

@@ -62,6 +62,19 @@ body {
 			}
 		}
 
+		.nav-item.nav-item-user {
+			background-color: #157bb1;
+
+			.nav-link {
+				color: #D9F0FD;
+
+				&:hover {
+					color: #fff;
+					box-shadow: none;
+				}
+			}
+		}
+
 		@media (max-width: 991px) {
 			padding-top: 0.5rem;
 			padding-bottom: 0.5rem;
