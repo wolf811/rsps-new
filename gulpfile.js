@@ -1,7 +1,8 @@
 'use strict';
 var gulp = require('gulp');
-var sass = require('gulp-sass');
 var bs = require('browser-sync').create();
+var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
 var wait = require('gulp-wait')
 
 gulp.task('browser-sync', ['sass'], function () {
@@ -16,6 +17,7 @@ gulp.task('sass', function(){
     return gulp.src('scss/*.scss')
         .pipe(wait(500))
         .pipe(sass({errLogToConsole: true}))
+        .pipe(autoprefixer({browsers: ['last 2 versions'], cascade: false}))
         .pipe(gulp.dest('css/'))
         .pipe(bs.reload({stream: true}));
 });
