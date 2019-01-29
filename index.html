@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ru">
+<head>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Bootstrap CSS -->
+   <link rel="stylesheet" href="css/bootstrap.css">
+
+   <!-- Font Awesome -->
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+   <!-- My styles -->
+   <link rel="stylesheet" href="fonts/AvenirNextCyr/font.css">
+   <link rel="stylesheet" href="css/style.css">
+
+   <!-- W3 -->
+   <script src="js/w3.js"></script>
+
+   <title>Library NAKS</title>
+</head>
+<body>
+   <!-- Include Header -->
+   <div w3-include-html="includes/header.html"></div>
+   <!-- End Include Header -->
+
+   <div class="container-fluid">
+      <div class="row flex-xl-nowrap">
+         <div class="col-12 col-md-3 col-xl-2 bd-sidebar bg-light">
+            <form class="bd-search d-flex align-items-center">
+               <span class="algolia-autocomplete">
+                  <input type="search" class="form-control ds-input" id="search-input" placeholder="Поиск..." autocomplete="off">
+               </span>
+               <button class="btn btn-link bd-search-docs-toggle d-md-none p-0 ml-3" type="button" data-toggle="collapse" data-target="#bd-docs-nav" aria-controls="bd-docs-nav" aria-expanded="false" aria-label="Toggle docs navigation"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30" height="30" focusable="false"><title>Menu</title><path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"></path></svg>
+               </button>
+            </form>
+
+            <nav id="bd-docs-nav" class="collapse bd-links">
+               <div class="bd-toc-item active">
+                  <a class="bd-toc-link" href="#item-1">Обзор</a>
+                  <ul class="nav bd-sidenav" role="tablist">
+                     <li class="nav-item">
+                        <a href="#item-1-1" class="nav-link">Контейнеры</a>
+                     </li>
+                     <li class="nav-item">
+                        <a href="#item-1-2" class="nav-link">Сетка (Grid system)</a>
+                     </li>
+                     <!-- <li class="nav-item">
+                        <a href="#item-1-3" class="nav-link">Медиа запросы (@media)</a>
+                     </li> -->
+                  </ul>
+               </div>
+
+               <div class="bd-toc-item">
+                  <a class="bd-toc-link" href="content.html">Контент</a>
+               </div>
+               <div class="bd-toc-item">
+                  <a class="bd-toc-link" href="components.html">Компоненты</a>
+               </div>
+               <div class="bd-toc-item">
+                  <a class="bd-toc-link" href="utilits.html">Утилиты</a>
+               </div>
+            </nav>
+         </div>
+         
+         <div class="d-none d-xl-block col-xl-2 bd-toc border-right">
+            <!-- Include RightContent -->
+            <div w3-include-html="includes/right-content.html"></div>
+            <!-- End Include RightContent -->
+         </div>
+
+         <main role="main" class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content">
+            <div class="mb-5">
+               <h1 class="bd-title" id="item-1">Обзор</h1>
+               <p class="mb-0">Большинство компонентов и опций для создания проектов заимствовано из фреймворка <a href="http://getbootstrap.com/" target="_blank">Bootstrap 4</a>, включая контейнеры для упаковки элементов, сетку (grid system), медиа запросы (@media...), утилиты адаптивности и прочие полезности.</p>
+            </div>
+
+            <div class="mb-5">
+               <h3 id="item-1-1">Контейнеры</h3>
+               <p>Контейнеры являются основным элементом компоновки и требуются при использовании сетки по умолчанию. Можно выбрать из адаптивного контейнера с фиксированной шириной (<span class="text-danger text-monospace">max-width</span>) и контейнера шириной в <span class="text-danger text-monospace">100%</span> всего окна браузера.</p>
+               <p>Контейнеры могут быть вложенными, но в большинстве случаев этого не требуется.</p>
+
+               <div class="bd-example">
+                  <div class="bd-example-container">
+                     <div class="mb-3">
+                        <p class="text-demi mb-2">Контейнер с фиксированной шириной</p>
+                        <p class="h5 text-secondary text-monospace">class = <span class="text-success">"container"</span></p>
+                     </div>
+                     <div class="bd-example-container-sidebar"></div>
+                     <div class="bd-example-container-body"></div>
+                  </div>
+               </div>
+               <div class="bd-example">
+                  <div class="bd-example-container bd-example-container-fluid">
+                     <div class="mb-3">
+                        <p class="text-demi mb-2">Контейнер с шириной в 100%</p>
+                        <p class="h5 text-secondary text-monospace">class = <span class="text-success">"container-fluid"</span></p>
+                     </div>
+                     <div class="bd-example-container-sidebar"></div>
+                     <div class="bd-example-container-body"></div>
+                  </div>
+               </div>
+            </div>
+            
+            <div class="mb-5">
+               <h3 id="item-1-2">Grid system (Сетка)</h3>
+               <p>Система сетки построена с помощью <a href="https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background" target="_blank">Flexbox</a>, состоит из двенадцати колонок, использует серию контейнеров, строк и столбцов для компоновки и выравнивания содержимого. Ниже приведен пример объеденения сетки.</p>
+               <div class="bd-example-row">
+                  <div class="bd-example">
+                     <div class="container">
+                        <div class="row">
+                           <div class="col-sm col-bg">Одна из трех колонок</div>
+                           <div class="col-sm col-bg">Одна из трех колонок</div>
+                           <div class="col-sm col-bg">Одна из трех колонок</div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="mb-3">
+                     <div class="card card-panel rounded-0">
+                        <div class="card-header" id="heading_01">
+                           <h5 class="mb-0">
+                              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse_01" aria-expanded="true" aria-controls="collapse_01"><i class="fas fa-code"></i> HTML</button>
+                           </h5>
+                        </div>
+
+                        <div id="collapse_01" class="collapse" aria-labelledby="heading_01">
+                           <div class="card-body">
+                              <textarea class="form-control text-success rounded-0" wrap="off" rows="9" readonly>
+
+                                 <div class="container">
+                                    <div class="row">
+                                       <div class="col-sm col-bg">Одна из трех колонок</div>
+                                       <div class="col-sm col-bg">Одна из трех колонок</div>
+                                       <div class="col-sm col-bg">Одна из трех колонок</div>
+                                    </div>
+                                 </div>
+                              </textarea>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <p>В сетку входят пять уровней предопределенных классов для построения сложных адаптивных макетов. Настройте размер ваших колонок на дополнительных маленьких, малых, средних, больших или дополнительных больших устройствах, как вы считаете нужным.</p>
+               <div class="table-responsive">
+                  <table class="table table-bordered table-striped">
+                     <thead>
+                        <tr>
+                           <th></th>
+                           <th class="text-center">
+                              Extra small<br>
+                              <small>&lt;576px</small>
+                           </th>
+                           <th class="text-center">
+                              Small<br>
+                              <small>≥576px</small>
+                           </th>
+                           <th class="text-center">
+                              Medium<br>
+                              <small>≥768px</small>
+                           </th>
+                           <th class="text-center">
+                              Large<br>
+                              <small>≥992px</small>
+                           </th>
+                           <th class="text-center">
+                              Extra large<br>
+                              <small>≥1200px</small>
+                           </th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <th class="text-nowrap" scope="row">Max container width</th>
+                           <td>None (auto)</td>
+                           <td>540px</td>
+                           <td>720px</td>
+                           <td>960px</td>
+                           <td>1140px</td>
+                        </tr>
+                        <tr>
+                           <th class="text-nowrap" scope="row">Class prefix</th>
+                           <td><code>.col-</code></td>
+                           <td><code>.col-sm-</code></td>
+                           <td><code>.col-md-</code></td>
+                           <td><code>.col-lg-</code></td>
+                           <td><code>.col-xl-</code></td>
+                        </tr>
+                        <tr>
+                           <th class="text-nowrap" scope="row"># of columns</th>
+                           <td colspan="5">12</td>
+                        </tr>
+                        <tr>
+                           <th class="text-nowrap" scope="row">Gutter width</th>
+                           <td colspan="5">30px (15px on each side of a column)</td>
+                        </tr>
+                        <tr>
+                           <th class="text-nowrap" scope="row">Nestable</th>
+                           <td colspan="5">Yes</td>
+                        </tr>
+                        <tr>
+                           <th class="text-nowrap" scope="row">Column ordering</th>
+                           <td colspan="5">Yes</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+               
+               <p class="mb-0">Bootstrap: <a href="http://getbootstrap.com/docs/4.1/layout/grid/" target="_blank">Grid system&nbsp;<i class="fas fa-external-link-alt"></i></a></p>
+            </div>
+         </main>
+      </div>
+   </div>
+   
+   <!-- Include Footer -->
+   <div w3-include-html="includes/footer.html"></div>
+   <!-- End Include Footer -->
+   
+   <!-- Optional JavaScript -->
+   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+   <!-- W3 -->
+   <script>w3.includeHTML();</script>
+
+   <!-- MyScript -->
+   <!-- <script src="js/script.js"></script> -->
+
+</body>
+</html>
