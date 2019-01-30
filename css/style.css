@@ -1,24 +1,15 @@
+/* Style change Bootstrap */
+.text-primary {
+  color: #086da3 !important; }
+
+.btn-primary {
+  background-color: #086da3 !important; }
+
+/* End */
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 0.9rem; }
 
-/* #Typography
-================================================== */
-/* 	h1, h2, h3, h4, h5, h6 {
-	color: #00467f;
-	font-weight: bold;
-	line-height: normal;
-	text-transform: none;
-	text-decoration: underline;
-	margin-bottom: 30px; 
-}
-	h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { font-weight: inherit; }
-	h1 { font-size: 1.2em; margin-bottom: 5px;}
-#docc {margin-bottom: 30px;}
-	h2 { font-size: 1.1em; }
-	h3 { font-size: 1em;}
-	h4 { font-size: 0.8em;}
-	h5 { font-size: 0.7em;} */
 .header-menu {
   background-color: #086da3;
   -webkit-box-shadow: inset 0 -2px 3px 0 #003560;
@@ -30,7 +21,7 @@ body {
   .header-menu .navbar {
     padding: 0; }
     .header-menu .navbar .navbar-toggler {
-      border-color: white; }
+      border: none; }
       .header-menu .navbar .navbar-toggler .navbar-toggler-icon {
         background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E"); }
   .header-menu .navbar-nav .nav-item .nav-link {
@@ -40,6 +31,10 @@ body {
       background-color: #157bb1;
       -webkit-box-shadow: inset 0 -2px 3px 0 #003560;
       box-shadow: inset 0 -2px 3px 0 #003560; }
+    @media (min-width: 992px) and (max-width: 1199px) {
+      .header-menu .navbar-nav .nav-item .nav-link {
+        padding: 0.8rem;
+        font-size: 0.8rem; } }
   .header-menu .navbar-nav .nav-item.active {
     color: #fff;
     background-color: #045594; }
@@ -57,3 +52,24 @@ body {
     .header-menu .navbar-nav {
       padding-top: 0.5rem;
       padding-bottom: 0.5rem; } }
+
+.header-content p:last-child {
+  margin-bottom: 0; }
+
+@media (min-width: 576px) and (max-width: 1199px) {
+  .header-content p {
+    font-size: 0.8rem; } }
+
+.header-content h2 {
+  margin-bottom: 0;
+  /* @media (min-width: 576px) and (max-width: 767px){
+				
+				font-size: 1.5rem;
+			} */ }
+  @media (min-width: 576px) and (max-width: 991px) {
+    .header-content h2 {
+      font-size: 1.5rem; } }
+
+main {
+  background-image: url(../images/bg-zub.gif);
+  background-repeat: repeat-x; }
