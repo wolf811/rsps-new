@@ -7,12 +7,12 @@
 }
 /* End */
 
-
 body {
 	font-family: 'Open Sans', sans-serif;
 	font-size: 0.9rem;
 }
 
+/* Header */
 .header-menu {
 	background-color: #086da3;
 	box-shadow: inset 0 -2px 3px 0 #003560;
@@ -27,13 +27,12 @@ body {
 
 		.navbar-toggler {
 			border: none;
-		    .navbar-toggler-icon {
-			  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+			.navbar-toggler-icon {
+				background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 			}
 		}
 	}
 	.navbar-nav {
-		
 		.nav-item .nav-link {
 			color: #fff;
 			padding: 1rem;
@@ -75,37 +74,65 @@ body {
 			padding-bottom: 0.5rem;
 		}
 	}
-	
 }
 
 .header-content {
-	p {
-
+	p 	{
 		&:last-child {
 			margin-bottom: 0;
 		}
 		@media (min-width: 576px) and (max-width: 1199px){
-				
-				font-size: 0.8rem;
-			}
+			font-size: 0.8rem;
+		}
 	}
 	
 	h2 {
 		margin-bottom: 0;
 		@media (min-width: 576px) and (max-width: 991px){
-				
-				font-size: 1.5rem;
-			}
-
-			/* @media (min-width: 576px) and (max-width: 767px){
-				
-				font-size: 1.5rem;
-			} */
+			font-size: 1.5rem;
+		}
 	}
-	
 }
+/* End Header */
 
+/* Content */
 main {
 	background-image: url(../images/bg-zub.gif);
-    background-repeat: repeat-x;
+	background-repeat: repeat-x;
 }
+/* End Content */
+
+/* Footer */
+footer hr {
+	margin-top: 0;
+}
+.footer-menu {
+	background-image: url(../images/bg-zub.gif);
+	background-repeat: repeat-x;
+
+	.nav {
+		.nav-item .nav-link {
+			color: #3F3F3F;
+			padding-bottom: 0.5rem;
+			border-bottom: 3px solid #c42921;
+			display: inline-block;
+
+			&:hover {
+				color: #000;
+			}
+		}
+	}
+}
+
+.footer-content {
+	h6 {
+		margin-bottom: 0;
+	}
+	p {
+		font-size: 0.8rem;
+	}
+	p:last-child {
+		margin-bottom: 0;
+	}
+}
+/* End Footer */
