@@ -13,7 +13,6 @@ body {
 /* Header */
 .header-menu {
   background-color: #086da3;
-  -webkit-box-shadow: inset 0 -2px 3px 0 #003560;
   box-shadow: inset 0 -2px 3px 0 #003560; }
   @media (max-width: 991px) {
     .header-menu {
@@ -30,7 +29,6 @@ body {
     padding: 1rem; }
     .header-menu .navbar-nav .nav-item .nav-link:hover {
       background-color: #157bb1;
-      -webkit-box-shadow: inset 0 -2px 3px 0 #003560;
       box-shadow: inset 0 -2px 3px 0 #003560; }
     @media (min-width: 992px) and (max-width: 1199px) {
       .header-menu .navbar-nav .nav-item .nav-link {
@@ -47,7 +45,6 @@ body {
       color: #D9F0FD; }
       .header-menu .navbar-nav .nav-item.nav-item-user .nav-link:hover {
         color: #fff;
-        -webkit-box-shadow: none;
         box-shadow: none; }
   @media (max-width: 991px) {
     .header-menu .navbar-nav {

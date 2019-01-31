@@ -1,0 +1,69 @@
+{% load static %}
+<!-- Header -->
+	<header>
+		<div class="header-menu">
+			<div class="container">
+				<nav class="navbar navbar-expand-lg navbar-light">
+					<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon mr-3"></span>
+						<span class="d-inline-block d-lg-none" style="color: #fff; font-size: 1.2rem;">Меню</span>
+					</button> 
+
+					<div class="collapse navbar-collapse" id="navbarNav">
+						<ul class="navbar-nav mr-auto">
+							<li class="nav-item active">
+								<a class="nav-link" href="{% url 'index' %}">Главная <span class="sr-only">(current)</span></a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">О РСПС</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">Новости</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">Документы</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">Региональные отделения</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">Одобрено РСПС</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{% url 'contact' %}">Контакты</a>
+							</li>
+						</ul>
+						<ul class="navbar-nav d-none">
+							<li class="nav-item nav-item-user">
+								<a class="nav-link" href="#"><i class="fa fa-user mr-2"></i>РО-02</a>
+							</li>
+							<li class="nav-item nav-item-user">
+								<a class="nav-link" href="#"><i class="fa fa-sign-out mr-2"></i>Выход</a>
+							</li>
+						</ul>
+						<ul class="navbar-nav">
+							<li class="nav-item nav-item-user">
+								<a class="nav-link" href="#"><i class="fa fa-sign-in mr-2"></i>Личный кабинет</a>
+							</li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+		</div>
+		<div class="header-content py-4">
+			<div class="container">
+				<div class="row align-items-center justify-content-between">
+					<div class="col-sm-3 col-md-2 col-lg-3 text-center text-sm-left">
+						<a href="http://rsps-online.ru/"><img src="{% static 'images/logo.gif' %}" class="img-fluid" alt="RSPS logo"></a>
+					</div>
+					<div class="d-none d-sm-block col-sm-9 col-md-7">
+						<h2>Российское сварочное профессиональное сообщество</h2>
+					</div>
+					<div class="d-sm-none d-md-block col-md-3 col-lg-2 text-center text-lg-right">
+						<p class="mb-1"><i class="fa fa-phone-square mr-2 mt-4 mt-sm-0 text-primary"></i>+7 (499) 784 77 00</p>
+						<p><i class="fa fa-fax mr-2 text-primary"></i>+7 (499) 784 77 11</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header> <!-- End Header -->
