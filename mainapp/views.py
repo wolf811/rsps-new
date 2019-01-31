@@ -15,3 +15,10 @@ def contact(request):
 		'title': title
 	}
 	return render(request, 'mainapp/contact.html', content)
+
+def account(request):
+	title = 'РСПС - Личный кабинет'
+	content = {
+		'title': title
+	}
+	return render(request, 'mainapp/account.html', content)

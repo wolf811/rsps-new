@@ -1,14 +1,32 @@
 /* Style change Bootstrap */
+/* a {
+	color: #086da3 !important;
+} */
 .text-primary {
 	color: #086da3 !important;
 }
 .btn-primary {
 	background-color: #086da3 !important;
+
+	&:hover {
+		background-color: #157bb1 !important;
+	}
+}
+.btn-outline-primary {
+    color: #086da3 !important;
+    border-color: #086da3 !important;
+
+    &:hover {
+    	background-color: #157bb1 !important;
+    	color: #fff !important;
+    }
+}
+.btn-link {
+    color: #086da3 !important;
 }
 /* End */
 
 body {
-	// test comment
 	font-family: 'Open Sans', sans-serif;
 	font-size: 0.9rem;
 }
@@ -27,10 +45,26 @@ body {
 		padding: 0;
 
 		.navbar-toggler {
+			@media (max-width: 991px) {
+				display: -webkit-flex;
+				display: -moz-flex;
+				display: -ms-flex;
+				display: -o-flex;
+				display: flex;
+				-ms-align-items: center;
+				align-items: center;
+			}
+			
 			border: none;
 			.navbar-toggler-icon {
 				background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 			}
+			.navbar-toggler-text {
+				color: #fff; 
+				font-size: 1.2rem;
+				text-transform: uppercase;
+			}
+
 		}
 	}
 	.navbar-nav {
@@ -137,3 +171,15 @@ footer hr {
 	}
 }
 /* End Footer */
+
+/* Form */
+/* .form-label-sm {
+
+} */
+/* End Form */
+
+/* Modal */
+	.modal-footer {
+		justify-content: space-between;
+	}
+/* End Modal */
