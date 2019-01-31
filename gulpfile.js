@@ -36,9 +36,10 @@ var exec = require('child_process').exec;
 
 gulp.task('browser-sync', ['runserver'], function() {
     bs.init({
-      notify: false,
+      notify: true,
       port: 8000,
-      proxy: 'localhost:8000'
+      proxy: 'localhost:8000',
+      // ws: true
     })
   });
 
