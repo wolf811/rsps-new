@@ -30,6 +30,7 @@
 
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var autoprefixer = require('gulp-autoprefixer');
 var bs = require('browser-sync').create();
 var wait = require('gulp-wait');
 var exec = require('child_process').exec;
@@ -39,7 +40,6 @@ gulp.task('browser-sync', ['runserver'], function() {
       notify: true,
       port: 8000,
       proxy: 'localhost:8000',
-      // ws: true
     })
   });
 
@@ -50,7 +50,8 @@ gulp.task('runserver', function() {
 gulp.task('sass', function(){
     return gulp.src('assets/scss/*.scss')
         .pipe(wait(500))
-        .pipe(sass())
+        .pipe(sass({errLogToConsole: true}))
+        .pipe(autoprefixer({browsers: ['last 2 versions'], cascade: false}))
         .pipe(gulp.dest('static/css/'))
         .pipe(bs.reload({stream: true}));
 });
