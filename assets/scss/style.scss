@@ -1,7 +1,4 @@
 /* Style change Bootstrap */
-/* a {
-	color: #086da3 !important;
-} */
 .text-primary {
 	color: #086da3 !important;
 }
@@ -13,16 +10,28 @@
 	}
 }
 .btn-outline-primary {
-    color: #086da3 !important;
-    border-color: #086da3 !important;
+	color: #086da3 !important;
+	border-color: #086da3 !important;
 
-    &:hover {
-    	background-color: #157bb1 !important;
-    	color: #fff !important;
-    }
+	&:hover {
+		background-color: #157bb1 !important;
+		color: #fff !important;
+	}
 }
 .btn-link {
-    color: #086da3 !important;
+	color: #086da3 !important;
+}
+
+.breadcrumb {
+	padding: 0;
+	background-color: transparent;
+	border-radius: 0;
+	font-size: 0.75rem;
+
+	a {
+		color: #086da3 !important;
+	}
+
 }
 /* End */
 
@@ -175,11 +184,35 @@ footer hr {
 /* Form */
 /* .form-label-sm {
 
-} */
-/* End Form */
+	} */
+	/* End Form */
 
-/* Modal */
+	/* Modal */
 	.modal-footer {
 		justify-content: space-between;
 	}
-/* End Modal */
+	/* End Modal */
+
+	main {
+		h4.title-page {
+			color: #00467f;
+			margin-bottom: 1.5rem;
+			font-weight: bold;
+		}
+		.nav-tabs {
+
+			.nav-link {
+				border-radius: 0; 
+				color: #086da3;
+				    border: solid 1px #ddd;
+    /* border-width: 1px 1px 0 0; */
+
+    background: #E8EEF2;
+			}
+			.nav-link.active {
+				    color: #495057;
+    				background-color: #fff;
+			}
+		}
+	}
+

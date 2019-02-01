@@ -1,5 +1,11 @@
+$('#showRecovery').click(function() {
+	$('#pass-recovery').show('fade');
+	$('#login-account').hide();
+});
 
-$(document).ready(function () {
-	console.log('работает kjndfkjdfkjvn');
+$('#backLogin').click(function() {
+	$('#login-account').show('fade');
+	$('#pass-recovery').hide();
 })
+
 

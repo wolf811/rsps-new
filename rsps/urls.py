@@ -25,6 +25,12 @@ urlpatterns = [
     path('', mainapp.index, name = 'index'),
     path('contact/', mainapp.contact, name = 'contact'),
     path('account/', mainapp.account, name = 'account'),
+    path('registration/', mainapp.registration, name = 'registration'),
+    path('about/', mainapp.about, name = 'about'),
+    path('news/', mainapp.news, name = 'news'),
+    path('docs/', mainapp.docs, name = 'docs'),
+    path('regionalOffice/', mainapp.regionalOffice, name = 'regionalOffice'),
+    path('approved/', mainapp.approved, name = 'approved'),
 ]
 
 if settings.DEBUG:

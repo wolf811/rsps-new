@@ -1,7 +1,4 @@
 /* Style change Bootstrap */
-/* a {
-	color: #086da3 !important;
-} */
 .text-primary {
   color: #086da3 !important; }
 
@@ -19,6 +16,14 @@
 
 .btn-link {
   color: #086da3 !important; }
+
+.breadcrumb {
+  padding: 0;
+  background-color: transparent;
+  border-radius: 0;
+  font-size: 0.75rem; }
+  .breadcrumb a {
+    color: #086da3 !important; }
 
 /* End */
 body {
@@ -133,7 +138,7 @@ footer hr {
 /* Form */
 /* .form-label-sm {
 
-} */
+	} */
 /* End Form */
 /* Modal */
 .modal-footer {
@@ -142,3 +147,18 @@ footer hr {
   justify-content: space-between; }
 
 /* End Modal */
+main h4.title-page {
+  color: #00467f;
+  margin-bottom: 1.5rem;
+  font-weight: bold; }
+
+main .nav-tabs .nav-link {
+  border-radius: 0;
+  color: #086da3;
+  border: solid 1px #ddd;
+  /* border-width: 1px 1px 0 0; */
+  background: #E8EEF2; }
+
+main .nav-tabs .nav-link.active {
+  color: #495057;
+  background-color: #fff; }
