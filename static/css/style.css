@@ -138,11 +138,6 @@ footer hr {
   margin-bottom: 0; }
 
 /* End Footer */
-/* Form */
-/* .form-label-sm {
-
-	} */
-/* End Form */
 /* Modal */
 .modal-footer {
   -webkit-box-pack: justify;
@@ -225,7 +220,6 @@ main .table-list.table-internal-list th {
   border-bottom: solid 1px #e5e5e5; }
 
 main .table-list.table-internal-list td {
-  font-size: 0.7rem;
   padding: 10px 15px;
   border-bottom: solid 1px #e5e5e5;
   background: #fefefe !important;
