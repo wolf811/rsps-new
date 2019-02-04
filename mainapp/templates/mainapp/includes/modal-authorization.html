@@ -1,0 +1,58 @@
+{% load static %}
+
+<!-- Modal - Login to your personal account-->
+<div class="modal fade" id="authorizationModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+	<div class="modal-dialog modal-sm" role="document">
+		<div class="modal-content">
+
+			<!-- Login -->
+			<div id="login-account">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Вход в личный кабинет</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="" class="form-label-sm">Ваш email</label>
+							<input type="email" class="form-control form-control-sm" placeholder="Email">
+						</div>
+						<div class="form-group">
+							<label for="" class="form-label-sm">Ваш пароль</label>
+							<input type="password" class="form-control form-control-sm" placeholder="Пароль">
+						</div>
+						<button type="button" id="showRecovery" class="btn btn-link btn-sm pl-0">Забыли пароль?</button>
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary btn-sm"><i class="fa fa-sign-in mr-2"></i>Войти</button>
+						<a href="{% url 'registration' %}" class="btn btn-outline-primary btn-sm">Зарегистрироваться</a>
+					</div>
+				</form>
+			</div> <!-- End Login -->
+
+			<!-- Recovery password -->
+			<div id="pass-recovery" style="display: none;">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Восстановление пароля</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form>
+					<div class="modal-body">
+
+					</div>
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary btn-sm">Отправить</button>
+						<button type="button" id="backLogin" class="btn btn-link btn-sm">Отмена</button>
+					</div>
+				</form>
+			</div><!-- End Recovery password -->
+
+		</div>
+	</div>
+</div>
+
+
