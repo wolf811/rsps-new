@@ -46,15 +46,15 @@
 							<td>236005, г. Обнинск, ул. Колхозная, д. 118A</td>
 							<td>
 								<div class="text-appercase">Конференция РСПС по Калужской области 2019</div>
-								<div>Колличество участников:&nbsp;<a href="#" class="text-primary">0</a></div>
+								<div>Колличество участников:&nbsp;<strong>0</strong></div>
 								<div class="text-danger mt-2">Зарегистрируйте участников</div>
 							</td>
 							<td>
-								<a href="#" class="mr-3 text-primary" title="Удалить"><i class="fa fa-times"></i></a>
-								<a href="#" class="text-primary" title="Изменить"><i class="fa fa-pencil"></i></a>
+								<a href="#" class="btn-action mr-3 text-primary" title="Удалить"><i class="fa fa-times"></i></a>
+								<a href="#multiCollapseConf01" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" aria-controls="multiCollapseConf01" title="Изменить"><i class="fa fa-pencil"></i></a>
 							</td>
 						</tr>
-						<tr class="edit-list" id="editListKonf01">
+						<tr class="multi-collapse collapse edit-list" id="multiCollapseConf01">
 							<td colspan="4">
 								<form>
 									<div class="mb-4">
@@ -93,7 +93,7 @@
 
 									<h6 class='text-primary mb-4'>Участники конференции</h6>
 
-									<button type="button" class="btn btn-danger btn-sm mb-3">Добавить участника</button>
+									<button type="button" class="btn btn-outline-danger btn-sm mb-3" data-toggle="modal" data-target="#participantConfModal">Зарегистрировать</button>
 
 									<div class="table-responsive">
 										<table class="table table-list table-internal-list">
@@ -102,7 +102,7 @@
 													<th>ФИО</th>
 													<th>Место работы / должность</th>
 													<th>Телефон / Email</th>
-													<th>Членство в РСПС</th>
+													<th>Членство РСПС</th>
 													<th>Действия</th>
 												</tr>
 											</thead>
@@ -112,9 +112,9 @@
 													<td>ООО "Аттестационный центр Калужской области", ген.директор</td>
 													<td>+7(4842) 56-24-66, andrey.tsarkov@mail.ru</td>
 													<td>да</td>
-													<td class="del-edit">
-														<a href="#" class="mr-3 text-primary" title="Удалить"><i class="fa fa-times"></i></a>
-														<a href="#Modal-editChlenKonf" class="text-primary" title="Изменить"><i class="fa fa-pencil"></i></a>
+													<td>
+														<a href="#" class="btn-action mr-3 text-primary" title="Удалить"><i class="fa fa-times"></i></a>
+														<a href="#" class="btn-action text-primary" data-toggle="modal" data-target="#participantConfModal" title="Изменить"><i class="fa fa-pencil"></i></a>
 													</td>
 												</tr>
 											</tbody>
@@ -127,7 +127,7 @@
 									</div>
 
 									<button type="submit" class="btn btn-primary btn-sm">Сохранить</button>
-									<button type="button" class="btn btn-link btn-sm">Отмена</button>
+									<a href="#multiCollapseConf01" class="btn btn-link btn-sm" data-toggle="collapse" aria-expanded="false" aria-controls="multiCollapseConf01" role="button">Отмена</a>
 								</form>
 							</td>
 						</tr>
@@ -137,18 +137,35 @@
 							<td>248000, г. Калуга, ул. Баженова, д.2, офис 239</td>
 							<td>
 								<div class="text-appercase">Конференция РСПС по Калужской области 2018</div>
-								<div>Колличество участников:&nbsp;<a href="#" class="text-primary">11</a></div>
+								<div>Колличество участников:&nbsp;<strong>11</strong></div>
 								<div class="text-success mt-2">Проведена</div>
 							</td>
 							<td>
-								<a href="#" class="mr-3 text-primary" title="Копировать"><i class="fa fa-clone"></i></a>
-								<a href="#" class="text-primary" title="Просмотр"><i class="fa fa-eye"></i></a>
+								<a href="#" class="btn-action mr-3 text-primary" title="Копировать"><i class="fa fa-clone"></i></a>
+								<a href="#multiCollapseConf02" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" aria-controls="multiCollapseConf02" title="Просмотр"><i class="fa fa-eye"></i></a>
 							</td>
 						</tr>
 
 					</tbody>
 				</table>
 			</div>
+			<nav aria-label="Page navigation example">
+				<ul class="pagination pagination-sm">
+					<li class="page-item disabled">
+						<a class="page-link" href="#" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+					<li class="page-item active"><a class="page-link" href="#">1</a></li>
+					<li class="page-item"><a class="page-link" href="#">2</a></li>
+					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					<li class="page-item">
+						<a class="page-link" href="#" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
 		</div>
 	</main> 
 <!-- End Content -->
