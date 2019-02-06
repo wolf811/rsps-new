@@ -236,7 +236,10 @@ main .table-list.table-internal-list th {
   border-bottom: solid 1px #e5e5e5; }
 
 main .table-list.table-internal-list td {
+
   /* font-size: 0.7rem; */
+
+
   padding: 10px 15px;
   border-bottom: solid 1px #e5e5e5;
   /* background: #fefefe !important; */
