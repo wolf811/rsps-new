@@ -28,7 +28,7 @@
 				</li>
 			</ul>
 			
-			<button type="button" class="btn btn-danger btn-xl mb-4 mb-xl-5">Добавить конференцию</button>
+			<button type="button" class="btn btn-danger btn-xl mb-4 mb-xl-5" data-toggle='modal' data-target='#modal-regConference'>Добавить конференцию</button>
 			
 			<div class="table-responsive">
 				<table class="table table-list">
@@ -46,16 +46,16 @@
 							<td>236005, г. Обнинск, ул. Колхозная, д. 118A</td>
 							<td>
 								<div class="text-appercase">Конференция РСПС по Калужской области 2019</div>
-								<div>Колличество участников:&nbsp;<a href="#" class="text-primary">0</a></div>
+								<div>Колличество участников:&nbsp;<strong>0</strong></div>
 								<div class="text-danger mt-2">Зарегистрируйте участников</div>
 							</td>
 							<td>
-								<a href="#" class="mr-3 text-primary" title="Удалить"><i class="fa fa-times"></i></a>
-								<a href="#" class="text-primary" title="Изменить"><i class="fa fa-pencil"></i></a>
+								<a href="#" class="btn-action mr-3 text-primary" title="Удалить"><i class="fa fa-times"></i></a>
+								<a href="#multiCollapseConf01" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" aria-controls="multiCollapseConf01" title="Изменить"><i class="fa fa-pencil"></i></a>
 							</td>
 						</tr>
-						<tr class="edit-list" id="editListKonf01">
-							<td colspan="4">
+						<tr class="multi-collapse collapse edit-list" id="multiCollapseConf01">
+							<td colspan="4" class="total-column">
 								<form>
 									<div class="mb-4">
 										<h6 class='text-primary mb-4'>Сведения о конференции</h6>
@@ -93,7 +93,7 @@
 
 									<h6 class='text-primary mb-4'>Участники конференции</h6>
 
-									<button type="button" class="btn btn-danger btn-sm mb-3">Добавить участника</button>
+									<button type="button" class="btn btn-outline-danger btn-xs mb-3" data-toggle="modal" data-target="#participantConfModal">Зарегистрировать</button>
 
 									<div class="table-responsive">
 										<table class="table table-list table-internal-list">
@@ -112,9 +112,11 @@
 													<td>ООО "Аттестационный центр Калужской области", ген.директор</td>
 													<td>+7(4842) 56-24-66, andrey.tsarkov@mail.ru</td>
 													<td>да</td>
-													<td class="del-edit">
-														<a href="#" class="mr-3 text-primary" title="Удалить"><i class="fa fa-times"></i></a>
-														<a href="#Modal-editChlenKonf" class="text-primary" title="Изменить"><i class="fa fa-pencil"></i></a>
+													<td>
+														<div>
+															<a href="#" class="btn-action mr-3 text-primary" title="Удалить"><i class="fa fa-times"></i></a>
+															<a href="#" class="btn-action text-primary" data-toggle="modal" data-target="#participantConfModal" title="Изменить"><i class="fa fa-pencil"></i></a>
+														</div>
 													</td>
 												</tr>
 												<tr>
@@ -133,11 +135,11 @@
 
 									<div class="form-group form-check">
 										<input type="checkbox" class="form-check-input">
-										<label class="form-check-label" for=""><span class="text-success">Конференция проведена</span></label>
+										<label class="form-check-label text-success" for=""><strong>Конференция проведена</strong></label>
 									</div>
 
-									<button type="submit" class="btn btn-primary btn-sm">Сохранить</button>
-									<button type="button" class="btn btn-link btn-sm">Отмена</button>
+									<button type="submit" class="btn btn-primary btn-xs">Сохранить</button>
+									<a href="#multiCollapseConf01" class="btn btn-outline-primary btn-xs" data-toggle="collapse" aria-expanded="false" aria-controls="multiCollapseConf01" role="button">Закрыть</a>
 								</form>
 							</td>
 						</tr>
@@ -147,18 +149,133 @@
 							<td>248000, г. Калуга, ул. Баженова, д.2, офис 239</td>
 							<td>
 								<div class="text-appercase">Конференция РСПС по Калужской области 2018</div>
-								<div>Колличество участников:&nbsp;<a href="#" class="text-primary">11</a></div>
+								<div>Колличество участников:&nbsp;<strong>11</strong></div>
 								<div class="text-success mt-2">Проведена</div>
 							</td>
 							<td>
-								<a href="#" class="mr-3 text-primary" title="Копировать"><i class="fa fa-clone"></i></a>
-								<a href="#" class="text-primary" title="Просмотр"><i class="fa fa-eye"></i></a>
+								<a href="#" class="btn-action mr-3 text-primary" title="Копировать"><i class="fa fa-clone"></i></a>
+								<a href="#multiCollapseConf02" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" aria-controls="multiCollapseConf02" title="Просмотр"><i class="fa fa-eye"></i></a>
 							</td>
 						</tr>
+						<tr class="multi-collapse collapse edit-list" id="multiCollapseConf02">
+							<td colspan="4" class="total-column">
+								<form>
+									<div class="mb-4">
+										<h6 class='text-primary mb-4'>Сведения о конференции</h6>
+										<div class="form-group row">
+											<label for="" class="col-sm-4 col-form-label col-form-label-sm">Дата проведения&nbsp;<span class="text-danger">*</span></label>
+											<div class="col-sm-2">
+												<input type="date" class="form-control form-control-sm" placeholder="" value="15.10.2019" disabled>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label for="" class="col-sm-4 col-form-label col-form-label-sm">Место проведения&nbsp;<span class="text-danger">*</span></label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control form-control-sm" placeholder="" value="236005, г. Обнинск, ул. Колхозная, д. 118A" disabled>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label for="" class="col-sm-4 col-form-label col-form-label-sm">Название конференции&nbsp;<span class="text-danger">*</span></label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control form-control-sm" placeholder="" value="Конференция РСПС по Калужской области 2019" disabled>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label for="" class="col-sm-4 col-form-label col-form-label-sm">Тема конференции&nbsp;<span class="text-danger">*</span></label>
+											<div class="col-sm-6">
+												<input type="text" class="form-control form-control-sm" placeholder="" value="Развитие сварочного сообщества" disabled>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label for="" class="col-sm-4 col-form-label col-form-label-sm">Повестка дня&nbsp;<span class="text-danger">*</span></label>
+											<div class="col-sm-6">
+												<textarea class="form-control form-control-sm" rows="3" disabled>
+													1.
+													2.
+													3.
+												</textarea>
+											</div>
+										</div>
+									</div>
 
+									<h6 class='text-primary mb-4'>Участники конференции</h6>
+
+									<!-- <button type="button" class="btn btn-outline-danger btn-xs mb-3" data-toggle="modal" data-target="#participantConfModal">Зарегистрировать</button> -->
+
+									<div class="table-responsive">
+										<table class="table table-list table-internal-list">
+											<thead>
+												<tr class="active">
+													<th>ФИО</th>
+													<th>Место работы / должность</th>
+													<th>Телефон / Email</th>
+													<th>Членство РСПС</th>
+													<th>Действия</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Царьков Андрей Васильевич</td>
+													<td>ООО "Аттестационный центр Калужской области", ген.директор</td>
+													<td>+7(4842) 56-24-66, andrey.tsarkov@mail.ru</td>
+													<td>да</td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>Царьков Андрей Васильевич</td>
+													<td>ООО "Аттестационный центр Калужской области", ген.директор</td>
+													<td>+7(4842) 56-24-66, andrey.tsarkov@mail.ru</td>
+													<td>да</td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>Царьков Андрей Васильевич</td>
+													<td>ООО "Аттестационный центр Калужской области", ген.директор</td>
+													<td>+7(4842) 56-24-66, andrey.tsarkov@mail.ru</td>
+													<td>да</td>
+													<td></td>
+												</tr>
+												<tr>
+													<td>Царьков Андрей Васильевич</td>
+													<td>ООО "Аттестационный центр Калужской области", ген.директор</td>
+													<td>+7(4842) 56-24-66, andrey.tsarkov@mail.ru</td>
+													<td>да</td>
+													<td></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+
+									<div class="form-group form-check">
+										<input type="checkbox" class="form-check-input" checked disabled>
+										<label class="form-check-label text-success" for=""><strong>Конференция проведена</strong></label>
+									</div>
+
+									<!-- <button type="submit" class="btn btn-primary btn-xs">Сохранить</button> -->
+									<a href="#multiCollapseConf01" class="btn btn-outline-primary btn-xs" data-toggle="collapse" aria-expanded="false" aria-controls="multiCollapseConf02" role="button">Закрыть</a>
+								</form>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
+			<nav aria-label="Page navigation example">
+				<ul class="pagination pagination-sm">
+					<li class="page-item disabled">
+						<a class="page-link" href="#" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+						</a>
+					</li>
+					<li class="page-item active"><a class="page-link" href="#">1</a></li>
+					<li class="page-item"><a class="page-link" href="#">2</a></li>
+					<li class="page-item"><a class="page-link" href="#">3</a></li>
+					<li class="page-item">
+						<a class="page-link" href="#" aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
 		</div>
 	</main> 
 <!-- End Content -->
