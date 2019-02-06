@@ -1,5 +1,6 @@
 from django.shortcuts import render
-
+from mainapp.models import Conference
+from mainapp.models import Member
 # Create your views here.
 
 def index(request):
@@ -18,8 +19,12 @@ def contact(request):
 
 def account(request):
 	title = 'РСПС - Личный кабинет'
+	conferences = Conference.objects.all()
+	members = Member.objects.all()
 	content = {
-		'title': title
+		'title': title, 
+		'conferences': conferences,
+		'members': members,
 	}
 	return render(request, 'mainapp/account.html', content)
 

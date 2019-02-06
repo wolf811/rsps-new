@@ -41,20 +41,22 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>15.05.2019</td>
-							<td>236005, г. Обнинск, ул. Колхозная, д. 118A</td>
-							<td>
-								<div class="text-appercase">Конференция РСПС по Калужской области 2019</div>
-								<div>Колличество участников:&nbsp;<strong>0</strong></div>
-								<div class="text-danger mt-2">Зарегистрируйте участников</div>
-							</td>
-							<td>
-								<a href="#" class="btn-action mr-3 text-primary" title="Удалить"><i class="fa fa-times"></i></a>
-								<a href="#multiCollapseConf01" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" aria-controls="multiCollapseConf01" title="Изменить"><i class="fa fa-pencil"></i></a>
-							</td>
-						</tr>
-						<tr class="multi-collapse collapse edit-list" id="multiCollapseConf01">
+						{% for conference in conferences %}
+							{% if not conference.completed %}
+							<tr>
+								<td>{{ conference.date }}</td>
+								<td>{{ conference.place }}</td>
+								<td>
+									<div class="text-appercase">{{ conference.title }}</div>
+									<div>Колличество участников:&nbsp;<strong>0</strong></div>
+									<div class="text-danger mt-2">Зарегистрируйте участников</div>
+								</td>
+								<td>
+									<a href="#" class="btn-action mr-3 text-primary" title="Удалить"><i class="fa fa-times"></i></a>
+									<a href="#multiCollapseConf01" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" aria-controls="multiCollapseConf01" title="Изменить"><i class="fa fa-pencil"></i></a>
+								</td>
+							</tr>
+							<tr class="multi-collapse collapse edit-list" id="multiCollapseConf01">
 							<td colspan="4" class="total-column">
 								<form>
 									<div class="mb-4">
@@ -107,10 +109,11 @@
 												</tr>
 											</thead>
 											<tbody>
+												{% for member in members %}
 												<tr>
-													<td>Царьков Андрей Васильевич</td>
-													<td>ООО "Аттестационный центр Калужской области", ген.директор</td>
-													<td>+7(4842) 56-24-66, andrey.tsarkov@mail.ru</td>
+													<td>{{member.fio}}</td>
+												<td>{{member.job}}, {{member.jobplace}}</td>
+													<td>{{member.tel}}, {{member.email}}</td>
 													<td>да</td>
 													<td>
 														<div>
@@ -119,16 +122,8 @@
 														</div>
 													</td>
 												</tr>
-												<tr>
-													<td>КРАСАВЧИК!!!</td>
-													<td>ООО "Аттестационный центр Калужской области", ген.директор</td>
-													<td>+7(4842) 56-24-66, andrey.tsarkov@mail.ru</td>
-													<td>да</td>
-													<td class="del-edit">
-														<a href="#" class="mr-3 text-primary" title="Удалить"><i class="fa fa-times"></i></a>
-														<a href="#Modal-editChlenKonf" class="text-primary" title="Изменить"><i class="fa fa-pencil"></i></a>
-													</td>
-												</tr>
+												{% endfor %}
+												
 											</tbody>
 										</table>
 									</div>
@@ -143,21 +138,21 @@
 								</form>
 							</td>
 						</tr>
-
-						<tr>
-							<td>10.11.2018</td>
-							<td>248000, г. Калуга, ул. Баженова, д.2, офис 239</td>
-							<td>
-								<div class="text-appercase">Конференция РСПС по Калужской области 2018</div>
-								<div>Колличество участников:&nbsp;<strong>11</strong></div>
-								<div class="text-success mt-2">Проведена</div>
-							</td>
-							<td>
-								<a href="#" class="btn-action mr-3 text-primary" title="Копировать"><i class="fa fa-clone"></i></a>
-								<a href="#multiCollapseConf02" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" aria-controls="multiCollapseConf02" title="Просмотр"><i class="fa fa-eye"></i></a>
-							</td>
-						</tr>
-						<tr class="multi-collapse collapse edit-list" id="multiCollapseConf02">
+							{% else %}
+							<tr>
+								<td>{{ conference.date }}</td>
+								<td>{{ conference.place }}</td>
+								<td>
+									<div class="text-appercase">{{ conference.title }}</div>
+									<div>Колличество участников:&nbsp;<strong>11</strong></div>
+									<div class="text-success mt-2">Проведена</div>
+								</td>
+								<td>
+									<a href="#" class="btn-action mr-3 text-primary" title="Копировать"><i class="fa fa-clone"></i></a>
+									<a href="#multiCollapseConf02" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" aria-controls="multiCollapseConf02" title="Просмотр"><i class="fa fa-eye"></i></a>
+								</td>
+							</tr>
+							<tr class="multi-collapse collapse edit-list" id="multiCollapseConf02">
 							<td colspan="4" class="total-column">
 								<form>
 									<div class="mb-4">
@@ -256,6 +251,13 @@
 								</form>
 							</td>
 						</tr>
+							{% endif %}
+						{% endfor %}
+						
+						
+
+						
+						
 					</tbody>
 				</table>
 			</div>
