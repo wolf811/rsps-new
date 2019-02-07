@@ -13,7 +13,7 @@ class Conference(models.Model):
 		verbose_name_plural = 'Конференции'
 
 	def __str__(self):
-		return '{}-{}'.format(self.title, self.date)
+		return '{}, {}'.format(self.title, self.date)
 
 class Member(models.Model):
 	"""docstring for Member"""
@@ -29,4 +29,4 @@ class Member(models.Model):
 		verbose_name_plural = 'Участники'
 
 	def __str__(self):
-		return '{}-{}'.format(self.title, self.date)
+		return '{}, {}'.format(self.fio, self.job)
