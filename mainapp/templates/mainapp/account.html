@@ -48,15 +48,15 @@
 								<td>{{ conference.place }}</td>
 								<td>
 									<div class="text-appercase">{{ conference.title }}</div>
-									<div>Колличество участников:&nbsp;<strong>0</strong></div>
+									<div>Колличество участников:&nbsp;<strong>{{ conference.members.all|length }}</strong></div>
 									<div class="text-danger mt-2">Зарегистрируйте участников</div>
 								</td>
 								<td>
 									<a href="#" class="btn-action mr-3 text-primary" title="Удалить"><i class="fa fa-times"></i></a>
-									<a href="#multiCollapseConf01" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" aria-controls="multiCollapseConf01" title="Изменить"><i class="fa fa-pencil"></i></a>
+									<a href="#multiCollapseConf{{conference.pk}}" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" aria-controls="multiCollapseConf01" title="Изменить"><i class="fa fa-pencil"></i></a>
 								</td>
 							</tr>
-							<tr class="multi-collapse collapse edit-list" id="multiCollapseConf01">
+							<tr class="multi-collapse collapse edit-list" id="multiCollapseConf{{conference.pk}}">
 							<td colspan="4" class="total-column">
 								<form>
 									<div class="mb-4">
@@ -109,12 +109,18 @@
 												</tr>
 											</thead>
 											<tbody>
-												{% for member in members %}
+												{% for member in conference.members.all %}
 												<tr>
 													<td>{{member.fio}}</td>
 												<td>{{member.job}}, {{member.jobplace}}</td>
 													<td>{{member.tel}}, {{member.email}}</td>
-													<td>да</td>
+													<td>
+														{% if member.membership %}
+														да
+														{% else %}
+														нет
+														{% endif %}
+													</td>
 													<td>
 														<div>
 															<a href="#" class="btn-action mr-3 text-primary" title="Удалить"><i class="fa fa-times"></i></a>
@@ -149,10 +155,10 @@
 								</td>
 								<td>
 									<a href="#" class="btn-action mr-3 text-primary" title="Копировать"><i class="fa fa-clone"></i></a>
-									<a href="#multiCollapseConf02" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" aria-controls="multiCollapseConf02" title="Просмотр"><i class="fa fa-eye"></i></a>
+									<a href="#multiCollapseConf{{conference.pk}}" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" title="Просмотр"><i class="fa fa-eye"></i></a>
 								</td>
 							</tr>
-							<tr class="multi-collapse collapse edit-list" id="multiCollapseConf02">
+							<tr class="multi-collapse collapse edit-list" id="multiCollapseConf{{conference.pk}}">
 							<td colspan="4" class="total-column">
 								<form>
 									<div class="mb-4">
@@ -195,8 +201,6 @@
 
 									<h6 class='text-primary mb-4'>Участники конференции</h6>
 
-									<!-- <button type="button" class="btn btn-outline-danger btn-xs mb-3" data-toggle="modal" data-target="#participantConfModal">Зарегистрировать</button> -->
-
 									<div class="table-responsive">
 										<table class="table table-list table-internal-list">
 											<thead>
@@ -209,34 +213,21 @@
 												</tr>
 											</thead>
 											<tbody>
+												{% for member in conference.members.all %}
 												<tr>
-													<td>Царьков Андрей Васильевич</td>
-													<td>ООО "Аттестационный центр Калужской области", ген.директор</td>
-													<td>+7(4842) 56-24-66, andrey.tsarkov@mail.ru</td>
-													<td>да</td>
+													<td>{{member.fio}}</td>
+												<td>{{member.job}}, {{member.jobplace}}</td>
+													<td>{{member.tel}}, {{member.email}}</td>
+													<td>
+														{% if member.membership %}
+														да
+														{% else %}
+														нет
+														{% endif %}
+													</td>
 													<td></td>
 												</tr>
-												<tr>
-													<td>Царьков Андрей Васильевич</td>
-													<td>ООО "Аттестационный центр Калужской области", ген.директор</td>
-													<td>+7(4842) 56-24-66, andrey.tsarkov@mail.ru</td>
-													<td>да</td>
-													<td></td>
-												</tr>
-												<tr>
-													<td>Царьков Андрей Васильевич</td>
-													<td>ООО "Аттестационный центр Калужской области", ген.директор</td>
-													<td>+7(4842) 56-24-66, andrey.tsarkov@mail.ru</td>
-													<td>да</td>
-													<td></td>
-												</tr>
-												<tr>
-													<td>Царьков Андрей Васильевич</td>
-													<td>ООО "Аттестационный центр Калужской области", ген.директор</td>
-													<td>+7(4842) 56-24-66, andrey.tsarkov@mail.ru</td>
-													<td>да</td>
-													<td></td>
-												</tr>
+												{% endfor %}
 											</tbody>
 										</table>
 									</div>

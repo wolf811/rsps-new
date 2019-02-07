@@ -20,11 +20,11 @@ def contact(request):
 def account(request):
 	title = 'РСПС - Личный кабинет'
 	conferences = Conference.objects.all()
-	members = Member.objects.all()
+	# members = Member.objects.all()
 	content = {
 		'title': title, 
 		'conferences': conferences,
-		'members': members,
+		# 'members': members,
 	}
 	return render(request, 'mainapp/account.html', content)
 
