@@ -30,7 +30,7 @@ urlpatterns = [
     path('news/', mainapp.news, name = 'news'),
     path('docs/', mainapp.docs, name = 'docs'),
     path('regionalOffice/', mainapp.regionalOffice, name = 'regionalOffice'),
-    path('approved/', mainapp.approved, name = 'approved'),
+    path('conf/', mainapp.conf, name = 'conf'),
 ]
 
 if settings.DEBUG:

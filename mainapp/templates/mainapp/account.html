@@ -52,14 +52,14 @@
 									<div class="text-danger mt-2">Зарегистрируйте участников</div>
 								</td>
 								<td>
-									<a href="#" class="btn-action mr-3 text-primary" title="Удалить"><i class="fa fa-times"></i></a>
+									<a href="#" class="btn-action mr-3 text-primary" title="Удалить конференцию"><i class="fa fa-trash-o"></i></a>
 									<a href="#multiCollapseConf{{conference.pk}}" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" aria-controls="multiCollapseConf01" title="Изменить"><i class="fa fa-pencil"></i></a>
 								</td>
 							</tr>
 							<tr class="multi-collapse collapse edit-list" id="multiCollapseConf{{conference.pk}}">
 							<td colspan="4" class="total-column">
 								<form>
-									<div class="mb-4">
+									<div class="mb-5">
 										<h6 class='text-primary mb-4'>Сведения о конференции</h6>
 										<div class="form-group row">
 											<label for="" class="col-sm-4 col-form-label col-form-label-sm">Дата проведения&nbsp;<span class="text-danger">*</span></label>
@@ -85,10 +85,42 @@
 												<input type="text" class="form-control form-control-sm" placeholder="" value="Развитие сварочного сообщества">
 											</div>
 										</div>
+										
+										
+											<div class="form-group row align-items-center">
+												<label for="" class="col-sm-4 col-form-label col-form-label-sm">Повестка дня&nbsp;<span class="text-danger">*</span></label>
+												<div class="col-sm-6">
+													<div class="input-group input-group-sm">
+														<div class="input-group-prepend">
+															<span class="input-group-text" id="countQuest01"><strong>1</strong></span>
+														</div>
+														<input type="text" class="form-control" placeholder="Введите вопрос повестки дня">
+														<div class="input-group-append">
+															<button class="btn btn-outline-danger" type="button" id="button-addon1" title="Удалить вопрос"><i class="fa fa-times"></i></button>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div id="add_field_area">
+												<div class="form-group row align-items-center" id="add">
+													<div class="col-sm-6 offset-sm-4">
+														<div class="input-group input-group-sm">
+															<div class="input-group-prepend">
+																<span class="input-group-text" id="countQuest02"><strong>2</strong></span>
+															</div>
+															<input type="text" class="form-control" placeholder="Введите вопрос повестки дня">
+															<div class="input-group-append">
+																<button class="btn btn-outline-danger" type="button" id="button-addon2" title="Удалить вопрос"><i class="fa fa-times"></i></button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										
 										<div class="form-group row">
-											<label for="" class="col-sm-4 col-form-label col-form-label-sm">Повестка дня&nbsp;<span class="text-danger">*</span></label>
-											<div class="col-sm-6">
-												<textarea class="form-control form-control-sm" rows="3"></textarea>
+											<label for="" class="sr-only">Добавить вопрос</label>
+											<div class="col-sm-6 offset-sm-4">
+												<button class="btn btn-outline-secondary btn-xs" onclick="addField();"><i class="fa fa-plus mr-2"></i>Добавить вопрос</button>
 											</div>
 										</div>
 									</div>
@@ -112,7 +144,7 @@
 												{% for member in conference.members.all %}
 												<tr>
 													<td>{{member.fio}}</td>
-												<td>{{member.job}}, {{member.jobplace}}</td>
+													<td>{{member.job}}, {{member.jobplace}}</td>
 													<td>{{member.tel}}, {{member.email}}</td>
 													<td>
 														{% if member.membership %}
@@ -123,7 +155,7 @@
 													</td>
 													<td>
 														<div>
-															<a href="#" class="btn-action mr-3 text-primary" title="Удалить"><i class="fa fa-times"></i></a>
+															<a href="#" class="btn-action mr-3 text-primary" title="Удалить участника"><i class="fa fa-trash-o"></i></a>
 															<a href="#" class="btn-action text-primary" data-toggle="modal" data-target="#participantConfModal" title="Изменить"><i class="fa fa-pencil"></i></a>
 														</div>
 													</td>
@@ -187,16 +219,29 @@
 												<input type="text" class="form-control form-control-sm" placeholder="" value="Развитие сварочного сообщества" disabled>
 											</div>
 										</div>
-										<div class="form-group row">
-											<label for="" class="col-sm-4 col-form-label col-form-label-sm">Повестка дня&nbsp;<span class="text-danger">*</span></label>
-											<div class="col-sm-6">
-												<textarea class="form-control form-control-sm" rows="3" disabled>
-													1.
-													2.
-													3.
-												</textarea>
+										<div class="form-group row align-items-center">
+												<label for="" class="col-sm-4 col-form-label col-form-label-sm">Повестка дня&nbsp;<span class="text-danger">*</span></label>
+												<div class="col-sm-6">
+													<div class="input-group input-group-sm">
+														<div class="input-group-prepend">
+															<span class="input-group-text" id="countQuest01"><strong>1</strong></span>
+														</div>
+														<input type="text" class="form-control" value="Вопрос повестки дня" disabled>
+													</div>
+												</div>
 											</div>
-										</div>
+											<div id="add_field_area">
+												<div class="form-group row align-items-center" id="add">
+													<div class="col-sm-6 offset-sm-4">
+														<div class="input-group input-group-sm">
+															<div class="input-group-prepend">
+																<span class="input-group-text" id="countQuest02"><strong>2</strong></span>
+															</div>
+															<input type="text" class="form-control" value="Вопрос повестки дня" disabled>
+														</div>
+													</div>
+												</div>
+											</div>
 									</div>
 
 									<h6 class='text-primary mb-4'>Участники конференции</h6>

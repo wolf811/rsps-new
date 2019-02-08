@@ -63,9 +63,9 @@ def regionalOffice(request):
 	}
 	return render(request, 'mainapp/regional-office.html', content)
 
-def approved(request):
-	title = 'РСПС - Одобрено РСПС'
+def conf(request):
+	title = 'РСПС - Конференции'
 	content = {
 		'title': title
 	}
-	return render(request, 'mainapp/approved.html', content)
+	return render(request, 'mainapp/conf.html', content)

@@ -25,7 +25,7 @@ gulp.task('sass', function(){
         .pipe(sass({errLogToConsole: true}))
         .pipe(autoprefixer({browsers: ['last 2 versions'], cascade: false}))
         .pipe(gulp.dest('static/css/'))
-        .pipe(bs.reload({stream: true}));
+        .pipe(bs.reload({stream: true}))
 });
 
 gulp.task('watch', ['browser-sync', 'sass'], function() {
@@ -33,3 +33,4 @@ gulp.task('watch', ['browser-sync', 'sass'], function() {
     gulp.watch("static/js/*.js").on('change', bs.reload);
     gulp.watch("**/templates/**/*.html").on('change', bs.reload);
 })
+
