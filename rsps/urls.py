@@ -24,12 +24,15 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', mainapp.index, name = 'index'),
     path('contact/', mainapp.contact, name = 'contact'),
-    path('account/', mainapp.account, name = 'account'),
+    path('account_about/', mainapp.account_about, name = 'account_about'),
+    path('account_news/', mainapp.account_news, name = 'account_news'),
+    path('account_employee/', mainapp.account_employee, name = 'account_employee'),
+    path('account_conf/', mainapp.account_conf, name = 'account_conf'),
     path('registration/', mainapp.registration, name = 'registration'),
     path('about/', mainapp.about, name = 'about'),
     path('news/', mainapp.news, name = 'news'),
     path('docs/', mainapp.docs, name = 'docs'),
-    path('regionalOffice/', mainapp.regionalOffice, name = 'regionalOffice'),
+    path('regional_office/', mainapp.regional_office, name = 'regional_office'),
     path('conf/', mainapp.conf, name = 'conf'),
 ]
 

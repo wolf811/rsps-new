@@ -16,8 +16,22 @@ def contact(request):
 		'title': title
 	}
 	return render(request, 'mainapp/contact.html', content)
+	
+def account_about(request):
+	title = 'РСПС - Личный кабинет'
+	content = {
+		'title': title, 
+	}
+	return render(request, 'mainapp/account_about.html', content)
 
-def account(request):
+def account_news(request):
+	title = 'РСПС - Личный кабинет'
+	content = {
+		'title': title, 
+	}
+	return render(request, 'mainapp/account_news.html', content)
+
+def account_conf(request):
 	title = 'РСПС - Личный кабинет'
 	conferences = Conference.objects.all()
 	# members = Member.objects.all()
@@ -26,7 +40,16 @@ def account(request):
 		'conferences': conferences,
 		# 'members': members,
 	}
-	return render(request, 'mainapp/account.html', content)
+	return render(request, 'mainapp/account_conf.html', content)
+
+def account_employee(request):
+	title = 'РСПС - Личный кабинет'
+	# employee = Employee.objects.all()
+	content = {
+		'title': title, 
+		# 'employee': employee,
+	}
+	return render(request, 'mainapp/account_employee.html', content)
 
 def registration(request):
 	title = 'РСПС - Регистрация'
@@ -56,12 +79,12 @@ def docs(request):
 	}
 	return render(request, 'mainapp/docs.html', content)
 
-def regionalOffice(request):
+def regional_office(request):
 	title = 'РСПС - Региональные отделения'
 	content = {
 		'title': title
 	}
-	return render(request, 'mainapp/regional-office.html', content)
+	return render(request, 'mainapp/regional_office.html', content)
 
 def conf(request):
 	title = 'РСПС - Конференции'

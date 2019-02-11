@@ -19,7 +19,7 @@
 	background-color: #086da3 !important;
 	color: #fff !important;
 }
-.btn-link, .page-link, .text-primary {
+.btn-link, .page-link, .text-primary, .card-link {
 	color: #086da3 !important;
 }
 
@@ -329,6 +329,74 @@ main {
 		tr:hover td {
 			background: #fefefe !important;
 		}
+	}
+	
+	/* All Conferences */
+	.card-all {
+		.row > div[class*='col-'] {
+		    display: flex;
+		}
+		.card {
+			&:hover {
+				border: 1px solid #c42921;
+    			transition: 0.5s;
+			}
+		}
+		.card-top {
+			height: 200px;
+
+			img {
+				height: 100%;
+			    width: auto;
+			    margin-left: auto;
+			    margin-right: auto;
+			    display: block;
+			}
+
+			.card-img-overlay {
+				position: absolute;
+			    top: 0;
+			    left: 0;
+			    right: auto;
+			    bottom: auto;
+			    padding: 0.25rem 1rem;
+			    font-size: 0.875rem;
+			    background-color: rgba(238, 238, 238, 0.7);
+			    font-weight: bold;
+			    color: #086da3;
+			}
+
+			.card-img-overlay-right {
+				position: absolute;
+			    top: 0;
+			    right: 0;
+			    left: auto;
+			    bottom: auto;
+			    padding: 0.25rem 1rem;
+			    font-size: 0.875rem;
+			    background-color: rgba(238, 238, 238, 0.7);
+			}
+		}
+
+		.card-body {
+			position: relative;
+
+			.card-title {
+				font-size: 0.875rem;
+				font-weight: bold;
+			}
+			.card-subtitle {
+				font-size: 0.875rem;
+			}
+			.card-text {
+				font-size: 0.8rem;
+			}
+		}
+	}
+	/* End Conferences */
+	
+	.search {
+		background: #E8EEF2;
 	}
 }
 
