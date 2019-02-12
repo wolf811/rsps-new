@@ -10,4 +10,25 @@ $('#backLogin').click(function() {
 	$('#pass-recovery').hide();
 })
 
-// Add field Conference	
+// $('#selectAll').change() {
+// 	if(this).prop('checked') {
+// 		$("input[name='congressMan']").attr('checked', 'checked');
+// 	} else {
+// 		$("input[name='congressMan']").attr('checked', false);
+// 	}
+// }
+
+$(document).ready(function() { 
+    $(".select-all").on("change", function() {
+        var groupId = $(this).data('id');
+        $('.select-one[data-id="' + groupId + '"]').prop("checked", this.checked);
+    });
+
+    $(".select-one").on("change", function() {
+        var groupId = $(this).data('id');
+        var allChecked = $('.select-one[data-id="' + groupId + '"]:not(:checked)').length == 0;
+        $('.select-all[data-id="' + groupId + '"]').prop("checked", allChecked);
+    });
+});
+
+
