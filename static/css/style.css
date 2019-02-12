@@ -183,9 +183,14 @@ main {
     padding: 20px 50px;
     font-size: 1rem; }
     main .btn-xl:hover {
-      background: #d8352d;
-      background: -o-linear-gradient(top, #d32f27, #d8352d);
-      background-image: -ms-linear-gradient(top, #d32f27 0%, #d8352d 100%); }
+      background-color: #dc3545 !important;
+      /* background: #d8352d;
+			background: -webkit-gradient(linear, left top, left bottom, from(#d32f27), to(#d8352d));
+			background: -webkit-linear-gradient(top, #d32f27, #d8352d);
+			background: -moz-linear-gradient(top, #d32f27, #d8352d);
+			background: -ms-linear-gradient(top, #d32f27, #d8352d);
+			background: -o-linear-gradient(top, #d32f27, #d8352d);
+			background-image: -ms-linear-gradient(top, #d32f27 0%, #d8352d 100%); */ }
   main .table-list {
     font-size: 0.75rem;
     color: #666666; }
@@ -230,6 +235,20 @@ main {
         color: #007bff !important; }
       main .table-list .btn-action i {
         font-size: 1rem; }
+    main .table-list .status-false {
+      text-transform: uppercase;
+      opacity: 0.7; }
+    main .table-list .status-true {
+      text-transform: uppercase;
+      font-weight: bold; }
+    main .table-list .progress .w-40 {
+      width: 40%; }
+    main .table-list .progress .w-35 {
+      width: 35%; }
+    main .table-list .progress .w-25 {
+      width: 25%; }
+    main .table-list .progress .bg-default {
+      background-color: #e9ecef; }
   main .table-list.table-internal-list th {
     font-size: 0.7rem;
     padding: 10px 15px;
@@ -278,11 +297,15 @@ main {
   main .card-all .card-body {
     position: relative; }
     main .card-all .card-body .card-title {
-      font-size: 0.875rem;
+      font-size: 0.9rem;
       font-weight: bold; }
     main .card-all .card-body .card-subtitle {
-      font-size: 0.875rem; }
+      font-size: 0.9rem; }
     main .card-all .card-body .card-text {
       font-size: 0.8rem; }
+  main .card-all .card-footer .card-link {
+    font-size: 0.8rem; }
+    main .card-all .card-footer .card-link:hover {
+      text-decoration: underline; }
   main .search {
     background: #E8EEF2; }
