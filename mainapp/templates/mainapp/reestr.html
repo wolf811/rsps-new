@@ -1,0 +1,181 @@
+{% extends 'mainapp/base.html' %}
+
+{% block content %}
+<!-- Content -->
+<main class="pt-4">
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Реестр членов РСПС</li>
+			</ol>
+		</nav>
+
+		<h4 class="title-page">Реестр членов РСПС</h4>
+
+		<div class="search p-3 mb-4">
+			<h5>Быстрый поиск</h5>
+			<form>
+				<div class="form-row">
+					<div class="form-group col-sm-6 col-lg-4">
+						<label for="" class="mb-1">Региональное отделение</label>
+						<select class="form-control form-control-sm">
+							<option selected="">Все</option>
+							<option>Москва</option>
+							<option>Московская область</option>
+							<option>Санкт-Петербург</option>
+							<option>Ленинградская область</option>
+							<option>Калужская область</option>
+						</select>
+					</div>
+					<div class="form-group col-sm-6 col-lg-4">
+						<label for="" class="mb-1">ФИО</label>
+						<input type="text" class="form-control form-control-sm">
+					</div>
+					<div class="form-group col-sm-6 col-lg-2">
+						<label for="" class="mb-1">Населенный пункт</label>
+						<select class="form-control form-control-sm">
+							<option selected="">Все</option>
+							<option>Калуга</option>
+							<option>Обнинск</option>
+							<option>Боровск</option>
+							<option>Жуков</option>
+							<option>Ермолино</option>
+						</select>
+					</div>
+					<div class="form-group col-sm-6 col-lg-2">
+						<label for="" class="mb-1">Статус членства</label>
+						<select class="form-control form-control-sm">
+							<option selected="">Все</option>
+							<option>заявлен</option>
+							<option>одобрен</option>
+							<option>имеет сертификат</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-auto">
+						<button type="submit" class="btn btn-outline-primary btn-xs"><i class="fa fa-search"></i> Найти</button>
+						<button type="button" class="btn btn-link btn-xs">Сбросить</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		<p class="text-secondary">Элементы 1-10 из 255</p>
+		<div class="table-responsive">
+			<table class="table table-list">
+				<thead>
+					<tr class="active">
+						<th>Региональное отделение</th>
+						<th>ФИО / Место работы / Должность</th>
+						<th>Контакты</th>
+						<th>Статус членства</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<div class="text-uppercase mb-1">Московская область</div>
+						</td>
+						<td>
+							<div class="mb-1">Комбаров Валентин Анатольевич</div>
+							<div class="mb-1">ООО "НЭДК"</div>
+							<div>инженер-программист</div>
+						</td>
+						<td>
+							<div class="mb-1">Домодедово</div>
+							<div class="mb-1">dev1@naks.ru</div>
+							<div>+7 (499) 784-72-86</div>
+						</td>
+						<td>
+							<div class="status-true text-info mb-1"><i class="fa fa-arrow-down mr-2"></i>Заявлен</div>
+							<div class="status-false mb-1"><i class="fa fa-arrow-down mr-2"></i><small>Одобрен РСПС</small></div>
+							<div class="status-false"><i class="fa fa-certificate mr-2"></i><small>Сертификат РСПС</small></div>
+						</td>
+					</tr>
+
+					<tr>
+						<td>
+							<div class="text-uppercase mb-1">Москва</div>
+						</td>
+						<td>
+							<div class="mb-1">Прилуцкий Иван Андреевич</div>
+							<div class="mb-1">ООО "НАКС Медиа"</div>
+							<div>директор</div>
+						</td>
+						<td>
+							<div class="mb-1">Москва</div>
+							<div class="mb-1">dev1@naks.ru</div>
+							<div>+7 (499) 784-72-86</div>
+						</td>
+						<td>
+							<div class="status-false mb-1"><i class="fa fa-arrow-down mr-2"></i><small>Заявлен</small></div>
+							<div class="status-true text-success mb-1"><i class="fa fa-arrow-down mr-2"></i>Одобрен РСПС</div>
+							<div class="status-false"><i class="fa fa-certificate mr-2"></i><small>Сертификат РСПС</small></div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="text-uppercase mb-1">Калужская область</div>
+						</td>
+						<td>
+							<div class="mb-1">Преображенская Анастасия Владимировна</div>
+							<div class="mb-1">ООО "Аттестационный центр"</div>
+							<div>начальник отдела кадров</div>
+						</td>
+						<td>
+							<div class="mb-1">Обнинск</div>
+							<div class="mb-1">dev1@naks.ru</div>
+							<div>+7 (499) 784-72-86</div>
+						</td>
+						<td>
+							<div class="status-false mb-1"><i class="fa fa-arrow-down mr-2"></i><small>Заявлен</small></div>
+							<div class="status-true text-success mb-1"><i class="fa fa-arrow-down mr-2"></i>Одобрен РСПС</div>
+							<div class="status-false"><i class="fa fa-certificate mr-2"></i><small>Сертификат РСПС</small></div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="text-uppercase mb-1">Московская область</div>
+						</td>
+						<td>
+							<div class="mb-1">Попов Анатолий Викторович</div>
+							<div class="mb-1">ООО "НЭДК"</div>
+							<div>начальник аналитического отдела</div>
+						</td>
+						<td>
+							<div class="mb-1">Домодедово</div>
+							<div class="mb-1">dev1@naks.ru</div>
+							<div>+7 (499) 784-72-86</div>
+						</td>
+						<td>
+							<div class="status-false mb-1"><i class="fa fa-arrow-down mr-2"></i><small>Заявлен</small></div>
+							<div class="status-false mb-1"><i class="fa fa-arrow-down mr-2"></i><small>Одобрен РСПС</small></div>
+							<div class="status-true text-warning"><i class="fa fa-certificate mr-2"></i>Сертификат РСПС</div>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<nav aria-label="Page navigation example">
+			<ul class="pagination pagination-sm">
+				<li class="page-item disabled">
+					<a class="page-link" href="#" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<li class="page-item active"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item">
+					<a class="page-link" href="#" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</main> 
+<!-- End Content -->
+{% endblock %}

@@ -86,6 +86,20 @@ def regional_office(request):
 	}
 	return render(request, 'mainapp/regional_office.html', content)
 
+def regional_office_detail(request):
+	title = 'РСПС - Региональное отделение'
+	content = {
+		'title': title
+	}
+	return render(request, 'mainapp/regional_office_detail.html', content)
+
+def reestr(request):
+	title = 'РСПС - Реестр членов'
+	content = {
+		'title': title
+	}
+	return render(request, 'mainapp/reestr.html', content)
+
 def conf(request):
 	title = 'РСПС - Конференции'
 	content = {

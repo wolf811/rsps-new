@@ -33,6 +33,8 @@ urlpatterns = [
     path('news/', mainapp.news, name = 'news'),
     path('docs/', mainapp.docs, name = 'docs'),
     path('regional_office/', mainapp.regional_office, name = 'regional_office'),
+    path('regional_office_detail/', mainapp.regional_office_detail, name = 'regional_office_detail'),
+    path('reestr/', mainapp.reestr, name = 'reestr'),
     path('conf/', mainapp.conf, name = 'conf'),
 ]
 

@@ -183,14 +183,7 @@ main {
     padding: 20px 50px;
     font-size: 1rem; }
     main .btn-xl:hover {
-      background-color: #dc3545 !important;
-      /* background: #d8352d;
-			background: -webkit-gradient(linear, left top, left bottom, from(#d32f27), to(#d8352d));
-			background: -webkit-linear-gradient(top, #d32f27, #d8352d);
-			background: -moz-linear-gradient(top, #d32f27, #d8352d);
-			background: -ms-linear-gradient(top, #d32f27, #d8352d);
-			background: -o-linear-gradient(top, #d32f27, #d8352d);
-			background-image: -ms-linear-gradient(top, #d32f27 0%, #d8352d 100%); */ }
+      background-color: #dc3545 !important; }
   main .table-list {
     font-size: 0.75rem;
     color: #666666; }
@@ -303,9 +296,42 @@ main {
       font-size: 0.9rem; }
     main .card-all .card-body .card-text {
       font-size: 0.8rem; }
-  main .card-all .card-footer .card-link {
-    font-size: 0.8rem; }
-    main .card-all .card-footer .card-link:hover {
-      text-decoration: underline; }
+    main .card-all .card-body .card-link {
+      font-size: 0.8rem; }
+      main .card-all .card-body .card-link:hover {
+        text-decoration: underline; }
+  main .card-all .card-footer .card-text {
+    font-size: 0.8rem;
+    text-transform: uppercase; }
+  main .card-all .card-footer .btn-xs {
+    padding: 2px 5px; }
+    main .card-all .card-footer .btn-xs:last-child {
+      padding: 2px 6px; }
   main .search {
     background: #E8EEF2; }
+  main .bg-red {
+    background-color: #A92119;
+    -webkit-box-shadow: inset 0 -2px 3px 0 #780400;
+    box-shadow: inset 0 -2px 3px 0 #780400; }
+  main .map {
+    background-color: #fff;
+    -webkit-box-shadow: 0 -1px 3px 0 #999, inset 0 -3px 4px 0 #666;
+    box-shadow: 0 -1px 3px 0 #999, inset 0 -3px 4px 0 #666; }
+  main .contacts-ro {
+    background-image: url(../images/bg-zub.gif);
+    background-repeat: repeat-x;
+    background-color: transparent !important; }
+    main .contacts-ro .table-sm tr td {
+      vertical-align: middle;
+      border-top: 2px solid #fff;
+      font-size: 0.8rem; }
+      main .contacts-ro .table-sm tr td:first-child {
+        position: relative;
+        text-transform: uppercase;
+        background-color: #e1ecf2; }
+        main .contacts-ro .table-sm tr td:first-child i {
+          position: absolute;
+          right: -15px;
+          top: 50%;
+          -webkit-transform: translate(0, -50%);
+          transform: translate(0, -50%); }

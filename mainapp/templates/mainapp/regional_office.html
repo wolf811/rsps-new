@@ -1,12 +1,119 @@
 {% extends 'mainapp/base.html' %}
 
 {% block content %}
-	<!-- Content -->
-	<main class="pt-4">
-		<div class="container">
-			<h2>Региональные отделения</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat aut, quod corrupti molestias et nihil numquam culpa. Autem est tempora sunt ipsa soluta illo, atque, porro nulla, maiores, ullam neque.</p>
+<!-- Content -->
+<main class="pt-4">
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Региональные отделения</li>
+			</ol>
+		</nav>
+
+		<h4 class="title-page">Региональные отделения</h4>
+
+		<div class="search p-3 mb-4">
+			<h5>Быстрый поиск</h5>
+			<form>
+				<div class="form-row">
+					<div class="form-group col-sm-6 col-lg-4">
+						<label for="" class="mb-1">Субъект РФ</label>
+						<select class="form-control form-control-sm">
+							<option selected="">Все</option>
+							<option>Москва</option>
+							<option>Московская область</option>
+							<option>Санкт-Петербург</option>
+							<option>Ленинградская область</option>
+							<option>Калужская область</option>
+						</select>
+					</div>
+					<div class="form-group col-sm-6 col-lg-4">
+						<label for="" class="mb-1">Руководитель отделения</label>
+						<input type="text" class="form-control form-control-sm">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-auto">
+						<button type="submit" class="btn btn-outline-primary btn-xs"><i class="fa fa-search"></i> Найти</button>
+						<button type="button" class="btn btn-link btn-xs">Сбросить</button>
+					</div>
+				</div>
+			</form>
 		</div>
-	</main> 
+		
+		<p class="text-secondary">Элементы 1-20 из 61</p>
+		<div class="table-responsive">
+			<table class="table table-list">
+				<thead>
+					<tr class="active">
+						<th>Субъект РФ</th>
+						<th>Руководитель отделения</th>
+						<th>Контакты</th>
+						<th>Состав</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="text-uppercase font-weight-bold">
+							<a href="{% url 'regional_office_detail' %}" class="text-primary">Астраханская область</a>
+						</td>
+						<td>Меркулов Денис Иювинальевич</td>
+						<td>
+							<div class="mb-1">414056, г. Астрахань, ул. Татищева 20а</div>
+							<div class="mb-1">Тел.: (8512) 549097 (8512) 485393</div>
+							<div>email:&nbsp;<a href="mailto:svarkacenter@ya.ru" class="text-primary">svarkacenter@ya.ru</a></div>
+						</td>
+						<td>4</td>
+					</tr>
+					<tr>
+						<td class="text-uppercase font-weight-bold">
+							<a href="{% url 'regional_office_detail' %}" class="text-primary">Алтайский край</a>
+						</td>
+						<td>Радченко Михаил Васильевич</td>
+						<td>
+							<div class="mb-1">656038, г. Барнаул, пр. Ленина, 46</div>
+							<div class="mb-1">Тел.: (3852) 290-765</div>
+							<div>email:&nbsp;<a href="mailto:mirad_x@mail.ru" class="text-primary">mirad_x@mail.ru</a></div>
+						</td>
+						<td>13</td>
+					</tr>
+					<tr>
+						<td class="text-uppercase font-weight-bold">
+							<a href="{% url 'regional_office_detail' %}" class="text-primary">Белгородская область</a>
+						</td>
+						<td>Остроцкий Александр Николаевич</td>
+						<td>
+							<div class="mb-1">308014, г. Белгород, ул. Н.Чумичова, д.70</div>
+							<div class="mb-1">Тел.: (4722) 33-33-87 (4722) 27-19-62</div>
+							<div>email:&nbsp;<a href="mailto:ac_bel@mail.ru" class="text-primary">ac_bel@mail.ru</a></div>
+						</td>
+						<td>5</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<nav aria-label="Page navigation example">
+			<ul class="pagination pagination-sm">
+				<li class="page-item disabled">
+					<a class="page-link" href="#" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<li class="page-item active"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item">
+					<a class="page-link" href="#" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+	<div class="py-5 mb-4 bg-red">
+			<button type="button" class="btn btn-danger btn-xl" data-toggle="modal" data-target="#modal-newDepartament">Открыть региональное отделение</button>
+		</div>
+</main> 
 <!-- End Content -->
 {% endblock %}

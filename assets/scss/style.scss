@@ -241,13 +241,6 @@ main {
 
 		&:hover {
 			background-color: #dc3545 !important;
-			/* background: #d8352d;
-			background: -webkit-gradient(linear, left top, left bottom, from(#d32f27), to(#d8352d));
-			background: -webkit-linear-gradient(top, #d32f27, #d8352d);
-			background: -moz-linear-gradient(top, #d32f27, #d8352d);
-			background: -ms-linear-gradient(top, #d32f27, #d8352d);
-			background: -o-linear-gradient(top, #d32f27, #d8352d);
-			background-image: -ms-linear-gradient(top, #d32f27 0%, #d8352d 100%); */
 		}
 	}
 
@@ -412,12 +405,22 @@ main {
 			.card-text {
 				font-size: 0.8rem;
 			}
-		}
-
-		.card-footer {
 			.card-link {
 				font-size: 0.8rem;
 				&:hover {text-decoration: underline;}
+			}
+		}
+
+		.card-footer {
+			.card-text {
+				font-size: 0.8rem;
+				text-transform: uppercase;
+			}
+			.btn-xs {
+				padding: 2px 5px;
+				&:last-child {
+					padding: 2px 6px;
+				}
 			}
 		}
 	}
@@ -425,6 +428,43 @@ main {
 	
 	.search {
 		background: #E8EEF2;
+	}
+
+	.bg-red {
+		background-color: #A92119;
+		box-shadow: inset 0 -2px 3px 0 #780400;
+	}
+	.map {
+		background-color: #fff;
+		box-shadow: 0 -1px 3px 0 #999, inset 0 -3px 4px 0 #666;
+	}
+	.contacts-ro {
+	    background-image: url(../images/bg-zub.gif);
+	    background-repeat: repeat-x;
+	    background-color: transparent!important;
+
+	    .table-sm {
+	    	tr td {
+	    		vertical-align: middle;
+	    		border-top: 2px solid #fff;
+	    		font-size: 0.8rem;
+				&:first-child {
+					position: relative;
+					text-transform: uppercase;
+    				background-color: #e1ecf2;
+    				i {
+						position: absolute;
+						right: -15px;
+						top: 50%;
+						transform: translate(0, -50%);
+					}
+				}
+				&:last-child {
+					
+				}
+				
+	    	}
+	    }
 	}
 }
 

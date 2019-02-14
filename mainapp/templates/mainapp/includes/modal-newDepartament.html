@@ -1,0 +1,54 @@
+{% load static %}
+
+<!-- Modal - Login to your personal account-->
+<div class="modal fade" id="modal-newDepartament" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Открыть региональное отделение</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="" class="form-label-sm">Субъект РФ&nbsp;<span class="text-danger">*</span></label>
+						<select class="form-control form-control-sm" aria-describedby="helpBlock" required>
+							<option>-</option>
+						  	<option disabled>Астраханская область</option>
+						  	<option>Тамбовская область</option>
+						  	<option>Воронежская область</option>
+						  	<option disabled>Московская область</option>
+						  	<option>Хабаровский край</option>
+						  	<option disabled>Краснодарский край</option>
+						</select>
+						<small id="helpBlock" class="form-text text-muted">
+						  	Выберите субъект, в котором еще не открыто региональное отделение РСПС
+						</small>
+					</div>
+					<div class="form-group">
+						<label for="" class="form-label-sm">ФИО контактного лица&nbsp;<span class="text-danger">*</span></label>
+						<input type="text" class="form-control form-control-sm" required>
+					</div>
+					<div class="form-row">
+						<div class="form-group col-sm">
+							<label for="" class="form-label-sm">Email&nbsp;<span class="text-danger">*</span></label>
+							<input type="text" class="form-control form-control-sm" required="">
+						</div>
+						<div class="form-group col-sm">
+							<label for="" class="form-label-sm">Телефон&nbsp;<span class="text-danger">*</span></label>
+							<input type="text" class="form-control form-control-sm">
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary btn-sm">Отправить запрос</button>
+					<button type="button" class="btn btn-link btn-sm" data-dismiss="modal">Отмена</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
