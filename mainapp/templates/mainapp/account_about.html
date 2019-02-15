@@ -13,7 +13,7 @@
 
 		<h4 class="title-page">Личный кабинет</h4>
 
-		<ul class="nav nav-tabs mb-4 mb-xl-5">
+		<ul class="nav nav-tabs mb-4">
 			<li class="nav-item">
 				<a class="nav-link active" href="{% url 'account_about' %}">О подразделении</a>
 			</li>
@@ -28,7 +28,34 @@
 			</li>
 		</ul>
 		
+		<h5>Астраханская область</h5>
+		<div class="about-ro py-3">
+			<div class="table-responsive">
+				<table class="table table-striped table-sm bg-light">
+					<tr>
+						<td class="text-white bg-danger pl-sm-3 pl-lg-5">Руководитель</td>
+						<td class="pl-sm-3 pl-lg-5">Меркулов Денис Иювинальевич</td>
+					</tr>
+					<tr>
+						<td class="pl-sm-3 pl-lg-5">Адрес подразделения</td>
+						<td class="pl-sm-3 pl-lg-5">414056, г. Астрахань, ул. Татищева 20а</td>
+					</tr>
+					<tr>
+						<td class="pl-sm-3 pl-lg-5">Телефоны</td>
+						<td class="pl-sm-3 pl-lg-5">(8512) 549097 (8512) 485393</td>
+					</tr>
+					<tr>
+						<td class="pl-sm-3 pl-lg-5">E-mail</td>
+						<td class="pl-sm-3 pl-lg-5"><a href="mailto:svarkacenter@ya.ru" class="text-primary">svarkacenter@ya.ru</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="map pb-1 mb-4" id="mapRegion">
+			<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A59068a2aec599036f416a9544c76f627f23d439f166fccde94df8f4637c6af72&amp;width=100%25&amp;height=350&amp;lang=ru_RU&amp;scroll=true;"></script>
+		</div>
 
+		
 	</div>
 </main> 
 <!-- End Content -->

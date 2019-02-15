@@ -211,6 +211,10 @@ main {
 		margin-bottom: 1.5rem;
 		font-weight: bold;
 	}
+	.img-head {
+		background: url(../images/vnutri-orsps.jpg) 100% 100% no-repeat;
+		background-size: contain;
+	}
 	.nav-tabs {
 		.nav-link {
 			border-radius: 0; 
@@ -449,20 +453,22 @@ main {
 	    		border-top: 2px solid #fff;
 	    		font-size: 0.8rem;
 				&:first-child {
-					position: relative;
 					text-transform: uppercase;
     				background-color: #e1ecf2;
-    				i {
-						position: absolute;
-						right: -15px;
-						top: 50%;
-						transform: translate(0, -50%);
-					}
 				}
-				&:last-child {
-					
+	    	}
+	    }
+	}
+	.about-ro {
+		.table-sm {
+	    	tr td {
+	    		vertical-align: middle;
+	    		border-top: 2px solid #fff;
+	    		font-size: 0.8rem;
+				&:first-child {
+					text-transform: uppercase;
+    				background-color: #e1ecf2;
 				}
-				
 	    	}
 	    }
 	}

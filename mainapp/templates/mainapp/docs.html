@@ -4,8 +4,116 @@
 	<!-- Content -->
 	<main class="pt-4">
 		<div class="container">
-			<h2>Документы</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat aut, quod corrupti molestias et nihil numquam culpa. Autem est tempora sunt ipsa soluta illo, atque, porro nulla, maiores, ullam neque.</p>
+			<nav aria-label="breadcrumb">
+				<ol class="breadcrumb">
+					<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+					<li class="breadcrumb-item active" aria-current="page">Документы</li>
+				</ol>
+			</nav>
+
+			<h4 class="title-page">Документы РСПС</h4>
+
+			<div class="search p-3 mb-4">
+				<h5>Быстрый поиск</h5>
+				<form>
+					<div class="form-row">
+						<div class="form-group col-sm-6 col-lg-4">
+							<label for="" class="mb-1">Название документа</label>
+							<input type="text" class="form-control form-control-sm">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-auto">
+							<button type="submit" class="btn btn-outline-primary btn-xs"><i class="fa fa-search"></i> Найти</button>
+							<button type="button" class="btn btn-link btn-xs">Сбросить</button>
+						</div>
+					</div>
+				</form>
+			</div>
+
+					<p class="text-secondary">Элементы 1-10 из 255</p>
+		<div class="table-responsive">
+			<table class="table table-list">
+				<thead>
+					<tr class="active">
+						<th colspan="2">Список документов</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="text-uppercase font-weight-bold">
+							<a href="#" class="text-primary" target="_blank">Устав РСПС</a>
+						</td>
+						<td><a href="#" class="btn btn-primary btn-xs" title="Скачать"><i class="fa fa-download"></i></a></td>
+					</tr>
+					<tr>
+						<td class="text-uppercase font-weight-bold">
+							<a href="#" class="text-primary" target="_blank">ПРОТОКОЛ №1 УЧРЕДИТЕЛЬНОГО СЪЕЗДА РСПС</a>
+						</td>
+						<td><a href="#" class="btn btn-primary btn-xs" title="Скачать"><i class="fa fa-download"></i></a></td>
+					</tr>
+					<tr>
+						<td class="text-uppercase font-weight-bold">
+							<a href="#" class="text-primary" target="_blank">ПРОТОКОЛ № 1 ПРЕЗИДИУМА РСПС</a>
+						</td>
+						<td><a href="#" class="btn btn-primary btn-xs" title="Скачать"><i class="fa fa-download"></i></a></td>
+					</tr>
+					<tr>
+						<td class="text-uppercase font-weight-bold">
+							<a href="#" class="text-primary" target="_blank">ПРОТОКОЛ № 2 ПРЕЗИДИУМА РСПС</a>
+						</td>
+						<td><a href="#" class="btn btn-primary btn-xs" title="Скачать"><i class="fa fa-download"></i></a></td>
+					</tr>
+					<tr>
+						<td class="text-uppercase font-weight-bold">
+							<a href="#" class="text-primary" target="_blank">ПРОТОКОЛ № 3 ПРЕЗИДИУМА РСПС</a>
+						</td>
+						<td><a href="#" class="btn btn-primary btn-xs" title="Скачать"><i class="fa fa-download"></i></a></td>
+					</tr>
+					<tr>
+						<td class="text-uppercase font-weight-bold">
+							<a href="#" class="text-primary" target="_blank">ПРОТОКОЛ № 4 ПРЕЗИДИУМА РСПС</a>
+						</td>
+						<td><a href="#" class="btn btn-primary btn-xs" title="Скачать"><i class="fa fa-download"></i></a></td>
+					</tr>
+					<tr>
+						<td class="text-uppercase font-weight-bold">
+							<a href="#" class="text-primary" target="_blank">ПРОТОКОЛ № 5 ПРЕЗИДИУМА РСПС</a>
+						</td>
+						<td><a href="#" class="btn btn-primary btn-xs" title="Скачать"><i class="fa fa-download"></i></a></td>
+					</tr>
+					<tr>
+						<td class="text-uppercase font-weight-bold">
+							<a href="#" class="text-primary" target="_blank">ПРОТОКОЛ № 6 ПРЕЗИДИУМА РСПС</a>
+						</td>
+						<td><a href="#" class="btn btn-primary btn-xs" title="Скачать"><i class="fa fa-download"></i></a></td>
+					</tr>
+					<tr>
+						<td class="text-uppercase font-weight-bold">
+							<a href="#" class="text-primary" target="_blank">ПРОТОКОЛ № 7 ПРЕЗИДИУМА РСПС</a>
+						</td>
+						<td><a href="#" class="btn btn-primary btn-xs" title="Скачать"><i class="fa fa-download"></i></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<nav aria-label="Page navigation example">
+			<ul class="pagination pagination-sm">
+				<li class="page-item disabled">
+					<a class="page-link" href="#" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<li class="page-item active"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item">
+					<a class="page-link" href="#" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
 		</div>
 	</main> 
 <!-- End Content -->
