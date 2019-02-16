@@ -2,12 +2,53 @@
 
 {% block content %}
 <!-- Content -->
-	<main class="pt-4">
-		<div class="container">
-			<h2>Контакты</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat aut, quod corrupti molestias et nihil numquam culpa. Autem est tempora sunt ipsa soluta illo, atque, porro nulla, maiores, ullam neque.</p>
-		</div>
-	</main> 
-<!-- End Content -->
+<main class="pt-4">
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+				<li class="breadcrumb-item"><a href="{% url 'regional_office' %}">Региональные отделения</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Москва</li>
+			</ol>
+		</nav>
 
+		<h4 class="title-page">Контакты регионального отделения<br><small class="text-muted">Москва</small></h4>
+
+	</div>
+
+	<div class="map pb-1 mb-4" id="mapRegion">
+		<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A39cfcc4d2def19d911b4f9876888bc18de829607b71238a144002462c1e3a9c7&amp;width=100%25&amp;height=350&amp;lang=ru_RU&amp;scroll=false"></script>
+	</div>
+
+	<div class="contacts-ro pt-4 pb-3">
+		<div class="container">
+			<div class="table-responsive">
+				<table class="table table-striped table-sm bg-light">
+					<tr>
+						<td class="text-white bg-danger pl-sm-3 pl-lg-5">Руководитель</td>
+						<td class="pl-sm-3 pl-lg-5">Бродягин Владимир Николаевич</td>
+					</tr>
+					<tr>
+						<td class="pl-sm-3 pl-lg-5">Адрес подразделения</td>
+						<td class="pl-sm-3 pl-lg-5">105082, город Москва, Басманный район, Переведеновский переулок, дом 13, строение 15</td>
+					</tr>
+					<tr>
+						<td class="pl-sm-3 pl-lg-5">Телефоны</td>
+						<td class="pl-sm-3 pl-lg-5">(910) 435-52-00 (495) 369-64-70</td>
+					</tr>
+					<tr>
+						<td class="pl-sm-3 pl-lg-5">E-mail</td>
+						<td class="pl-sm-3 pl-lg-5"><a href="mailto:ac-mosgaz@yandex.ru" class="text-primary">ac-mosgaz@yandex.ru</a></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="py-5 mb-4 bg-red">
+		<button type="button" class="btn btn-danger btn-xl" data-toggle="modal" data-target="#modal-newEmployee">Стать членом сообщества</button>
+	</div>
+</main> 
+
+<!-- End Content -->
 {% endblock %}

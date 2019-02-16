@@ -1,15 +1,215 @@
 {% extends 'mainapp/base.html' %}
 
 {% block content %}
-	<!-- Content -->
-	<main class="pt-4">
-		<div class="img-head">
-			<img src="/static/images/vnutri-orsps.jpg" alt="">
-		</div>	
-		<div class="container">
-			<h2>О РСПС</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat aut, quod corrupti molestias et nihil numquam culpa. Autem est tempora sunt ipsa soluta illo, atque, porro nulla, maiores, ullam neque.</p>
+<!-- Content -->
+<main class="pt-4">
+	<div class="img-head mb-5">
+		<img src="/static/images/vnutri-orsps.jpg" alt="">
+	</div>	
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+				<li class="breadcrumb-item active" aria-current="page">О РСПС</li>
+			</ol>
+		</nav>
+		<h4 class="title-page">О РСПС</h4>
+		<p>Общероссийская общественная организация «Российское Сварочное Профессиональное Сообщество» является, основанным на членстве, добровольным, самоуправляемым, некоммерческим общественным объединением, созданным по инициативе граждан, объединившихся на основе общности интересов для реализации общих целей, определенных <a href="#" class="text-primary" target='_blank'>Уставом</a>.</p>
+		<p>РСПС осуществляет свою деятельность в соответствии с Конституцией Российской Федерации, Гражданским кодексом Российской Федерации, Федеральным законом «Об общественных объединениях», иными нормативными правовыми актами  Российской Федерации, общепризнанными принципами, нормами международного права и Уставом организации.</p>
+		<p>Организация без государственной регистрации и приобретения прав юридического лица, строит свою деятельность на основе принципов равноправия своих членов, законности, гласности, добровольности, самоуправления. Осуществляет свою деятельность на территории более половины субъектов Российской Федерации.</p>
+		<p>РСПС свободна в определении своей внутренней структуры, целей, форм и методов своей деятельности.</p>
+		
+		<div class="bg-light px-3 mb-4 mb-lg-5">
+			<div class="row py-2 align-items-center border-bottom">
+				<div class="col-sm-6">
+					<div class="font-weight-bold">Полное наименование Организации:</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="text-secondary">Общероссийская общественная организация «Российское Сварочное Профессиональное Сообщество»</div>
+				</div>
+			</div>
+			<div class="row py-2 align-items-center border-bottom">
+				<div class="col-sm-6">
+					<div class="font-weight-bold">Сокращенное наименование Организации:</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="text-secondary">ООО «РСПС»</div>
+				</div>
+			</div>
+			<div class="row py-2 align-items-center border-bottom">
+				<div class="col-sm-6">
+					<div class="font-weight-bold">Краткое наименование Организации:</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="text-secondary">РСПС</div>
+				</div>
+			</div>
+			<div class="row py-2 align-items-center border-bottom">
+				<div class="col-sm-6">
+					<div class="font-weight-bold">Наименование Организации на английском языке:</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="text-secondary">The all-Russian public organization «Russian welding professional community»</div>
+				</div>
+			</div>
+			<div class="row py-2 align-items-center border-bottom">
+				<div class="col-sm-6">
+					<div class="font-weight-bold">Краткое наименование Организации на английском языке:</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="text-secondary">RWPC</div>
+				</div>
+			</div>
+			<div class="row py-2 align-items-center">
+				<div class="col-sm-6">
+					<div class="font-weight-bold">Местонахождение постоянно действующего руководящего органа Организации (Президиума Организации):</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="text-secondary">город Москва, Российская Федерация</div>
+				</div>
+			</div>
 		</div>
-	</main> 
+		
+
+		<div class="mb-4">
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item">
+					<a class="nav-link active text-uppercase font-weight-bold" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Состав Президиума РСПС</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link text-uppercase font-weight-bold" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Состав Наблюдательного совета РСПС</a>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+					<div class="table-responsive mt-4">
+						<table class="table table-list">
+							<tbody>
+								<tr>
+									<td width="30%" class="text-uppercase font-weight-bold text-secondary">Алешин Николай Павлович</td>
+									<td>Академик РАН, Президент СРО НП «НАКС»</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Лысак Владимир Ильич</td>
+									<td>Академик РАН, ректор Волгоградского государственного технического университета</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Гортышов Юрий Федорович</td>
+									<td>Д.Т.Н., Президент Федерального государственного бюджетного образовательного учреждения высшего профессионального образования «Казанский национальный исследовательский технический университет им. А.Н. Туполева-КАИ»</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Атрощенко Валерий Владимирович</td>
+									<td>Д.Т.Н., зав. кафедрой сварки Уфимского Государственного авиационно-технического Университета</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Бродягин Владимир Николаевич</td>
+									<td>К.Т.Н., главный сварщик ОАО «МОСГАЗ»</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Вышемирский Евгений Мстиславович</td>
+									<td>К.Т.Н., начальник Отдела главного сварщика Департамента капитального ремонта ОАО «ГАЗПРОМ»</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Гребенчук Виктор Георгиевич</td>
+									<td>К.Т.Н., заместитель директора филиала ОАО ЦНИИС «НИЦ «Мосты» - руководитель ГАЦ «Мосты»</td>
+								</tr><tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Братусь Артем Алексеевич</td>
+									<td>Главный технолог Управления главного механика ОАО «АК «Транснефть»</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Оськин Игорь Эдуардович</td>
+									<td>Главный сварщик ГУП МО «Мособлгаз»</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Прилуцкий Андрей Иванович</td>
+									<td>К.Т.Н, Генеральный директор СРО Ассоциация «НАКС»</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Чупрак Александр Иванович</td>
+									<td>Технический директор СРО Ассоциация «НАКС», ответственный секретарь технического комитета по стандартизации ТК 364 «Сварка и родственные процессы</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Жабин Александр Николаевич</td>
+									<td>Заместитель Генерального директора СРО Ассоциация «НАКС»</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Марков Николай Николаевич</td>
+									<td>Заместитель Генерального директора СРО Ассоциация «НАКС»</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Штоколов Сергей Александрович</td>
+									<td>Генеральный директор НП «Национальное Промышленное Сварочное Общество»</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+					<div class="table-responsive mt-4">
+						<table class="table table-list">
+							<tbody>
+								<tr>
+									<td width="30%" class="text-uppercase font-weight-bold text-secondary">Зажигалкин Александр Владимирович</td>
+									<td>Заместитель Руководителя Федерального агентства по техническому регулированию и метрологии - председатель Наблюдательного Совета</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Опекунов  Виктор  Семенович</td>
+									<td>Президент СРО НП "СОЮЗАТОМСТРОЙ", Советник генерального директора Госкорпорации "Росатом" - зам. председателя Наблюдательного Совета</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Красных Борис Адольфович</td>
+									<td>Заместитель Руководителя Федеральной службы по экологическому, технологическому и атомному надзору</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Токарев Олег Павлович</td>
+									<td>Заместитель директора Департамента станкостроения и инвестиционного машиностроения Минпромторга России</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Прокопов Федор Тимофеевич</td>
+									<td>Вице-президент Общероссийской общественной организации "Российский союз промышленников и предпринимателей", заместитель председателя Национального совета при Президенте Российской Федерации по профессиональным квалификациям</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Песоцкий Юрий Сергеевич</td>
+									<td>Вице-президент Общероссийской общественной организации малого и среднего предпринимательства «ОПОРА РОССИИ»,  Председатель Комитета «ОПОРЫ РОССИИ» по кадрам для МСП и образованию</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Салихов Сергей Владимирович</td>
+									<td>Директор Департамента науки и технологий Министерства образования и науки Российской Федерации</td>
+								</tr><tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Михайлов Владимир Евгеньевич</td>
+									<td>Генеральный директор Государственного научного центра Российской Федерации Акционерного общества «Научно-производственное объединение «Центральный научно-исследовательский институт технологии машиностроения»</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Лисин Юрий Викторович</td>
+									<td>Генеральный директор ООО «НИИ Транснефть»</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Горбач Владимир Дмитриевич</td>
+									<td>Главный сварщик Государственного научного центра Российской Федерации Федерального Государственного унитарного предприятия "Центральный Научно-Исследовательский Институт Конструкционных материалов "ПРОМЕТЕЙ"</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Смородинский Яков Гаврилович</td>
+									<td>Зав. отделом неразрушающего контроля и комплексных методов контроля Института физики металлов имени М.Н. Михеева Уральского отделения РАН (ИФМ УрО РАН)</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Лысак Владимир Ильич</td>
+									<td>Председатель Президиума РСПС, академик РАН, ректор Волгоградского государственного технического университета</td>
+								</tr>
+								<tr>
+									<td class="text-uppercase font-weight-bold text-secondary">Гортышов Юрий Федорович</td>
+									<td>Сопредседатель Президиума РСПС, Действительный член Академии наук Республики Татарстан, Президент Федерального государственного бюджетного образовательного учреждения высшего профессионального образования «Казанский национальный исследовательский технический университет им. А.Н. Туполева-КАИ» (КНИТУ-КАИ)</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+	</div>
+</main> 
 <!-- End Content -->
 {% endblock %}

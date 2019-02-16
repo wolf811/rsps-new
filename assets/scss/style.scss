@@ -212,9 +212,26 @@ main {
 		font-weight: bold;
 	}
 	.img-head {
-		background: url(../images/vnutri-orsps.jpg) 100% 100% no-repeat;
-		background-size: contain;
+		background-image: url(../images/bg-zub.gif);
+    	background-repeat: repeat-x;
+    	background-position: bottom;
+    	padding-bottom: 1.5rem;
+		img {
+	    	object-fit: none; /* Do not scale the image */
+			object-position: center; /* Center the image within the element */
+			height: 176px;
+			width: 100%;
+		}
 	}
+
+	/* .card-top {
+		img {
+	    	object-fit: none;
+			object-position: center;
+			height: 176px;
+			width: 100%;
+		}
+	} */
 	.nav-tabs {
 		.nav-link {
 			border-radius: 0; 
@@ -401,6 +418,7 @@ main {
 
 			.card-title {
 				font-size: 0.9rem;
+				text-transform: uppercase;
 				font-weight: bold;
 			}
 			.card-subtitle {

@@ -159,6 +159,14 @@ footer hr {
 
 /* End Modal */
 main {
+  /* .card-top {
+		img {
+	    	object-fit: none;
+			object-position: center;
+			height: 176px;
+			width: 100%;
+		}
+	} */
   /* All Conferences */
   /* End Conferences */ }
   main h4.title-page {
@@ -166,8 +174,19 @@ main {
     margin-bottom: 1.5rem;
     font-weight: bold; }
   main .img-head {
-    background: url(../images/vnutri-orsps.jpg) 100% 100% no-repeat;
-    background-size: contain; }
+    background-image: url(../images/bg-zub.gif);
+    background-repeat: repeat-x;
+    background-position: bottom;
+    padding-bottom: 1.5rem; }
+    main .img-head img {
+      -o-object-fit: none;
+      object-fit: none;
+      /* Do not scale the image */
+      -o-object-position: center;
+      object-position: center;
+      /* Center the image within the element */
+      height: 176px;
+      width: 100%; }
   main .nav-tabs .nav-link {
     border-radius: 0;
     color: #086da3; }
@@ -294,6 +313,7 @@ main {
     position: relative; }
     main .card-all .card-body .card-title {
       font-size: 0.9rem;
+      text-transform: uppercase;
       font-weight: bold; }
     main .card-all .card-body .card-subtitle {
       font-size: 0.9rem; }
