@@ -1,5 +1,5 @@
 {% extends 'mainapp/base.html' %}
-
+{% load static %}
 {% block content %}
 <!-- Content -->
 <main class="pt-4">
@@ -28,8 +28,113 @@
 				<a class="nav-link" href="{% url 'account_conf' %}">Конференции</a>
 			</li>
 		</ul>
-		
 
+		<div class="card-all">
+			<div class="row">
+				<div class="col-sm-6 col-lg-4 mb-3">
+					<div class="card rounded-0">
+						<div class="card-top">
+							<img class="card-img-top" src="{% static 'images/news1.jpg' %}" alt="">
+							<div class="card-img-overlay">Калужская область</div>
+							<div class="card-img-overlay-right">01.11.2019</div>
+						</div>
+						<div class="card-body">
+							<h6 class="card-title mb-3">11-12 октября состоялся Семинар в Москве</h6>
+							<p class="card-text mb-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit animi inventore dolorem blanditiis atque fugit sed, quo soluta tempore ea alias hic amet ipsum est.</p>
+							<a href="#" class="card-link" target="_blank">Подробнее<i class="fa fa-arrow ml-2"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-4 mb-3">
+					<div class="card rounded-0">
+						<div class="card-top">
+							<img class="card-img-top" src="{% static 'images/news2.jpg' %}" alt="">
+							<div class="card-img-overlay">Калужская область</div>
+							<div class="card-img-overlay-right">01.11.2019</div>
+						</div>
+						<div class="card-body">
+							<h6 class="card-title mb-3">11-12 октября состоялся Семинар в Москве</h6>
+							<p class="card-text mb-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit animi inventore dolorem blanditiis atque fugit sed, quo soluta tempore ea alias hic amet ipsum est.</p>
+							<a href="#" class="card-link" target="_blank">Подробнее<i class="fa fa-arrow ml-2"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-4 mb-3">
+					<div class="card rounded-0">
+						<div class="card-top">
+							<img class="card-img-top" src="{% static 'images/news3.jpg' %}" alt="">
+							<div class="card-img-overlay">Калужская область</div>
+							<div class="card-img-overlay-right">01.11.2019</div>
+						</div>
+						<div class="card-body">
+							<h6 class="card-title mb-3">11-12 октября состоялся Семинар в Москве</h6>
+							<p class="card-text mb-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit animi inventore dolorem blanditiis atque fugit sed, quo soluta tempore ea alias hic amet ipsum est.</p>
+							<a href="#" class="card-link" target="_blank">Подробнее<i class="fa fa-arrow ml-2"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-4 mb-3">
+					<div class="card rounded-0">
+						<div class="card-top">
+							<img class="card-img-top" src="{% static 'images/news4.jpg' %}" alt="">
+							<div class="card-img-overlay">Калужская область</div>
+							<div class="card-img-overlay-right">01.11.2019</div>
+						</div>
+						<div class="card-body">
+							<h6 class="card-title mb-3">11-12 октября состоялся Семинар в Москве</h6>
+							<p class="card-text mb-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit animi inventore dolorem blanditiis atque fugit sed, quo soluta tempore ea alias hic amet ipsum est.</p>
+							<a href="#" class="card-link" target="_blank">Подробнее<i class="fa fa-arrow ml-2"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-4 mb-3">
+					<div class="card rounded-0">
+						<div class="card-top">
+							<img class="card-img-top" src="{% static 'images/news1.jpg' %}" alt="">
+							<div class="card-img-overlay">Калужская область</div>
+							<div class="card-img-overlay-right">01.11.2019</div>
+						</div>
+						<div class="card-body">
+							<h6 class="card-title mb-3">11-12 октября состоялся Семинар в Москве</h6>
+							<p class="card-text mb-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit animi inventore dolorem blanditiis atque fugit sed, quo soluta tempore ea alias hic amet ipsum est.</p>
+							<a href="#" class="card-link" target="_blank">Подробнее<i class="fa fa-arrow ml-2"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6 col-lg-4 mb-3">
+					<div class="card rounded-0">
+						<div class="card-top">
+							<img class="card-img-top" src="{% static 'images/news1.jpg' %}" alt="">
+							<div class="card-img-overlay">Калужская область</div>
+							<div class="card-img-overlay-right">01.11.2019</div>
+						</div>
+						<div class="card-body">
+							<h6 class="card-title mb-3">11-12 октября состоялся Семинар в Москве</h6>
+							<p class="card-text mb-2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit animi inventore dolorem blanditiis atque fugit sed, quo soluta tempore ea alias hic amet ipsum est.</p>
+							<a href="#" class="card-link" target="_blank">Подробнее<i class="fa fa-arrow ml-2"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<nav aria-label="Page navigation example">
+			<ul class="pagination pagination-sm">
+				<li class="page-item disabled">
+					<a class="page-link" href="#" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<li class="page-item active"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item">
+					<a class="page-link" href="#" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
 	</div>
 </main> 
 <!-- End Content -->

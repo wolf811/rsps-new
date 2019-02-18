@@ -223,15 +223,6 @@ main {
 			width: 100%;
 		}
 	}
-
-	/* .card-top {
-		img {
-	    	object-fit: none;
-			object-position: center;
-			height: 176px;
-			width: 100%;
-		}
-	} */
 	.nav-tabs {
 		.nav-link {
 			border-radius: 0; 
@@ -321,13 +312,9 @@ main {
 		}
 		.btn-action {
 			font-weight: bold;
-			&:hover {
-				color: #007bff !important;
-			}
+			&:hover {color: #007bff !important;}
 
-			i {
-				font-size: 1rem;
-			}
+			i {font-size: 1rem;}
 		}
 
 		.status-false {
@@ -378,14 +365,41 @@ main {
 			}
 		}
 		.card-top {
-			height: 200px;
+			width: 100%;
+    		height: 200px;
+    		overflow:hidden;
+			/* position: relative;
+			  width: 100%;
+			  height: 200px;
+			  overflow: hidden; */
+			/* height: 200px;
+			overflow: hidden;       
+		    display: table-cell;
+		    text-align: center;
+		    vertical-align: middle; */
 
 			img {
 				height: 100%;
+    			min-width: 100%;
+    			left: 50%;
+    			position: relative;
+    			transform: translateX(-50%);
+				/* position: absolute;
+				  left: 50%;
+				  top: 50%;
+				  height: 100%;
+				  width: auto;
+				  -webkit-transform: translate(-50%,-50%);
+				      -ms-transform: translate(-50%,-50%);
+				          transform: translate(-50%,-50%); */
+				/* max-width: 100%;
+    			display: inline-block; */
+
+				/* height: 100%;
 			    width: auto;
 			    margin-left: auto;
 			    margin-right: auto;
-			    display: block;
+			    display: block; */
 			}
 
 			.card-img-overlay {
@@ -490,5 +504,10 @@ main {
 	    	}
 	    }
 	}
+}
+
+/* Calendar */
+.datepicker {
+	z-index: 10000;
 }
 
