@@ -5,25 +5,28 @@
 			<div class="container">
 				<ul class="nav nav-fill">
 					<li class="nav-item">
-						<a class="nav-link" href="#">Главная</a>
+						<a class="nav-link" href="{% url 'index' %}">Главная</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">О РСПС</a>
+						<a class="nav-link" href="{% url 'about' %}">О РСПС</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Новости</a>
+						<a class="nav-link" href="{% url 'news' %}">Новости</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Документы</a>
+						<a class="nav-link" href="{% url 'docs' %}">Документы</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Региональные отделения</a>
+						<a class="nav-link" href="{% url 'regional_office' %}">Региональные отделения</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Одобрено РСПС</a>
+						<a class="nav-link" href="{% url 'reestr' %}">Реестр РСПС</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Контакты</a>
+						<a class="nav-link" href="{% url 'conf' %}">Конференции</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'contact' %}">Контакты</a>
 					</li>
 				</ul>
 			</div>

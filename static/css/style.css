@@ -351,6 +351,32 @@ main {
       padding: 2px 6px; }
   main .search {
     background: #E8EEF2; }
+    main .search .form-check-input {
+      margin-top: 0.3rem; }
+  main .registration .row {
+    border: solid 1px #e5e5e5;
+    vertical-align: middle;
+    border-bottom: 0;
+    margin: 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background: #fefefe;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%, #fefefe), to(#f2f7f9));
+    background: linear-gradient(to bottom, #fefefe 1%, #f2f7f9 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#f2f7f9',GradientType=0 ); }
+    main .registration .row:hover {
+      background: #f0fbdc;
+      background: -webkit-gradient(linear, left top, left bottom, from(#f0fbdc), to(#e4efd1));
+      background: linear-gradient(to bottom, #f0fbdc 0%, #e4efd1 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0fbdc', endColorstr='#e4efd1',GradientType=0 ); }
+    main .registration .row:last-child {
+      border-bottom: solid 1px #e5e5e5; }
+    main .registration .row label {
+      text-transform: uppercase;
+      font-size: 0.8rem;
+      color: #6c757d; }
+    main .registration .row .form-check-input {
+      margin-top: 0.3rem; }
   main .bg-red {
     background-color: #A92119;
     -webkit-box-shadow: inset 0 -2px 3px 0 #780400;

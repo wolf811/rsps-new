@@ -16,6 +16,20 @@ def contact(request):
 		'title': title
 	}
 	return render(request, 'mainapp/contact.html', content)
+
+def user(request):
+	title = 'РСПС - Личный кабинет'
+	content = {
+		'title': title, 
+	}
+	return render(request, 'mainapp/user.html', content)
+
+def account_user(request):
+	title = 'РСПС - Личный кабинет'
+	content = {
+		'title': title, 
+	}
+	return render(request, 'mainapp/account_user.html', content)
 	
 def account_about(request):
 	title = 'РСПС - Личный кабинет'

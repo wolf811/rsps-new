@@ -24,6 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', mainapp.index, name = 'index'),
     path('contact/', mainapp.contact, name = 'contact'),
+    path('user/', mainapp.user, name = 'user'),
+    path('account_user/', mainapp.account_user, name = 'account_user'),
     path('account_about/', mainapp.account_about, name = 'account_about'),
     path('account_news/', mainapp.account_news, name = 'account_news'),
     path('account_employee/', mainapp.account_employee, name = 'account_employee'),

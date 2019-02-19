@@ -32,3 +32,15 @@ $(document).ready(function() {
 });
 
 
+// $('#imMember').on('change', function() {
+//     $('#chooseRo').toggle();
+// })
+
+
+$("#imMember").change(function() {
+    if ($(this).prop('checked')) {
+      $('#chooseRo').fadeIn(300);
+      } else {
+        $('#chooseRo').fadeOut(); 
+      }
+    });

@@ -1,27 +1,88 @@
 {% extends 'mainapp/base.html' %}
 
 {% block content %}
-	<!-- Content -->
-	<main class="pt-4">
-		<div class="container">
-			<nav aria-label="breadcrumb">
-				<ol class="breadcrumb">
-					<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
-					<li class="breadcrumb-item active" aria-current="page">Регистрация</li>
-				</ol>
-			</nav>
+<!-- Content -->
+<main class="pt-4">
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Регистрация</li>
+			</ol>
+		</nav>
 
-			<h4 class="title-page">Регистрация</h4>
+		<h4 class="title-page">Регистрация</h4>
 
-			<div class="search p-3 mb-4">
-				<!-- <h5>Быстрый поиск</h5> -->
-				<form>
+		<div class="registration mb-4">
+			<form>
+				<div class="form-group row">
+					<div class="offset-sm-4 col-sm-8">
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+							<label class="form-check-label text-primary text-uppercase" for="exampleRadios2">
+								регистрация учетной записи
+							</label>
+						</div>
+
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="offset-sm-4 col-sm-8">
+						<div class="form-check">
+							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+							<label class="form-check-label text-primary text-uppercase" for="exampleRadios1">
+								регистрация Регионального отделения (для руководителя РО)
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<!-- ========= Регистрация регионального отделения ======== -->
+				<div id="complexUser">
 					<div class="form-group row">
-						<label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm">Региональное отделение&nbsp;<span class="text-danger">*</span></label>
-						<div class="col-sm-6">
+						<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">Субъект РФ&nbsp;<span class="text-danger">*</span></label>
+						<div class="col-md-8 col-lg-6">
+							<select class="form-control form-control-sm" aria-describedby="helpBlock" required="">
+								<option>-</option>
+								<option disabled="">Астраханская область</option>
+								<option>Тамбовская область</option>
+								<option>Воронежская область</option>
+								<option disabled="">Московская область</option>
+								<option>Хабаровский край</option>
+								<option disabled="">Краснодарский край</option>
+							</select>
+							<small id="helpBlock" class="form-text text-muted">
+								Выберите субъект, в котором еще не открыто региональное отделение РСПС
+							</small>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">ФИО (руководитель РО)&nbsp;<span class="text-danger">*</span></label>
+						<div class="col-md-8 col-lg-6">
+							<input type="text" class="form-control form-control-sm" required="">
+						</div>
+					</div>
+				</div> <!-- END -->
+
+				<!-- ========= Регистрация простой учетной записи ======== -->
+				<div id="simleUser">
+					<div class="form-group row">
+					<div class="offset-sm-4 col-sm-8">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" name="exampleRadios" id="imMember" value="option2">
+							<label class="form-check-label text-secondary text-uppercase" for="imMember">
+								являюсь членом сообщества
+							</label>
+						</div>
+
+					</div>
+				</div>
+					<div class="form-group row" id="chooseRo" style="display: none;">
+						<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">Региональное отделение&nbsp;<span class="text-danger">*</span></label>
+						<div class="col-md-8 col-lg-6">
 							<select class="form-control form-control-sm" required="">
 								<option>-</option>
-								<option selected="">Астраханская область</option>
+								<option>Астраханская область</option>
 								<option>Тамбовская область</option>
 								<option>Воронежская область</option>
 								<option>Московская область</option>
@@ -31,58 +92,58 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm">ФИО&nbsp;<span class="text-danger">*</span></label>
-						<div class="col-sm-6">
+						<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">ФИО&nbsp;<span class="text-danger">*</span></label>
+						<div class="col-md-8 col-lg-6">
 							<input type="text" class="form-control form-control-sm" required="">
 						</div>
 					</div>
 					<div class="form-group row">
-						<label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm">Город проживания (населенный пункт)&nbsp;<span class="text-danger">*</span></label>
-						<div class="col-sm-3">
+						<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">Город проживания (населенный пункт) &nbsp;<span class="text-danger">*</span></label>
+						<div class="col-md-8 col-lg-6">
 							<input type="text" class="form-control form-control-sm" required="">
 						</div>
 					</div>
-					<div class="form-group row">
-						<label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm">Телефон / Email&nbsp;<span class="text-danger">*</span></label>
-						<div class="col-sm-3">
-							<input type="text" class="form-control form-control-sm" placeholder="tel">
-						</div>
-						<div class="col-sm-3">
-							<input type="text" class="form-control form-control-sm" placeholder="email" required="">
-						</div>
+				</div> <!-- END -->
+
+				<div class="form-group row">
+					<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">Телефон / Email&nbsp;<span class="text-danger">*</span></label>
+					<div class="col-md-4 col-lg-3 mb-2 mb-md-0">
+						<input type="text" class="form-control form-control-sm" placeholder="tel">
 					</div>
-					<div class="form-group row">
-						<label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm">Место работы</label>
-						<div class="col-sm-3">
-							<input type="text" class="form-control form-control-sm">
-						</div>
+					<div class="col-md-4 col-lg-3">
+						<input type="text" class="form-control form-control-sm" placeholder="email" required="">
 					</div>
-					<div class="form-group row">
-						<label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm">Должность</label>
-						<div class="col-sm-3">
-							<input type="text" class="form-control form-control-sm">
-						</div>
+				</div>
+				<div class="form-group row">
+					<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">Место работы</label>
+					<div class="col-md-8 col-lg-6">
+						<input type="text" class="form-control form-control-sm">
 					</div>
-					<div class="form-group row">
-						<div class="offset-sm-4 col-sm-6">
-							<div class="form-check">
-							<input class="form-check-input" type="checkbox" id="gridCheck">
-							<label class="form-check-label" for="gridCheck">
-								подписка на рассылку от РСПС
+				</div>
+				<div class="form-group row">
+					<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">Должность</label>
+					<div class="col-md-8 col-lg-6">
+						<input type="text" class="form-control form-control-sm">
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="offset-sm-4 col-sm-6">
+						<div class="form-check">
+							<input class="form-check-input" type="checkbox" id="mailing">
+							<label class="form-check-label text-secondary text-uppercase" for="mailing">
+								<small>подписка на рассылку от РСПС</small>
 							</label>
 						</div>
-						</div>
-						
 					</div>
-					<div class="row">
-						<div class="col-auto">
-							<button type="submit" class="btn btn-outline-danger btn-sm">Отправить<i class="fa fa-angle-right ml-2"></i></button>
-							<button type="button" class="btn btn-link btn-sm">Отмена</button>
-						</div>
+				</div>
+				<div class="row">
+					<div class="col-auto">
+						<button type="submit" class="btn btn-danger btn-xl">Отправить<i class="fa fa-angle-right ml-2"></i></button>
 					</div>
-				</form>
-			</div>
+				</div>
+			</form>
 		</div>
-	</main> 
+	</div>
+</main> 
 <!-- End Content -->
 {% endblock %}
