@@ -1,13 +1,37 @@
 {% extends 'mainapp/base.html' %}
-
+{% load static %}
 {% block content %}
-
+	
 	<!-- Content -->
-	<main class="pt-4">
-		<div class="container">
-			<h2>Hello, world!</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Placeat aut, quod corrupti molestias et nihil numquam culpa. Autem est tempora sunt ipsa soluta illo, atque, porro nulla, maiores, ullam neque.</p>
+	<main class="pt-0" style="background-image: none;">
+		<div class="bg-red py-5">
+			<button type="button" class="btn btn-danger btn-xl" data-toggle="modal" data-target="#modal-newEmployee">Стать членом сообщества</button>
 		</div>
+		<div class="bg-gray py-5">
+			<div class="container">
+				<div class="card-deck">
+					<div class="card">
+						<img src="{% static 'images/news1.jpg' %}" class="card-img" alt="...">
+						<div class="card-img-overlay">
+							<h5 class="card-title">Card title</h5>
+						</div>
+					</div>
+					<div class="card">
+						<img src="{% static 'images/news_detail3.jpg' %}" class="card-img" alt="...">
+						<div class="card-img-overlay">
+							<h5 class="card-title">Card title</h5>
+						</div>
+					</div>
+					<div class="card">
+						<img src="{% static 'images/news1.jpg' %}" class="card-img" alt="...">
+						<div class="card-img-overlay">
+							<h5 class="card-title">Card title</h5>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
 	</main> <!-- End Content -->
 
 	

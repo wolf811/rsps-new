@@ -18,8 +18,8 @@
 				<div class="form-group row">
 					<div class="offset-sm-4 col-sm-8">
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-							<label class="form-check-label text-primary text-uppercase" for="exampleRadios2">
+							<input class="form-check-input" type="radio" name="regAccount" id="regUser" value="option2" checked>
+							<label class="form-check-label text-primary text-uppercase" for="regUser">
 								регистрация учетной записи
 							</label>
 						</div>
@@ -29,8 +29,8 @@
 				<div class="form-group row">
 					<div class="offset-sm-4 col-sm-8">
 						<div class="form-check">
-							<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-							<label class="form-check-label text-primary text-uppercase" for="exampleRadios1">
+							<input class="form-check-input" type="radio" name="regAccount" id="regRo" value="option1">
+							<label class="form-check-label text-primary text-uppercase" for="regRo">
 								регистрация Регионального отделения (для руководителя РО)
 							</label>
 						</div>
@@ -38,7 +38,7 @@
 				</div>
 
 				<!-- ========= Регистрация регионального отделения ======== -->
-				<div id="complexUser">
+				<div id="complexUser" style="display: none;">
 					<div class="form-group row">
 						<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">Субъект РФ&nbsp;<span class="text-danger">*</span></label>
 						<div class="col-md-8 col-lg-6">
@@ -56,7 +56,7 @@
 							</small>
 						</div>
 					</div>
-					<div class="form-group row">
+					<div class="form-group row border-bottom-0">
 						<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">ФИО (руководитель РО)&nbsp;<span class="text-danger">*</span></label>
 						<div class="col-md-8 col-lg-6">
 							<input type="text" class="form-control form-control-sm" required="">
@@ -69,15 +69,15 @@
 					<div class="form-group row">
 					<div class="offset-sm-4 col-sm-8">
 						<div class="form-check">
-							<input class="form-check-input" type="checkbox" name="exampleRadios" id="imMember" value="option2">
+							<input class="form-check-input" type="checkbox" name="exampleRadios" id="imMember" value="option2" checked>
 							<label class="form-check-label text-secondary text-uppercase" for="imMember">
 								являюсь членом сообщества
-							</label>
+							</label>&nbsp;<i class="fa fa fa-info-circle text-info ml-2" data-container="body" data-toggle="popover" data-trigger='hover' data-placement="top" data-content="Cогласно пп 4.2. Устава РСПС членами Организации могут быть: Физические лица, достигшие 18 лет - граждане Российской Федерации, иностранные граждане и лица без гражданства, имеющие образование в области сварки и родственных процессов (для лиц, не имеющих образования в области сварки и родственных процессов необходим опыт работы в области сварки не менее 5 лет), разделяющие цели и задачи Организации, выполняющие требования Устава, принимающие непосредственное участие в работе Организации; Юридические лица - общественные объединения специалистов в области сварки и родственных процессов, разделяющие цели и задачи Организации, выполняющие требования настоящего Устава, принимающие непосредственное участие в работе Организации."></i>
 						</div>
 
 					</div>
 				</div>
-					<div class="form-group row" id="chooseRo" style="display: none;">
+					<div class="form-group row" id="chooseRo">
 						<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">Региональное отделение&nbsp;<span class="text-danger">*</span></label>
 						<div class="col-md-8 col-lg-6">
 							<select class="form-control form-control-sm" required="">
@@ -97,7 +97,7 @@
 							<input type="text" class="form-control form-control-sm" required="">
 						</div>
 					</div>
-					<div class="form-group row">
+					<div class="form-group row border-bottom-0">
 						<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">Город проживания (населенный пункт) &nbsp;<span class="text-danger">*</span></label>
 						<div class="col-md-8 col-lg-6">
 							<input type="text" class="form-control form-control-sm" required="">

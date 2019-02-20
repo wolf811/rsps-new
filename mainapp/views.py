@@ -86,6 +86,13 @@ def news(request):
 	}
 	return render(request, 'mainapp/news.html', content)
 
+def news_detail(request):
+	title = 'РСПС - Новости'
+	content = {
+		'title': title
+	}
+	return render(request, 'mainapp/news_detail.html', content)
+
 def docs(request):
 	title = 'РСПС - Документы'
 	content = {

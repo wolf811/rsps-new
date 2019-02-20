@@ -1,5 +1,9 @@
 'use strict';
 
+$(function () {
+  $('[data-toggle="popover"]').popover()
+})
+
 $('#showRecovery').click(function() {
 	$('#pass-recovery').show('fade');
 	$('#login-account').hide();
@@ -18,29 +22,43 @@ $('#backLogin').click(function() {
 // 	}
 // }
 
-$(document).ready(function() { 
-    $(".select-all").on("change", function() {
-        var groupId = $(this).data('id');
-        $('.select-one[data-id="' + groupId + '"]').prop("checked", this.checked);
-    });
+// $(document).ready(function() { 
+//     $(".select-all").on("change", function() {
+//         var groupId = $(this).data('id');
+//         $('.select-one[data-id="' + groupId + '"]').prop("checked", this.checked);
+//     });
 
-    $(".select-one").on("change", function() {
-        var groupId = $(this).data('id');
-        var allChecked = $('.select-one[data-id="' + groupId + '"]:not(:checked)').length == 0;
-        $('.select-all[data-id="' + groupId + '"]').prop("checked", allChecked);
-    });
-});
+//     $(".select-one").on("change", function() {
+//         var groupId = $(this).data('id');
+//         var allChecked = $('.select-one[data-id="' + groupId + '"]:not(:checked)').length == 0;
+//         $('.select-all[data-id="' + groupId + '"]').prop("checked", allChecked);
+//     });
+// });
 
 
 // $('#imMember').on('change', function() {
 //     $('#chooseRo').toggle();
 // })
 
-
+// ======= Страница Регистрации - выбор типа регистрации =======
+$("#regRo").change(function() {
+    if ($(this).prop('checked')) {
+        $('#complexUser').show('fade');
+        $('#simleUser').hide();
+    }
+});
+$("#regUser").change(function() {
+    if ($(this).prop('checked')) {
+        $('#simleUser').show('fade');
+        $('#complexUser').hide();
+    }
+});
 $("#imMember").change(function() {
     if ($(this).prop('checked')) {
-      $('#chooseRo').fadeIn(300);
-      } else {
-        $('#chooseRo').fadeOut(); 
-      }
-    });
+        $('#chooseRo').show('fade');
+    } else {
+        $('#chooseRo').hide(); 
+    }
+});
+// ====== END ==========
+

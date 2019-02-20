@@ -35,35 +35,18 @@
 		<div class="search px-3 py-4 mb-4">
 				<form>
 					<div class="form-group row">
-						<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">Региональное отделение&nbsp;<span class="text-danger">*</span></label>
-						<div class="col-md-4 col-lg-3 mb-2 mb-md-0">
-							<select class="form-control form-control-sm" required="">
-								<option>-</option>
-								<option selected="">Астраханская область</option>
-								<option>Тамбовская область</option>
-								<option>Воронежская область</option>
-								<option>Московская область</option>
-								<option>Хабаровский край</option>
-								<option>Краснодарский край</option>
-							</select>
-						</div>
-						<div class="col-md-4 col-lg-3">
-							<input type="text" class="form-control form-control-sm" placeholder="Населенный пункт" required="">
-						</div>
-					</div>
-					<div class="form-group row">
-						<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">ФИО&nbsp;<span class="text-danger">*</span></label>
+						<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">ФИО (Руководитель РО)&nbsp;<span class="text-danger">*</span></label>
 						<div class="col-md-8 col-lg-6">
-							<input type="text" class="form-control form-control-sm" required="">
+							<input type="text" class="form-control form-control-sm" value="Меркулов Денис Иювинальевич" required="">
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">Телефон / Email&nbsp;<span class="text-danger">*</span></label>
 						<div class="col-md-4 col-lg-3 mb-2 mb-md-0">
-							<input type="text" class="form-control form-control-sm" placeholder="tel">
+							<input type="text" class="form-control form-control-sm" placeholder="tel" value="(8512) 549097">
 						</div>
 						<div class="col-md-4 col-lg-3">
-							<input type="text" class="form-control form-control-sm" placeholder="email" required="">
+							<input type="text" class="form-control form-control-sm" placeholder="email" required="" value="svarkacenter@ya.ru">
 						</div>
 					</div>
 					<div class="form-group row">
@@ -78,10 +61,21 @@
 							<input type="text" class="form-control form-control-sm">
 						</div>
 					</div>
+					<hr>
+					<div class="form-group row">
+						<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">Смена пароля</label>
+						<div class="col-md-4 col-lg-3 mb-2 mb-md-0">
+							<input type="text" class="form-control form-control-sm" placeholder="новый пароль">
+						</div>
+						<div class="col-md-4 col-lg-3">
+							<input type="text" class="form-control form-control-sm" placeholder="повторите пароль" required="">
+						</div>
+					</div>
+					<hr>
 					<div class="form-group row">
 						<div class="offset-sm-4 col-sm-6">
 							<div class="form-check">
-								<input class="form-check-input" type="checkbox" id="mailing">
+								<input class="form-check-input" type="checkbox" id="mailing" checked>
 								<label class="form-check-label" for="mailing">
 									подписка на рассылку от РСПС
 								</label>
@@ -90,8 +84,7 @@
 					</div>
 					<div class="row">
 						<div class="col-auto">
-							<button type="submit" class="btn btn-outline-danger btn-sm">Отправить<i class="fa fa-angle-right ml-2"></i></button>
-							<button type="button" class="btn btn-link btn-sm">Отмена</button>
+							<button type="submit" class="btn btn-primary btn-sm">Сохранить</button>
 						</div>
 					</div>
 				</form>

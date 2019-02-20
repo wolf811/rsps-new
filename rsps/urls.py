@@ -33,6 +33,7 @@ urlpatterns = [
     path('registration/', mainapp.registration, name = 'registration'),
     path('about/', mainapp.about, name = 'about'),
     path('news/', mainapp.news, name = 'news'),
+    path('news_detail/', mainapp.news_detail, name = 'news_detail'),
     path('docs/', mainapp.docs, name = 'docs'),
     path('regional_office/', mainapp.regional_office, name = 'regional_office'),
     path('regional_office_detail/', mainapp.regional_office_detail, name = 'regional_office_detail'),

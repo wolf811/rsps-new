@@ -17,11 +17,21 @@
 		<div class="search px-3 py-4 mb-4">
 				<form>
 					<div class="form-group row">
+						<div class="offset-md-4 col-md-8">
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" name="exampleRadios" id="imMember" value="option2" checked>
+								<label class="form-check-label text-secondary text-uppercase" for="imMember">
+									являюсь членом сообщества
+								</label>&nbsp;<i class="fa fa fa-info-circle text-info ml-2" data-container="body" data-toggle="popover" data-trigger='hover' data-placement="top" data-content="Cогласно пп 4.2. Устава РСПС членами Организации могут быть: Физические лица, достигшие 18 лет - граждане Российской Федерации, иностранные граждане и лица без гражданства, имеющие образование в области сварки и родственных процессов (для лиц, не имеющих образования в области сварки и родственных процессов необходим опыт работы в области сварки не менее 5 лет), разделяющие цели и задачи Организации, выполняющие требования Устава, принимающие непосредственное участие в работе Организации; Юридические лица - общественные объединения специалистов в области сварки и родственных процессов, разделяющие цели и задачи Организации, выполняющие требования настоящего Устава, принимающие непосредственное участие в работе Организации."></i>
+							</div>
+						</div>
+					</div>
+					<div class="form-group row" id="chooseRo">
 						<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">Региональное отделение&nbsp;<span class="text-danger">*</span></label>
-						<div class="col-md-4 col-lg-3 mb-2 mb-md-0">
+						<div class="col-md-8 col-lg-6">
 							<select class="form-control form-control-sm" required="">
 								<option>-</option>
-								<option selected="">Астраханская область</option>
+								<option selected>Астраханская область</option>
 								<option>Тамбовская область</option>
 								<option>Воронежская область</option>
 								<option>Московская область</option>
@@ -29,23 +39,26 @@
 								<option>Краснодарский край</option>
 							</select>
 						</div>
-						<div class="col-md-4 col-lg-3">
-							<input type="text" class="form-control form-control-sm" placeholder="Населенный пункт" required="">
-						</div>
 					</div>
 					<div class="form-group row">
 						<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">ФИО&nbsp;<span class="text-danger">*</span></label>
 						<div class="col-md-8 col-lg-6">
-							<input type="text" class="form-control form-control-sm" required="">
+							<input type="text" class="form-control form-control-sm" value="Меркулов Денис Иювинальевич" required="">
+						</div>
+					</div>
+					<div class="form-group row">
+						<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">Город проживания (населенный пункт)&nbsp;<span class="text-danger">*</span></label>
+						<div class="col-md-8 col-lg-6">
+							<input type="text" class="form-control form-control-sm" value="Астрахань" required="">
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">Телефон / Email&nbsp;<span class="text-danger">*</span></label>
 						<div class="col-md-4 col-lg-3 mb-2 mb-md-0">
-							<input type="text" class="form-control form-control-sm" placeholder="tel">
+							<input type="text" class="form-control form-control-sm" value="(8512) 549097" placeholder="tel">
 						</div>
 						<div class="col-md-4 col-lg-3">
-							<input type="text" class="form-control form-control-sm" placeholder="email" required="">
+							<input type="text" class="form-control form-control-sm" placeholder="email" value="svarkacenter@ya.ru" required="">
 						</div>
 					</div>
 					<div class="form-group row">
@@ -60,6 +73,17 @@
 							<input type="text" class="form-control form-control-sm">
 						</div>
 					</div>
+					<hr>
+					<div class="form-group row">
+						<label for="colFormLabelSm" class="col-md-4 col-form-label col-form-label-sm">Смена пароля</label>
+						<div class="col-md-4 col-lg-3 mb-2 mb-md-0">
+							<input type="text" class="form-control form-control-sm" placeholder="новый пароль">
+						</div>
+						<div class="col-md-4 col-lg-3">
+							<input type="text" class="form-control form-control-sm" placeholder="повторите пароль" required="">
+						</div>
+					</div>
+					<hr>
 					<div class="form-group row">
 						<div class="offset-sm-4 col-sm-6">
 							<div class="form-check">
@@ -70,10 +94,12 @@
 							</div>
 						</div>
 					</div>
-					<div class="row">
+					<div class="row justify-content-between align-items-center">
 						<div class="col-auto">
-							<button type="submit" class="btn btn-outline-danger btn-sm">Отправить<i class="fa fa-angle-right ml-2"></i></button>
-							<button type="button" class="btn btn-link btn-sm">Отмена</button>
+							<button type="submit" class="btn btn-primary btn-sm">Сохранить</button>
+						</div>
+						<div class="col-auto">
+							<button type="submit" class="btn btn-link btn-xs text-muted">Удалить учетную запись</button>
 						</div>
 					</div>
 				</form>
