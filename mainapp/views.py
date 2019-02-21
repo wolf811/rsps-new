@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from mainapp.models import Conference
+from mainapp.models import Conference, Post
 from mainapp.models import Member
 # Create your views here.
 
@@ -86,10 +86,12 @@ def news(request):
 	}
 	return render(request, 'mainapp/news.html', content)
 
-def news_detail(request):
+def news_detail(request, pk):
+	post = Post.objects.get(pk=pk)
 	title = 'РСПС - Новости'
 	content = {
-		'title': title
+		'title': title,
+		'post': post,
 	}
 	return render(request, 'mainapp/news_detail.html', content)
 
