@@ -9,11 +9,8 @@ from django.utils.html import format_html
 def get_picture_preview(obj):
     if obj.pk:  # if object has already been saved and has a primary key, show picture preview
         return format_html("""<a href="{src}" target="_blank">
-        <img src="{src}" alt="{title}" style="max-width: 200px; max-height: 200px;" />
-        </a>""".format(
-            src=obj.image.url,
-            title=obj.title,
-        ))
+        <img src="{src}" alt="title" style="max-width: 200px; max-height: 200px;" />
+        </a>""".format(src=obj.image.url))
     return "(После загрузки фотографии здесь будет ее миниатюра)"
 
 class PhotoInline(admin.StackedInline):
@@ -37,14 +34,13 @@ class PhotoInline(admin.StackedInline):
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     view_on_site = True
-    fields = ('title', 'text', 'published_date')
+    fields = ('title', 'short_description', 'text', 'published_date')
     list_display = ['title', 'published_date']
     inlines = [PhotoInline]
 
     def view_on_site(self, obj):
-        url = reverse('details', kwargs={'pk': pk})
+        url = reverse('details', kwargs={'pk': obj.pk})
         return url
-
 
 admin.site.register(Conference)
 admin.site.register(Member)

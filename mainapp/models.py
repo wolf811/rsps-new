@@ -39,6 +39,7 @@ class Conference(models.Model):
 class Post(models.Model):
     """model for publications"""
     title = models.CharField(max_length=200, verbose_name='Название публикации')
+    short_description = models.CharField(max_length=100, verbose_name='Краткое описание', blank=True, default='')
     text = RichTextUploadingField(verbose_name='Текст публикации')
     published_date = models.DateTimeField(u'Дата публикации', default=timezone.now)
 
@@ -47,7 +48,7 @@ class Post(models.Model):
         verbose_name_plural = 'Публикации'
 
     def __str__(self):
-        return 'Публикация {}, дата {}'.format(self.title, self.date)
+        return 'Публикация {}, дата {}'.format(self.title, self.published_date)
 
 class Photo(models.Model):
     """model for handling photos"""
