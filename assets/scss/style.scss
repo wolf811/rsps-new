@@ -570,6 +570,31 @@ main {
 		background-image: url(../images/bg-zub.gif);
     	background-repeat: repeat-x;
 	}
+	.img-container {
+		height: 250px;
+		background-position: center center;
+  		background-repeat: no-repeat;
+  		background-size: cover;
+		
+		.card-img-overlay {
+			position: absolute;
+			top: auto;
+		    bottom: 0;
+		    padding: 0;
+
+		    a {	
+		    	display: block;
+		    	font-size: 1rem;
+		    	font-weight: bold;
+		    	text-transform: uppercase;
+	  			color: rgba(255, 255, 255, 1);
+	  			background-color: #000;
+	  			opacity: 0.6;
+	  			padding: 1rem;
+	  		}
+		}
+  		
+	}
 	.map {
 		background-color: #fff;
 		box-shadow: 0 -1px 3px 0 #999, inset 0 -3px 4px 0 #666;
