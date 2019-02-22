@@ -1,6 +1,7 @@
 from django.contrib import admin
 from mainapp.models import Conference
 from mainapp.models import Member, Post, Photo
+from members.models import Membership
 from django.urls import reverse
 from django.utils.html import format_html
 
@@ -12,6 +13,11 @@ def get_picture_preview(obj):
         <img src="{src}" alt="title" style="max-width: 200px; max-height: 200px;" />
         </a>""".format(src=obj.image.url))
     return "(После загрузки фотографии здесь будет ее миниатюра)"
+
+class MembershipInline(admin.StackedInline):
+    model = Membership
+    extra = 0
+    fields = ['status']
 
 class PhotoInline(admin.StackedInline):
     model = Photo
@@ -42,6 +48,11 @@ class PostAdmin(admin.ModelAdmin):
         url = reverse('details', kwargs={'pk': obj.pk})
         return url
 
-admin.site.register(Conference)
-admin.site.register(Member)
+@admin.register(Member)
+class MemberAdmin(admin.ModelAdmin):
+    view_on_site = False
+    fields = ['fio', 'job', 'jobplace', 'tel', 'email']
+    inlines = [MembershipInline]
 
+
+admin.site.register(Conference)

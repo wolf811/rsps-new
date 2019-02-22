@@ -9,8 +9,9 @@ class Member(models.Model):
     job = models.CharField(max_length=100, verbose_name='Место работы')
     jobplace = models.CharField(max_length=100, verbose_name='Должность')
     tel = models.CharField(max_length=100, verbose_name='Телефон')
-    email = models.CharField(max_length=100, verbose_name='Email')
-    membership = models.BooleanField(verbose_name='Членство в РСПС')
+    email = models.EmailField(max_length=100, verbose_name='Email')
+    city = models.CharField(max_length=100, verbose_name='Город проживания')
+    # membership = models.BooleanField(verbose_name='Членство в РСПС')
     # conference = models.ForeignKey(Conference, verbose_name='Зареристрирован на:', 
     # 	default=null, null=True, on_delete=models.SET_NULL)
 
