@@ -1,6 +1,7 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Member(models.Model):
@@ -11,6 +12,7 @@ class Member(models.Model):
     tel = models.CharField(max_length=100, verbose_name='Телефон')
     email = models.EmailField(max_length=100, verbose_name='Email')
     city = models.CharField(max_length=100, verbose_name='Город проживания')
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     # membership = models.BooleanField(verbose_name='Членство в РСПС')
     # conference = models.ForeignKey(Conference, verbose_name='Зареристрирован на:', 
     # 	default=null, null=True, on_delete=models.SET_NULL)

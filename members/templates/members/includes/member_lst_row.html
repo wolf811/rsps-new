@@ -1,0 +1,25 @@
+<tr>
+    <td>
+        <div class="mb-1">{{ member.fio }}</div>
+        <div class="mb-1">{{ member.jobplace }}</div>
+        <div>{{ member.job }}</div>
+    </td>
+    <td>
+        <div class="mb-1">{{ member.city }}</div>
+        <div class="mb-1">{{ member.email }}</div>
+        <div>{{ member.tel }}</div>
+    </td>
+    <td>
+        <div class="status-false mb-1"><i class="fa fa-arrow-down mr-2"></i><small>Новый</small></div>
+    </td>
+    <td>
+        <a href="#" class="btn-action mr-3 text-primary" title="Удалить"><i class="fa fa-trash-o"></i></a>
+        <a href="#multiCollapseEmpl{{ member.pk }}" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false"
+            title="Изменить"><i class="fa fa-pencil"></i></a>
+    </td>
+</tr>
+<tr class="multi-collapse collapse edit-list" id="multiCollapseEmpl{{ member.pk }}">
+    <td colspan="4" class="total-column">
+        {% include 'members/includes/member_edit_form.html' %}
+    </td>
+</tr>

@@ -17,3 +17,6 @@ class Membership(models.Model):
     class Meta:
         verbose_name = 'статус членства'
         verbose_name_plural = 'статусы членства'
+
+    def __str__(self):
+        return self.status

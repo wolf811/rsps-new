@@ -86,30 +86,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>
-							<div class="mb-1">Комбаров Валентин Анатольевич</div>
-							<div class="mb-1">ООО "НЭДК"</div>
-							<div>инженер-программист</div>
-						</td>
-						<td>
-							<div class="mb-1">Москва</div>
-							<div class="mb-1">dev1@naks.ru</div>
-							<div>+7 (499) 784-72-86</div>
-						</td>
-						<td>
-							<div class="status-false mb-1"><i class="fa fa-arrow-down mr-2"></i><small>Новый</small></div>
-						</td>
-						<td>
-							<a href="#" class="btn-action mr-3 text-primary" title="Удалить"><i class="fa fa-trash-o"></i></a>
-							<a href="#multiCollapseEmpl00" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" title="Изменить"><i class="fa fa-pencil"></i></a>
-						</td>
-					</tr>
-					<tr class="multi-collapse collapse edit-list" id="multiCollapseEmpl00">
-						<td colspan="4" class="total-column">
-							{% include 'members/includes/member_edit_form.html' %}
-						</td>
-					</tr>
+				{% for member in members %}
+					{% include 'members/includes/member_lst_row.html' %}
+				{% endfor %}
 				</tbody>
 			</table>
 		</div>
