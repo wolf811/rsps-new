@@ -25,6 +25,34 @@ def user(request):
     }
     return render(request, 'mainapp/user.html', content)
 
+def prezidium_regional_office(request):
+    title = 'РСПС - Президиум'
+    content = {
+        'title': title, 
+    }
+    return render(request, 'mainapp/prezidium_regional_office.html', content)
+
+def prezidium_employee(request):
+    title = 'РСПС - Президиум'
+    content = {
+        'title': title, 
+    }
+    return render(request, 'mainapp/prezidium_employee.html', content)
+
+def prezidium_conf(request):
+    title = 'РСПС - Президиум'
+    content = {
+        'title': title, 
+    }
+    return render(request, 'mainapp/prezidium_conf.html', content)
+
+def prezidium_congress(request):
+    title = 'РСПС - Президиум'
+    content = {
+        'title': title, 
+    }
+    return render(request, 'mainapp/prezidium_congress.html', content)
+
 def account_user(request):
     title = 'РСПС - Личный кабинет'
     content = {

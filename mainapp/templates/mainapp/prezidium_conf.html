@@ -7,7 +7,7 @@
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
-				<li class="breadcrumb-item"><a href="{% url 'account_about' %}">Личный кабинет подразделения</a></li>
+				<li class="breadcrumb-item"><a href="{% url 'prezidium_regional_office' %}">Президиум</a></li>
 				<li class="breadcrumb-item active" aria-current="page">Конференции</li>
 			</ol>
 		</nav>
@@ -16,28 +16,67 @@
 
 		<ul class="nav nav-tabs mb-4">
 			<li class="nav-item">
-				<a class="nav-link" href="{% url 'account_user' %}">Учетная запись</a>
+				<a class="nav-link" href="{% url 'prezidium_regional_office' %}">Региональные отделения</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="{% url 'account_about' %}">О подразделении</a>
+				<a class="nav-link" href="{% url 'prezidium_employee' %}">Члены РСПС</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="{% url 'account_news' %}">Новости</a>
+				<a class="nav-link active" href="{% url 'prezidium_conf' %}">Конференции</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="{% url 'account_employee' %}">Члены подразделения</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link active" href="{% url 'account_conf' %}">Конференции</a>
+				<a class="nav-link" href="{% url 'prezidium_congress' %}">Съезды</a>
 			</li>
 		</ul>
-		
+		<div class="search p-3 mb-4">
+			<h5>Быстрый поиск</h5>
+			<form>
+				<div class="form-row">
+					<div class="form-group col-sm-6 col-lg-4">
+						<label for="" class="mb-1">Региональное отделение</label>
+						<select class="form-control form-control-sm">
+							<option selected="">Все</option>
+							<option>Москва</option>
+							<option>Московская область</option>
+							<option>Санкт-Петербург</option>
+							<option>Ленинградская область</option>
+							<option>Калужская область</option>
+						</select>
+					</div>
+					<div class="form-group col-sm-3 col-lg-2">
+						<label for="" class="mb-1">Дата проведения: c</label>
+						<div class="input-group input-group-sm">
+							<input type="text" class="form-control datepicker-here" placeholder="дд.мм.гггг" aria-label="дд.мм.гггг" aria-describedby="">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fa fa-calendar"></i></span>
+							</div>
+						</div>
+					</div>
+					<div class="form-group col-sm-3 col-lg-2">
+						<label for="" class="mb-1">по</label>
+						<div class="input-group input-group-sm">
+							<input type="text" class="form-control datepicker-here" placeholder="дд.мм.гггг" aria-label="дд.мм.гггг" aria-describedby="">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fa fa-calendar"></i></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-auto">
+						<button type="submit" class="btn btn-outline-primary btn-xs"><i class="fa fa-search"></i> Найти</button>
+						<button type="button" class="btn btn-link btn-xs">Сбросить</button>
+					</div>
+				</div>
+			</form>
+		</div>
 		<button type="button" class="btn btn-danger btn-xl mb-4" data-toggle='modal' data-target='#modal-regConference'>Добавить конференцию</button>
-		
+		<p class="text-secondary">Элементы 1-20 из 25</p>
 		<div class="table-responsive">
 			<table class="table table-list">
 				<thead>
 					<tr class="active">
+						<th>Региональное отделение</th>
 						<th>Дата проведения</th>
 						<th>Место проведения</th>
 						<th>Название конференции</th>
@@ -45,23 +84,24 @@
 					</tr>
 				</thead>
 				<tbody>
-					{% for conference in conferences %}
-					{% if not conference.completed %}
 					<tr>
-						<td>{{ conference.date }}</td>
-						<td>{{ conference.place }}</td>
+						<td class="text-uppercase font-weight-bold">
+							<div class="text-primary">Московская область</div>
+						</td>
+						<td>12 сентября 2019 г.</td>
+						<td>Москва, ул. Братиславская, дом 6, офис НАКС</td>
 						<td>
-							<div class="text-appercase">{{ conference.title }}</div>
-							<div>Колличество участников:&nbsp;<strong>{{ conference.members.all|length }}</strong></div>
-							<div class="text-danger mt-2">Зарегистрируйте участников</div>
+							<div class="text-appercase">Конференция по Московской области 2019</div>
+							<div>Колличество участников:&nbsp;<strong>5</strong></div>
+							<div class="text-danger mt-2">Зарегистрирована</div>
 						</td>
 						<td>
 							<a href="#" class="btn-action mr-3 text-primary" title="Удалить конференцию"><i class="fa fa-trash-o"></i></a>
-							<a href="#multiCollapseConf{{conference.pk}}" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" title="Изменить"><i class="fa fa-pencil"></i></a>
+							<a href="#multiCollapseConf00" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" title="Изменить"><i class="fa fa-pencil"></i></a>
 						</td>
 					</tr>
-					<tr class="multi-collapse collapse edit-list" id="multiCollapseConf{{conference.pk}}">
-						<td colspan="4" class="total-column">
+					<tr class="multi-collapse collapse edit-list" id="multiCollapseConf00">
+						<td colspan="5" class="total-column">
 							<form>
 								<div class="mb-5">
 									<h6 class='text-primary mb-4'>Сведения о конференции</h6>
@@ -149,18 +189,11 @@
 											</tr>
 										</thead>
 										<tbody>
-											{% for member in conference.members.all %}
 											<tr>
-												<td>{{member.fio}}</td>
-												<td>{{member.job}}, {{member.jobplace}}</td>
-												<td>{{member.tel}}, {{member.email}}</td>
-												<td>
-													{% if member.membership %}
-													да
-													{% else %}
-													нет
-													{% endif %}
-												</td>
+												<td>Фамилия Имя Отчество</td>
+												<td>ООО "Работа", директор</td>
+												<td>+79851234568, mail@mail.ru</td>
+												<td>да</td>
 												<td>
 													<div>
 														<a href="#" class="btn-action mr-3 text-primary" title="Удалить участника"><i class="fa fa-trash-o"></i></a>
@@ -168,8 +201,6 @@
 													</div>
 												</td>
 											</tr>
-											{% endfor %}
-											
 										</tbody>
 									</table>
 								</div>
@@ -183,26 +214,29 @@
 									</div>
 								</div>
 								<button type="submit" class="btn btn-primary btn-xs">Сохранить</button>
-								<a href="#multiCollapseConf{{conference.pk}}" class="btn btn-outline-primary btn-xs" data-toggle="collapse" aria-expanded="false" role="button">Закрыть</a>
+								<a href="#multiCollapseConf00" class="btn btn-outline-primary btn-xs" data-toggle="collapse" aria-expanded="false" role="button">Закрыть</a>
 							</form>
 						</td>
 					</tr>
-					{% else %}
+
 					<tr>
-						<td>{{ conference.date }}</td>
-						<td>{{ conference.place }}</td>
+						<td class="text-uppercase font-weight-bold">
+							<div class="text-primary">Астраханская область</div>
+						</td>
+						<td>21 ноября 2018 г.</td>
+						<td>Астрахань, ул. Набережная 25</td>
 						<td>
-							<div class="text-appercase">{{ conference.title }}</div>
-							<div>Колличество участников:&nbsp;<strong>{{ conference.members.all|length }}</strong></div>
+							<div class="text-appercase">Конференция по Астраханской области 2018</div>
+							<div>Колличество участников:&nbsp;<strong>10</strong></div>
 							<div class="text-success mt-2">Проведена</div>
 						</td>
 						<td>
 							<a href="#" class="btn-action mr-3 text-primary" title="Копировать"><i class="fa fa-clone"></i></a>
-							<a href="#multiCollapseConf{{conference.pk}}" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" title="Просмотр"><i class="fa fa-eye"></i></a>
+							<a href="#multiCollapseConf01" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" title="Просмотр"><i class="fa fa-eye"></i></a>
 						</td>
 					</tr>
-					<tr class="multi-collapse collapse edit-list" id="multiCollapseConf{{conference.pk}}">
-						<td colspan="4" class="total-column">
+					<tr class="multi-collapse collapse edit-list" id="multiCollapseConf01">
+						<td colspan="5" class="total-column">
 							<form>
 								<div class="mb-4">
 									<h6 class='text-primary mb-4'>Сведения о конференции</h6>
@@ -274,21 +308,13 @@
 											</tr>
 										</thead>
 										<tbody>
-											{% for member in conference.members.all %}
 											<tr>
-												<td>{{member.fio}}</td>
-												<td>{{member.job}}, {{member.jobplace}}</td>
-												<td>{{member.tel}}, {{member.email}}</td>
-												<td>
-													{% if member.membership %}
-													да
-													{% else %}
-													нет
-													{% endif %}
-												</td>
-												<td></td>  
+												<td>Фамилия Имя Отчество</td>
+												<td>ООО "Работа", директор</td>
+												<td>+79851234568, mail@mail.ru</td>
+												<td>нет</td>
+												<td>-</td>
 											</tr>
-											{% endfor %}
 										</tbody>
 									</table>
 								</div>
@@ -302,13 +328,10 @@
 									</div>
 								</div>
 
-								<a href="#multiCollapseConf{{conference.pk}}" class="btn btn-outline-primary btn-xs" data-toggle="collapse" aria-expanded="false" aria-controls="multiCollapseConf02" role="button">Закрыть</a>
+								<a href="#multiCollapseConf01" class="btn btn-outline-primary btn-xs" data-toggle="collapse" aria-expanded="false" aria-controls="multiCollapseConf01" role="button">Закрыть</a>
 							</form>
 						</td>
 					</tr>
-					{% endif %}
-					{% endfor %}
-
 				</tbody>
 			</table>
 		</div>

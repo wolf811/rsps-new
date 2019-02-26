@@ -7,7 +7,7 @@
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
-				<li class="breadcrumb-item"><a href="{% url 'account_about' %}">Личный кабинет подразделения</a></li>
+				<li class="breadcrumb-item"><a href="{% url 'account_about' %}">Личный кабинет президиума</a></li>
 				<li class="breadcrumb-item active" aria-current="page">Конференции</li>
 			</ol>
 		</nav>
@@ -16,19 +16,16 @@
 
 		<ul class="nav nav-tabs mb-4">
 			<li class="nav-item">
-				<a class="nav-link" href="{% url 'account_user' %}">Учетная запись</a>
+				<a class="nav-link" href="{% url 'prezidium_regional_office' %}">Региональные отделения</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="{% url 'account_about' %}">О подразделении</a>
+				<a class="nav-link" href="{% url 'prezidium_employee' %}">Члены РСПС</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="{% url 'account_news' %}">Новости</a>
+				<a class="nav-link" href="{% url 'prezidium_conf' %}">Конференции</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="{% url 'account_employee' %}">Члены подразделения</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link active" href="{% url 'account_conf' %}">Конференции</a>
+				<a class="nav-link active" href="{% url 'prezidium_congress' %}">Съезды</a>
 			</li>
 		</ul>
 		
@@ -193,7 +190,7 @@
 						<td>{{ conference.place }}</td>
 						<td>
 							<div class="text-appercase">{{ conference.title }}</div>
-							<div>Колличество участников:&nbsp;<strong>{{ conference.members.all|length }}</strong></div>
+							<div>Колличество участников:&nbsp;<strong>11</strong></div>
 							<div class="text-success mt-2">Проведена</div>
 						</td>
 						<td>

@@ -1,0 +1,174 @@
+{% extends 'mainapp/base.html' %}
+
+{% block content %}
+<!-- Content -->
+<main class="pt-4">
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+				<li class="breadcrumb-item"><a href="{% url 'prezidium_regional_office' %}">Президиум</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Региональные отделения</li>
+			</ol>
+		</nav>
+
+		<h4 class="title-page">Личный кабинет</h4>
+
+		<ul class="nav nav-tabs mb-4">
+			<li class="nav-item">
+				<a class="nav-link active" href="{% url 'prezidium_regional_office' %}">Региональные отделения</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'prezidium_employee' %}">Члены РСПС</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'prezidium_conf' %}">Конференции</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'prezidium_congress' %}">Съезды</a>
+			</li>
+		</ul>
+		<div class="search p-3 mb-4">
+			<h5>Быстрый поиск</h5>
+			<form>
+				<div class="form-row">
+					<div class="form-group col-sm-6 col-lg-4">
+						<label for="" class="mb-1">Субъект РФ</label>
+						<select class="form-control form-control-sm">
+							<option selected="">Все</option>
+							<option>Москва</option>
+							<option>Московская область</option>
+							<option>Санкт-Петербург</option>
+							<option>Ленинградская область</option>
+							<option>Калужская область</option>
+						</select>
+					</div>
+					<div class="form-group col-sm-6 col-lg-4">
+						<label for="" class="mb-1">Руководитель отделения</label>
+						<input type="text" class="form-control form-control-sm">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-auto">
+						<button type="submit" class="btn btn-outline-primary btn-xs"><i class="fa fa-search"></i> Найти</button>
+						<button type="button" class="btn btn-link btn-xs">Сбросить</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<button type="button" class="btn btn-danger btn-xl mb-4" data-toggle="modal" data-target="#modal-newDepartament">Открыть региональное отделение</button>
+
+		<p class="text-secondary">Элементы 1-20 из 61</p>
+
+		<div class="table-responsive">
+			<table class="table table-list">
+				<thead>
+					<tr class="active">
+						<th>Субъект РФ</th>
+						<th>Руководитель отделения</th>
+						<th>Контакты</th>
+						<th>Состав</th>
+						<th>Действия</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					<!-- ======= НОВОЕ РО (заявленное с сайта) ========= -->
+					<tr>
+						<td class="text-uppercase font-weight-bold">
+							<div class="text-secondary mb-1">Тамбовская область</div>
+							<div class="status-false"><i class="fa fa-arrow-down mr-2"></i><small>Новый</small></div>
+						</td>
+						<td>Комбаров Валентин Анатольевич</td>
+						<td>
+							<div class="mb-1">Тел:&nbsp;+7(499)784-72-86</div>
+							<div>Email:&nbsp;<a href="mailto:dev1@naks.ru" class="text-primary">dev1@naks.ru</a></div>
+						</td>
+						<td>0</td>
+						<td>
+							<a href="#" class="btn-action mr-3 text-primary" title="Удалить"><i class="fa fa-trash-o"></i></a>
+							<a href="#multiCollapseEmpl00" class="btn-action mr-3 text-primary" data-toggle="collapse" aria-expanded="false" title="Просмотреть, изменить" id='addDis'><i class="fa fa-eye"></i></a>
+						</td>
+					</tr>
+					<tr class="multi-collapse collapse edit-list" id="multiCollapseEmpl00">
+						<td colspan="5" class="total-column">
+							<div class="row align-items-center justify-content-between mb-4">
+								<div class="col-auto">
+									<h6 class='text-primary mb-0'>Общие сведения</h6>
+								</div>
+								<div class="col-auto">
+									<button class="btn btn-info btn-xs" id='removeDis'><i class="fa fa-pencil mr-2"></i>Изменить</button>
+									<a href="#multiCollapseEmpl00" class="btn btn-outline-info btn-xs" data-toggle="collapse" aria-expanded="false" role="button">Закрыть</a>
+								</div>
+							</div>
+							
+							<form>
+								<fieldset id="form1">
+									{% include 'mainapp/includes/form-prezidium_ro.html' %}
+								</fieldset>
+							</form>
+						</td>
+					</tr> <!-- ======= END НОВОЕ РО ========= -->
+					
+					<!-- ======= Существующее РО ========= -->
+					<tr>
+						<td class="text-uppercase font-weight-bold">
+							<div class="text-primary">Астраханская область</div>
+						</td>
+						<td>Меркулов Денис Иювинальевич</td>
+						<td>
+							<div class="mb-1">414056, г. Астрахань, ул. Татищева 20а</div>
+							<div class="mb-1">Тел:&nbsp;(8512) 549097 (8512) 485393</div>
+							<div>Email:&nbsp;<a href="mailto:svarkacenter@ya.ru" class="text-primary">svarkacenter@ya.ru</a></div>
+						</td>
+						<td>4</td>
+						<td>
+							<a href="#" class="btn-action mr-3 text-primary" title="Удалить"><i class="fa fa-trash-o"></i></a>
+							<a href="#multiCollapseEmpl01" class="btn-action mr-3 text-primary" data-toggle="collapse" aria-expanded="false" title="Просмотреть, изменить" id='addDis'><i class="fa fa-eye"></i></a>
+						</td>
+					</tr>
+					<tr class="multi-collapse collapse edit-list" id="multiCollapseEmpl01">
+						<td colspan="5" class="total-column">
+							<div class="row align-items-center justify-content-between mb-4">
+								<div class="col-auto">
+									<h6 class='text-primary mb-0'>Общие сведения</h6>
+								</div>
+								<div class="col-auto">
+									<button class="btn btn-info btn-xs" id='removeDis'><i class="fa fa-pencil mr-2"></i>Изменить</button>
+									<a href="#multiCollapseEmpl01" class="btn btn-outline-info btn-xs" data-toggle="collapse" aria-expanded="false" role="button">Закрыть</a>
+								</div>
+							</div>
+							
+							<form>
+								<fieldset id="form2">
+									{% include 'mainapp/includes/form-prezidium_ro.html' %}
+								</fieldset>
+							</form>
+						</td>
+					</tr>  <!-- ======= END Существующее РО ========= -->
+
+				</tbody>
+			</table>
+		</div>
+		<nav aria-label="Page navigation example">
+			<ul class="pagination pagination-sm">
+				<li class="page-item disabled">
+					<a class="page-link" href="#" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<li class="page-item active"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item">
+					<a class="page-link" href="#" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</main> 
+<!-- End Content -->
+{% endblock %}
