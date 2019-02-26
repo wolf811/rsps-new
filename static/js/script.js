@@ -62,3 +62,17 @@ $("#imMember").change(function() {
 });
 // ====== END ==========
 
+$('#addDis').click(function() {
+    $('#form1').prop('disabled', 'disabled');
+});
+
+$('#removeDis').click(function() {
+    $('#form1').prop('disabled', '');
+});
+// $(function(){
+//     $('fieldset').attr('disabled', 'disabled');
+
+//     $('#addDis').click(function(){
+//       alert($(this).attr('disabled'));
+//   });
+// });
