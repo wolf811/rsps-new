@@ -1,17 +1,21 @@
+
 <div class="col-sm-6 col-lg-4 mb-3">
-					<div class="card rounded-0">
-						<div class="card-top">
-							<img class="card-img-top" src="{% if publication.photo.image %}
-							{{ publication.photo.image.url }}
-							{% else %}
-							https://place-hold.it/360x200
-							{% endif %}" alt="">
-							<div class="card-img-overlay-right">{{ publication.post.published_date }}</div>
-						</div>
-						<div class="card-body">
-							<h6 class="card-title mb-3">{{ publication.post.title }}</h6>
-							<div class="card-text">{{ publication.post.short_description }}</div>
-							<a href="{% url 'details' publication.post.pk %}" class="card-link">Подробнее<i class="fa fa-angle-right ml-2"></i></a>
-						</div>
-					</div>
-				</div>
+	<div class="card w-100 rounded-0">  <!-- ====== 1. Добавить класс "w-100" ========= -->
+		<div class="card-top img-container" style="">  <!-- ====== 2. Добавить соответствующий стиль style="background-image: url(../static/images/news1.jpg);" ========= -->
+
+			<!-- ======= 3. Полностью убрать тег 'img' ======== -->
+			<img class="card-img-top" src="{% if publication.photo.image %}
+			{{ publication.photo.image.url }}
+			{% else %}
+			https://place-hold.it/360x200
+			{% endif %}" alt="">
+
+			<div class="card-img-overlay-right">{{ publication.post.published_date }}</div>
+		</div>
+		<div class="card-body">
+			<h6 class="card-title mb-3">{{ publication.post.title }}</h6>
+			<div class="card-text">{{ publication.post.short_description }}</div>
+			<a href="{% url 'details' publication.post.pk %}" class="card-link">Подробнее<i class="fa fa-angle-right ml-2"></i></a>
+		</div>
+	</div>
+</div>
