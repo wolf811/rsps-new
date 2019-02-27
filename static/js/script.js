@@ -45,3 +45,43 @@ $('#removeDis').click(function() {
 });
 // ====== END ==========
 
+// $('#status1').click(function() {
+//     var progressed = 0;
+//     var interval = setInterval(function() {
+//         progressed += 1;
+//         $("#moving-progress-bar").css("width", progressed + "%").attr("aria-valuenow", progressed).text(progressed + "Заявлен");
+//         if (progressed >= 40)
+//             clearInterval(interval);
+//     }, 100);
+// });
+
+
+// ======= Статусы членов РСПС =========
+$(function() {
+    $("#status0").change(function() {
+        if ($(this).prop('checked')) {
+            $("#progressStatusNull").removeClass('bg-default text-secondary').addClass('progress-bar-striped bg-info');
+        } else {
+            $("#progressStatusNull").removeClass('progress-bar-striped bg-info').addClass('bg-default text-secondary');
+        }
+    });
+
+    $('#status1').click(function() {
+        $("#progressStatusTwo").removeClass('progress-bar-striped bg-success').addClass('bg-default text-secondary');
+        $("#progressStatusThree").removeClass('progress-bar-striped bg-warning').addClass('bg-default text-secondary');
+        $("#progressStatusOne").removeClass('bg-default text-secondary').addClass('progress-bar-striped bg-info');
+    });
+
+    $('#status2').click(function() {
+        $("#progressStatusThree").removeClass('progress-bar-striped bg-warning').addClass('bg-default text-secondary');
+        $("#progressStatusOne").removeClass('bg-default text-secondary').addClass('progress-bar-striped bg-info');
+        $("#progressStatusTwo").removeClass('bg-default text-secondary').addClass('progress-bar-striped bg-success');
+    });
+
+    $('#status3').click(function() {
+        $("#progressStatusOne").removeClass('bg-default text-secondary').addClass('progress-bar-striped bg-info');
+        $("#progressStatusTwo").removeClass('bg-default text-secondary').addClass('progress-bar-striped bg-success');
+        $("#progressStatusThree").removeClass('bg-default text-secondary').addClass('progress-bar-striped bg-warning');
+    });
+})
+// ====== END ==========

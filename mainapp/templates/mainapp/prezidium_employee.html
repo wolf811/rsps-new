@@ -133,32 +133,21 @@
 									{% include 'mainapp/includes/form-prezidium_employee.html' %}
 
 									<h6 class='text-primary mb-3'>Статус членства в РСПС</h6>
-
+									<div class="form-group">
+										<div class="form-check">
+											<input class="form-check-input" type="checkbox" id="status0">
+											<label class="form-check-label font-weight-bold text-uppercase text-info" for="status0">Заявлен</label>
+										</div>
+									</div>
 									<div class="progress mb-5">
-										<div class="progress-bar bg-default text-secondary w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">Заявлен</div>
+										<div id="progressStatusNull" class="progress-bar bg-default text-secondary w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">Заявлен</div>
 										<div class="progress-bar bg-default text-secondary w-35" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">Одобрен РСПС</div>
 										<div class="progress-bar bg-default text-secondary w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Сертификат РСПС</div>
 									</div>
 
-									<div class="form-group">
-										<div class="form-check">
-											<input class="form-check-input" type="checkbox" id="gridCheck0">
-											<label class="form-check-label text-success text-uppercase" for="gridCheck0">
-												<strong>Зарегистрировать на Съезд РСПС 2019</strong>
-											</label>
-										</div>
-									</div>
 									<div class="form-row align-items-center">
 										<div class="col-auto mr-auto">
 											<button type="submit" class="btn btn-primary btn-xs">Сохранить</button>
-										</div>
-										<div class="col-auto my-1">
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" id="mailingCheck0">
-												<label class="form-check-label" for="mailingCheck0">
-													подписка на рассылку от РСПС
-												</label>
-											</div>
 										</div>
 									</div>
 								</fieldset>
@@ -207,32 +196,29 @@
 								{% include 'mainapp/includes/form-prezidium_employee.html' %}
 
 								<h6 class='text-primary mb-3'>Статус членства в РСПС</h6>
-								
-								<div class="progress mb-5">
-									<div class="progress-bar progress-bar-striped bg-info w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">Заявлен</div>
-									<div class="progress-bar bg-default text-secondary w-35" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">Одобрен РСПС</div>
-									<div class="progress-bar bg-default text-secondary w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Сертификат РСПС</div>
-								</div>
-
 								<div class="form-group">
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="gridCheck1">
-										<label class="form-check-label text-success text-uppercase" for="gridCheck1">
-											<strong>Зарегистрировать на Съезд РСПС 2019</strong>
-										</label>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" id="status1" name="statusEmloyee" checked>
+										<label class="form-check-label font-weight-bold text-uppercase text-info" for="status1">Заявлен</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" id="status2" name="statusEmloyee">
+										<label class="form-check-label font-weight-bold text-uppercase text-success" for="status2">Одобрен РСПС</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" id="status3" name="statusEmloyee">
+										<label class="form-check-label font-weight-bold text-uppercase text-warning" for="status3">Сертификат РСПС</label>
 									</div>
 								</div>
+								<div class="progress mb-5">
+									<div id="progressStatusOne" class="progress-bar progress-bar-striped bg-info w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">Заявлен</div>
+									<div id="progressStatusTwo" class="progress-bar bg-default text-secondary w-35" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">Одобрен РСПС</div>
+									<div id="progressStatusThree" class="progress-bar bg-default text-secondary w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Сертификат РСПС</div>
+								</div>
+
 								<div class="form-row align-items-center">
 									<div class="col-auto mr-auto">
 										<button type="submit" class="btn btn-primary btn-xs">Сохранить</button>
-									</div>
-									<div class="col-auto my-1">
-										<div class="form-check">
-											<input class="form-check-input" type="checkbox" id="mailingCheck1">
-											<label class="form-check-label" for="mailingCheck1">
-												подписка на рассылку от РСПС
-											</label>
-										</div>
 									</div>
 								</div>
 								</fieldset>
@@ -282,31 +268,29 @@
 
 									<h6 class='text-primary mb-3'>Статус членства в РСПС</h6>
 
-									<div class="progress mb-5">
-										<div class="progress-bar progress-bar-striped bg-info w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">Заявлен</div>
-										<div class="progress-bar progress-bar-striped bg-success w-35" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">Одобрен РСПС</div>
-										<div class="progress-bar bg-default text-secondary w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Сертификат РСПС</div>
-									</div>
-
 									<div class="form-group">
-										<div class="form-check">
-											<input class="form-check-input" type="checkbox" id="gridCheck2" checked>
-											<label class="form-check-label text-success text-uppercase" for="gridCheck2">
-												<strong>Зарегистрировать на Съезд РСПС 2019</strong>
-											</label>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="radio" id="status1" name="statusEmloyee">
+											<label class="form-check-label font-weight-bold text-uppercase text-info" for="status1">Заявлен</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="radio" id="status2" name="statusEmloyee" checked>
+											<label class="form-check-label font-weight-bold text-uppercase text-success" for="status2">Одобрен РСПС</label>
+										</div>
+										<div class="form-check form-check-inline">
+											<input class="form-check-input" type="radio" id="status3" name="statusEmloyee">
+											<label class="form-check-label font-weight-bold text-uppercase text-warning" for="status3">Сертификат РСПС</label>
 										</div>
 									</div>
+									<div class="progress mb-5">
+										<div id="progressStatusOne" class="progress-bar progress-bar-striped bg-info w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">Заявлен</div>
+										<div id="progressStatusTwo" class="progress-bar progress-bar-striped bg-success w-35" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">Одобрен РСПС</div>
+										<div id="progressStatusThree" class="progress-bar bg-default text-secondary w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Сертификат РСПС</div>
+									</div>
+
 									<div class="form-row align-items-center">
 										<div class="col-auto mr-auto">
 											<button type="submit" class="btn btn-primary btn-xs">Сохранить</button>
-										</div>
-										<div class="col-auto my-1">
-											<div class="form-check">
-												<input class="form-check-input" type="checkbox" id="mailingCheck2">
-												<label class="form-check-label" for="mailingCheck2">
-													подписка на рассылку от РСПС
-												</label>
-											</div>
 										</div>
 									</div>
 								</fieldset>
@@ -355,32 +339,29 @@
 								{% include 'mainapp/includes/form-prezidium_employee.html' %}
 
 								<h6 class='text-primary mb-3'>Статус членства в РСПС</h6>
-
-								<div class="progress mb-5">
-									<div class="progress-bar progress-bar-striped bg-info w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">Заявлен</div>
-									<div class="progress-bar progress-bar-striped bg-success w-35" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">Одобрен РСПС</div>
-									<div class="progress-bar progress-bar-striped bg-warning w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Сертификат РСПС</div>
-								</div>
-
 								<div class="form-group">
-									<div class="form-check">
-										<input class="form-check-input" type="checkbox" id="gridCheck3" checked>
-										<label class="form-check-label text-success text-uppercase" for="gridCheck3">
-											<strong>Зарегистрировать на Съезд РСПС 2019</strong>
-										</label>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" id="status1" name="statusEmloyee">
+										<label class="form-check-label font-weight-bold text-uppercase text-info" for="status1">Заявлен</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" id="status2" name="statusEmloyee">
+										<label class="form-check-label font-weight-bold text-uppercase text-success" for="status2">Одобрен РСПС</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" id="status3" name="statusEmloyee" checked>
+										<label class="form-check-label font-weight-bold text-uppercase text-warning" for="status3">Сертификат РСПС</label>
 									</div>
 								</div>
+								<div class="progress mb-5">
+									<div id="progressStatusOne" class="progress-bar progress-bar-striped bg-info w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">Заявлен</div>
+									<div id="progressStatusTwo" class="progress-bar progress-bar-striped bg-success w-35" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">Одобрен РСПС</div>
+									<div id="progressStatusThree" class="progress-bar progress-bar-striped bg-warning w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Сертификат РСПС</div>
+								</div>
+
 								<div class="form-row align-items-center">
 									<div class="col-auto mr-auto">
 										<button type="submit" class="btn btn-primary btn-xs">Сохранить</button>
-									</div>
-									<div class="col-auto my-1">
-										<div class="form-check">
-											<input class="form-check-input" type="checkbox" id="mailingCheck3">
-											<label class="form-check-label" for="mailingCheck3">
-												подписка на рассылку от РСПС
-											</label>
-										</div>
 									</div>
 								</div>
 								</fieldset>
