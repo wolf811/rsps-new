@@ -49,15 +49,16 @@ $('#removeDis').click(function() {
 //     var progressed = 0;
 //     var interval = setInterval(function() {
 //         progressed += 1;
-//         $("#moving-progress-bar").css("width", progressed + "%").attr("aria-valuenow", progressed).text(progressed + "Заявлен");
+//         $("#progressStatusNull").css("width", progressed + "%").attr("aria-valuenow", progressed).text(progressed + "Заявлен");
 //         if (progressed >= 40)
 //             clearInterval(interval);
 //     }, 100);
 // });
 
 
-// ======= Статусы членов РСПС =========
+// ======= Статусы членов РСПС c прогресс-баром =========
 $(function() {
+    // Относится к статусу "Новый", где внутри профиля есть только чекбокс "ЗАЯВЛЕН"
     $("#status0").change(function() {
         if ($(this).prop('checked')) {
             $("#progressStatusNull").removeClass('bg-default text-secondary').addClass('progress-bar-striped bg-info');
@@ -66,18 +67,19 @@ $(function() {
         }
     });
 
+    // статус "Заявлен"
     $('#status1').click(function() {
         $("#progressStatusTwo").removeClass('progress-bar-striped bg-success').addClass('bg-default text-secondary');
         $("#progressStatusThree").removeClass('progress-bar-striped bg-warning').addClass('bg-default text-secondary');
         $("#progressStatusOne").removeClass('bg-default text-secondary').addClass('progress-bar-striped bg-info');
     });
-
+    // статус "Одобрено РСПС"
     $('#status2').click(function() {
         $("#progressStatusThree").removeClass('progress-bar-striped bg-warning').addClass('bg-default text-secondary');
         $("#progressStatusOne").removeClass('bg-default text-secondary').addClass('progress-bar-striped bg-info');
         $("#progressStatusTwo").removeClass('bg-default text-secondary').addClass('progress-bar-striped bg-success');
     });
-
+    // статус "Сертификат РСПС"
     $('#status3').click(function() {
         $("#progressStatusOne").removeClass('bg-default text-secondary').addClass('progress-bar-striped bg-info');
         $("#progressStatusTwo").removeClass('bg-default text-secondary').addClass('progress-bar-striped bg-success');
