@@ -45,17 +45,6 @@ $('#removeDis').click(function() {
 });
 // ====== END ==========
 
-// $('#status1').click(function() {
-//     var progressed = 0;
-//     var interval = setInterval(function() {
-//         progressed += 1;
-//         $("#progressStatusNull").css("width", progressed + "%").attr("aria-valuenow", progressed).text(progressed + "Заявлен");
-//         if (progressed >= 40)
-//             clearInterval(interval);
-//     }, 100);
-// });
-
-
 // ======= Статусы членов РСПС c прогресс-баром =========
 $(function() {
     // Относится к статусу "Новый", где внутри профиля есть только чекбокс "ЗАЯВЛЕН"
