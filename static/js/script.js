@@ -36,7 +36,6 @@ $("#imMember").change(function() {
 });
 // ====== END ==========
 
-<<<<<<< HEAD
 // ======= Просмотр, редактирование члена РСПС в ЛК =========
 $('#addDis').click(function() {
     $('#form1').prop('disabled', 'disabled');
@@ -45,19 +44,35 @@ $('#removeDis').click(function() {
     $('#form1').prop('disabled', '');
 });
 // ====== END ==========
-=======
-$('#addDis').click(function() {
-    $('#form1').prop('disabled', 'disabled');
-});
 
-$('#removeDis').click(function() {
-    $('#form1').prop('disabled', '');
-});
-// $(function(){
-//     $('fieldset').attr('disabled', 'disabled');
+// ======= Статусы членов РСПС c прогресс-баром =========
+$(function() {
+    // Относится к статусу "Новый", где внутри профиля есть только чекбокс "ЗАЯВЛЕН"
+    $("#status0").change(function() {
+        if ($(this).prop('checked')) {
+            $("#progressStatusNull").removeClass('bg-default text-secondary').addClass('progress-bar-striped bg-info');
+        } else {
+            $("#progressStatusNull").removeClass('progress-bar-striped bg-info').addClass('bg-default text-secondary');
+        }
+    });
 
-//     $('#addDis').click(function(){
-//       alert($(this).attr('disabled'));
-//   });
-// });
->>>>>>> e584f8ee237500dca473df5b743853a4ec337698
+    // статус "Заявлен"
+    $('#status1').click(function() {
+        $("#progressStatusTwo").removeClass('progress-bar-striped bg-success').addClass('bg-default text-secondary');
+        $("#progressStatusThree").removeClass('progress-bar-striped bg-warning').addClass('bg-default text-secondary');
+        $("#progressStatusOne").removeClass('bg-default text-secondary').addClass('progress-bar-striped bg-info');
+    });
+    // статус "Одобрено РСПС"
+    $('#status2').click(function() {
+        $("#progressStatusThree").removeClass('progress-bar-striped bg-warning').addClass('bg-default text-secondary');
+        $("#progressStatusOne").removeClass('bg-default text-secondary').addClass('progress-bar-striped bg-info');
+        $("#progressStatusTwo").removeClass('bg-default text-secondary').addClass('progress-bar-striped bg-success');
+    });
+    // статус "Сертификат РСПС"
+    $('#status3').click(function() {
+        $("#progressStatusOne").removeClass('bg-default text-secondary').addClass('progress-bar-striped bg-info');
+        $("#progressStatusTwo").removeClass('bg-default text-secondary').addClass('progress-bar-striped bg-success');
+        $("#progressStatusThree").removeClass('bg-default text-secondary').addClass('progress-bar-striped bg-warning');
+    });
+})
+// ====== END ==========

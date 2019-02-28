@@ -1,0 +1,48 @@
+{% load static %}
+
+<!-- Modal - Login to your personal account-->
+<div class="modal fade" id="modal-newCongress" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Новый съезд РСПС</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<form>
+				<div class="modal-body">
+					<div class="form-row">
+						<div class="form-group col-sm-4">
+							<label for="" class="col-form-label col-form-label-sm">Дата проведения&nbsp;<span class="text-danger">*</span></label>
+							<div class="input-group input-group-sm">
+								<input type="text" class="form-control datepicker-here" placeholder="дд.мм.гггг" aria-label="дд.мм.гггг" aria-describedby="">
+								<div class="input-group-append">
+									<span class="input-group-text"><i class="fa fa-calendar"></i></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="" class="form-label-sm">Место проведения&nbsp;<span class="text-danger">*</span></label>
+						<input type="text" class="form-control form-control-sm" required>
+					</div>
+					<div class="form-group">
+						<label for="" class="form-label-sm">Рабочее название&nbsp;<span class="text-danger">*</span></label>
+						<input type="text" class="form-control form-control-sm" required>
+					</div>
+					<div class="form-group">
+						<label for="" class="form-label-sm">Краткая информация о Съезде</label>
+						<textarea class="form-control form-control-sm" rows="3"></textarea>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary btn-sm">Сохранить</button>
+					<button type="button" class="btn btn-link btn-sm" data-dismiss="modal">Отмена</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
