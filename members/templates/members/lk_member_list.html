@@ -75,7 +75,7 @@
 
 		<button type="button" class="btn btn-outline-danger btn-sm mb-4 d-block mx-auto" data-toggle='modal' data-target='#modal-regCongress'>Регистрация на Съезд РСПС 2019</button>
 
-		<div class="table-responsive">
+		<div class="table-responsive" id="table-top">
 			<table class="table table-list">
 				<thead>
 					<tr class="active">
@@ -92,24 +92,31 @@
 				</tbody>
 			</table>
 		</div>
-		<nav aria-label="Page navigation example">
+		{% if members.paginator.num_pages > 1  %}
+		<nav aria-label="Members pagination">
 			<ul class="pagination pagination-sm">
-				<li class="page-item disabled">
-					<a class="page-link" href="#" aria-label="Previous">
+				{% if members.has_previous %}
+				<li class="page-item">
+					<a class="page-link" href="?page=1#table-top" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
+				<li class="page-item"><a class="page-link" href="?page={{members.previous_page_number}}#table-top">{{members.previous_page_number}}</a></li>
 					</a>
 				</li>
-				<li class="page-item active"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				{% endif %}
+				<li class="page-item active disabled"><a class="page-link">{{ members.number }}</a></li>
+				{% if members.has_next %}
+				<li class="page-item"><a class="page-link" href="?page={{members.next_page_number}}#table-top">{{ members.next_page_number}}</a></li>
 				<li class="page-item">
-					<a class="page-link" href="#" aria-label="Next">
+					<a class="page-link" href="?page={{members.paginator.num_pages}}#table-top" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
 					</a>
 				</li>
+				{% endif %}
 			</ul>
 		</nav>
+		{% endif %}
 	</div>
-</main> 
+
+</main>
 <!-- End Content -->
 {% endblock %}
