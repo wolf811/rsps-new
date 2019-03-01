@@ -43,6 +43,7 @@ urlpatterns = [
     path('reestr/', mainapp.reestr, name = 'reestr'),
     path('conf/', mainapp.conf, name = 'conf'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('members/', include('members.urls', namespace='members')),
 ]
 if settings.DEBUG:
     urlpatterns += static(
