@@ -1,7 +1,7 @@
 {% load static %}
 
 <!-- Modal - Login to your personal account-->
-<div class="modal fade" id="modal-newEmployee" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+<div class="modal fade" id="id_add_new_member_modal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -10,7 +10,7 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form>
+			<form method="post" id="add_new_member_form">
 				<div class="modal-body">
 					<div class="form-group">
 						<label for="" class="form-label-sm">Региональное отделение&nbsp;<span class="text-danger">*</span></label>
@@ -26,7 +26,7 @@
 						</select>
 
 						<!-- Вариант 2: касается страниц без привязки к РО (пр. Главная и т.д.) - автоматический выбор <option selected>отделение...</option> и блокировкой поля select атрибутом disabled -->
-						
+						{% comment %} #TODO: make an autochoice of subdivision to request user {% endcomment %}
 						<!-- <select class="form-control form-control-sm" required>
 							<option>-</option>
 						  	<option>Астраханская область</option>
@@ -40,30 +40,37 @@
 
 
 					<div class="form-group">
-						<label for="" class="form-label-sm">ФИО&nbsp;<span class="text-danger">*</span></label>
-						<input type="text" class="form-control form-control-sm" required>
+						<label for="id_fio" class="form-label-sm">ФИО&nbsp;<span class="text-danger">*</span></label>
+						{% comment %} <input type="text" class="form-control form-control-sm" required> {% endcomment %}
+						{{ add_new_member_form.fio }}
+
 					</div>
 					<div class="form-group">
-						<label for="" class="form-label-sm">Город проживания (населенный пункт)&nbsp;<span class="text-danger">*</span></label>
-						<input type="text" class="form-control form-control-sm" required>
+						<label for="id_city" class="form-label-sm">Город проживания (населенный пункт)&nbsp;<span class="text-danger">*</span></label>
+						{% comment %} <input type="text" class="form-control form-control-sm" required> {% endcomment %}
+						{{ add_new_member_form.city }}
 					</div>
 					<div class="form-row">
 						<div class="form-group col-sm">
-							<label for="" class="form-label-sm">Email&nbsp;<span class="text-danger">*</span></label>
-							<input type="text" class="form-control form-control-sm" required="">
+							<label for="id_email" class="form-label-sm">Email&nbsp;<span class="text-danger">*</span></label>
+							{% comment %} <input type="text" class="form-control form-control-sm" required=""> {% endcomment %}
+							{{ add_new_member_form.email }}
 						</div>
 						<div class="form-group col-sm">
-							<label for="" class="form-label-sm">Телефон</label>
-							<input type="text" class="form-control form-control-sm">
+							<label for="id_tel" class="form-label-sm">Телефон</label>
+							{% comment %} <input type="text" class="form-control form-control-sm"> {% endcomment %}
+							{{ add_new_member_form.tel }}
 						</div>
 					</div>	
 					<div class="form-group">
-						<label for="" class="form-label-sm">Место работы</label>
-						<input type="text" class="form-control form-control-sm">
+						<label for="id_job" class="form-label-sm">Место работы</label>
+						{% comment %} <input type="text" class="form-control form-control-sm"> {% endcomment %}
+						{{ add_new_member_form.job }}
 					</div>
 					<div class="form-group">
-						<label for="" class="form-label-sm">Должность</label>
-						<input type="text" class="form-control form-control-sm" required>
+						<label for="id_jobplace" class="form-label-sm">Должность</label>
+						{% comment %} <input type="text" class="form-control forom-control-sm" required> {% endcomment %}
+						{{ add_new_member_form.jobplace }}
 					</div>
 					<div class="form-group">
 						<div class="form-check">
@@ -74,8 +81,10 @@
 						</div>
 					</div>
 				</div>
+				{% comment %} {{ add_new_member_form.errors }} {% endcomment %}
+				<div id="results"></div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary btn-sm">Сохранить</button>
+					<button id="post-form" type="submit" class="btn btn-primary btn-sm">Сохранить</button>
 					<button type="button" class="btn btn-link btn-sm" data-dismiss="modal">Отмена</button>
 				</div>
 			</form>

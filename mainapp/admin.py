@@ -51,7 +51,7 @@ class PostAdmin(admin.ModelAdmin):
 @admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):
     view_on_site = False
-    fields = ['fio', 'job', 'jobplace', 'tel', 'email']
+    fields = ['fio', 'job', 'jobplace', 'tel', 'email', 'user']
     inlines = [MembershipInline]
 
 

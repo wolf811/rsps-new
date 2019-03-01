@@ -21,7 +21,7 @@ def contact(request):
 def user(request):
     title = 'РСПС - Личный кабинет'
     content = {
-        'title': title, 
+        'title': title,
     }
     return render(request, 'mainapp/user.html', content)
 
@@ -43,6 +43,7 @@ def prezidium_conf(request):
     title = 'РСПС - Президиум'
     content = {
         'title': title, 
+        #TODO: add report to unassign conferences, and filter
     }
     return render(request, 'mainapp/prezidium_conf.html', content)
 

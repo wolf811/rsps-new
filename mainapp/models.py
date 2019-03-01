@@ -2,6 +2,17 @@ from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
+import re
+
+def textvalidation(value):
+    template = re.compile('^[a-zA-Zа-яА-Я\s]+')
+    m = template.match(value)
+    if not m:
+        error_text = '{} - недопустимое значение поля ФИО'.format(value)
+        raise ValidationError({
+            'fio': ValidationError(error_text, code='invalid'),
+        })
 
 # Create your models here.
 class Member(models.Model):
@@ -23,6 +34,9 @@ class Member(models.Model):
 
     def __str__(self):
         return '{}, {}'.format(self.fio, self.job)
+
+    def clean(self):
+        textvalidation(self.fio)
 
 class Conference(models.Model):
     """docstring for Conference"""

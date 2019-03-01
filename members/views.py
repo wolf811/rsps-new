@@ -2,9 +2,10 @@ from django.shortcuts import render
 from mainapp.models import Member
 from .models import Membership
 from .forms import MemberForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse
 from django.core.paginator import Paginator
+import json
 
 
 # Create your views here.
@@ -46,16 +47,20 @@ def member_list(request):
         members.append(statused_member)
 
     if request.method == "POST":
-        form = MemberForm(request.POST)
-        if form.is_valid():
-            new_member = form.save(commit=False)
+        print(request.POST)
+        add_new_member_form = MemberForm(request.POST)
+        if add_new_member_form.is_valid():
+            new_member = add_new_member_form.save(commit=False)
             new_member.user = request.user
             new_member.save()
             return HttpResponseRedirect(reverse('members:member_list'))
-    else:
-        form = MemberForm()
+        else:
+            errors = add_new_member_form.errors
+            print(add_new_member_form.errors.as_json())
+            return JsonResponse(errors)
 
-    print(members)
+    else:
+        add_new_member_form = MemberForm()
 
     #pagination
     paginator = Paginator(members, 10)
@@ -65,7 +70,8 @@ def member_list(request):
     content = {
         'title': title,
         'members': paginated_members,
-        'form': form,
+        'add_new_member_form': add_new_member_form,
+        'success': 'success',
         #TODO: add edit form for every member
     }
 
