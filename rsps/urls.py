@@ -24,6 +24,10 @@ urlpatterns = [
     path('', mainapp.index, name = 'index'),
     path('contact/', mainapp.contact, name = 'contact'),
     path('user/', mainapp.user, name = 'user'),
+    path('prezidium_regional_office/', mainapp.prezidium_regional_office, name = 'prezidium_regional_office'),
+    path('prezidium_employee/', mainapp.prezidium_employee, name = 'prezidium_employee'),
+    path('prezidium_conf/', mainapp.prezidium_conf, name = 'prezidium_conf'),
+    path('prezidium_congress/', mainapp.prezidium_congress, name = 'prezidium_congress'),
     path('account_user/', mainapp.account_user, name = 'account_user'),
     path('account_about/', mainapp.account_about, name = 'account_about'),
     path('account_news/', mainapp.account_news, name = 'account_news'),
@@ -40,7 +44,6 @@ urlpatterns = [
     path('conf/', mainapp.conf, name = 'conf'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('members/', include('members.urls', namespace='members')),
-
 ]
 if settings.DEBUG:
     urlpatterns += static(

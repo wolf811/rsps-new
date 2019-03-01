@@ -1,0 +1,59 @@
+{% load static %}
+
+<div class="mb-4">
+	<div class="form-group row">
+		<label for="" class="col-sm-4 col-form-label col-form-label-sm">Дата проведения&nbsp;<span class="text-danger">*</span></label>
+		<div class="col-6 col-sm-4 col-lg-3">
+			<div class="input-group input-group-sm">
+				<input type="text" class="form-control datepicker-here" placeholder="дд.мм.гггг" value="01.07.2019">
+				<div class="input-group-append">
+					<span class="input-group-text"><i class="fa fa-calendar"></i></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="form-group row">
+		<label for="" class="col-sm-4 col-form-label col-form-label-sm">Место проведения&nbsp;<span class="text-danger">*</span></label>
+		<div class="col-sm-8 col-lg-6">
+			<input type="text" class="form-control form-control-sm" placeholder="" value="Москва, ул. Братиславская, дом 6, офис НАКС">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label for="" class="col-sm-4 col-form-label col-form-label-sm">Рабочее название&nbsp;<span class="text-danger">*</span></label>
+		<div class="col-sm-8 col-lg-6">
+			<input type="text" class="form-control form-control-sm" placeholder="" value="Съезд РСПС 2019">
+		</div>
+	</div>
+	<div class="form-group row">
+		<label for="" class="col-sm-4 col-form-label col-form-label-sm">Краткая информация</label>
+		<div class="col-sm-8 col-lg-6">
+			<textarea class="form-control form-control-sm" rows="3"></textarea>
+		</div>
+	</div>
+	<fieldset class="form-group">
+		<div class="row">
+			<legend class="col-sm-4 col-form-label col-form-label-sm pt-0">Разместить информацию о Съезде</legend>
+			<div class="col-sm-8 col-lg-6">
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="newsPlacement1" value="option1">
+					<label class="form-check-label" for="newsPlacement1">
+						на Главной
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="newsPlacement2" value="option2">
+					<label class="form-check-label" for="newsPlacement2">
+						в Новостях
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="checkbox" id="newsPlacement3" value="option3">
+					<label class="form-check-label" for="newsPlacement3">
+						в Новостях РО
+					</label>
+				</div>
+			</div>
+		</div>
+	</fieldset>
+
+

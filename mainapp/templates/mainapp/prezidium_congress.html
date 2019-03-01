@@ -1,0 +1,231 @@
+{% extends 'mainapp/base.html' %}
+
+{% block content %}
+<!-- Content -->
+<main class="pt-4">
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Личный кабинет президиума</li>
+			</ol>
+		</nav>
+
+		<h4 class="title-page">Личный кабинет</h4>
+
+		<ul class="nav nav-tabs mb-4">
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'prezidium_regional_office' %}">Региональные отделения</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'prezidium_employee' %}">Члены РСПС</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'prezidium_conf' %}">Конференции</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link active" href="{% url 'prezidium_congress' %}">Съезды</a>
+			</li>
+		</ul>
+		
+		<button type="button" class="btn btn-danger btn-xl mb-4" data-toggle='modal' data-target='#modal-newCongress'>Новый съезд РСПС</button>
+		
+		<div class="table-responsive">
+			<table class="table table-list">
+				<thead>
+					<tr class="active">
+						<th>Рабочее название</th>
+						<th>Дата проведения</th>
+						<th>Место проведения</th>
+						<th>Зарегистрировано участников</th>
+						<th>Действия</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<div class="text-uppercase font-weight-bold text-primary">Съезд РСПС 2019</div>
+							<div class="text-danger mt-2">Запланировано</div>
+						</td>
+						<td>01 июля 2019 г.</td>
+						<td>Москва, ул. Братиславская, дом 6, офис НАКС</td>
+						<td class="font-weight-bold">24</td>
+						<td>
+							<a href="#" class="btn-action mr-3 text-primary" title="Удалить съезд"><i class="fa fa-trash-o"></i></a>
+							<a href="#multiCollapseConf00" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" title="Изменить"><i class="fa fa-pencil"></i></a>
+						</td>
+					</tr>
+					<tr class="multi-collapse collapse edit-list" id="multiCollapseConf00">
+						<td colspan="5" class="total-column">
+							<form>
+								<div class="mb-4">
+									<h6 class='text-primary mb-4'>Сведения о съезде</h6>
+									{% include 'mainapp/includes/form-prezidium_congress.html' %}
+								</div>
+								
+								<div class="mb-4">
+									<h6 class='text-primary mb-4'>Участники съезда</h6>
+									<div class="form-row align-items-center mb-3">
+										<div class="col-auto">
+											<button type="button" class="btn btn-outline-danger btn-xs" data-toggle="modal" data-target="#modal-regCongress">Зарегистрировать</button>
+										</div>
+										<div class="col-auto">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" id="gridCheck1">
+												<label class="form-check-label" for="gridCheck1">
+													Уведомить участников
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="table-responsive table-scroll">
+										<table class="table table-list table-internal-list">
+											<thead>
+												<tr class="active">
+													<th>Региональное отделение</th>
+													<th>Руководитель отделения</th>
+													<th>Телефон / Email</th>
+													<th>Зарегистрировано</th>
+													<th>Действия</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td class="font-weight-bold">Московская область</td>
+													<td>Бродягин Владимир Николаевич</td>
+													<td>(910) 435-52-00 (495) 369-64-70, ac-mosgaz@yandex.ru</td>
+													<td class="font-weight-bold">20</td>
+													<td>
+														<a href="#" class="btn-action mr-3 text-primary" title="Удалить участника"><i class="fa fa-trash-o"></i></a>
+														<a href="#" class="btn-action text-primary" data-toggle="modal" data-target="#modal-regCongress" title="Изменить"><i class="fa fa-pencil"></i></a>
+													</td>
+												</tr>
+												<tr>
+													<td class="font-weight-bold">Астраханская область</td>
+													<td>Меркулов Денис Иювинальевич</td>
+													<td>(8512) 549097 (8512) 485393, svarkacenter@ya.ru</td>
+													<td class="font-weight-bold">4</td>
+													<td>
+														<a href="#" class="btn-action mr-3 text-primary" title="Удалить участника"><i class="fa fa-trash-o"></i></a>
+														<a href="#" class="btn-action text-primary" data-toggle="modal" data-target="#modal-regCongress" title="Изменить"><i class="fa fa-pencil"></i></a>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="gridCheck1">
+										<label class="form-check-label text-success" for="gridCheck1">
+											<strong>Съезд проведен</strong>
+										</label>
+									</div>
+								</div>
+								<button type="submit" class="btn btn-primary btn-xs">Сохранить</button>
+								<a href="#multiCollapseConf00" class="btn btn-outline-primary btn-xs" data-toggle="collapse" aria-expanded="false" role="button">Закрыть</a>
+							</form>
+						</td>
+					</tr>
+
+					<tr>
+						<td>
+							<div class="text-uppercase font-weight-bold text-primary">Съезд РСПС 2018</div>
+							<div class="text-success mt-2">Проведен</div>
+						</td>
+						<td>01 июля 2018 г.</td>
+						<td>Москва, ул. Братиславская, дом 6, офис НАКС</td>
+						<td class="font-weight-bold">24</td>
+						<td>
+							<a href="#" class="btn-action mr-3 text-primary" title="Удалить съезд"><i class="fa fa-trash-o"></i></a>
+							<a href="#multiCollapseConf01" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" title="Просмотр"><i class="fa fa-eye"></i></a>
+						</td>
+					</tr>
+					<tr class="multi-collapse collapse edit-list" id="multiCollapseConf01">
+						<td colspan="5" class="total-column">
+							<form>
+								<div class="mb-4">
+									<h6 class='text-primary mb-4'>Сведения о съезде</h6>
+									{% include 'mainapp/includes/form-prezidium_congress.html' %}
+								</div>
+								
+								<div class="mb-4">
+									<h6 class='text-primary mb-4'>Участники съезда</h6>
+									<div class="form-row align-items-center mb-3">
+										<div class="col-auto">
+											<div class="form-check">
+												<input class="form-check-input" type="checkbox" id="gridCheck1" checked>
+												<label class="form-check-label" for="gridCheck1">
+													Уведомить участников
+												</label>
+											</div>
+										</div>
+									</div>
+									<div class="table-responsive table-scroll">
+										<table class="table table-list table-internal-list">
+											<thead>
+												<tr class="active">
+													<th>Региональное отделение</th>
+													<th>Руководитель отделения</th>
+													<th>Телефон / Email</th>
+													<th>Зарегистрировано</th>
+													<th>Действия</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td class="font-weight-bold">Московская область</td>
+													<td>Бродягин Владимир Николаевич</td>
+													<td>(910) 435-52-00 (495) 369-64-70, ac-mosgaz@yandex.ru</td>
+													<td class="font-weight-bold">20</td>
+													<td>-</td>
+												</tr>
+												<tr>
+													<td class="font-weight-bold">Астраханская область</td>
+													<td>Меркулов Денис Иювинальевич</td>
+													<td>(8512) 549097 (8512) 485393, svarkacenter@ya.ru</td>
+													<td class="font-weight-bold">4</td>
+													<td>-</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								
+								<div class="form-group">
+									<div class="form-check">
+										<input class="form-check-input" type="checkbox" id="gridCheck1" checked>
+										<label class="form-check-label text-success" for="gridCheck1">
+											<strong>Съезд проведен</strong>
+										</label>
+									</div>
+								</div>
+								<a href="#multiCollapseConf00" class="btn btn-outline-primary btn-xs" data-toggle="collapse" aria-expanded="false" role="button">Закрыть</a>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<nav aria-label="Page navigation example">
+			<ul class="pagination pagination-sm">
+				<li class="page-item disabled">
+					<a class="page-link" href="#" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<li class="page-item active"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item">
+					<a class="page-link" href="#" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</main> 
+<!-- End Content -->
+{% endblock %}

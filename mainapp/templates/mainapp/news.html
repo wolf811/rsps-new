@@ -14,7 +14,7 @@
 		<h4 class="title-page mb-4">Новости РСПС</h4>
 
 		<div class="card-all">
-			<div class="row flex-wrap">
+			<div class="row">  <!-- =========== Убран класс 'flex-wrap' за ненадобностью ========= -->
 				{% for publication in posts %}
 					{% include 'mainapp/includes/news-list-card.html' %}
 				{% endfor %}
