@@ -9,7 +9,7 @@ def textvalidation(value):
     template = re.compile('^[a-zA-Zа-яА-Я\s]+')
     m = template.match(value)
     if not m:
-        error_text = '{} - недопустимое значение поля ФИО'.format(value)
+        error_text = '{} недопустимое значение поля ФИО'.format(value)
         raise ValidationError({
             'fio': ValidationError(error_text, code='invalid'),
         })
@@ -24,6 +24,9 @@ class Member(models.Model):
     email = models.EmailField(max_length=100, verbose_name='Email')
     city = models.CharField(max_length=100, verbose_name='Город проживания')
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    short_description = models.TextField(u'Краткая информация (награды, звания и т.д.)', 
+                                            null=True, default=None)
+    subscription = models.BooleanField(u'Подписка на обновления')
     # membership = models.BooleanField(verbose_name='Членство в РСПС')
     # conference = models.ForeignKey(Conference, verbose_name='Зареристрирован на:', 
     # 	default=null, null=True, on_delete=models.SET_NULL)

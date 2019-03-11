@@ -87,9 +87,9 @@ $('#post-form').on('click', function(event){
 });
 
 function add_member() {
-    console.log("create member is working!") // sanity check
+    // console.log("create member is working!") // sanity check
     $.ajax({
-        url : "", // the endpoint
+        url : "", // the endpoint - current page
         type : "POST", // http method
         data : $('#add_new_member_form').serializeArray(), // data sent with the post request
 
@@ -100,14 +100,38 @@ function add_member() {
         success : function(json_result) {
             // $('#add_new_member_form').val(''); // remove the value from the input
             console.log(json_result); // log the returned json to the console
-            console.log("success"); // another sanity check
+            // console.log("json response recieved"); // another sanity check
+            if ('not_unique' in json_result) {
+                $('#results').html(`
+                <p class="text-info">
+                Такой пользователь уже зарегистрирован: <br>
+                <strong>${json_result['member_fio']}, идентификатор: ${json_result['member_id']}</strong>
+                </p>`);
+            }
+            if ('new_member_saved' in json_result) {
+                console.log('saved new member:', json_result['new_member_saved']);
+                $('#results').html(`
+                <p class="text-success">
+                Данные успешно сохранены, форму можно закрыть
+                </p>`);
+                $('#dismiss-link').text('Закрыть форму');
+                $('#dismiss-link').click(()=>{location.reload()});
+            }
+            //clear previous messages (if exist);
+            let error_message = $('.text-danger');
+            error_message.remove()
+            //update fields with error messages (add after)
             for (let key in json_result) {
                 if (key in {'fio':1, 'job':1, 'jobplace':1, 'tel':1, 'email':1, 'city':1}) {
-                    console.log('error is here!');
                     let error = json_result[key];
-                    console.log('error text', error);
+                    // console.log('error text', error);
                     let field = $('#add_new_member_form').find(`#id_${key}`);
-                    field.before(`<p class="text-danger">${error}</p>`);
+                    for (let err of error) {
+                        field.after(`
+                        <small class="text-danger d-block">
+                        ${err}
+                        </small>`);
+                    }
                 }
             }
         },
@@ -119,4 +143,4 @@ function add_member() {
             console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
         }
     });
-};
+}; //end function add member

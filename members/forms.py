@@ -12,3 +12,10 @@ class MemberForm(forms.ModelForm):
     class Meta:
         model = Member
         fields = ('fio', 'job', 'jobplace', 'tel', 'email', 'city')
+
+
+class EditMemberForm(forms.ModelForm):
+    class Meta:
+        model = Member
+        fields = ('fio', 'job', 'jobplace', 'tel', 'email', 'city',
+                  'short_description', 'subscription')

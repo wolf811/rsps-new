@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from mainapp.models import Member
 from .models import Membership
-from .forms import MemberForm
+from .forms import MemberForm, EditMemberForm
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse
 from django.core.paginator import Paginator
@@ -52,8 +52,20 @@ def member_list(request):
         if add_new_member_form.is_valid():
             new_member = add_new_member_form.save(commit=False)
             new_member.user = request.user
-            new_member.save()
-            return HttpResponseRedirect(reverse('members:member_list'))
+            filtered_by_name = Member.objects.filter(fio=request.POST['fio'])
+            if len(filtered_by_name) > 0:
+                not_unique_message = {
+                        'not_unique': 'member fio not unique',
+                        'member_fio': request.POST['fio'],
+                        'member_id': filtered_by_name[0].pk
+                        }
+                print(not_unique_message)
+                return JsonResponse(not_unique_message)
+            else:
+                new_member.save()
+            # return HttpResponseRedirect(reverse('members:member_list'))
+            success_message = {'new_member_saved': new_member.pk}
+            return JsonResponse(success_message)
         else:
             errors = add_new_member_form.errors
             print(add_new_member_form.errors.as_json())
@@ -66,6 +78,13 @@ def member_list(request):
     paginator = Paginator(members, 10)
     page = request.GET.get('page')
     paginated_members = paginator.get_page(page)
+
+    #edit form by id of member
+    member_pk = request.GET.get('member_pk')
+    if member_pk:
+        edit_member = Member.objects.get(pk=member_pk)
+        edit_member_form = EditMemberForm(instance=edit_member)
+        return JsonResponse(edit_member_form)
 
     content = {
         'title': title,
