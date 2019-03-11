@@ -86,6 +86,11 @@ $('#post-form').on('click', function(event){
     add_member();
 });
 
+$('.pencil').on('click' , function(event) {
+    event.preventDefault();
+    edit_member($(this).attr('href'));
+});
+
 function add_member() {
     // console.log("create member is working!") // sanity check
     $.ajax({
@@ -144,3 +149,8 @@ function add_member() {
         }
     });
 }; //end function add member
+
+function edit_member(collapse_id) {
+    // console.log(collapse_id);
+    $(collapse_id).collapse('toggle');
+}; //end function edit member
