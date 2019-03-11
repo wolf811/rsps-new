@@ -6,6 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse
 from django.core.paginator import Paginator
 import json
+from django.core import serializers
 
 
 # Create your views here.
@@ -79,12 +80,13 @@ def member_list(request):
     page = request.GET.get('page')
     paginated_members = paginator.get_page(page)
 
-    #edit form by id of member
-    member_pk = request.GET.get('member_pk')
-    if member_pk:
-        edit_member = Member.objects.get(pk=member_pk)
-        edit_member_form = EditMemberForm(instance=edit_member)
-        return JsonResponse(edit_member_form)
+    # #edit form by id of member
+    # member_pk = request.GET.get('member_pk')
+    # if member_pk:
+    #     edit_member = Member.objects.get(pk=member_pk)
+    #     edit_member_form = EditMemberForm(instance=edit_member)
+    #     # print(edit_member_form)
+    #     return HttpResponse(edit_member_form)
 
     content = {
         'title': title,
@@ -95,3 +97,15 @@ def member_list(request):
     }
 
     return render(request, 'members/lk_member_list.html', content)
+
+def get_member_form(request):
+    if request.method == 'POST':
+        member_pk = request.POST.get('member_pk')
+        if member_pk:
+            edit_member = Member.objects.get(pk=member_pk)
+            edit_member_form = EditMemberForm(instance=edit_member)
+        print(member_pk)
+        context = {
+            'member_edit_form': edit_member_form,
+        }
+    return render(request, 'members/includes/member_edit_form.html', context)

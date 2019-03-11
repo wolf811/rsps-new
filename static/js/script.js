@@ -91,6 +91,37 @@ $('.pencil').on('click' , function(event) {
     edit_member($(this).attr('href'));
 });
 
+function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+var csrftoken = getCookie('csrftoken');
+console.log('CSRF_TOKEN:', csrftoken);
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+// $ajaxSetup https://docs.djangoproject.com/en/2.2/ref/csrf/#ajax
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+
 function add_member() {
     // console.log("create member is working!") // sanity check
     $.ajax({
@@ -151,6 +182,32 @@ function add_member() {
 }; //end function add member
 
 function edit_member(collapse_id) {
-    // console.log(collapse_id);
     $(collapse_id).collapse('toggle');
+    //get member_id from edit href
+    let member_id = collapse_id.match(/\d+/).join("");
+    // console.log(member_id);
+    //now load from controller current member data
+    $.ajax({
+        url : '/members/edit/', // the endpoint - current page
+        type : "POST", // http method
+        data : {
+            'member_pk': member_id
+        }, // data sent with the post request
+        // handle a successful response
+        //https://realpython.com/django-and-ajax-form-submissions/
+        //http://jsn-techtips.blogspot.com/2014/04/django-show-form-validation-error-with.html
+
+        success : function(response) {
+            // $('#add_new_member_form').val(''); // remove the value from the input
+            $(`#td_${member_id}`).html(response);
+            console.log(typeof response, response); // log the returned json to the console
+            // console.log("json response recieved"); // another sanity check
+            //update fields with error messages (add after)
+        },
+
+        // handle a non-successful response
+        error : function(xhr) {
+            console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+        }
+    });
 }; //end function edit member
