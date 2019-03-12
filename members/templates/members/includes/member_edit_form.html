@@ -1,47 +1,55 @@
 {% load formstyles %}
-<form>
+<form id="edit_member_form_{{member.pk}}" method="post">
+    {% csrf_token %}
     <div class="mb-4">
         <h6 class='text-primary mb-4'>Сведения о члене РСПС</h6>
         <div class="form-group row">
-            <label for="" class="col-sm-4 col-form-label col-form-label-sm">ФИО&nbsp;<span class="text-danger">*</span></label>
+            <label for="id_fio" class="col-sm-4 col-form-label col-form-label-sm">ФИО&nbsp;<span class="text-danger">*</span></label>
             <div class="col-sm-8 col-lg-6">
-                <input type="text" class="form-control form-control-sm" placeholder="" value="Комбаров Валентин Анатольевич">
+                {{ member_edit_form.fio|addcss:"form-control form-control-sm"}}
+                {% comment %} <input type="text" class="form-control form-control-sm" placeholder="" value="Комбаров Валентин Анатольевич"> {% endcomment %}
             </div>
         </div>
         <div class="form-group row">
-            <label for="" class="col-sm-4 col-form-label col-form-label-sm">Город проживания (населенный пункт)&nbsp;<span
+            <label for="id_city" class="col-sm-4 col-form-label col-form-label-sm">Город проживания (населенный пункт)&nbsp;<span
                     class="text-danger">*</span></label>
             <div class="col-sm-8 col-lg-6">
-                <input type="text" class="form-control form-control-sm" placeholder="" value="Москва">
+                {% comment %} <input type="text" class="form-control form-control-sm" placeholder="" value="Москва"> {% endcomment %}
+                {{ member_edit_form.city|addcss:"form-control form-control-sm"}}
             </div>
         </div>
         <div class="form-group row">
-            <label for="" class="col-sm-4 col-form-label col-form-label-sm">Email&nbsp;<span class="text-danger">*</span>
+            <label for="id_email" class="col-sm-4 col-form-label col-form-label-sm">Email&nbsp;<span class="text-danger">*</span>
                 / Телефон</label>
             <div class="col-6 col-sm-4 col-lg-3">
-                <input type="text" class="form-control form-control-sm" placeholder="Email" value="dev1@naks.ru">
+                {% comment %} <input type="text" class="form-control form-control-sm" placeholder="Email" value="dev1@naks.ru"> {% endcomment %}
+                {{member_edit_form.email|addcss:"form-control form-control-sm"}}
             </div>
             <div class="col-6 col-sm-4 col-lg-3">
-                <input type="text" class="form-control form-control-sm" placeholder="№ телефона" value="+7 (499) 784-72-86">
+                {% comment %} <input type="text" class="form-control form-control-sm" placeholder="№ телефона" value="+7 (499) 784-72-86"> {% endcomment %}
+                {{member_edit_form.tel|addcss:"form-control form-control-sm"}}
             </div>
         </div>
         <div class="form-group row">
-            <label for="" class="col-sm-4 col-form-label col-form-label-sm">Место работы</label>
+            <label for="id_job" class="col-sm-4 col-form-label col-form-label-sm">Место работы</label>
             <div class="col-sm-8 col-lg-6">
-                <input type="text" class="form-control form-control-sm" placeholder="" value='ООО "НЭДК'>
+                {% comment %} <input type="text" class="form-control form-control-sm" placeholder="" value='ООО "НЭДК'> {% endcomment %}
+                {{member_edit_form.job|addcss:"form-control form-control-sm"}}
             </div>
         </div>
         <div class="form-group row">
-            <label for="" class="col-sm-4 col-form-label col-form-label-sm">Должность</label>
+            <label for="id_jobplace" class="col-sm-4 col-form-label col-form-label-sm">Должность</label>
             <div class="col-sm-8 col-lg-6">
-                <input type="text" class="form-control form-control-sm" placeholder="" value="инженер-программист">
+                {% comment %} <input type="text" class="form-control form-control-sm" placeholder="" value="инженер-программист"> {% endcomment %}
+                {{member_edit_form.jobplace|addcss:"form-control form-control-sm"}}
             </div>
         </div>
         <div class="form-group row">
             <label for="" class="col-sm-4 col-form-label col-form-label-sm">Краткая информация о члене РСПС<br><small>(область
                     деятельности, достижения и прочее...)</small></label>
             <div class="col-sm-8 col-lg-6">
-                <textarea class="form-control form-control-sm" rows="3"></textarea>
+                {% comment %} <textarea class="form-control form-control-sm" rows="3"></textarea> {% endcomment %}
+                {{member_edit_form.short_description|addcss:"form-control form-control-sm"}}
             </div>
         </div>
     </div>
@@ -67,14 +75,15 @@
     </div>
     <div class="form-row align-items-center">
         <div class="col-auto mr-auto">
-            <button type="submit" class="btn btn-primary btn-xs">Сохранить</button>
-            <a href="#multiCollapseEmpl01" class="btn btn-outline-primary btn-xs" data-toggle="collapse" aria-expanded="false"
+            <button type='button' data-member-id="{{member.pk}}" class="update_member_button btn btn-primary btn-xs">Сохранить</button>
+            <a href="#multiCollapseEmpl{{ member.pk }}" class="btn btn-outline-primary btn-xs" data-toggle="collapse" aria-expanded="false"
                 role="button">Закрыть</a>
         </div>
         <div class="col-auto my-1">
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="mailingCheck{{ member.pk }}">
-                <label class="form-check-label" for="mailingCheck{{ member.pk }}">
+                {% comment %} <input class="form-check-input" type="checkbox" id="mailingCheck{{ member.pk }}"> {% endcomment %}
+                {{member_edit_form.subscription|addcss:"form-check-input"}}
+                <label class="form-check-label" for="id_subscription">
                     подписка на рассылку от РСПС
                 </label>
             </div>

@@ -1,3 +1,4 @@
+{% load static %}
 <tr>
     <td>
         <div class="mb-1">{{ member.fio }}</div>
@@ -22,7 +23,10 @@
     </td>
 </tr>
 <tr class="multi-collapse collapse edit-list" id="multiCollapseEmpl{{ member.pk }}">
-    <td id="td_{{member.pk}}" colspan="4" class="total-column">
+    <td id="td_{{member.pk}}" colspan="4" class="member_row_parent total-column loading_row">
+        <div id="loadingmessage">
+            <img src="{% static 'images/ajax-loader.gif' %}" alt="loading_data">
+        </div>
         {% comment %} {% include 'members/includes/member_edit_form.html' %} {% endcomment %}
     </td>
 </tr>

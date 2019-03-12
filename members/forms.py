@@ -11,7 +11,8 @@ class MemberForm(forms.ModelForm):
             field.widget.attrs['class'] = 'form-control form-control-sm'
     class Meta:
         model = Member
-        fields = ('fio', 'job', 'jobplace', 'tel', 'email', 'city')
+        fields = ('fio', 'job', 'jobplace', 'tel', 'email', 'city',
+                  'subscription')
 
 
 class EditMemberForm(forms.ModelForm):
@@ -19,3 +20,6 @@ class EditMemberForm(forms.ModelForm):
         model = Member
         fields = ('fio', 'job', 'jobplace', 'tel', 'email', 'city',
                   'short_description', 'subscription')
+        widgets= {
+            'short_description': forms.Textarea(attrs={'rows': 3}),
+            }

@@ -25,7 +25,7 @@ class Member(models.Model):
     city = models.CharField(max_length=100, verbose_name='Город проживания')
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     short_description = models.TextField(u'Краткая информация (награды, звания и т.д.)', 
-                                            null=True, default=None)
+                                            blank=True, null=True, default=None)
     subscription = models.BooleanField(u'Подписка на обновления')
     # membership = models.BooleanField(verbose_name='Членство в РСПС')
     # conference = models.ForeignKey(Conference, verbose_name='Зареристрирован на:', 

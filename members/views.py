@@ -48,7 +48,7 @@ def member_list(request):
         members.append(statused_member)
 
     if request.method == "POST":
-        print(request.POST)
+        print('REQUEST POST', request.POST)
         add_new_member_form = MemberForm(request.POST)
         if add_new_member_form.is_valid():
             new_member = add_new_member_form.save(commit=False)
@@ -100,12 +100,25 @@ def member_list(request):
 
 def get_member_form(request):
     if request.method == 'POST':
+        # print('REQUEST POST', request.POST)
         member_pk = request.POST.get('member_pk')
-        if member_pk:
-            edit_member = Member.objects.get(pk=member_pk)
-            edit_member_form = EditMemberForm(instance=edit_member)
-        print(member_pk)
+        edit_member = Member.objects.get(pk=member_pk)
+        edit_member_form = EditMemberForm(instance=edit_member)
+        if 'update_form_data' in request.POST:
+            form_updating = EditMemberForm(request.POST or None, instance=edit_member)
+            if form_updating.is_valid():
+                instance = form_updating.save()
+                success_message = {
+                    'id': edit_member.pk,
+                    'status': 'successfully saved',
+                }
+                return JsonResponse(success_message)
+            else:
+                errors = form_updating.errors
+                return JsonResponse(errors)
+        # print(member_pk)
         context = {
+            'member': edit_member,
             'member_edit_form': edit_member_form,
         }
     return render(request, 'members/includes/member_edit_form.html', context)
