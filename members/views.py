@@ -100,14 +100,14 @@ def member_list(request):
 
 def get_member_form(request):
     if request.method == 'POST':
-        # print('REQUEST POST', request.POST)
+        print('REQUEST POST', request.POST)
         member_pk = request.POST.get('member_pk')
         edit_member = Member.objects.get(pk=member_pk)
         edit_member_form = EditMemberForm(instance=edit_member)
         if 'update_form_data' in request.POST:
             form_updating = EditMemberForm(request.POST or None, instance=edit_member)
             if form_updating.is_valid():
-                instance = form_updating.save()
+                form_updating.save()
                 success_message = {
                     'id': edit_member.pk,
                     'status': 'successfully saved',
