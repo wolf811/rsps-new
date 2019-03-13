@@ -25,16 +25,12 @@ class StatusedMember:
         self.tel = self.member.tel
 
     def status_get_or_create(self):
-        status = [x for x in Membership.objects.filter(member=self.member)]
-        if len(status) == 0:
+        try:
+            membership = Membership.objects.get(member=self.member)
+        except Membership.DoesNotExist:
             membership = Membership.objects.create(member=self.member)
-            status.append(membership)
-        else:
-            for m in status:
-                if status.index(m) > 0:
-                    status.remove(m)
-                    m.delete()
-        return status[0]
+        return membership.status
+
 
     def set_status(self, status):
         current_status = self.status_get_or_create()

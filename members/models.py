@@ -10,7 +10,7 @@ class Membership(models.Model):
         ('Одобрен', 'Утвержден Президиумом РСПС'),
         ('Выдан сертификат', 'Выдан сертификат РСПС'),
     )
-    member = models.ForeignKey(Member, null=True, on_delete=models.SET_NULL)
+    member = models.OneToOneField(Member, null=True, on_delete=models.SET_NULL)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES,
                               default='Новый')
 
