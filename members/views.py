@@ -9,14 +9,11 @@ import json
 from django.core import serializers
 # from django.utils.html import format_html
 
-
-
 # Create your views here.
 
 class StatusedMember:
     def __init__(self, member_pk):
         self.member = Member.objects.get(pk=member_pk)
-        self.membership = Membership.objects.get(member=self.member)
         self.pk = member_pk
         self.status = self.status_get_or_create()
         self.fio = self.member.fio
@@ -27,10 +24,10 @@ class StatusedMember:
 
     def status_get_or_create(self):
         try:
-            membership = Membership.objects.get(member=self.member)
+            self.membership = Membership.objects.get(member=self.member)
         except Membership.DoesNotExist:
-            membership = Membership.objects.create(member=self.member)
-        return membership.status
+            self.membership = Membership.objects.create(member=self.member)
+        return self.membership.status
 
     def set_status(self, status):
         self.membership.status = status
@@ -62,6 +59,9 @@ def member_list(request):
                 return JsonResponse(not_unique_message)
             else:
                 new_member.save()
+                statused_member = StatusedMember(new_member.pk)
+                statused_member.status_get_or_create()
+                statused_member.set_status('Заявлен')
             # return HttpResponseRedirect(reverse('members:member_list'))
             success_message = {'new_member_saved': new_member.pk}
             return JsonResponse(success_message)
