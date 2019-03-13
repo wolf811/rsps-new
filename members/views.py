@@ -7,6 +7,8 @@ from django.urls import reverse
 from django.core.paginator import Paginator
 import json
 from django.core import serializers
+# from django.utils.html import format_html
+
 
 
 # Create your views here.
@@ -109,12 +111,18 @@ def get_member_form(request):
             if form_updating.is_valid():
                 form_updating.save()
                 success_message = {
+                    'success': True,
                     'id': edit_member.pk,
-                    'status': 'successfully saved',
+                    'message': '<span class="text-info"> \
+                                <i class="fa fa-check mr-2"></i>\
+                                Успешно сохранено</span>',
                 }
                 return JsonResponse(success_message)
             else:
                 errors = form_updating.errors
+                errors['message'] = '<span class="text-danger">\
+                                     <i class="fa fa-times mr-2"></i>\
+                                     Ошибка сохранения</span>',
                 return JsonResponse(errors)
         # print(member_pk)
         context = {

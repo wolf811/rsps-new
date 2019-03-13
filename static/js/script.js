@@ -3,17 +3,17 @@ $(document).ready(function(){
     $(function () {
       $('[data-toggle="popover"]').popover()
     })
-    
+
     $('#showRecovery').click(function() {
         $('#pass-recovery').show('fade');
         $('#login-account').hide();
     });
-    
+
     $('#backLogin').click(function() {
         $('#login-account').show('fade');
         $('#pass-recovery').hide();
     })
-    
+
     // ======= Страница Регистрации - выбор типа регистрации =======
     $("#regRo").change(function() {
         if ($(this).prop('checked')) {
@@ -31,11 +31,11 @@ $(document).ready(function(){
         if ($(this).prop('checked')) {
             $('#chooseRo').show('fade');
         } else {
-            $('#chooseRo').hide(); 
+            $('#chooseRo').hide();
         }
     });
     // ====== END ==========
-    
+
     // ======= Просмотр, редактирование члена РСПС в ЛК =========
     $('#addDis').click(function() {
         $('#form1').prop('disabled', 'disabled');
@@ -44,7 +44,7 @@ $(document).ready(function(){
         $('#form1').prop('disabled', '');
     });
     // ====== END ==========
-    
+
     // ======= Статусы членов РСПС c прогресс-баром =========
     $(function() {
         // Относится к статусу "Новый", где внутри профиля есть только чекбокс "ЗАЯВЛЕН"
@@ -55,7 +55,7 @@ $(document).ready(function(){
                 $("#progressStatusNull").removeClass('progress-bar-striped bg-info').addClass('bg-default text-secondary');
             }
         });
-    
+
         // статус "Заявлен"
         $('#status1').click(function() {
             $("#progressStatusTwo").removeClass('progress-bar-striped bg-success').addClass('bg-default text-secondary');
@@ -76,16 +76,16 @@ $(document).ready(function(){
         });
     })
     // ====== END ==========
-    
+
     // new member form submit
     // AJAX for posting
-    
+
     $('#post-form').on('click', function(event){
         event.preventDefault();
         console.log("form submitted!")  // sanity check
         add_member();
     });
-    
+
     $('.pencil').on('click' , function(event) {
         event.preventDefault();
         console.log('pencil clicked');
@@ -101,7 +101,7 @@ $(document).ready(function(){
         console.log('update_member_button clicked');
         update_member($(this).data('member-id'));
     });
-    
+
     // $('.member_save').on('click', function(event) {
     //     console.log('member_save clicked');
     //     event.preventDefault();
@@ -118,7 +118,7 @@ $(document).ready(function(){
         event.preventDefault();
         console.log('update_member_button clicked');
     })
-    
+
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -136,7 +136,7 @@ $(document).ready(function(){
     }
     var csrftoken = getCookie('csrftoken');
     console.log('CSRF_TOKEN:', csrftoken);
-    
+
     function csrfSafeMethod(method) {
         // these HTTP methods do not require CSRF protection
         return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
@@ -149,18 +149,18 @@ $(document).ready(function(){
             }
         }
     });
-    
+
     function add_member() {
         // console.log("create member is working!") // sanity check
         $.ajax({
             url : "", // the endpoint - current page
             type : "POST", // http method
             data : $('#add_new_member_form').serializeArray(), // data sent with the post request
-    
+
             // handle a successful response
             //https://realpython.com/django-and-ajax-form-submissions/
             //http://jsn-techtips.blogspot.com/2014/04/django-show-form-validation-error-with.html
-    
+
             success : function(json_result) {
                 // $('#add_new_member_form').val(''); // remove the value from the input
                 console.log(json_result); // log the returned json to the console
@@ -208,7 +208,7 @@ $(document).ready(function(){
             }
         });
     }; //end function add member
-    
+
     //progress_bar on change of loading row
     $(function() {
         $(".loading_row").on("change", function() {
@@ -216,7 +216,7 @@ $(document).ready(function(){
           $('#loadingmessage').show();
         })
     });
-    
+
     function edit_member(collapse_id) {
         $(collapse_id).collapse('toggle');
         //get member_id from edit href
@@ -230,50 +230,72 @@ $(document).ready(function(){
                 'member_pk': member_id,
             }, // data sent with the post request
             // handle a successful response
-            //https://realpython.com/django-and-ajax-form-submissions/
-            //http://jsn-techtips.blogspot.com/2014/04/django-show-form-validation-error-with.html
-    
+            // https://realpython.com/django-and-ajax-form-submissions/
+            // http://jsn-techtips.blogspot.com/2014/04/django-show-form-validation-error-with.html
+
             success : function(response) {
                 // $('#add_new_member_form').val(''); // remove the value from the input
                 $('#loadingmessage').hide();
                 $(`#td_${member_id}`).html(response);
-                // console.log(typeof response, response); // log the returned json to the console
                 // console.log("json response recieved"); // another sanity check
-                //update fields with error messages (add after)
+                // update fields with error messages (add after)
             },
-    
+
             // handle a non-successful response
             error : function(xhr) {
                 console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
             }
         });
     }; //end function edit member
-    
+
     function update_member(member_id) {
-        let serialized_data = $(`#edit_member_form_${member_id}`).serializeArray(); // data sent with the post request
+        // serialize form data to sent with the post request
+        let serialized_data = $(`#edit_member_form_${member_id}`).serializeArray();
+        //add_member primary key to request
         serialized_data.push({name:'member_pk', value:member_id});
+        //add_type of request to handle by view
         serialized_data.push({name:'update_form_data', value:'True'});
         // console.log('SERIALIZED', serialized_data);
         $.ajax({
-            url : '/members/edit/', // the endpoint - current page
+            url : '/members/edit/', // the endpoint - member edit page
             type : "POST", // http method
-            data : serialized_data,
-            // 'member_pk': member_id,
             // data sent with the post request
+            data : serialized_data,
             // handle a successful response
             success : function(response) {
-                console.log('RESPONSE', response);
-                // $('#add_new_member_form').val(''); // remove the value from the input
+                console.log(typeof response, response); // log the returned json to the console
+                //clear previous messages (if exist);
+                let error_message = $(`#edit_member_form_${member_id}`).find('.text-danger');
+                error_message.remove()
+                //update fields with error messages (add message after field)
+                for (let key in response) {
+                    if (key in {'fio':1,
+                                'job':1,
+                                'jobplace':1,
+                                'tel':1,
+                                'email':1,
+                                'city':1,
+                                'short_description': 1}) {
+                        let error = response[key];
+                        // console.log('error text', error);
+                        let field = $(`#edit_member_form_${member_id}`).find(`#id_${key}`);
+                        for (let err of error) {
+                            field.after(`
+                            <small class="text-danger d-block">
+                            ${err}
+                            </small>`);
+                        }
+                    }
+                }
+                let server_message = $(`#edit_member_form_${member_id}`).find(`#responseMessage${member_id}`);
+                server_message.html(response['message']);
+                server_message.show();
                 // $('#loadingmessage').hide();
-    
-                // console.log(typeof response, response); // log the returned json to the console
-                // console.log("json response recieved"); // another sanity check
-                //update fields with error messages (add after)
             },
             // handle a non-successful response
             error : function(xhr) {
                 console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
             }
         });
-    }; //end function edit member
-}); //document ready function end
+    }; //end function update member
+}); //document ready end function
