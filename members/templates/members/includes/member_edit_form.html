@@ -58,14 +58,38 @@
 
     {% include 'members/includes/member_status_progress.html' %}
 
+    {% if membership.status == 'Новый' %}
+        <div class="form-group">
+            <div class="form-check">
+                <input name="register_new_member" class="form-check-input" type="checkbox" id="registerCheck{{ member.pk }}">
+                <label class="form-check-label text-info text-uppercase" for="registerCheck{{ member.pk }}">
+                    <strong>Заявить в качестве члена РСПС от регионального подразделения</strong>
+                </label>
+            </div>
+        </div>
+
+    {% endif %}
+    {% if registrations|length > 0 %}
+        {% for register in registrations %}
+            <div class="form-group">
+                <div class="form-check">
+                    <input name="event_register" class="form-check-input" type="checkbox" id="gridCheck{{ member.pk }}" checked>
+                    <label class="form-check-label text-secondary text-uppercase mr-2" for="gridCheck{{ member.pk }}">
+                        <strong>{{ register.name }}</strong>
+                    </label>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
     <div class="form-group">
         <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="gridCheck{{ member.pk }}">
+            <input name="event_register" class="form-check-input" type="checkbox" id="gridCheck{{ member.pk }}">
             <label class="form-check-label text-success text-uppercase" for="gridCheck{{ member.pk }}">
                 <strong>Зарегистрировать на Съезд РСПС 2019</strong>
             </label>
         </div>
     </div>
+    {% endif %}
     <div class="form-row align-items-center">
         <div class="col-auto mr-auto">
             <button type='button' data-member-id="{{member.pk}}" class="update_member_button btn btn-primary btn-xs">Сохранить</button>

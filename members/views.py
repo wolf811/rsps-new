@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from mainapp.models import Member
-from .models import Membership
+from .models import Membership, MemberRegistration
 from .forms import MemberForm, EditMemberForm
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse
@@ -78,14 +78,6 @@ def member_list(request):
     page = request.GET.get('page')
     paginated_members = paginator.get_page(page)
 
-    # #edit form by id of member
-    # member_pk = request.GET.get('member_pk')
-    # if member_pk:
-    #     edit_member = Member.objects.get(pk=member_pk)
-    #     edit_member_form = EditMemberForm(instance=edit_member)
-    #     # print(edit_member_form)
-    #     return HttpResponse(edit_member_form)
-
     content = {
         'title': title,
         'members': paginated_members,
@@ -105,6 +97,16 @@ def get_member_form(request):
         membership = Membership.objects.get(member=edit_member)
         print('STATUS:', membership.status)
         if 'update_form_data' in request.POST:
+            if 'register_new_member' in request.POST:
+                membership.status = 'Заявлен'
+                membership.save()
+            if request.POST.get('event_register', '') == 'on':
+                registration = MemberRegistration.objects.create(
+                    member=edit_member,
+                    name='Зарегистрирован на Съезд 2019',
+                    register=True,
+                    )
+                registration.save()
             form_updating = EditMemberForm(request.POST or None, instance=edit_member)
             if form_updating.is_valid():
                 form_updating.save()
@@ -123,9 +125,13 @@ def get_member_form(request):
                                      Ошибка сохранения</span>',
                 return JsonResponse(errors)
         # print(member_pk)
+
+        registrations = MemberRegistration.objects.filter(member=edit_member)
+
         context = {
             'member': edit_member,
             'membership': membership,
+            'registrations': registrations,
             'member_edit_form': edit_member_form,
         }
         return render(request, 'members/includes/member_edit_form.html', context)
