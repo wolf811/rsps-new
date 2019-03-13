@@ -11,7 +11,8 @@
         <div>{{ member.tel }}</div>
     </td>
     <td>
-        <div class="status-false mb-1"><i class="fa fa-arrow-down mr-2"></i><small>{{ member.status }}</small></div>
+        {% comment %} <div class="status-false mb-1"><i class="fa fa-arrow-down mr-2"></i><small>{{ member.status }}</small></div> {% endcomment %}
+        {% include 'members/includes/member_status_templates.html' %}
     </td>
     <td>
         <a href="#" class="btn-action mr-3 text-primary" title="Удалить"><i class="fa fa-trash-o"></i></a>

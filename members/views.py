@@ -16,6 +16,7 @@ from django.core import serializers
 class StatusedMember:
     def __init__(self, member_pk):
         self.member = Member.objects.get(pk=member_pk)
+        self.membership = Membership.objects.get(member=self.member)
         self.pk = member_pk
         self.status = self.status_get_or_create()
         self.fio = self.member.fio
@@ -31,10 +32,9 @@ class StatusedMember:
             membership = Membership.objects.create(member=self.member)
         return membership.status
 
-
     def set_status(self, status):
-        current_status = self.status_get_or_create()
-        current_status.status = status
+        self.membership.status = status
+        self.membership.save()
 
 def member_list(request):
     title = 'Список членов РСПС'
@@ -102,6 +102,8 @@ def get_member_form(request):
         member_pk = request.POST.get('member_pk')
         edit_member = Member.objects.get(pk=member_pk)
         edit_member_form = EditMemberForm(instance=edit_member)
+        membership = Membership.objects.get(member=edit_member)
+        print('STATUS:', membership.status)
         if 'update_form_data' in request.POST:
             form_updating = EditMemberForm(request.POST or None, instance=edit_member)
             if form_updating.is_valid():
@@ -123,6 +125,7 @@ def get_member_form(request):
         # print(member_pk)
         context = {
             'member': edit_member,
+            'membership': membership,
             'member_edit_form': edit_member_form,
         }
-    return render(request, 'members/includes/member_edit_form.html', context)
+        return render(request, 'members/includes/member_edit_form.html', context)
