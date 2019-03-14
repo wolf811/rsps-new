@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.core.paginator import Paginator
 import json
 from django.core import serializers
+import re
 # from django.utils.html import format_html
 
 # Create your views here.
@@ -21,6 +22,7 @@ class StatusedMember:
         self.jobplace = self.member.jobplace
         self.email = self.member.email
         self.tel = self.member.tel
+        self.registrations = self.get_registrations()
 
     def status_get_or_create(self):
         try:
@@ -32,6 +34,9 @@ class StatusedMember:
     def set_status(self, status):
         self.membership.status = status
         self.membership.save()
+
+    def get_registrations(self):
+        return MemberRegistration.objects.filter(member=self.member)
 
 def member_list(request):
     title = 'Список членов РСПС'
@@ -95,19 +100,25 @@ def get_member_form(request):
         edit_member = Member.objects.get(pk=member_pk)
         edit_member_form = EditMemberForm(instance=edit_member)
         membership = Membership.objects.get(member=edit_member)
-        print('STATUS:', membership.status)
         if 'update_form_data' in request.POST:
             if 'register_new_member' in request.POST:
                 membership.status = 'Заявлен'
                 membership.save()
-            if request.POST.get('event_register', '') == 'on':
-                registration = MemberRegistration.objects.create(
-                    member=edit_member,
-                    name='Зарегистрирован на Съезд 2019',
-                    register=True,
-                    )
-                registration.save()
+            annual_registrations = MemberRegistration.objects.filter(member=edit_member,
+                                                                        name='Зарегистрирован на Съезд РСПС 2019',
+                                                                        register=True)
+            if request.POST.get('annual_event_register') == 'on':
+                if annual_registrations.count() == 0:
+                    MemberRegistration.objects.create(member=edit_member,
+                                                      name='Зарегистрирован на Съезд РСПС 2019')
+            #check if user unchek a registration
+
             form_updating = EditMemberForm(request.POST or None, instance=edit_member)
+            if 'unregister_event' in request.POST:
+                MemberRegistration.objects.get(pk=request.POST['unregister_event']).delete()
+            if 'registered_event' in request.POST:
+                if MemberRegistration.objects.filter(pk=request.POST['registered_event']).count() == 0:
+                    MemberRegistration.objects.create(member=edit_member, name='Зарегистрирован на Съезд РСПС 2019')
             if form_updating.is_valid():
                 form_updating.save()
                 success_message = {
@@ -126,12 +137,15 @@ def get_member_form(request):
                 return JsonResponse(errors)
         # print(member_pk)
 
-        registrations = MemberRegistration.objects.filter(member=edit_member)
-
         context = {
             'member': edit_member,
             'membership': membership,
-            'registrations': registrations,
             'member_edit_form': edit_member_form,
         }
+
+        registrations = MemberRegistration.objects.filter(member=edit_member)
+
+        if registrations.count() > 0:
+            context['registrations'] = registrations
+
         return render(request, 'members/includes/member_edit_form.html', context)

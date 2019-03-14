@@ -27,4 +27,4 @@ class MemberRegistration(models.Model):
     member = models.ForeignKey(Member, null=True, blank=True, default=None,
                                on_delete=models.SET_NULL)
     name = models.CharField(u'Название регистрации', max_length=150)
-    register = models.BooleanField(u'Зарегистрировать')
+    register = models.NullBooleanField(u'Зарегистрировать')

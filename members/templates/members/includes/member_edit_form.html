@@ -73,7 +73,7 @@
         {% for register in registrations %}
             <div class="form-group">
                 <div class="form-check">
-                    <input name="event_register" class="form-check-input" type="checkbox" id="gridCheck{{ member.pk }}" checked>
+                    <input name="event_register" data-event-id="{{register.pk}}" class="event_register form-check-input" type="checkbox" id="gridCheck{{ member.pk }}" checked>
                     <label class="form-check-label text-secondary text-uppercase mr-2" for="gridCheck{{ member.pk }}">
                         <strong>{{ register.name }}</strong>
                     </label>
@@ -83,7 +83,7 @@
     {% else %}
     <div class="form-group">
         <div class="form-check">
-            <input name="event_register" class="form-check-input" type="checkbox" id="gridCheck{{ member.pk }}">
+            <input name="annual_event_register" class="form-check-input" type="checkbox" id="gridCheck{{ member.pk }}">
             <label class="form-check-label text-success text-uppercase" for="gridCheck{{ member.pk }}">
                 <strong>Зарегистрировать на Съезд РСПС 2019</strong>
             </label>

@@ -1,7 +1,14 @@
 {% load static %}
 <tr>
     <td>
-        <div class="mb-1">{{ member.fio }}</div>
+        <div class="mb-1">{{ member.fio }}
+        {% if member.registrations|length > 0%}
+            <i class="ml-1 fa fa-exclamation-circle" data-toggle="tooltip" data-placement="right" title="
+            {% for registration in member.registrations %}
+                {{ registration.name }}
+            {% endfor %}"></i>
+        {% endif %}
+        </div>
         <div class="mb-1">{{ member.jobplace }}</div>
         <div>{{ member.job }}</div>
     </td>

@@ -101,6 +101,30 @@ $(document).ready(function(){
         console.log('update_member_button clicked');
         update_member($(this).data('member-id'));
     });
+    $(".member_row_parent").on("click", ".event_register", function() {
+        console.log('.event_register clicked');
+        console.log($(this).data('event-id'));
+        let event_id = $(this).data('event-id');
+        $(this).parent().find('input:hidden').remove();
+        if ($(this).is(':checked')) {
+            $(this).after(
+                `<input type='hidden' name="registered_event", value="${event_id}"></input>`
+            );
+        } else {
+            $(this).after(
+                `<input type='hidden' name="unregister_event", value="${event_id}"></input>`
+            );
+        }
+    });
+
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      });
+
+    // $('.member_register_info').balloon({
+    //     html:true,
+    //     contents: 'test'
+    // });
 
     // $('.member_save').on('click', function(event) {
     //     console.log('member_save clicked');
@@ -199,7 +223,7 @@ $(document).ready(function(){
                     }
                 }
             },
-    
+
             // handle a non-successful response
             error : function(xhr,errmsg,err) {
                 $('#results').html("<div class='alert-box alert radius' data-alert>Oops! We have encountered an error: "+errmsg+

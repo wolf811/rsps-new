@@ -1,7 +1,7 @@
 from django.contrib import admin
 from mainapp.models import Conference
 from mainapp.models import Member, Post, Photo
-from members.models import Membership
+from members.models import Membership, MemberRegistration
 from django.urls import reverse
 from django.utils.html import format_html
 
@@ -56,3 +56,4 @@ class MemberAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Conference)
+admin.site.register(MemberRegistration)
