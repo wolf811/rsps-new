@@ -3,10 +3,18 @@ from django.urls import reverse
 from django.core.files import File
 from mainapp.models import Post, Member, Conference, Photo
 from members.models import Membership
+from django.contrib.auth.models import User
 # from django.conf import settings
 from mixer.backend.django import mixer
 import random
+
+
 # from model_mommy.recipe import Recipe, foreign_key, seq
+
+try:
+    popov_user = User.objects.get(username='popov')
+except:
+    popov_user=User.objects.create(username='popov', email='popov@naks.ru', password='2011')
 
 images = [
     'media/01.JPG',
@@ -57,7 +65,8 @@ class Command(BaseCommand):
                 jobplace=random.choice(jobs),
                 tel=lambda: '8(925){}-{}-{}'.format(random.randint(100, 999),
                                                     random.randint(10, 99),
-                                                    random.randint(10, 99))
+                                                    random.randint(10, 99)),
+                user=popov_user
             )
         for conference in Conference.objects.all():
             conference.members.add(Member.objects.first())

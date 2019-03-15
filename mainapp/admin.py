@@ -57,3 +57,4 @@ class MemberAdmin(admin.ModelAdmin):
 
 admin.site.register(Conference)
 admin.site.register(MemberRegistration)
+admin.site.register(Membership)

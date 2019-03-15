@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from mainapp.models import Member
 from .models import Membership, MemberRegistration
-from .forms import MemberForm, EditMemberForm, SearchMemberForm
+from .forms import MemberForm, EditMemberForm
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse
 from django.core.paginator import Paginator
@@ -9,6 +9,8 @@ import json
 from django.core import serializers
 import re
 from django.db.models import Q
+from django import forms
+
 # from django.utils.html import format_html
 
 # Create your views here.
@@ -41,12 +43,27 @@ class StatusedMember:
 
 def member_list(request):
     title = 'Список членов РСПС'
-    member_list = Member.objects.all()
+    member_list = Member.objects.filter(user=request.user) #TODO: fix to filter by request user
     members = []
 
     for member in member_list:
         statused_member = StatusedMember(member.pk)
         members.append(statused_member)
+
+    # print('CITIES', cities)
+    USER_CITIES = [('All', 'Все')]
+    USER_CITIES += [(member.member.city, member.member.city) for member in members]
+    USER_CITIES = tuple(USER_CITIES)
+
+    from .models import STATUS_CHOICES
+    statuses = list(STATUS_CHOICES)
+    default_status = [('All', 'Все')]
+    STATUS_CHOICES = tuple(default_status+statuses)
+
+    class SearchMemberForm(forms.Form):
+        fio_city_job = forms.CharField(required=False, max_length=100)
+        city = forms.ChoiceField(choices=USER_CITIES, required=False, )
+        status = forms.ChoiceField(choices=STATUS_CHOICES, required=False)
 
     search_member_form = SearchMemberForm()
 
@@ -57,20 +74,21 @@ def member_list(request):
         if 'search_member' in request.POST:
             form = SearchMemberForm(request.POST)
             if form.is_valid():
-                fio_city_job_query = Q(fio__icontains=request.POST['fio_city_job'])
-                fio_city_job_query |= Q(jobplace__icontains=request.POST['fio_city_job'])
-                fio_city_job_query |= Q(job__icontains=request.POST['fio_city_job'])
+                fio_city_job_query = Q()
+                if request.POST['fio_city_job'] != '':
+                    fio_city_job_query = Q(fio__icontains=request.POST['fio_city_job'])
+                    fio_city_job_query |= Q(jobplace__icontains=request.POST['fio_city_job'])
+                    fio_city_job_query |= Q(job__icontains=request.POST['fio_city_job'])
+                if request.POST['city'] != 'All':
+                    fio_city_job_query &= Q(city=request.POST['city'])
+                if request.POST['status']!= 'All':
+                    filtered_statuses = Membership.objects.filter(status=request.POST['status'])
+                    filtered_member_pks = [status.member.pk for status in filtered_statuses]
+                    fio_city_job_query &= Q(id__in=filtered_member_pks)
                 fio_city_job_query &= Q(user=request.user)
-
                 filtered_members = Member.objects.filter(fio_city_job_query)
-                filtered_statused_members = []
-                for member in filtered_members:
-                    statused_member = StatusedMember(member.pk)
-                    filtered_statused_members.append(statused_member)
-
-                print('QUERY', fio_city_job_query)
-                print('RAW SQL QUERY', filtered_members.query)
-
+                filtered_statused_members = [StatusedMember(member.pk) for member in filtered_members]
+                # print('QUERY', fio_city_job_query)
                 content = {
                     'title': title,
                     'members': filtered_statused_members,
@@ -79,7 +97,7 @@ def member_list(request):
                     'search_result_count': len(filtered_statused_members)
                 }
 
-            return render(request, 'members/lk_member_list.html', content)
+                return render(request, 'members/lk_member_list.html', content)
 
         if add_new_member_form.is_valid():
             new_member = add_new_member_form.save(commit=False)
@@ -105,7 +123,6 @@ def member_list(request):
             errors = add_new_member_form.errors
             print(add_new_member_form.errors.as_json())
             return JsonResponse(errors)
-
     else:
         add_new_member_form = MemberForm()
 

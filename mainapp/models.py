@@ -17,9 +17,9 @@ def textvalidation(value):
 # Create your models here.
 class Member(models.Model):
     """docstring for Member"""
-    fio = models.CharField(max_length=100, verbose_name='ФИО')
-    job = models.CharField(max_length=100, verbose_name='Место работы')
-    jobplace = models.CharField(max_length=100, verbose_name='Должность')
+    fio = models.CharField(db_index=True, max_length=100, verbose_name='ФИО')
+    job = models.CharField(db_index=True, max_length=100, verbose_name='Место работы')
+    jobplace = models.CharField(db_index=True, max_length=100, verbose_name='Должность')
     tel = models.CharField(max_length=100, verbose_name='Телефон')
     email = models.EmailField(max_length=100, verbose_name='Email')
     city = models.CharField(max_length=100, verbose_name='Город проживания')
