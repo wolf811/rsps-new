@@ -1,13 +1,14 @@
 from django.shortcuts import render
 from mainapp.models import Member
 from .models import Membership, MemberRegistration
-from .forms import MemberForm, EditMemberForm
+from .forms import MemberForm, EditMemberForm, SearchMemberForm
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.urls import reverse
 from django.core.paginator import Paginator
 import json
 from django.core import serializers
 import re
+from django.db.models import Q
 # from django.utils.html import format_html
 
 # Create your views here.
@@ -47,9 +48,39 @@ def member_list(request):
         statused_member = StatusedMember(member.pk)
         members.append(statused_member)
 
+    search_member_form = SearchMemberForm()
+
     if request.method == "POST":
         print('REQUEST POST', request.POST)
         add_new_member_form = MemberForm(request.POST)
+        #handle member search
+        if 'search_member' in request.POST:
+            form = SearchMemberForm(request.POST)
+            if form.is_valid():
+                fio_city_job_query = Q(fio__icontains=request.POST['fio_city_job'])
+                fio_city_job_query |= Q(jobplace__icontains=request.POST['fio_city_job'])
+                fio_city_job_query |= Q(job__icontains=request.POST['fio_city_job'])
+                fio_city_job_query &= Q(user=request.user)
+
+                filtered_members = Member.objects.filter(fio_city_job_query)
+                filtered_statused_members = []
+                for member in filtered_members:
+                    statused_member = StatusedMember(member.pk)
+                    filtered_statused_members.append(statused_member)
+
+                print('QUERY', fio_city_job_query)
+                print('RAW SQL QUERY', filtered_members.query)
+
+                content = {
+                    'title': title,
+                    'members': filtered_statused_members,
+                    'add_new_member_form': add_new_member_form,
+                    'search_member_form': form,
+                    'search_result_count': len(filtered_statused_members)
+                }
+
+            return render(request, 'members/lk_member_list.html', content)
+
         if add_new_member_form.is_valid():
             new_member = add_new_member_form.save(commit=False)
             new_member.user = request.user
@@ -87,6 +118,7 @@ def member_list(request):
         'title': title,
         'members': paginated_members,
         'add_new_member_form': add_new_member_form,
+        'search_member_form': search_member_form,
         'success': 'success',
         #TODO: add edit form for every member
     }

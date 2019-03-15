@@ -23,3 +23,6 @@ class EditMemberForm(forms.ModelForm):
         widgets= {
             'short_description': forms.Textarea(attrs={'rows': 3}),
             }
+
+class SearchMemberForm(forms.Form):
+    fio_city_job = forms.CharField(max_length=100)
