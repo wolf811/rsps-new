@@ -11,6 +11,7 @@
 				</button>
 			</div>
 			<form id='add_new_conference_form' method='post'>
+				{% csrf_token %}
 				<div class="modal-body">
 					<div class="form-group">
 						<label for="" class="form-label-sm">Региональное отделение&nbsp;<span class="text-danger">*</span></label>

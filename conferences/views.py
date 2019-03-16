@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from mainapp.models import Conference
 from .forms import ConferenceForm
+from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 
 # Create your views here.
@@ -29,9 +30,13 @@ def conference_list(request):
             errors = new_conference.errors
             return JsonResponse(errors)
     
+    paginator = Paginator(conferences, 10)
+    page = request.GET.get('page')
+    paginated_conferences = paginator.get_page(page)
+
     content = {
         'add_new_conference_form': new_conference_form,
-        'conferences': conferences,
+        'conferences': paginated_conferences,
     }
     return render(request, 'conferences/conferences_list.html', content)
 
