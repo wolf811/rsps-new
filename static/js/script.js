@@ -329,6 +329,9 @@ $(document).ready(function(){
     }; //end function update member
 
     function toggle_delete_modal(member_id, member_fio) {
+        $('#validation_field').val('');
+        $('#wrong_input').hide();
+        $('#can_be_deleted_message').hide();
         console.log('deleting member', member_id);
         $('#confirm_deleting_form').modal('toggle');
         $('#confirm_deleting_fio').text(member_fio);
@@ -359,14 +362,27 @@ $(document).ready(function(){
                     // handle a successful response
                     success : function(response) {
                         console.log(typeof response, response); // log the returned json to the console
-                        $('#can_be_deleted_message').html(
-                            `
-                            <span class="text-info">
-                            <i class="fa fa-check"></i>
-                            Запись "${response.fio}" удалена из базы данных
-                            </span>
-                            `
-                        );
+                        if (!response['error']) {
+                            $('#can_be_deleted_message').html(
+                                `
+                                <span class="text-info">
+                                <i class="fa fa-check"></i>
+                                ${response.message}: "${response.fio}"
+                                </span>
+                                `
+                            );
+                        } else {
+                            $('#can_be_deleted_message').hide();
+                            $('#wrong_input').show();
+                            $('#wrong_input').html(
+                                `
+                                <span class="text-danger">
+                                <i class="fa fa-times"></i>
+                                ${response.message}: "${response.error}"
+                                </span>
+                                `
+                            );
+                        }
                     },
                     // handle a non-successful response
                     error : function(xhr) {

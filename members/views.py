@@ -206,12 +206,18 @@ def get_member_form(request):
 
 def delete_member(request):
     member_pk = request.POST.get('member_id')
-    member_to_delete = Member.objects.get(pk=member_pk)
-    member_fio = member_to_delete.fio
-    member_to_delete.delete()
-    return JsonResponse({
-        'member_id': member_pk,
-        'fio': member_fio,
-        'status': 'deleted',
-        'message': "Запись из базы данных удалена",
+    try:
+        member_to_delete = Member.objects.get(pk=member_pk)
+        member_fio = member_to_delete.fio
+        member_to_delete.delete()
+        return JsonResponse({
+            'member_id': member_pk,
+            'fio': member_fio,
+            'status': 'deleted',
+            'message': "Запись из базы данных удалена",
+            })
+    except Exception as e:
+        return JsonResponse({
+            'error': '{}'.format(e),
+            'message': 'Что-то пошло не так'
         })
