@@ -1,0 +1,75 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block content %}
+<main class="pt-4">
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+				<li class="breadcrumb-item"><a href="{% url 'account_about' %}">Личный кабинет подразделения</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Конференции</li>
+			</ol>
+		</nav>
+
+		<h4 class="title-page">Личный кабинет</h4>
+
+		{% include 'mainapp/includes/account_menu_tabs.html' %}
+
+		<button type="button" class="btn btn-danger btn-xl mb-4" data-toggle='modal' data-target='#modal-regConference'>Добавить конференцию</button>
+
+		<div class="table-responsive">
+			<table class="table table-list">
+				<thead>
+					<tr class="active">
+						<th>Дата проведения</th>
+						<th>Место проведения</th>
+						<th>Название конференции</th>
+						<th>Действия</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for conference in conferences %}
+					{% if not conference.completed %}
+					<tr>
+						<td>{{ conference.date }}</td>
+						<td>{{ conference.place }}</td>
+						<td>
+							<div class="text-appercase">{{ conference.title }}</div>
+							<div>Колличество участников:&nbsp;<strong>{{ conference.members.all|length }}</strong></div>
+							<div class="text-danger mt-2">Зарегистрируйте участников</div>
+						</td>
+						<td>
+							<a href="#" class="btn-action mr-3 text-primary" title="Удалить конференцию"><i class="fa fa-trash-o"></i></a>
+							<a href="#multiCollapseConf{{conference.pk}}" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" title="Изменить"><i class="fa fa-pencil"></i></a>
+						</td>
+					</tr>
+                        {% include 'conferences/includes/conference_edit.html' %}
+
+					{% endif %}
+					{% endfor %}
+
+				</tbody>
+			</table>
+		</div>
+		<nav aria-label="Page navigation example">
+			<ul class="pagination pagination-sm">
+				<li class="page-item disabled">
+					<a class="page-link" href="#" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+					</a>
+				</li>
+				<li class="page-item active"><a class="page-link" href="#">1</a></li>
+				<li class="page-item"><a class="page-link" href="#">2</a></li>
+				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				<li class="page-item">
+					<a class="page-link" href="#" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+			</ul>
+		</nav>
+	</div>
+</main> 
+
+{% include 'conferences/includes/conference_add_modal.html' %}
+{% endblock %}

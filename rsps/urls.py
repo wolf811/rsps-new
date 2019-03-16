@@ -44,6 +44,7 @@ urlpatterns = [
     path('conf/', mainapp.conf, name = 'conf'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('members/', include('members.urls', namespace='members')),
+    path('conferences/', include('conferences.urls', namespace='conferences')),
 ]
 if settings.DEBUG:
     urlpatterns += static(

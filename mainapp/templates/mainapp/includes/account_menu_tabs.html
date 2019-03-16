@@ -12,6 +12,6 @@
 				<a class="nav-link{% if request.resolver_match.url_name == 'member_list' %} active{% endif %}" href="{% url 'members:member_list' %}">Члены подразделения</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link{% if request.resolver_match.url_name == 'account_conf' %} active{% endif %}" href="{% url 'account_conf' %}">Конференции</a>
+				<a class="nav-link{% if request.resolver_match.url_name == 'conference_list' %} active{% endif %}" href="{% url 'conferences:conference_list' %}">Конференции</a>
 			</li>
 		</ul>

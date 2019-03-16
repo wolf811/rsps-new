@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainapp',
     'members',
+    'conferences',
     'ckeditor',
     'ckeditor_uploader',
 ]

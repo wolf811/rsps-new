@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %}{% load formstyles %}
 
 <!-- Modal - Login to your personal account-->
 <div class="modal fade" id="modal-regConference" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
@@ -10,12 +10,11 @@
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form>
+			<form id='add_new_conference_form' method='post'>
 				<div class="modal-body">
 					<div class="form-group">
 						<label for="" class="form-label-sm">Региональное отделение&nbsp;<span class="text-danger">*</span></label>
 						<!-- Вариант 1: касается ЛК РО (account_conf.html) - автоматический выбор <option selected>отделение...</option> и блокировкой поля select атрибутом disabled -->
-						
 						<!-- <select class="form-control form-control-sm" disabled required>
 							<option>-</option>
 						  	<option selected>Астраханская область</option>
@@ -27,7 +26,6 @@
 						</select> -->
 
 						<!-- Вариант 2: касается ЛК Президиума - атрибута disabled у поля <select> быть не должно -->
-						
 						<select class="form-control form-control-sm" required>
 							<option>-</option>
 						  	<option selected>Астраханская область</option>
@@ -40,9 +38,10 @@
 					</div>
 					<div class="form-row">
 						<div class="form-group col-sm-4">
-							<label for="" class="col-form-label col-form-label-sm">Дата проведения&nbsp;<span class="text-danger">*</span></label>
+							<label for="id_date" class="col-form-label col-form-label-sm">Дата проведения&nbsp;<span class="text-danger">*</span></label>
 							<div class="input-group input-group-sm">
-								<input type="text" class="form-control datepicker-here" placeholder="дд.мм.гггг" aria-label="дд.мм.гггг" aria-describedby="">
+								{{add_new_conference_form.date|addcss:"form-control datepicker-here"}}
+								{% comment %} <input type="text" class="form-control datepicker-here" placeholder="дд.мм.гггг" aria-label="дд.мм.гггг" aria-describedby=""> {% endcomment %}
 								<div class="input-group-append">
 									<span class="input-group-text"><i class="fa fa-calendar"></i></span>
 								</div>
@@ -50,24 +49,23 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="" class="form-label-sm">Место проведения&nbsp;<span class="text-danger">*</span></label>
-						<input type="text" class="form-control form-control-sm" required>
+						<label for="id_place" class="form-label-sm">Место проведения&nbsp;<span class="text-danger">*</span></label>
+						{{add_new_conference_form.place|addcss:"form-control form-control-sm"}}
+						{% comment %} <input type="text" class="form-control form-control-sm" required> {% endcomment %}
 					</div>
 					<div class="form-group">
-						<label for="" class="form-label-sm">Название конференции&nbsp;<span class="text-danger">*</span></label>
-						<input type="text" class="form-control form-control-sm" required>
-					</div>
-					<div class="form-group">
-						<label for="" class="form-label-sm">Тема конференции&nbsp;<span class="text-danger">*</span></label>
-						<input type="text" class="form-control form-control-sm" required>
+						<label for="id_title" class="form-label-sm">Название конференции&nbsp;<span class="text-danger">*</span></label>
+						{{add_new_conference_form.title|addcss:"form-control form-control-sm"}}
+						{% comment %} <input type="text" class="form-control form-control-sm" required> {% endcomment %}
 					</div>
 					<div class="alert alert-danger" role="alert">
 					  <strong>Внимание!!!</strong>&nbsp;В профиле конференции не забудьте добавить повестку дня и зарегистрировать участников.
 					</div>
+					<div id="results"></div>
 				</div>
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary btn-sm">Сохранить</button>
-					<button type="button" class="btn btn-link btn-sm" data-dismiss="modal">Отмена</button>
+					<button id="submit_conference_button" class="btn btn-primary btn-sm">Сохранить</button>
+					<button id="dismiss-link" type="button" class="btn btn-link btn-sm" data-dismiss="modal">Отмена</button>
 				</div>
 			</form>
 		</div>

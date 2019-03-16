@@ -43,10 +43,11 @@ class Member(models.Model):
 
 class Conference(models.Model):
     """docstring for Conference"""
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=200, verbose_name='Название конференции')
     date = models.DateField(verbose_name='Дата проведения')
     place = models.CharField(max_length=100, verbose_name='Место проведения')
-    completed = models.BooleanField(verbose_name='Проведена')
+    completed = models.BooleanField(verbose_name='Проведена', default=False)
     members = models.ManyToManyField(Member, verbose_name='Участники')
 
     class Meta:

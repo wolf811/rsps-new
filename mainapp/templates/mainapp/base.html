@@ -39,11 +39,11 @@
 
 	{% include 'mainapp/includes/modal-authorization.html' %}
 	{% include 'mainapp/includes/modal-participantConf.html' %}
-	{% include 'mainapp/includes/modal-regConference.html' %}
+	{% comment %} {% include 'mainapp/includes/modal-regConference.html' %} {% endcomment %}
 	{% include 'mainapp/includes/modal-newEmployee.html' %}
 	{% comment %} {% include 'mainapp/includes/modal-regCongress.html' %} {% endcomment %}
 	{% include 'mainapp/includes/modal-newDepartament.html' %}
-	{% include 'mainapp/includes/modal-newCongress.html' %}
+	{% comment %} {% include 'mainapp/includes/modal-newCongress.html' %} {% endcomment %}
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -59,6 +59,7 @@
 	<script src="{% static 'js/flickity.pkgd.min.js' %}"></script>
 	<!-- My scripts -->
 	<script src="{% static 'js/script.js' %}"></script>
+	<script src={% static 'js/conferences.js'%}></script>
 
 </body>
 </html>

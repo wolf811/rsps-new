@@ -52,7 +52,7 @@ class Command(BaseCommand):
         #make PostPhotos
         for i in range(0, len(images)):
             #make Tags
-            mixer.blend(Conference)
+            mixer.blend(Conference, user=popov_user)
             #make Posts without pictures
             mixer.blend(Post, title=random.choice(news_titles))
             mixer.blend(Photo, image=File(open(images[i], 'rb')))
