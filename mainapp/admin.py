@@ -1,7 +1,7 @@
 from django.contrib import admin
 from mainapp.models import Conference
 from mainapp.models import Member, Post, Photo
-from members.models import Membership
+from members.models import Membership, MemberRegistration
 from django.urls import reverse
 from django.utils.html import format_html
 
@@ -51,8 +51,10 @@ class PostAdmin(admin.ModelAdmin):
 @admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):
     view_on_site = False
-    fields = ['fio', 'job', 'jobplace', 'tel', 'email']
+    fields = ['fio', 'job', 'jobplace', 'tel', 'email', 'user']
     inlines = [MembershipInline]
 
 
 admin.site.register(Conference)
+admin.site.register(MemberRegistration)
+admin.site.register(Membership)

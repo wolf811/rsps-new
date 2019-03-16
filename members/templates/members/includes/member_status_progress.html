@@ -1,0 +1,25 @@
+{% if membership.status == 'Новый' %}
+        <div class="progress mb-5">
+            <div class="progress-bar bg-default text-secondary w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">Заявлен</div>
+            <div class="progress-bar bg-default text-secondary w-35" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">Одобрен РСПС</div>
+            <div class="progress-bar bg-default text-secondary w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Сертификат РСПС</div>
+        </div>
+{% elif membership.status == 'Заявлен'%}
+        <div class="progress mb-5">
+            <div class="progress-bar progress-bar-striped bg-info w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">Заявлен</div>
+            <div class="progress-bar bg-default text-secondary w-35" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">Одобрен РСПС</div>
+            <div class="progress-bar bg-default text-secondary w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Сертификат РСПС</div>
+        </div>
+{% elif membership.status == 'Одобрен' %}
+    <div class="progress mb-5">
+        <div class="progress-bar progress-bar-striped bg-info w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">Заявлен</div>
+        <div class="progress-bar progress-bar-striped bg-success w-35" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">Одобрен РСПС</div>
+        <div class="progress-bar bg-default text-secondary w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Сертификат РСПС</div>
+    </div>
+{% elif membership.status == 'Выдан сертификат' %}
+    <div class="progress mb-5">
+        <div class="progress-bar progress-bar-striped bg-info w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">Заявлен</div>
+        <div class="progress-bar progress-bar-striped bg-success w-35" role="progressbar" aria-valuenow="35" aria-valuemin="0" aria-valuemax="100">Одобрен РСПС</div>
+        <div class="progress-bar progress-bar-striped bg-warning w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">Сертификат РСПС</div>
+    </div>
+{% endif %}

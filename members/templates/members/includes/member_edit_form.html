@@ -1,79 +1,107 @@
-<form>
+{% load formstyles %}
+<form id="edit_member_form_{{member.pk}}" method="post">
+    {% csrf_token %}
     <div class="mb-4">
         <h6 class='text-primary mb-4'>Сведения о члене РСПС</h6>
         <div class="form-group row">
-            <label for="" class="col-sm-4 col-form-label col-form-label-sm">ФИО&nbsp;<span class="text-danger">*</span></label>
+            <label for="id_fio" class="col-sm-4 col-form-label col-form-label-sm">ФИО&nbsp;<span class="text-danger">*</span></label>
             <div class="col-sm-8 col-lg-6">
-                <input type="text" class="form-control form-control-sm" placeholder="" value="Комбаров Валентин Анатольевич">
+                {{ member_edit_form.fio|addcss:"form-control form-control-sm"}}
+                {% comment %} <input type="text" class="form-control form-control-sm" placeholder="" value="Комбаров Валентин Анатольевич"> {% endcomment %}
             </div>
         </div>
         <div class="form-group row">
-            <label for="" class="col-sm-4 col-form-label col-form-label-sm">Город проживания (населенный пункт)&nbsp;<span
+            <label for="id_city" class="col-sm-4 col-form-label col-form-label-sm">Город проживания (населенный пункт)&nbsp;<span
                     class="text-danger">*</span></label>
             <div class="col-sm-8 col-lg-6">
-                <input type="text" class="form-control form-control-sm" placeholder="" value="Москва">
+                {% comment %} <input type="text" class="form-control form-control-sm" placeholder="" value="Москва"> {% endcomment %}
+                {{ member_edit_form.city|addcss:"form-control form-control-sm"}}
             </div>
         </div>
         <div class="form-group row">
-            <label for="" class="col-sm-4 col-form-label col-form-label-sm">Email&nbsp;<span class="text-danger">*</span>
+            <label for="id_email" class="col-sm-4 col-form-label col-form-label-sm">Email&nbsp;<span class="text-danger">*</span>
                 / Телефон</label>
             <div class="col-6 col-sm-4 col-lg-3">
-                <input type="text" class="form-control form-control-sm" placeholder="Email" value="dev1@naks.ru">
+                {% comment %} <input type="text" class="form-control form-control-sm" placeholder="Email" value="dev1@naks.ru"> {% endcomment %}
+                {{member_edit_form.email|addcss:"form-control form-control-sm"}}
             </div>
             <div class="col-6 col-sm-4 col-lg-3">
-                <input type="text" class="form-control form-control-sm" placeholder="№ телефона" value="+7 (499) 784-72-86">
+                {% comment %} <input type="text" class="form-control form-control-sm" placeholder="№ телефона" value="+7 (499) 784-72-86"> {% endcomment %}
+                {{member_edit_form.tel|addcss:"form-control form-control-sm"}}
             </div>
         </div>
         <div class="form-group row">
-            <label for="" class="col-sm-4 col-form-label col-form-label-sm">Место работы</label>
+            <label for="id_job" class="col-sm-4 col-form-label col-form-label-sm">Место работы</label>
             <div class="col-sm-8 col-lg-6">
-                <input type="text" class="form-control form-control-sm" placeholder="" value='ООО "НЭДК'>
+                {% comment %} <input type="text" class="form-control form-control-sm" placeholder="" value='ООО "НЭДК'> {% endcomment %}
+                {{member_edit_form.job|addcss:"form-control form-control-sm"}}
             </div>
         </div>
         <div class="form-group row">
-            <label for="" class="col-sm-4 col-form-label col-form-label-sm">Должность</label>
+            <label for="id_jobplace" class="col-sm-4 col-form-label col-form-label-sm">Должность</label>
             <div class="col-sm-8 col-lg-6">
-                <input type="text" class="form-control form-control-sm" placeholder="" value="инженер-программист">
+                {% comment %} <input type="text" class="form-control form-control-sm" placeholder="" value="инженер-программист"> {% endcomment %}
+                {{member_edit_form.jobplace|addcss:"form-control form-control-sm"}}
             </div>
         </div>
         <div class="form-group row">
             <label for="" class="col-sm-4 col-form-label col-form-label-sm">Краткая информация о члене РСПС<br><small>(область
                     деятельности, достижения и прочее...)</small></label>
             <div class="col-sm-8 col-lg-6">
-                <textarea class="form-control form-control-sm" rows="3"></textarea>
+                {% comment %} <textarea class="form-control form-control-sm" rows="3"></textarea> {% endcomment %}
+                {{member_edit_form.short_description|addcss:"form-control form-control-sm"}}
             </div>
         </div>
     </div>
 
     <h6 class='text-primary mb-3'>Статус членства в РСПС</h6>
 
-    <div class="progress mb-5">
-        <div class="progress-bar bg-default text-secondary w-40" role="progressbar" aria-valuenow="40" aria-valuemin="0"
-            aria-valuemax="100">Заявлен</div>
-        <div class="progress-bar bg-default text-secondary w-35" role="progressbar" aria-valuenow="35" aria-valuemin="0"
-            aria-valuemax="100">Одобрен РСПС</div>
-        <div class="progress-bar bg-default text-secondary w-25" role="progressbar" aria-valuenow="25" aria-valuemin="0"
-            aria-valuemax="100">Сертификат РСПС</div>
-    </div>
+    {% include 'members/includes/member_status_progress.html' %}
 
+    {% if membership.status == 'Новый' %}
+        <div class="form-group">
+            <div class="form-check">
+                <input name="register_new_member" class="form-check-input" type="checkbox" id="registerCheck{{ member.pk }}">
+                <label class="form-check-label text-info text-uppercase" for="registerCheck{{ member.pk }}">
+                    <strong>Заявить в качестве члена РСПС от регионального подразделения</strong>
+                </label>
+            </div>
+        </div>
+
+    {% endif %}
+    {% if registrations|length > 0 %}
+        {% for register in registrations %}
+            <div class="form-group">
+                <div class="form-check">
+                    <input name="event_register" data-event-id="{{register.pk}}" class="event_register form-check-input" type="checkbox" id="gridCheck{{ member.pk }}" checked>
+                    <label class="form-check-label text-secondary text-uppercase mr-2" for="gridCheck{{ member.pk }}">
+                        <strong>{{ register.name }}</strong>
+                    </label>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
     <div class="form-group">
         <div class="form-check">
-            <input class="form-check-input" type="checkbox" id="gridCheck0">
-            <label class="form-check-label text-success text-uppercase" for="gridCheck0">
+            <input name="annual_event_register" class="form-check-input" type="checkbox" id="gridCheck{{ member.pk }}">
+            <label class="form-check-label text-success text-uppercase" for="gridCheck{{ member.pk }}">
                 <strong>Зарегистрировать на Съезд РСПС 2019</strong>
             </label>
         </div>
     </div>
+    {% endif %}
     <div class="form-row align-items-center">
         <div class="col-auto mr-auto">
-            <button type="submit" class="btn btn-primary btn-xs">Сохранить</button>
-            <a href="#multiCollapseEmpl01" class="btn btn-outline-primary btn-xs" data-toggle="collapse" aria-expanded="false"
+            <button type='button' data-member-id="{{member.pk}}" class="update_member_button btn btn-primary btn-xs">Сохранить</button>
+            <a href="#multiCollapseEmpl{{ member.pk }}" class="btn btn-outline-primary btn-xs" data-toggle="collapse" aria-expanded="false"
                 role="button">Закрыть</a>
+            <div id="responseMessage{{ member.pk }}" class="d-inline-block ml-2" style="display:none"></div>
         </div>
         <div class="col-auto my-1">
             <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="mailingCheck0">
-                <label class="form-check-label" for="mailingCheck0">
+                {% comment %} <input class="form-check-input" type="checkbox" id="mailingCheck{{ member.pk }}"> {% endcomment %}
+                {{member_edit_form.subscription|addcss:"form-check-input"}}
+                <label class="form-check-label" for="id_subscription">
                     подписка на рассылку от РСПС
                 </label>
             </div>
