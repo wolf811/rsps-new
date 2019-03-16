@@ -79,75 +79,7 @@ $(document).ready(function(){
 
     // new member form submit
     // AJAX for posting
-
-    $('#post-form').on('click', function(event){
-        event.preventDefault();
-        add_member();
-    });
-
-    $('.pencil').on('click' , function(event) {
-        event.preventDefault();
-        edit_member($(this).attr('href'));
-    });
-
-    $('.delete_member').on('click', function(event){
-        event.preventDefault();
-        let member_id = $(this).data('member-pk');
-        let member_fio = $(this).data('member-fio');
-        toggle_delete_modal(member_id, member_fio);
-    })
-
-    // $('.update_member_button').on('click' , function(event) {
-    //     // event.preventDefault();
-    //     console.log('update_member_button clicked');
-    //     // edit_member($(this).data('member-id'));
-    // });
-    $(".member_row_parent").on("click", ".update_member_button", function() {
-        console.log('update_member_button clicked');
-        update_member($(this).data('member-id'));
-    });
-    $(".member_row_parent").on("click", ".event_register", function() {
-        console.log('.event_register clicked');
-        console.log($(this).data('event-id'));
-        let event_id = $(this).data('event-id');
-        $(this).parent().find('input:hidden').remove();
-        if ($(this).is(':checked')) {
-            $(this).after(
-                `<input type='hidden' name="registered_event", value="${event_id}"></input>`
-            );
-        } else {
-            $(this).after(
-                `<input type='hidden' name="unregister_event", value="${event_id}"></input>`
-            );
-        }
-    });
-
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-      });
-
-    // $('.member_register_info').balloon({
-    //     html:true,
-    //     contents: 'test'
-    // });
-
-    // $('.member_save').on('click', function(event) {
-    //     console.log('member_save clicked');
-    //     event.preventDefault();
-    //     console.log($(this).data('member-id'));
-    //     // update_member($(this).data('member-id'));
-    // });
-    // $('.pencil').click((event) => {
-    //     console.log('pencil clicked');
-    //     event.preventDefault();
-    //     edit_member($(this).attr('href'));
-    // });
-
-    $('.update_member_button').click( (event) => {
-        event.preventDefault();
-        console.log('update_member_button clicked');
-    })
-
+    //django csrf tokens from cookie
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -179,6 +111,58 @@ $(document).ready(function(){
         }
     });
 
+    $('#post-form').on('click', function(event){
+        event.preventDefault();
+        add_member();
+    });
+
+    $('.pencil').on('click' , function(event) {
+        event.preventDefault();
+        edit_member($(this).attr('href'));
+    });
+
+    $('.update_member_button').click( (event) => {
+        event.preventDefault();
+        console.log('update_member_button clicked');
+    });
+
+    $('.delete_member').on('click', function(event){
+        event.preventDefault();
+        let member_id = $(this).data('member-pk');
+        let member_fio = $(this).data('member-fio');
+        toggle_delete_modal(member_id, member_fio);
+    });
+
+    //bootstrap bolloons setup
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+      });
+
+    /***dynamicly loaded form handlers***/
+    //save member button handler
+    $(".member_row_parent").on("click", ".update_member_button", function() {
+        console.log('update_member_button clicked');
+        update_member($(this).data('member-id'));
+    });
+    //event register
+    $(".member_row_parent").on("click", ".event_register", function() {
+        console.log('.event_register clicked');
+        console.log($(this).data('event-id'));
+        let event_id = $(this).data('event-id');
+        //add event id to server request via hidden input
+        $(this).parent().find('input:hidden').remove();
+        if ($(this).is(':checked')) {
+            $(this).after(
+                `<input type='hidden' name="registered_event", value="${event_id}"></input>`
+            );
+        } else {
+            $(this).after(
+                `<input type='hidden' name="unregister_event", value="${event_id}"></input>`
+            );
+        }
+    });
+
+    /***member CRUD functions***/
     function add_member() {
         // console.log("create member is working!") // sanity check
         $.ajax({
@@ -238,7 +222,7 @@ $(document).ready(function(){
         });
     }; //end function add member
 
-    //progress_bar on change of loading row
+    //progress animation on change of loading row
     $(function() {
         $(".loading_row").on("change", function() {
         //   var clientid=$("#client").val();
@@ -332,18 +316,15 @@ $(document).ready(function(){
         $('#validation_field').val('');
         $('#wrong_input').hide();
         $('#can_be_deleted_message').hide();
-        console.log('deleting member', member_id);
         $('#confirm_deleting_form').modal('toggle');
         $('#confirm_deleting_fio').text(member_fio);
         $('#validation_field').keyup(function(){
             let input_value = $('#validation_field').val();
             if (input_value != 'УДАЛИТЬ') {
-                // console.log('введите УДАЛИТЬ');
                 $('#can_be_deleted_message').hide();
                 $('#wrong_input').show();
 
             } else {
-                // console.log('Удаляем');
                 $('#wrong_input').hide();
                 $('#can_be_deleted_message').show();
             }
