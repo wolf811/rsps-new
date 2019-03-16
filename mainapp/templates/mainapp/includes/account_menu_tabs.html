@@ -1,0 +1,17 @@
+		<ul class="nav nav-tabs mb-4">
+			<li class="nav-item">
+				<a class="nav-link{% if request.resolver_match.url_name == 'account_user' %} active{% endif %}" href="{% url 'account_user' %}">Учетная запись</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link{% if request.resolver_match.url_name == 'account_about' %} active{% endif %}" href="{% url 'account_about' %}">О подразделении</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link{% if request.resolver_match.url_name == 'news' %} active{% endif %}" href="{% url 'news' %}">Новости</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link{% if request.resolver_match.url_name == 'member_list' %} active{% endif %}" href="{% url 'members:member_list' %}">Члены подразделения</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link{% if request.resolver_match.url_name == 'account_conf' %} active{% endif %}" href="{% url 'account_conf' %}">Конференции</a>
+			</li>
+		</ul>

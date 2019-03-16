@@ -2,6 +2,7 @@
 {% load formstyles %}
 
 {% block content %}
+
 <!-- Content -->
 <main class="pt-4">
 	<div class="container">
@@ -9,29 +10,14 @@
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
 				<li class="breadcrumb-item"><a href="{% url 'account_about' %}">Личный кабинет подразделения</a></li>
-				<li class="breadcrumb-item active" aria-current="page">Члены подразделения</li>
+				<li class="breadcrumb-item active" aria-current="page">Конференции</li>
 			</ol>
 		</nav>
 
-		<h4 id="lk_top" class="title-page">Личный кабинет</h4>
+		<h4 class="title-page">Личный кабинет</h4>
 
-		<ul class="nav nav-tabs mb-4">
-			<li class="nav-item">
-				<a class="nav-link" href="{% url 'account_user' %}">Учетная запись</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="{% url 'account_about' %}">О подразделении</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="{% url 'account_news' %}">Новости</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link active" href="{% url 'account_employee' %}">Члены подразделения</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="{% url 'account_conf' %}">Конференции</a>
-			</li>
-		</ul>
+		{% include 'mainapp/includes/account_menu_tabs.html' %}
+		{% comment %} {{request.resolver_match.url_name}} {% endcomment %}
 
 		<div class="search p-3 mb-4">
 			<h5>Быстрый поиск</h5>
