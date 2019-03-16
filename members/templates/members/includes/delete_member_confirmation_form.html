@@ -1,0 +1,29 @@
+<div id="confirm_deleting_form" class="modal fade" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Подтвердите удаление записи: <span id="confirm_deleting_fio"></span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Напишите заглавными буквами "УДАЛИТЬ" в поле проверки и нажмите клавишу "ENTER"</p>
+        <div class="form-group">
+            <label for="validation_field">Проверка:</label>
+            {% comment %} <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="City" required> {% endcomment %}
+            <input type="text" class="form-control" id="validation_field" required>
+            {% comment %} <div id="delete_confirm_input_validation" class="invalid-feedback">
+            Введите "УДАЛИТЬ"
+            </div> {% endcomment %}
+            <div id="wrong_input" class="text-danger" style="display:none">Введите "УДАЛИТЬ"</div>
+            <div id="can_be_deleted_message" class="text-info" style="display:none">Подтверждено. Теперь нажмите "Сохранить"</div>
+    </div>
+      </div>
+      <div class="modal-footer">
+        <button id="save_delete_member_button" type="button" class="btn btn-primary">Сохранить</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+      </div>
+    </div>
+  </div>
+</div>

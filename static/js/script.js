@@ -82,15 +82,20 @@ $(document).ready(function(){
 
     $('#post-form').on('click', function(event){
         event.preventDefault();
-        console.log("form submitted!")  // sanity check
         add_member();
     });
 
     $('.pencil').on('click' , function(event) {
         event.preventDefault();
-        console.log('pencil clicked');
         edit_member($(this).attr('href'));
     });
+
+    $('.delete_member').on('click', function(event){
+        event.preventDefault();
+        let member_id = $(this).data('member-pk');
+        let member_fio = $(this).data('member-fio');
+        toggle_delete_modal(member_id, member_fio);
+    })
 
     // $('.update_member_button').on('click' , function(event) {
     //     // event.preventDefault();
@@ -322,4 +327,55 @@ $(document).ready(function(){
             }
         });
     }; //end function update member
+
+    function toggle_delete_modal(member_id, member_fio) {
+        console.log('deleting member', member_id);
+        $('#confirm_deleting_form').modal('toggle');
+        $('#confirm_deleting_fio').text(member_fio);
+        $('#validation_field').keyup(function(){
+            let input_value = $('#validation_field').val();
+            if (input_value != 'УДАЛИТЬ') {
+                // console.log('введите УДАЛИТЬ');
+                $('#can_be_deleted_message').hide();
+                $('#wrong_input').show();
+
+            } else {
+                // console.log('Удаляем');
+                $('#wrong_input').hide();
+                $('#can_be_deleted_message').show();
+            }
+         });
+
+        $('#save_delete_member_button').on('click', function(){
+            event.preventDefault();
+            if ($('#can_be_deleted_message').is(':visible')) {
+                console.log('wi can now delet it');
+                console.log('member id to delete', member_id);
+                $.ajax({
+                    url : '/members/delete/', // the endpoint - member edit page
+                    type : "POST", // http method
+                    // data sent with the post request
+                    data : {'member_id': member_id},
+                    // handle a successful response
+                    success : function(response) {
+                        console.log(typeof response, response); // log the returned json to the console
+                        $('#can_be_deleted_message').html(
+                            `
+                            <span class="text-info">
+                            <i class="fa fa-check"></i>
+                            Запись "${response.fio}" удалена из базы данных
+                            </span>
+                            `
+                        );
+                    },
+                    // handle a non-successful response
+                    error : function(xhr) {
+                        console.log(xhr.status + ": " + xhr.responseText); // provide a bit more info about the error to the console
+                    }
+                });
+            } else {
+                console.log('confirmation not exist');
+            };
+        });
+    };
 }); //document ready end function

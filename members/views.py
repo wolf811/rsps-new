@@ -43,62 +43,68 @@ class StatusedMember:
 
 def member_list(request):
     title = 'Список членов РСПС'
-    member_list = Member.objects.filter(user=request.user) #TODO: fix to filter by request user
+    member_list = Member.objects.filter(user=request.user)
     members = []
 
     for member in member_list:
         statused_member = StatusedMember(member.pk)
         members.append(statused_member)
 
-    # print('CITIES', cities)
+    # add first 'all' value to city choice
     USER_CITIES = [('All', 'Все')]
     USER_CITIES += [(member.member.city, member.member.city) for member in members]
     USER_CITIES = tuple(USER_CITIES)
 
+    #add first 'all' value to form status choice
     from .models import STATUS_CHOICES
     statuses = list(STATUS_CHOICES)
     default_status = [('All', 'Все')]
     STATUS_CHOICES = tuple(default_status+statuses)
 
+    #make form with dynamic city choices
     class SearchMemberForm(forms.Form):
-        fio_city_job = forms.CharField(required=False, max_length=100)
-        city = forms.ChoiceField(choices=USER_CITIES, required=False, )
-        status = forms.ChoiceField(choices=STATUS_CHOICES, required=False)
+        fio_job_jobplace = forms.CharField(required=False, max_length=100)
+        search_by_city = forms.ChoiceField(choices=USER_CITIES, required=False, )
+        search_by_status = forms.ChoiceField(choices=STATUS_CHOICES, required=False)
 
     search_member_form = SearchMemberForm()
 
     if request.method == "POST":
         print('REQUEST POST', request.POST)
         add_new_member_form = MemberForm(request.POST)
+
         #handle member search
         if 'search_member' in request.POST:
             form = SearchMemberForm(request.POST)
             if form.is_valid():
-                fio_city_job_query = Q()
-                if request.POST['fio_city_job'] != '':
-                    fio_city_job_query = Q(fio__icontains=request.POST['fio_city_job'])
-                    fio_city_job_query |= Q(jobplace__icontains=request.POST['fio_city_job'])
-                    fio_city_job_query |= Q(job__icontains=request.POST['fio_city_job'])
-                if request.POST['city'] != 'All':
-                    fio_city_job_query &= Q(city=request.POST['city'])
-                if request.POST['status']!= 'All':
-                    filtered_statuses = Membership.objects.filter(status=request.POST['status'])
+                member_search_query = Q()
+                #add searching by fio, job, jobplace
+                if request.POST['fio_job_jobplace'] != '':
+                    member_search_query = Q(fio__icontains=request.POST['fio_job_jobplace'])
+                    member_search_query |= Q(jobplace__icontains=request.POST['fio_job_jobplace'])
+                    member_search_query |= Q(job__icontains=request.POST['fio_job_jobplace'])
+                if request.POST['search_by_city'] != 'All':
+                    member_search_query &= Q(city=request.POST['search_by_city'])
+                if request.POST['search_by_status']!= 'All':
+                    filtered_statuses = Membership.objects.filter(status=request.POST['search_by_status'])
                     filtered_member_pks = [status.member.pk for status in filtered_statuses]
-                    fio_city_job_query &= Q(id__in=filtered_member_pks)
-                fio_city_job_query &= Q(user=request.user)
-                filtered_members = Member.objects.filter(fio_city_job_query)
+                    member_search_query &= Q(id__in=filtered_member_pks)
+                #add searching in current user records
+                member_search_query &= Q(user=request.user)
+                filtered_members = Member.objects.filter(member_search_query)
                 filtered_statused_members = [StatusedMember(member.pk) for member in filtered_members]
-                # print('QUERY', fio_city_job_query)
+                print(len(filtered_statused_members), filtered_statused_members)
                 content = {
                     'title': title,
                     'members': filtered_statused_members,
                     'add_new_member_form': add_new_member_form,
                     'search_member_form': form,
-                    'search_result_count': len(filtered_statused_members)
+                    'search_result': 'True',
                 }
 
                 return render(request, 'members/lk_member_list.html', content)
 
+        #handle add new member post form
         if add_new_member_form.is_valid():
             new_member = add_new_member_form.save(commit=False)
             new_member.user = request.user
@@ -121,7 +127,7 @@ def member_list(request):
             return JsonResponse(success_message)
         else:
             errors = add_new_member_form.errors
-            print(add_new_member_form.errors.as_json())
+            # print(add_new_member_form.errors.as_json())
             return JsonResponse(errors)
     else:
         add_new_member_form = MemberForm()
@@ -137,7 +143,6 @@ def member_list(request):
         'add_new_member_form': add_new_member_form,
         'search_member_form': search_member_form,
         'success': 'success',
-        #TODO: add edit form for every member
     }
 
     return render(request, 'members/lk_member_list.html', content)
@@ -198,3 +203,15 @@ def get_member_form(request):
             context['registrations'] = registrations
 
         return render(request, 'members/includes/member_edit_form.html', context)
+
+def delete_member(request):
+    member_pk = request.POST.get('member_id')
+    member_to_delete = Member.objects.get(pk=member_pk)
+    member_fio = member_to_delete.fio
+    member_to_delete.delete()
+    return JsonResponse({
+        'member_id': member_pk,
+        'fio': member_fio,
+        'status': 'deleted',
+        'message': "Запись из базы данных удалена",
+        })

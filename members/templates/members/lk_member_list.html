@@ -39,55 +39,38 @@
 				<div class="form-row">
 					{% csrf_token %}
 					<div class="form-group col-md-6 col-lg-4">
-						<label for="id_fio_city_job" class="mb-1">ФИО / Место работы / Должность</label>
-						{% comment %} <input type="text" class="form-control form-control-sm"> {% endcomment %}
-						{{ search_member_form.fio_city_job|addcss:"form-control form-control-sm"}}
+						<label for="id_fio_job_jobplace" class="mb-1">ФИО / Место работы / Должность</label>
+						{{ search_member_form.fio_job_jobplace|addcss:"form-control form-control-sm"}}
 						<input type="hidden" name='search_member' value='true'>
 					</div>
 					<div class="form-group col-sm-2 col-sm-6 col-md-3 col-lg-2">
-						<label for="id_city" class="mb-1">Населенный пункт</label>
-						{% comment %} <select name='city' class="form-control form-control-sm"> {% endcomment %}
-						{{ search_member_form.city|addcss:"form-control form-control-sm"}}
-							{% comment %} <option selected>Все</option> {% endcomment %}
-							{% comment %} {% for city in cities %}
-							<option>{{ city }}</option>
-							{% endfor %} {% endcomment %}
-							{% comment %} <option value='Калуга'>Калуга</option>
-							<option>Обнинск</option>
-							<option>Боровск</option>
-							<option>Жуков</option>
-							<option>Ермолино</option> {% endcomment %}
-						{% comment %} </select> {% endcomment %}
+						<label for="id_search_by_city" class="mb-1">Населенный пункт</label>
+						{{ search_member_form.search_by_city|addcss:"form-control form-control-sm"}}
 					</div>
 					<div class="form-group col-sm-6 col-md-3 col-lg-2">
-						<label for="id_status" class="mb-1">Статус членства</label>
-						{{ search_member_form.status|addcss:"form-control form-control-sm"}}
-						{% comment %} <select name='member_status' class="form-control form-control-sm">
-							<option selected>Все</option>
-							<option>Новый</option>
-							<option>Заявлен</option>
-							<option>Одобрен</option>
-							<option>Выдан сертификат</option>
-						</select> {% endcomment %}
+						<label for="id_search_by_status" class="mb-1">Статус членства</label>
+						{{ search_member_form.search_by_status|addcss:"form-control form-control-sm"}}
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-auto">
 						<button type="submit" class="btn btn-outline-primary btn-xs"><i class="fa fa-search"></i> Найти</button>
-						{% if search_result_count %}
 						<a href="{% url 'members:member_list' %}" class="btn btn-link btn-xs">Сбросить</a>
-						{% endif %}
 					</div>
 				</div>
 			</form>
-			{% if search_result_count %}
-				<div class="text-info">Найдено записей: {{search_result_count}}</div>
+			{% if search_result %}
+				{% if members|length == 0 %}
+				<div class="text-info">Ничего не найдено</div>
+				{% else %}
+				<div class="text-info">Найдено записей: {{ members|length }}</div>
+				{% endif %}
 			{% endif %}
+
 		</div>
 
 		<button type="button" class="btn btn-danger btn-xl mb-4" data-toggle='modal' data-target='#id_add_new_member_modal'>Добавить члена РСПС</button>
 
-		{% comment %} <button type="button" class="btn btn-outline-danger btn-sm mb-4 d-block mx-auto" data-toggle='modal' data-target='#modal-regCongress'>Регистрация на Съезд РСПС 2019</button> {% endcomment %}
 
 		<div class="table-responsive" id="table-top">
 			<table class="table table-list">
@@ -134,5 +117,6 @@
 </main>
 
 {% include 'members/includes/new_member_form.html'%}
+{% include 'members/includes/delete_member_confirmation_form.html' %}
 <!-- End Content -->
 {% endblock %}
