@@ -51,25 +51,31 @@
 				</tbody>
 			</table>
 		</div>
-		<nav aria-label="Page navigation example">
+		{% if conferences.paginator.num_pages > 1  %}
+		<nav aria-label="Conferences pagination">
 			<ul class="pagination pagination-sm">
-				<li class="page-item disabled">
-					<a class="page-link" href="#" aria-label="Previous">
+				{% if conferences.has_previous %}
+				<li class="page-item">
+					<a class="page-link" href="?page=1#table-top" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
+				<li class="page-item"><a class="page-link" href="?page={{conferences.previous_page_number}}#table-top">{{conferences.previous_page_number}}</a></li>
 					</a>
 				</li>
-				<li class="page-item active"><a class="page-link" href="#">1</a></li>
-				<li class="page-item"><a class="page-link" href="#">2</a></li>
-				<li class="page-item"><a class="page-link" href="#">3</a></li>
+				{% endif %}
+				<li class="page-item active disabled"><a class="page-link">{{ conferences.number }}</a></li>
+				{% if conferences.has_next %}
+				<li class="page-item"><a class="page-link" href="?page={{conferences.next_page_number}}#table-top">{{ conferences.next_page_number}}</a></li>
 				<li class="page-item">
-					<a class="page-link" href="#" aria-label="Next">
+					<a class="page-link" href="?page={{conferences.paginator.num_pages}}#table-top" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>
 					</a>
 				</li>
+				{% endif %}
 			</ul>
 		</nav>
+		{% endif %}
 	</div>
-</main> 
+</main>
 
 {% include 'conferences/includes/conference_add_modal.html' %}
 {% endblock %}

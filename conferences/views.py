@@ -12,7 +12,7 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 
 
 def conference_list(request):
-    conferences = Conference.objects.all()
+    conferences = Conference.objects.filter(user=request.user)
     new_conference_form = ConferenceForm()
     if request.method == 'POST':
         print(request.POST)
@@ -29,7 +29,6 @@ def conference_list(request):
         else:
             errors = new_conference.errors
             return JsonResponse(errors)
-    
     paginator = Paginator(conferences, 10)
     page = request.GET.get('page')
     paginated_conferences = paginator.get_page(page)

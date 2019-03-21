@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 import re
 
+
 def textvalidation(value):
     template = re.compile('^[a-zA-Zа-яА-Я\s]+')
     m = template.match(value)
@@ -13,6 +14,7 @@ def textvalidation(value):
         raise ValidationError({
             'fio': ValidationError(error_text, code='invalid'),
         })
+
 
 # Create your models here.
 class Member(models.Model):
@@ -41,6 +43,7 @@ class Member(models.Model):
     def clean(self):
         textvalidation(self.fio)
 
+
 class Conference(models.Model):
     """docstring for Conference"""
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
@@ -57,6 +60,7 @@ class Conference(models.Model):
     def __str__(self):
         return '{}, {}'.format(self.title, self.date)
 
+
 class Post(models.Model):
     """model for publications"""
     title = models.CharField(max_length=200, verbose_name='Название публикации')
@@ -70,6 +74,7 @@ class Post(models.Model):
 
     def __str__(self):
         return 'Публикация {}, дата {}'.format(self.title, self.published_date)
+
 
 class Photo(models.Model):
     """model for handling photos"""

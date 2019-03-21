@@ -1,0 +1,330 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+0001_initial.py	../mainapp/migrations/0001_initial.py	1;"	kind:file	line:1
+0001_initial.py	../members/migrations/0001_initial.py	1;"	kind:file	line:1
+0002_auto_20190312_1244.py	../mainapp/migrations/0002_auto_20190312_1244.py	1;"	kind:file	line:1
+0002_auto_20190313_0929.py	../members/migrations/0002_auto_20190313_0929.py	1;"	kind:file	line:1
+0003_auto_20190315_1204.py	../mainapp/migrations/0003_auto_20190315_1204.py	1;"	kind:file	line:1
+0003_memberregistration.py	../members/migrations/0003_memberregistration.py	1;"	kind:file	line:1
+0004_auto_20190314_0659.py	../members/migrations/0004_auto_20190314_0659.py	1;"	kind:file	line:1
+0004_conference_user.py	../mainapp/migrations/0004_conference_user.py	1;"	kind:file	line:1
+0005_auto_20190316_1244.py	../mainapp/migrations/0005_auto_20190316_1244.py	1;"	kind:file	line:1
+ALLOWED_HOSTS	../rsps/settings.py	/^ALLOWED_HOSTS = []$/;"	kind:variable	line:28
+AUTH_PASSWORD_VALIDATORS	../rsps/settings.py	/^AUTH_PASSWORD_VALIDATORS = [$/;"	kind:variable	line:95
+AuthConfig	../auth/apps.py	/^class AuthConfig(AppConfig):$/;"	kind:class	line:4
+BASE_DIR	../rsps/settings.py	/^BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))$/;"	kind:variable	line:16
+CKEDITOR_CONFIGS	../rsps/settings.py	/^CKEDITOR_CONFIGS = {$/;"	kind:variable	line:148
+CKEDITOR_IMAGE_BACKEND	../rsps/settings.py	/^CKEDITOR_IMAGE_BACKEND = "pillow"$/;"	kind:variable	line:146
+CKEDITOR_JQUERY_URL	../rsps/settings.py	/^CKEDITOR_JQUERY_URL = 'https:\/\/ajax.googleapis.com\/ajax\/libs\/jquery\/2.2.4\/jquery.min.js'$/;"	kind:variable	line:143
+CKEDITOR_UPLOAD_PATH	../rsps/settings.py	/^CKEDITOR_UPLOAD_PATH = 'uploads\/'$/;"	kind:variable	line:145
+Command	../mainapp/management/commands/fill_db.py	/^class Command(BaseCommand):$/;"	kind:class	line:43
+Conference	../mainapp/models.py	/^class Conference(models.Model):$/;"	kind:class	line:47
+ConferenceForm	../conferences/forms.py	/^class ConferenceForm(forms.ModelForm):$/;"	kind:class	line:5
+ConferencesConfig	../conferences/apps.py	/^class ConferencesConfig(AppConfig):$/;"	kind:class	line:4
+DATABASES	../rsps/settings.py	/^DATABASES = {$/;"	kind:variable	line:82
+DEBUG	../rsps/settings.py	/^DEBUG = True$/;"	kind:variable	line:26
+DJANGORESIZED_DEFAULT_FORCE_FORMAT	../rsps/settings.py	/^DJANGORESIZED_DEFAULT_FORCE_FORMAT = 'JPEG'$/;"	kind:variable	line:190
+DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS	../rsps/settings.py	/^DJANGORESIZED_DEFAULT_FORMAT_EXTENSIONS = {'JPEG': ".jpg"}$/;"	kind:variable	line:191
+DJANGORESIZED_DEFAULT_KEEP_META	../rsps/settings.py	/^DJANGORESIZED_DEFAULT_KEEP_META = True$/;"	kind:variable	line:189
+DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION	../rsps/settings.py	/^DJANGORESIZED_DEFAULT_NORMALIZE_ROTATION = True/;"	kind:variable	line:192
+DJANGORESIZED_DEFAULT_QUALITY	../rsps/settings.py	/^DJANGORESIZED_DEFAULT_QUALITY = 75$/;"	kind:variable	line:188
+DJANGORESIZED_DEFAULT_SIZE	../rsps/settings.py	/^DJANGORESIZED_DEFAULT_SIZE = [1920, 1080]$/;"	kind:variable	line:187
+EMAIL_BACKEND	../rsps/settings.py	/^EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'$/;"	kind:variable	line:89
+EMAIL_FILE_PATH	../rsps/settings.py	/^EMAIL_FILE_PATH = 'email\/messages'$/;"	kind:variable	line:90
+EditMemberForm	../members/forms.py	/^class EditMemberForm(forms.ModelForm):$/;"	kind:class	line:18
+INSTALLED_APPS	../rsps/settings.py	/^INSTALLED_APPS = [$/;"	kind:variable	line:33
+LANGUAGE_CODE	../rsps/settings.py	/^LANGUAGE_CODE = 'ru-RU'$/;"	kind:variable	line:114
+MEDIA_ROOT	../rsps/settings.py	/^MEDIA_ROOT = os.path.join(BASE_DIR, 'media')$/;"	kind:variable	line:136
+MEDIA_URL	../rsps/settings.py	/^MEDIA_URL = '\/media\/'$/;"	kind:variable	line:135
+MIDDLEWARE	../rsps/settings.py	/^MIDDLEWARE = [$/;"	kind:variable	line:47
+MainappConfig	../mainapp/apps.py	/^class MainappConfig(AppConfig):$/;"	kind:class	line:4
+Member	../mainapp/models.py	/^class Member(models.Model):$/;"	kind:class	line:20
+MemberAdmin	../mainapp/admin.py	/^class MemberAdmin(admin.ModelAdmin):$/;"	kind:class	line:52
+MemberForm	../members/forms.py	/^class MemberForm(forms.ModelForm):$/;"	kind:class	line:6
+MemberRegistration	../members/models.py	/^class MemberRegistration(models.Model):$/;"	kind:class	line:25
+MembersConfig	../members/apps.py	/^class MembersConfig(AppConfig):$/;"	kind:class	line:4
+Membership	../members/models.py	/^class Membership(models.Model):$/;"	kind:class	line:12
+MembershipInline	../mainapp/admin.py	/^class MembershipInline(admin.StackedInline):$/;"	kind:class	line:17
+Meta	../conferences/forms.py	/^    class Meta:$/;"	kind:class	line:6
+Meta	../mainapp/models.py	/^    class Meta:$/;"	kind:class	line:36
+Meta	../mainapp/models.py	/^    class Meta:$/;"	kind:class	line:56
+Meta	../mainapp/models.py	/^    class Meta:$/;"	kind:class	line:71
+Meta	../members/forms.py	/^    class Meta:$/;"	kind:class	line:12
+Meta	../members/forms.py	/^    class Meta:$/;"	kind:class	line:19
+Meta	../members/models.py	/^    class Meta:$/;"	kind:class	line:17
+Migration	../mainapp/migrations/0001_initial.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:10
+Migration	../mainapp/migrations/0002_auto_20190312_1244.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
+Migration	../mainapp/migrations/0003_auto_20190315_1204.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
+Migration	../mainapp/migrations/0004_conference_user.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../mainapp/migrations/0005_auto_20190316_1244.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
+Migration	../members/migrations/0001_initial.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:7
+Migration	../members/migrations/0002_auto_20190313_0929.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:7
+Migration	../members/migrations/0003_memberregistration.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:7
+Migration	../members/migrations/0004_auto_20190314_0659.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
+Photo	../mainapp/models.py	/^class Photo(models.Model):$/;"	kind:class	line:79
+PhotoInline	../mainapp/admin.py	/^class PhotoInline(admin.StackedInline):$/;"	kind:class	line:22
+Post	../mainapp/models.py	/^class Post(models.Model):$/;"	kind:class	line:64
+PostAdmin	../mainapp/admin.py	/^class PostAdmin(admin.ModelAdmin):$/;"	kind:class	line:41
+ROOT_URLCONF	../rsps/settings.py	/^ROOT_URLCONF = 'rsps.urls'$/;"	kind:variable	line:57
+STATICFILES_DIRS	../rsps/settings.py	/^STATICFILES_DIRS = ($/;"	kind:variable	line:131
+STATIC_URL	../rsps/settings.py	/^STATIC_URL = '\/static\/'$/;"	kind:variable	line:128
+STATUS_CHOICES	../members/models.py	/^STATUS_CHOICES = ($/;"	kind:variable	line:5
+SearchMemberForm	../members/views.py	/^    class SearchMemberForm(forms.Form):$/;"	kind:class	line:67
+StatusedMember	../members/views.py	/^class StatusedMember:$/;"	kind:class	line:19
+TEMPLATES	../rsps/settings.py	/^TEMPLATES = [$/;"	kind:variable	line:59
+TIME_ZONE	../rsps/settings.py	/^TIME_ZONE = 'UTC'$/;"	kind:variable	line:116
+USE_I18N	../rsps/settings.py	/^USE_I18N = True$/;"	kind:variable	line:118
+USE_L10N	../rsps/settings.py	/^USE_L10N = True$/;"	kind:variable	line:120
+USE_TZ	../rsps/settings.py	/^USE_TZ = True$/;"	kind:variable	line:122
+WSGI_APPLICATION	../rsps/settings.py	/^WSGI_APPLICATION = 'rsps.wsgi.application'$/;"	kind:variable	line:76
+__init__	../members/forms.py	/^    def __init__(self, *args, **kwargs):$/;"	kind:member	line:8
+__init__	../members/views.py	/^    def __init__(self, member_pk):$/;"	kind:member	line:20
+__init__.py	../auth/__init__.py	1;"	kind:file	line:1
+__init__.py	../auth/migrations/__init__.py	1;"	kind:file	line:1
+__init__.py	../conferences/__init__.py	1;"	kind:file	line:1
+__init__.py	../conferences/migrations/__init__.py	1;"	kind:file	line:1
+__init__.py	../mainapp/__init__.py	1;"	kind:file	line:1
+__init__.py	../mainapp/migrations/__init__.py	1;"	kind:file	line:1
+__init__.py	../members/__init__.py	1;"	kind:file	line:1
+__init__.py	../members/migrations/__init__.py	1;"	kind:file	line:1
+__init__.py	../members/templatetags/__init__.py	1;"	kind:file	line:1
+__init__.py	../rsps/__init__.py	1;"	kind:file	line:1
+__str__	../mainapp/models.py	/^    def __str__(self):$/;"	kind:member	line:40
+__str__	../mainapp/models.py	/^    def __str__(self):$/;"	kind:member	line:60
+__str__	../mainapp/models.py	/^    def __str__(self):$/;"	kind:member	line:75
+__str__	../members/models.py	/^    def __str__(self):$/;"	kind:member	line:21
+about	../mainapp/views.py	/^def about(request):$/;"	kind:function	line:105
+account_about	../mainapp/views.py	/^def account_about(request):$/;"	kind:function	line:64
+account_conf	../mainapp/views.py	/^def account_conf(request):$/;"	kind:function	line:78
+account_employee	../mainapp/views.py	/^def account_employee(request):$/;"	kind:function	line:89
+account_news	../mainapp/views.py	/^def account_news(request):$/;"	kind:function	line:71
+account_user	../mainapp/views.py	/^def account_user(request):$/;"	kind:function	line:57
+add_new_member_form	../members/views.py	/^        add_new_member_form = MemberForm()$/;"	kind:variable	line:135
+add_new_member_form	../members/views.py	/^        add_new_member_form = MemberForm(request.POST)$/;"	kind:variable	line:76
+addcss	../members/templatetags/formstyles.py	/^def addcss(field, css):$/;"	kind:function	line:5
+admin.py	../auth/admin.py	1;"	kind:file	line:1
+admin.py	../conferences/admin.py	1;"	kind:file	line:1
+admin.py	../mainapp/admin.py	1;"	kind:file	line:1
+admin.py	../members/admin.py	1;"	kind:file	line:1
+app_name	../conferences/urls.py	/^app_name = 'conferences'$/;"	kind:variable	line:5
+app_name	../members/urls.py	/^app_name = 'members'$/;"	kind:variable	line:5
+application	../rsps/wsgi.py	/^application = get_wsgi_application()$/;"	kind:variable	line:16
+apps.py	../auth/apps.py	1;"	kind:file	line:1
+apps.py	../conferences/apps.py	1;"	kind:file	line:1
+apps.py	../mainapp/apps.py	1;"	kind:file	line:1
+apps.py	../members/apps.py	1;"	kind:file	line:1
+city	../mainapp/models.py	/^    city = models.CharField(max_length=100, verbose_name='Город проживания')$/;"	kind:variable	line:27
+clean	../mainapp/models.py	/^    def clean(self):$/;"	kind:member	line:43
+completed	../mainapp/models.py	/^    completed = models.BooleanField(verbose_name='Проведена', default=False)$/;"	kind:variable	line:53
+conf	../mainapp/views.py	/^def conf(request):$/;"	kind:function	line:171
+conference_list	../conferences/views.py	/^def conference_list(request):$/;"	kind:function	line:14
+contact	../mainapp/views.py	/^def contact(request):$/;"	kind:function	line:14
+content	../members/views.py	/^                content = {$/;"	kind:variable	line:99
+context_processors.py	../mainapp/context_processors.py	1;"	kind:file	line:1
+date	../mainapp/models.py	/^    date = models.DateField(verbose_name='Дата проведения')$/;"	kind:variable	line:51
+default	../members/models.py	/^                              default='Новый')$/;"	kind:variable	line:15
+delete_conference	../conferences/views.py	/^def delete_conference(request):$/;"	kind:function	line:47
+delete_member	../members/views.py	/^def delete_member(request):$/;"	kind:function	line:209
+dependencies	../mainapp/migrations/0001_initial.py	/^    dependencies = [$/;"	kind:variable	line:14
+dependencies	../mainapp/migrations/0002_auto_20190312_1244.py	/^    dependencies = [$/;"	kind:variable	line:8
+dependencies	../mainapp/migrations/0003_auto_20190315_1204.py	/^    dependencies = [$/;"	kind:variable	line:8
+dependencies	../mainapp/migrations/0004_conference_user.py	/^    dependencies = [$/;"	kind:variable	line:10
+dependencies	../mainapp/migrations/0005_auto_20190316_1244.py	/^    dependencies = [$/;"	kind:variable	line:8
+dependencies	../members/migrations/0001_initial.py	/^    dependencies = [$/;"	kind:variable	line:11
+dependencies	../members/migrations/0002_auto_20190313_0929.py	/^    dependencies = [$/;"	kind:variable	line:9
+dependencies	../members/migrations/0003_memberregistration.py	/^    dependencies = [$/;"	kind:variable	line:9
+dependencies	../members/migrations/0004_auto_20190314_0659.py	/^    dependencies = [$/;"	kind:variable	line:8
+details	../mainapp/views.py	/^def details(request, pk):$/;"	kind:function	line:132
+docs	../mainapp/views.py	/^def docs(request):$/;"	kind:function	line:143
+email	../mainapp/models.py	/^    email = models.EmailField(max_length=100, verbose_name='Email')$/;"	kind:variable	line:26
+errors	../members/views.py	/^            errors = add_new_member_form.errors$/;"	kind:variable	line:131
+extra	../mainapp/admin.py	/^    extra = 0$/;"	kind:variable	line:19
+extra	../mainapp/admin.py	/^    extra = 0$/;"	kind:variable	line:24
+field	../mainapp/migrations/0001_initial.py	/^            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='mainapp.Post'),$/;"	kind:variable	line:76
+field	../mainapp/migrations/0001_initial.py	/^            field=models.ManyToManyField(to='mainapp.Member', verbose_name='Участники'),$/;"	kind:variable	line:81
+field	../mainapp/migrations/0002_auto_20190312_1244.py	/^            field=models.TextField(blank=True, default=None, null=True, verbose_name='Краткая информация (награды, звания и т.д.)'),$/;"	kind:variable	line:16
+field	../mainapp/migrations/0003_auto_20190315_1204.py	/^            field=models.CharField(db_index=True, max_length=100, verbose_name='Должность'),$/;"	kind:variable	line:26
+field	../mainapp/migrations/0003_auto_20190315_1204.py	/^            field=models.CharField(db_index=True, max_length=100, verbose_name='Место работы'),$/;"	kind:variable	line:21
+field	../mainapp/migrations/0003_auto_20190315_1204.py	/^            field=models.CharField(db_index=True, max_length=100, verbose_name='ФИО'),$/;"	kind:variable	line:16
+field	../mainapp/migrations/0004_conference_user.py	/^            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to=settings.AUTH_USER_MODEL),$/;"	kind:variable	line:19
+field	../mainapp/migrations/0005_auto_20190316_1244.py	/^            field=models.BooleanField(default=False, verbose_name='Проведена'),$/;"	kind:variable	line:16
+field	../members/migrations/0002_auto_20190313_0929.py	/^            field=models.OneToOneField(null=True, on_delete=django.db.models.deletion.SET_NULL, to='mainapp.Member'),$/;"	kind:variable	line:17
+field	../members/migrations/0004_auto_20190314_0659.py	/^            field=models.NullBooleanField(verbose_name='Зарегистрировать'),$/;"	kind:variable	line:16
+fields	../conferences/forms.py	/^        fields = ('title', 'date', 'place')$/;"	kind:variable	line:9
+fields	../mainapp/admin.py	/^    fields = ('title', 'short_description', 'text', 'published_date')$/;"	kind:variable	line:43
+fields	../mainapp/admin.py	/^    fields = ['fio', 'job', 'jobplace', 'tel', 'email', 'user']$/;"	kind:variable	line:54
+fields	../mainapp/admin.py	/^    fields = ['image', get_picture_preview]$/;"	kind:variable	line:25
+fields	../mainapp/admin.py	/^    fields = ['status']$/;"	kind:variable	line:20
+fields	../mainapp/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:21
+fields	../mainapp/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:35
+fields	../mainapp/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:54
+fields	../mainapp/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:61
+fields	../members/forms.py	/^        fields = ('fio', 'job', 'jobplace', 'tel', 'email', 'city',$/;"	kind:variable	line:14
+fields	../members/forms.py	/^        fields = ('fio', 'job', 'jobplace', 'tel', 'email', 'city',$/;"	kind:variable	line:21
+fields	../members/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:18
+fields	../members/migrations/0003_memberregistration.py	/^            fields=[$/;"	kind:variable	line:17
+fill_db.py	../mainapp/management/commands/fill_db.py	1;"	kind:file	line:1
+filtered_by_name	../members/views.py	/^            filtered_by_name = Member.objects.filter(fio=request.POST['fio'])$/;"	kind:variable	line:113
+filtered_member_pks	../members/views.py	/^                    filtered_member_pks = [status.member.pk for status in filtered_statuses]$/;"	kind:variable	line:92
+filtered_members	../members/views.py	/^                filtered_members = Member.objects.filter(member_search_query)$/;"	kind:variable	line:96
+filtered_statused_members	../members/views.py	/^                filtered_statused_members = [StatusedMember(member.pk) for member in filtered_members]$/;"	kind:variable	line:97
+filtered_statuses	../members/views.py	/^                    filtered_statuses = Membership.objects.filter(status=request.POST['search_by_status'])$/;"	kind:variable	line:91
+fio	../mainapp/models.py	/^    fio = models.CharField(db_index=True, max_length=100, verbose_name='ФИО')$/;"	kind:variable	line:22
+fio_job_jobplace	../members/views.py	/^        fio_job_jobplace = forms.CharField(required=False, max_length=100)$/;"	kind:variable	line:68
+form	../members/views.py	/^            form = SearchMemberForm(request.POST)$/;"	kind:variable	line:80
+forms.py	../conferences/forms.py	1;"	kind:file	line:1
+forms.py	../members/forms.py	1;"	kind:file	line:1
+formstyles.py	../members/templatetags/formstyles.py	1;"	kind:file	line:1
+get_conference	../conferences/views.py	/^def get_conference(request):$/;"	kind:function	line:43
+get_edit_link	../mainapp/admin.py	/^    def get_edit_link(self, obj=None):$/;"	kind:member	line:28
+get_member_form	../members/views.py	/^def get_member_form(request):$/;"	kind:function	line:152
+get_picture_preview	../mainapp/admin.py	/^def get_picture_preview(obj):$/;"	kind:function	line:10
+get_registrations	../members/views.py	/^    def get_registrations(self):$/;"	kind:member	line:42
+handle	../mainapp/management/commands/fill_db.py	/^    def handle(self, *args, **options):$/;"	kind:member	line:44
+image	../mainapp/models.py	/^    image = models.ImageField(u'Фото', upload_to='upload\/')$/;"	kind:variable	line:81
+images	../mainapp/management/commands/fill_db.py	/^images = [$/;"	kind:variable	line:19
+index	../mainapp/views.py	/^def index(request):$/;"	kind:function	line:7
+initial	../mainapp/migrations/0001_initial.py	/^    initial = True$/;"	kind:variable	line:12
+initial	../members/migrations/0001_initial.py	/^    initial = True$/;"	kind:variable	line:9
+inlines	../mainapp/admin.py	/^    inlines = [MembershipInline]$/;"	kind:variable	line:55
+inlines	../mainapp/admin.py	/^    inlines = [PhotoInline]$/;"	kind:variable	line:45
+job	../mainapp/models.py	/^    job = models.CharField(db_index=True, max_length=100, verbose_name='Место работы')$/;"	kind:variable	line:23
+job_places	../mainapp/management/commands/fill_db.py	/^job_places = ['Сварка трубопроводов', 'ООО Аттестационный центр', 'Сибирские трубомагистрали', 'Транснефть', 'Мегионгазсервис', 'Нижневартовскгоргаз']$/;"	kind:variable	line:39
+jobplace	../mainapp/models.py	/^    jobplace = models.CharField(db_index=True, max_length=100, verbose_name='Должность')$/;"	kind:variable	line:24
+jobs	../mainapp/management/commands/fill_db.py	/^jobs = ['Главный сварщик', 'Инженер', 'Сварщик', 'Главный инженер', 'Слесарь', 'Контролер сварочных работ']$/;"	kind:variable	line:41
+last_names	../mainapp/management/commands/fill_db.py	/^last_names = ['Иванов', 'Пономаренко', 'Минаев', 'Гончаров', 'Комбаров', 'Попов', 'Кузнецов']$/;"	kind:variable	line:37
+list_display	../mainapp/admin.py	/^    list_display = ['title', 'published_date']$/;"	kind:variable	line:44
+manage.py	../manage.py	1;"	kind:file	line:1
+member	../members/models.py	/^    member = models.ForeignKey(Member, null=True, blank=True, default=None,$/;"	kind:variable	line:27
+member	../members/models.py	/^    member = models.OneToOneField(Member, null=True, on_delete=models.SET_NULL)$/;"	kind:variable	line:13
+member_list	../members/views.py	/^def member_list(request):$/;"	kind:function	line:46
+member_search_query	../members/views.py	/^                    member_search_query = Q(fio__icontains=request.POST['fio_job_jobplace'])$/;"	kind:variable	line:85
+member_search_query	../members/views.py	/^                member_search_query = Q()$/;"	kind:variable	line:82
+members	../mainapp/models.py	/^    members = models.ManyToManyField(Member, verbose_name='Участники')$/;"	kind:variable	line:54
+model	../conferences/forms.py	/^        model = Conference$/;"	kind:variable	line:7
+model	../mainapp/admin.py	/^    model = Membership$/;"	kind:variable	line:18
+model	../mainapp/admin.py	/^    model = Photo$/;"	kind:variable	line:23
+model	../members/forms.py	/^        model = Member$/;"	kind:variable	line:13
+model	../members/forms.py	/^        model = Member$/;"	kind:variable	line:20
+model_name	../mainapp/migrations/0001_initial.py	/^            model_name='conference',$/;"	kind:variable	line:79
+model_name	../mainapp/migrations/0001_initial.py	/^            model_name='photo',$/;"	kind:variable	line:74
+model_name	../mainapp/migrations/0002_auto_20190312_1244.py	/^            model_name='member',$/;"	kind:variable	line:14
+model_name	../mainapp/migrations/0003_auto_20190315_1204.py	/^            model_name='member',$/;"	kind:variable	line:14
+model_name	../mainapp/migrations/0003_auto_20190315_1204.py	/^            model_name='member',$/;"	kind:variable	line:19
+model_name	../mainapp/migrations/0003_auto_20190315_1204.py	/^            model_name='member',$/;"	kind:variable	line:24
+model_name	../mainapp/migrations/0004_conference_user.py	/^            model_name='conference',$/;"	kind:variable	line:17
+model_name	../mainapp/migrations/0005_auto_20190316_1244.py	/^            model_name='conference',$/;"	kind:variable	line:14
+model_name	../members/migrations/0002_auto_20190313_0929.py	/^            model_name='membership',$/;"	kind:variable	line:15
+model_name	../members/migrations/0004_auto_20190314_0659.py	/^            model_name='memberregistration',$/;"	kind:variable	line:14
+models.py	../auth/models.py	1;"	kind:file	line:1
+models.py	../conferences/models.py	1;"	kind:file	line:1
+models.py	../mainapp/models.py	1;"	kind:file	line:1
+models.py	../members/models.py	1;"	kind:file	line:1
+name	../auth/apps.py	/^    name = 'auth'$/;"	kind:variable	line:5
+name	../conferences/apps.py	/^    name = 'conferences'$/;"	kind:variable	line:5
+name	../mainapp/apps.py	/^    name = 'mainapp'$/;"	kind:variable	line:5
+name	../mainapp/migrations/0001_initial.py	/^            name='Conference',$/;"	kind:variable	line:20
+name	../mainapp/migrations/0001_initial.py	/^            name='Member',$/;"	kind:variable	line:34
+name	../mainapp/migrations/0001_initial.py	/^            name='Photo',$/;"	kind:variable	line:53
+name	../mainapp/migrations/0001_initial.py	/^            name='Post',$/;"	kind:variable	line:60
+name	../mainapp/migrations/0001_initial.py	/^            name='members',$/;"	kind:variable	line:80
+name	../mainapp/migrations/0001_initial.py	/^            name='post',$/;"	kind:variable	line:75
+name	../mainapp/migrations/0002_auto_20190312_1244.py	/^            name='short_description',$/;"	kind:variable	line:15
+name	../mainapp/migrations/0003_auto_20190315_1204.py	/^            name='fio',$/;"	kind:variable	line:15
+name	../mainapp/migrations/0003_auto_20190315_1204.py	/^            name='job',$/;"	kind:variable	line:20
+name	../mainapp/migrations/0003_auto_20190315_1204.py	/^            name='jobplace',$/;"	kind:variable	line:25
+name	../mainapp/migrations/0004_conference_user.py	/^            name='user',$/;"	kind:variable	line:18
+name	../mainapp/migrations/0005_auto_20190316_1244.py	/^            name='completed',$/;"	kind:variable	line:15
+name	../members/apps.py	/^    name = 'members'$/;"	kind:variable	line:5
+name	../members/migrations/0001_initial.py	/^            name='Membership',$/;"	kind:variable	line:17
+name	../members/migrations/0002_auto_20190313_0929.py	/^            name='member',$/;"	kind:variable	line:16
+name	../members/migrations/0003_memberregistration.py	/^            name='MemberRegistration',$/;"	kind:variable	line:16
+name	../members/migrations/0004_auto_20190314_0659.py	/^            name='register',$/;"	kind:variable	line:15
+name	../members/models.py	/^    name = models.CharField(u'Название регистрации', max_length=150)$/;"	kind:variable	line:29
+names	../mainapp/management/commands/fill_db.py	/^names = ['Иван', 'Сергей', 'Владимир', 'Александр', 'Валентин', 'Анатолий', 'Кирилл']$/;"	kind:variable	line:35
+new_member	../members/views.py	/^            new_member = add_new_member_form.save(commit=False)$/;"	kind:variable	line:111
+news	../mainapp/views.py	/^def news(request):$/;"	kind:function	line:112
+news_titles	../mainapp/management/commands/fill_db.py	/^news_titles = [$/;"	kind:variable	line:28
+not_unique_message	../members/views.py	/^                not_unique_message = {$/;"	kind:variable	line:115
+on_delete	../members/models.py	/^                               on_delete=models.SET_NULL)$/;"	kind:variable	line:28
+operations	../mainapp/migrations/0001_initial.py	/^    operations = [$/;"	kind:variable	line:18
+operations	../mainapp/migrations/0002_auto_20190312_1244.py	/^    operations = [$/;"	kind:variable	line:12
+operations	../mainapp/migrations/0003_auto_20190315_1204.py	/^    operations = [$/;"	kind:variable	line:12
+operations	../mainapp/migrations/0004_conference_user.py	/^    operations = [$/;"	kind:variable	line:15
+operations	../mainapp/migrations/0005_auto_20190316_1244.py	/^    operations = [$/;"	kind:variable	line:12
+operations	../members/migrations/0001_initial.py	/^    operations = [$/;"	kind:variable	line:15
+operations	../members/migrations/0002_auto_20190313_0929.py	/^    operations = [$/;"	kind:variable	line:13
+operations	../members/migrations/0003_memberregistration.py	/^    operations = [$/;"	kind:variable	line:14
+operations	../members/migrations/0004_auto_20190314_0659.py	/^    operations = [$/;"	kind:variable	line:12
+options	../mainapp/migrations/0001_initial.py	/^            options={$/;"	kind:variable	line:28
+options	../mainapp/migrations/0001_initial.py	/^            options={$/;"	kind:variable	line:47
+options	../mainapp/migrations/0001_initial.py	/^            options={$/;"	kind:variable	line:68
+options	../members/migrations/0001_initial.py	/^            options={$/;"	kind:variable	line:23
+place	../mainapp/models.py	/^    place = models.CharField(max_length=100, verbose_name='Место проведения')$/;"	kind:variable	line:52
+popov_user	../mainapp/management/commands/fill_db.py	/^    popov_user = User.objects.get(username='popov')$/;"	kind:variable	line:15
+popov_user	../mainapp/management/commands/fill_db.py	/^    popov_user=User.objects.create(username='popov', email='popov@naks.ru', password='2011')$/;"	kind:variable	line:17
+post	../mainapp/models.py	/^    post = models.ForeignKey(Post, null=True, on_delete=models.CASCADE)/;"	kind:variable	line:82
+prezidium_conf	../mainapp/views.py	/^def prezidium_conf(request):$/;"	kind:function	line:42
+prezidium_congress	../mainapp/views.py	/^def prezidium_congress(request):$/;"	kind:function	line:50
+prezidium_employee	../mainapp/views.py	/^def prezidium_employee(request):$/;"	kind:function	line:35
+prezidium_regional_office	../mainapp/views.py	/^def prezidium_regional_office(request):$/;"	kind:function	line:28
+published_date	../mainapp/models.py	/^    published_date = models.DateTimeField(u'Дата публикации', default=timezone.now)$/;"	kind:variable	line:69
+readonly_fields	../mainapp/admin.py	/^    readonly_fields = [get_picture_preview]$/;"	kind:variable	line:26
+reestr	../mainapp/views.py	/^def reestr(request):$/;"	kind:function	line:164
+regional_office	../mainapp/views.py	/^def regional_office(request):$/;"	kind:function	line:150
+regional_office_detail	../mainapp/views.py	/^def regional_office_detail(request):$/;"	kind:function	line:157
+register	../members/models.py	/^    register = models.NullBooleanField(u'Зарегистрировать')$/;"	kind:variable	line:30
+register	../members/templatetags/formstyles.py	/^register = template.Library()$/;"	kind:variable	line:2
+registration	../mainapp/views.py	/^def registration(request):$/;"	kind:function	line:98
+search_by_city	../members/views.py	/^        search_by_city = forms.ChoiceField(choices=USER_CITIES, required=False, )$/;"	kind:variable	line:69
+search_by_status	../members/views.py	/^        search_by_status = forms.ChoiceField(choices=STATUS_CHOICES, required=False)$/;"	kind:variable	line:70
+second_names	../mainapp/management/commands/fill_db.py	/^second_names = ['Иванович', 'Сергеевич', 'Владимирович', 'Александрович', 'Валентинович', 'Анатольевич', 'Кириллович']$/;"	kind:variable	line:36
+set_status	../members/views.py	/^    def set_status(self, status):$/;"	kind:member	line:38
+settings.py	../rsps/settings.py	1;"	kind:file	line:1
+short_description	../mainapp/models.py	/^    short_description = models.CharField(max_length=100, verbose_name='Краткое описание', blank=True, default='')$/;"	kind:variable	line:67
+short_description	../mainapp/models.py	/^    short_description = models.TextField(u'Краткая информация (награды, звания и т.д.)', $/;"	kind:variable	line:29
+status	../members/models.py	/^    status = models.CharField(max_length=20, choices=STATUS_CHOICES,$/;"	kind:variable	line:14
+status_get_or_create	../members/views.py	/^    def status_get_or_create(self):$/;"	kind:member	line:31
+statused_member	../members/views.py	/^                statused_member = StatusedMember(new_member.pk)$/;"	kind:variable	line:124
+subscription	../mainapp/models.py	/^    subscription = models.BooleanField(u'Подписка на обновления')$/;"	kind:variable	line:31
+success_message	../members/views.py	/^            success_message = {'new_member_saved': new_member.pk}$/;"	kind:variable	line:128
+tel	../mainapp/models.py	/^    tel = models.CharField(max_length=100, verbose_name='Телефон')$/;"	kind:variable	line:25
+tests.py	../auth/tests.py	1;"	kind:file	line:1
+tests.py	../conferences/tests.py	1;"	kind:file	line:1
+tests.py	../mainapp/tests.py	1;"	kind:file	line:1
+tests.py	../members/tests.py	1;"	kind:file	line:1
+text	../mainapp/models.py	/^    text = RichTextUploadingField(verbose_name='Текст публикации')$/;"	kind:variable	line:68
+textvalidation	../mainapp/models.py	/^def textvalidation(value):$/;"	kind:function	line:9
+title	../mainapp/models.py	/^    title = models.CharField(max_length=200, verbose_name='Название конференции')$/;"	kind:variable	line:50
+title	../mainapp/models.py	/^    title = models.CharField(max_length=200, verbose_name='Название публикации')$/;"	kind:variable	line:66
+urlpatterns	../conferences/urls.py	/^urlpatterns = [$/;"	kind:variable	line:7
+urlpatterns	../members/urls.py	/^urlpatterns = [$/;"	kind:variable	line:7
+urlpatterns	../rsps/urls.py	/^urlpatterns = [$/;"	kind:variable	line:22
+urls.py	../conferences/urls.py	1;"	kind:file	line:1
+urls.py	../members/urls.py	1;"	kind:file	line:1
+urls.py	../rsps/urls.py	1;"	kind:file	line:1
+user	../mainapp/models.py	/^    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)$/;"	kind:variable	line:28
+user	../mainapp/models.py	/^    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)$/;"	kind:variable	line:49
+user	../mainapp/views.py	/^def user(request):$/;"	kind:function	line:21
+verbose_name	../mainapp/models.py	/^        verbose_name = 'Конференция'$/;"	kind:variable	line:57
+verbose_name	../mainapp/models.py	/^        verbose_name = 'Публикация'$/;"	kind:variable	line:72
+verbose_name	../mainapp/models.py	/^        verbose_name = 'Участник'$/;"	kind:variable	line:37
+verbose_name	../members/models.py	/^        verbose_name = 'статус членства'$/;"	kind:variable	line:18
+verbose_name_plural	../mainapp/models.py	/^        verbose_name_plural = 'Конференции'$/;"	kind:variable	line:58
+verbose_name_plural	../mainapp/models.py	/^        verbose_name_plural = 'Публикации'$/;"	kind:variable	line:73
+verbose_name_plural	../mainapp/models.py	/^        verbose_name_plural = 'Участники'$/;"	kind:variable	line:38
+verbose_name_plural	../members/models.py	/^        verbose_name_plural = 'статусы членства'$/;"	kind:variable	line:19
+view_on_site	../mainapp/admin.py	/^    def view_on_site(self, obj):$/;"	kind:member	line:47
+view_on_site	../mainapp/admin.py	/^    view_on_site = False$/;"	kind:variable	line:53
+view_on_site	../mainapp/admin.py	/^    view_on_site = True$/;"	kind:variable	line:42
+views.py	../auth/views.py	1;"	kind:file	line:1
+views.py	../conferences/views.py	1;"	kind:file	line:1
+views.py	../mainapp/views.py	1;"	kind:file	line:1
+views.py	../members/views.py	1;"	kind:file	line:1
+widgets	../conferences/forms.py	/^        widgets = {$/;"	kind:variable	line:10
+widgets	../members/forms.py	/^        widgets= {$/;"	kind:variable	line:23
+wsgi.py	../rsps/wsgi.py	1;"	kind:file	line:1

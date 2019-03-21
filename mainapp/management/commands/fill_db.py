@@ -52,7 +52,6 @@ class Command(BaseCommand):
         #make PostPhotos
         for i in range(0, len(images)):
             #make Tags
-            mixer.blend(Conference, user=popov_user)
             #make Posts without pictures
             mixer.blend(Post, title=random.choice(news_titles))
             mixer.blend(Photo, image=File(open(images[i], 'rb')))
@@ -68,6 +67,8 @@ class Command(BaseCommand):
                                                     random.randint(10, 99)),
                 user=popov_user
             )
+        for i in range (0, 20):
+            mixer.blend(Conference, user=popov_user)
         for conference in Conference.objects.all():
             conference.members.add(Member.objects.first())
 
