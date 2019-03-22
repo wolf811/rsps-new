@@ -15,7 +15,8 @@
 
 		{% include 'mainapp/includes/account_menu_tabs.html' %}
 
-		<button type="button" class="btn btn-danger btn-xl mb-4" data-toggle='modal' data-target='#modal-regConference'>Добавить конференцию</button>
+		<button type="button" class="btn btn-danger btn-xl mb-4" data-toggle='modal'
+			data-target='#modal-regConference'>Добавить конференцию</button>
 
 		<div class="table-responsive">
 			<table class="table table-list">
@@ -30,7 +31,7 @@
 				<tbody>
 					{% for conference in conferences %}
 					{% if not conference.completed %}
-					<tr>
+					<tr id="tr_{{ conference.pk }}">
 						<td>{{ conference.date }}</td>
 						<td>{{ conference.place }}</td>
 						<td>
@@ -39,11 +40,22 @@
 							<div class="text-danger mt-2">Зарегистрируйте участников</div>
 						</td>
 						<td>
-							<a href="#" class="btn-action mr-3 text-primary" title="Удалить конференцию"><i class="fa fa-trash-o"></i></a>
-							<a href="#multiCollapseConf{{conference.pk}}" class="btn-action text-primary" data-toggle="collapse" aria-expanded="false" title="Изменить"><i class="fa fa-pencil"></i></a>
+							<a href="#" class="btn-action mr-3 text-primary" title="Удалить конференцию"><i
+									class="fa fa-trash-o"></i></a>
+							<a href="#multiCollapseConf{{ conference.pk }}"
+								class="conference_edit btn-action text-primary" data-toggle="collapse"
+								data-conference-id="{{ conference.pk }}" aria-expanded="false" title="Изменить"><i
+									class="fa fa-pencil"></i></a>
 						</td>
 					</tr>
-                        {% include 'conferences/includes/conference_edit.html' %}
+					{% comment %} {% include 'conferences/includes/conference_edit.html' %} {% endcomment %}
+					<tr class="multi-collapse collapse edit-list" id="multiCollapseConf{{ conference.pk }}">
+						<td id="td_{{conference.pk}}" colspan="4" class="total-column">
+							<div id="loadingmessage">
+								<img src="{% static 'images/ajax-loader.gif' %}" alt="loading_data">
+							</div>
+						</td>
+					</tr>
 
 					{% endif %}
 					{% endfor %}
@@ -58,13 +70,17 @@
 				<li class="page-item">
 					<a class="page-link" href="?page=1#table-top" aria-label="Previous">
 						<span aria-hidden="true">&laquo;</span>
-				<li class="page-item"><a class="page-link" href="?page={{conferences.previous_page_number}}#table-top">{{conferences.previous_page_number}}</a></li>
-					</a>
+				<li class="page-item"><a class="page-link"
+						href="?page={{conferences.previous_page_number}}#table-top">{{conferences.previous_page_number}}</a>
+				</li>
+				</a>
 				</li>
 				{% endif %}
 				<li class="page-item active disabled"><a class="page-link">{{ conferences.number }}</a></li>
 				{% if conferences.has_next %}
-				<li class="page-item"><a class="page-link" href="?page={{conferences.next_page_number}}#table-top">{{ conferences.next_page_number}}</a></li>
+				<li class="page-item"><a class="page-link"
+						href="?page={{conferences.next_page_number}}#table-top">{{ conferences.next_page_number}}</a>
+				</li>
 				<li class="page-item">
 					<a class="page-link" href="?page={{conferences.paginator.num_pages}}#table-top" aria-label="Next">
 						<span aria-hidden="true">&raquo;</span>

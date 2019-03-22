@@ -8,7 +8,6 @@ from django.contrib.auth.models import User
 from mixer.backend.django import mixer
 import random
 
-
 # from model_mommy.recipe import Recipe, foreign_key, seq
 
 try:
@@ -51,8 +50,7 @@ class Command(BaseCommand):
 
         #make PostPhotos
         for i in range(0, len(images)):
-            #make Tags
-            #make Posts without pictures
+            #make Posts and Photos
             mixer.blend(Post, title=random.choice(news_titles))
             mixer.blend(Photo, image=File(open(images[i], 'rb')))
         for i in range(20):

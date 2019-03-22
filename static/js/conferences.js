@@ -1,5 +1,7 @@
+"use_strict";
 $(document).ready(function() {
     console.log('conferences');
+    //add conference modal ajax
     $('#submit_conference_button').click((event)=>{
         event.preventDefault();
         // console.log('click');
@@ -38,6 +40,27 @@ $(document).ready(function() {
                 console.log('fail');
                 console.log(response);
             });
-    })
+    });
+    //edit conference ajax
+    $('.conference_edit').click((event)=>{
+        event.preventDefault();
+        var conference_id = $(event.target).parent().data('conference-id');
+        edit_conference(conference_id);
+        $(`#multiCollapseConf${conference_id}`).toggle();
+    });
+    function edit_conference(conference_id) {
+        // console.log(conference_id);
+        var data = {'conference_id': conference_id};
+        if ($(`#form_${conference_id}`).length == 0) {
+            $.post('/conferences/edit/', data)
+                .done(function(response) {
+                    $('#loadingmessage').hide();
+                    $(`#td_${conference_id}`).html(response);
+                })
+                .fail(function(response){
+                    console.log(response);
+                });
+        }
     }
-);
+
+});

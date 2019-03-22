@@ -26,11 +26,11 @@ class Member(models.Model):
     email = models.EmailField(max_length=100, verbose_name='Email')
     city = models.CharField(max_length=100, verbose_name='Город проживания')
     user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    short_description = models.TextField(u'Краткая информация (награды, звания и т.д.)', 
+    short_description = models.TextField(u'Краткая информация (награды, звания и т.д.)',
                                             blank=True, null=True, default=None)
     subscription = models.BooleanField(u'Подписка на обновления')
     # membership = models.BooleanField(verbose_name='Членство в РСПС')
-    # conference = models.ForeignKey(Conference, verbose_name='Зареристрирован на:', 
+    # conference = models.ForeignKey(Conference, verbose_name='Зареристрирован на:',
     # 	default=null, null=True, on_delete=models.SET_NULL)
 
     class Meta:
@@ -51,7 +51,7 @@ class Conference(models.Model):
     date = models.DateField(verbose_name='Дата проведения')
     place = models.CharField(max_length=100, verbose_name='Место проведения')
     completed = models.BooleanField(verbose_name='Проведена', default=False)
-    members = models.ManyToManyField(Member, verbose_name='Участники')
+    members = models.ManyToManyField(Member, verbose_name='Участники', blank=True, default=None)
 
     class Meta:
         verbose_name = 'Конференция'
