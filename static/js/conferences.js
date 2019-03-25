@@ -61,16 +61,31 @@ $(document).ready(function () {
         var conference_id = $(event.target).data('conference-id');
         var lst = $(document).find(`#conference_${conference_id}_subjects`);
         var html_question = `
-            <div class="input-group input-group-sm mb-3">
+            <div class="question_theme input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="countQuest01"><strong>${lst.children().length+1}</strong></span>
                 </div>
                 <input type="text" class="form-control" placeholder="Введите вопрос повестки дня">
                 <div class="input-group-append">
-                    <button class="btn btn-outline-danger" type="button" id="button-addon1" title="Удалить вопрос"><i class="fa fa-times"></i></button>
+                    <button class="remove_question btn btn-outline-danger" type="button" title="Удалить вопрос"><i class="fa fa-times"></i></button>
             </div>
             </div>`;
         lst.append(html_question);
+    });
+
+    $('td').on("click", ".remove_question", (event) => {
+        event.preventDefault();
+        console.log('deleted');
+        let element = $(event.target);
+        var lst = element.closest('.col-sm-8').children();
+        element.closest('.question_theme').remove();
+        // console.log($(event.target).closest('.col-sm-8').attr('id'));
+        let counter = 0;
+        for (el of lst) {
+            console.log(counter++);
+        }
+        // var lst = $(document).find(`#${lst_id}`).children();
+
     });
 
     function edit_conference(conference_id) {

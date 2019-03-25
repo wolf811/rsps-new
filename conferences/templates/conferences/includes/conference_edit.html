@@ -42,13 +42,13 @@
 			<div id="conference_{{ conference.pk }}_subjects" class="col-sm-8 col-lg-6">
 				{% comment %} {{ question_formset }} {% endcomment %}
 				{% for form in question_formset %}
-				<div class="input-group input-group-sm mb-3">
+				<div class="question_theme input-group input-group-sm mb-3">
 					<div class="input-group-prepend">
 						<span class="input-group-text"><strong>{{forloop.counter}}</strong></span>
 					</div>
 					{{ form }}
 					<div class="input-group-append">
-						<button class="btn btn-outline-danger" type="button" title="Удалить вопрос"><i
+						<button class="remove_question btn btn-outline-danger" type="button" title="Удалить вопрос"><i
 								class="fa fa-times"></i></button>
 					</div>
 				</div>
