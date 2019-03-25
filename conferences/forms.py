@@ -19,7 +19,6 @@ class ConferenceForm(forms.ModelForm):
 class ConferenceEditForm(forms.ModelForm):
     class Meta:
         model = Conference
-
         fields = ('title', 'date', 'place')
         widgets = {
             'date': forms.TextInput({
@@ -30,6 +29,11 @@ class ConferenceEditForm(forms.ModelForm):
         }
 
 class SubjectForm(forms.ModelForm):
+    subject = forms.CharField(widget=forms.TextInput({
+                'type': "text",
+                'class': "form-control form-control-sm",
+                'placeholder': 'Введите вопрос повестки дня',
+                }), label='')
     class Meta:
         model = ConferenceTheme
-        exclude = ()
+        exclude = ('conference',)

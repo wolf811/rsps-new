@@ -22,7 +22,7 @@
 			<label for="id_place" class="col-sm-4 col-form-label col-form-label-sm">Место проведения&nbsp;<span
 					class="text-danger">*</span></label>
 			<div class="col-sm-8 col-lg-6">
-			     {{ edit_conference_form.place|addcss:"form-control form-control-sm"}}
+				{{ edit_conference_form.place|addcss:"form-control form-control-sm"}}
 				{% comment %} <input type="text" class="form-control form-control-sm" placeholder=""
 					value="236005, г. Обнинск, ул. Колхозная, д. 118A"> {% endcomment %}
 			</div>
@@ -31,47 +31,35 @@
 			<label for="id_title" class="col-sm-4 col-form-label col-form-label-sm">Название конференции&nbsp;<span
 					class="text-danger">*</span></label>
 			<div class="col-sm-8 col-lg-6">
-			     {{ edit_conference_form.title|addcss:"form-control form-control-sm"}}
+				{{ edit_conference_form.title|addcss:"form-control form-control-sm"}}
 				{% comment %} <input type="text" class="form-control form-control-sm" placeholder=""
 					value="Конференция РСПС по Калужской области 2019"> {% endcomment %}
 			</div>
 		</div>
-		<div class="form-group row align-items-center">
+		<div class="form-group row align-items-start">
 			<label for="" class="col-sm-4 col-form-label col-form-label-sm">Повестка дня&nbsp;<span
 					class="text-danger">*</span></label>
-			<div class="col-sm-8 col-lg-6">
-				<div class="input-group input-group-sm">
+			<div id="conference_{{ conference.pk }}_subjects" class="col-sm-8 col-lg-6">
+				{% comment %} {{ question_formset }} {% endcomment %}
+				{% for form in question_formset %}
+				<div class="input-group input-group-sm mb-3">
 					<div class="input-group-prepend">
-						<span class="input-group-text"><strong>1</strong></span>
+						<span class="input-group-text"><strong>{{forloop.counter}}</strong></span>
 					</div>
-					<input type="text" class="form-control" placeholder="Введите вопрос повестки дня">
+					{{ form }}
 					<div class="input-group-append">
 						<button class="btn btn-outline-danger" type="button" title="Удалить вопрос"><i
 								class="fa fa-times"></i></button>
 					</div>
 				</div>
-			</div>
-		</div>
-		<div id="add_field_area">
-			<div class="form-group row align-items-center" id="add">
-				<div class="col-sm-8 col-lg-6 offset-sm-4">
-					<div class="input-group input-group-sm">
-						<div class="input-group-prepend">
-							<span class="input-group-text" id="countQuest02"><strong>2</strong></span>
-						</div>
-						<input type="text" class="form-control" placeholder="Введите вопрос повестки дня">
-						<div class="input-group-append">
-							<button class="btn btn-outline-danger" type="button" title="Удалить вопрос"><i
-									class="fa fa-times"></i></button>
-						</div>
-					</div>
-				</div>
+				{% endfor %}
 			</div>
 		</div>
 		<div class="form-group row">
 			<label for="" class="sr-only">Добавить вопрос</label>
 			<div class="col-sm-6 offset-sm-4">
-				<button class="btn btn-outline-secondary btn-xs"><i class="fa fa-plus mr-2"></i>Добавить вопрос</button>
+				<a class="add_question btn btn-outline-secondary btn-xs" data-conference-id="{{conference.pk}}"><i class="fa fa-plus mr-2"></i>Добавить
+					вопрос</a>
 			</div>
 		</div>
 	</div>

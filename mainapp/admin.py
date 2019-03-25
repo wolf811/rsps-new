@@ -2,6 +2,7 @@ from django.contrib import admin
 from mainapp.models import Conference
 from mainapp.models import Member, Post, Photo
 from members.models import Membership, MemberRegistration
+from conferences.models import ConferenceTheme
 from django.urls import reverse
 from django.utils.html import format_html
 
@@ -37,6 +38,11 @@ class PhotoInline(admin.StackedInline):
     get_edit_link.short_description = "Изменить"
     get_edit_link.allow_tags = True
 
+class ConferenceThemeInline(admin.StackedInline):
+    model = ConferenceTheme
+    extra = 0
+    fields = ['subject']
+
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     view_on_site = True
@@ -54,7 +60,12 @@ class MemberAdmin(admin.ModelAdmin):
     fields = ['fio', 'job', 'jobplace', 'tel', 'email', 'user']
     inlines = [MembershipInline]
 
+@admin.register(Conference)
+class ConferenceEdmin(admin.ModelAdmin):
+    view_on_site = False
+    exclude = ()
+    inlines = [ConferenceThemeInline]
 
-admin.site.register(Conference)
+# admin.site.register(Conference)
 admin.site.register(MemberRegistration)
 admin.site.register(Membership)

@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from mainapp.models import Conference
-from .forms import ConferenceForm, ConferenceEditForm
+from .models import ConferenceTheme
+from .forms import ConferenceForm, ConferenceEditForm, SubjectForm
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.forms import formset_factory
 
 # Create your views here.
 # path('list/', conferences.conference_list, name='member_list'),
@@ -47,8 +49,15 @@ def conference_list(request):
 def edit_conference(request):
     edit_conference = Conference.objects.get(id=request.POST.get('conference_id'))
     edit_conference_form = ConferenceEditForm(instance=edit_conference)
+    questions = ConferenceTheme.objects.filter(conference=edit_conference)
+    SubjectFormSet = formset_factory(SubjectForm, extra=1)
+    formset = SubjectFormSet(initial=[
+        {'subject': question.subject} for question in questions])
+    print('FORMSET', formset)
     content = {
         'conference': edit_conference,
+        # 'questions': questions,
+        'question_formset': formset,
         'edit_conference_form': edit_conference_form
     }
     return render(request, 'conferences/includes/conference_edit.html', content)
