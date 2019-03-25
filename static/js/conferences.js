@@ -56,6 +56,8 @@ $(document).ready(function() {
                 .done(function(response) {
                     $('#loadingmessage').hide();
                     $(`#td_${conference_id}`).html(response);
+                    //initialize datepicker to loaded content
+                    $('.datepicker-here').datepicker();
                 })
                 .fail(function(response){
                     console.log(response);
