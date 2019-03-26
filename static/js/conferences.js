@@ -22,11 +22,7 @@ $(document).ready(function () {
                     });
                 }
                 for (let key in response) {
-                    if (key in {
-                            'title': 1,
-                            'date': 1,
-                            'place': 1
-                        }) {
+                    if (key in {'title': 1, 'date': 1, 'place': 1}) {
                         let error = response[key]
                         let field = $('#add_new_conference_form').find(`#id_${key}`);
                         for (let err of error) {
@@ -43,7 +39,7 @@ $(document).ready(function () {
                 //handle errors
             })
             .fail(function (response) {
-                console.log('fail');
+                console.log('***FAIL***');
                 console.log(response);
             });
     });
@@ -66,16 +62,32 @@ $(document).ready(function () {
                 </div>
                 <input type="text" class="form-control" placeholder="Введите вопрос повестки дня">
                 <div class="input-group-append">
-                    <button class="remove_question btn btn-outline-danger" type="button" title="Удалить вопрос"><i class="fa fa-times"></i></button>
+                    <button data-form-number="NEW_SUBJECT" class="remove_question btn btn-outline-danger" type="button" title="Удалить вопрос"><i class="fa fa-times"></i></button>
             </div>
             </div>`;
         lst.append(html_question);
+        let conf_data = $('td').find(`#conference_${conference_id}_form_data`);
+        for (el of conf_data.children()) {
+            if ($(el).attr('id') == 'id_form-TOTAL_FORMS') {
+                // let val = $(el).attr('value');
+                $(el).val(lst.children().length+"");
+            }
+        }
     });
 
+    //remove quesitons handler (updating question number)
     $('td').on("click", ".remove_question", (event) => {
         event.preventDefault();
         let element = $(event.target);
-        let lst_id = element.closest('.col-sm-8').attr('id');
+        let lst_id = element.closest('.question_list').attr('id');
+        // console.log(lst_id);
+        pattern = /\d+/g;
+        let conference_id = lst_id.match(pattern);
+        // console.log('CONFERENCE ID:', conference_id[0]);
+        console.log(element.parent());
+        let form_number = element.parent().data('form-number');
+        let to_delete_message = `form-${form_number}-DELETE`;
+        console.log('TO_DELETE', to_delete_message);
         element.closest('.question_theme').remove();
         let updated_lst = $(document).find(`#${lst_id}`).children();
         //update numbers of questions in <strong> tag
@@ -85,6 +97,18 @@ $(document).ready(function () {
             question_number.text(counter);
             counter++;
         }
+        // conference_{{ conference.pk }}_form_data
+        let conf_data = $('td').find(`#conference_${conference_id}_form_data`);
+        for (el of conf_data.children()) {
+            if ($(el).attr('id') == 'id_form-TOTAL_FORMS') {
+                // let val = $(el).attr('value');
+                $(el).val(counter-1);
+            }
+            console.log(el);
+        }
+        conf_data.append(`<input type="hidden" name="to_delete_${form_number}" value="form-${form_number}-DELETE">`);
+        // console.log(conf_data.children());
+
     });
 
     function edit_conference(conference_id) {

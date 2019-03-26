@@ -39,7 +39,10 @@
 		<div class="form-group row align-items-start">
 			<label for="" class="col-sm-4 col-form-label col-form-label-sm">Повестка дня&nbsp;<span
 					class="text-danger">*</span></label>
-			<div id="conference_{{ conference.pk }}_subjects" class="col-sm-8 col-lg-6">
+				<div id="conference_{{ conference.pk }}_form_data">
+					{{ question_formset.management_form }}
+				</div>
+			<div id="conference_{{ conference.pk }}_subjects" class="question_list col-sm-8 col-lg-6">
 				{% comment %} {{ question_formset }} {% endcomment %}
 				{% for form in question_formset %}
 				<div class="question_theme input-group input-group-sm mb-3">
@@ -48,8 +51,8 @@
 					</div>
 					{{ form }}
 					<div class="input-group-append">
-						<button class="remove_question btn btn-outline-danger" type="button" title="Удалить вопрос"><i
-								class="fa fa-times"></i></button>
+						<button data-form-number="{{ forloop.counter0 }}" class="remove_question btn btn-outline-danger" type="button" title="Удалить вопрос">
+						<i class="fa fa-times"></i></button>
 					</div>
 				</div>
 				{% endfor %}
