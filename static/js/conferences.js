@@ -84,10 +84,8 @@ $(document).ready(function () {
         pattern = /\d+/g;
         let conference_id = lst_id.match(pattern);
         // console.log('CONFERENCE ID:', conference_id[0]);
-        console.log(element.parent());
         let form_number = element.parent().data('form-number');
         let to_delete_message = `form-${form_number}-DELETE`;
-        console.log('TO_DELETE', to_delete_message);
         element.closest('.question_theme').remove();
         let updated_lst = $(document).find(`#${lst_id}`).children();
         //update numbers of questions in <strong> tag
@@ -97,17 +95,14 @@ $(document).ready(function () {
             question_number.text(counter);
             counter++;
         }
-        // conference_{{ conference.pk }}_form_data
         let conf_data = $('td').find(`#conference_${conference_id}_form_data`);
         for (el of conf_data.children()) {
             if ($(el).attr('id') == 'id_form-TOTAL_FORMS') {
                 // let val = $(el).attr('value');
                 $(el).val(counter-1);
             }
-            console.log(el);
         }
         conf_data.append(`<input type="hidden" name="to_delete_${form_number}" value="form-${form_number}-DELETE">`);
-        // console.log(conf_data.children());
 
     });
 
