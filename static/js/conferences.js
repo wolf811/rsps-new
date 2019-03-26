@@ -57,13 +57,12 @@ $(document).ready(function () {
     //delegate event handler to dinamic loaded content
     $('td').on("click", ".add_question", (event) => {
         event.preventDefault();
-        console.log($(event.target).data('conference-id'));
         var conference_id = $(event.target).data('conference-id');
         var lst = $(document).find(`#conference_${conference_id}_subjects`);
         var html_question = `
             <div class="question_theme input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="countQuest01"><strong>${lst.children().length+1}</strong></span>
+                    <span class="input-group-text" id="countQuest01"><strong class="question_number">${lst.children().length+1}</strong></span>
                 </div>
                 <input type="text" class="form-control" placeholder="Введите вопрос повестки дня">
                 <div class="input-group-append">
@@ -75,17 +74,17 @@ $(document).ready(function () {
 
     $('td').on("click", ".remove_question", (event) => {
         event.preventDefault();
-        console.log('deleted');
         let element = $(event.target);
-        var lst = element.closest('.col-sm-8').children();
+        let lst_id = element.closest('.col-sm-8').attr('id');
         element.closest('.question_theme').remove();
-        // console.log($(event.target).closest('.col-sm-8').attr('id'));
-        let counter = 0;
-        for (el of lst) {
-            console.log(counter++);
+        let updated_lst = $(document).find(`#${lst_id}`).children();
+        //update numbers of questions in <strong> tag
+        let counter = 1;
+        for (el of updated_lst) {
+            let question_number = $(el).find('.question_number');
+            question_number.text(counter);
+            counter++;
         }
-        // var lst = $(document).find(`#${lst_id}`).children();
-
     });
 
     function edit_conference(conference_id) {

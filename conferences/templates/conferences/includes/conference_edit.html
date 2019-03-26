@@ -44,7 +44,7 @@
 				{% for form in question_formset %}
 				<div class="question_theme input-group input-group-sm mb-3">
 					<div class="input-group-prepend">
-						<span class="input-group-text"><strong>{{forloop.counter}}</strong></span>
+						<span class="input-group-text"><strong class="question_number" >{{forloop.counter}}</strong></span>
 					</div>
 					{{ form }}
 					<div class="input-group-append">
