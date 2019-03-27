@@ -39,21 +39,27 @@
 		<div class="form-group row align-items-start">
 			<label for="" class="col-sm-4 col-form-label col-form-label-sm">Повестка дня&nbsp;<span
 					class="text-danger">*</span></label>
-				<div id="conference_{{ conference.pk }}_form_data">
-					{{ question_formset.management_form }}
-				</div>
+			<div id="conference_{{ conference.pk }}_form_data">
+				{{ question_formset.management_form }}
+			</div>
 			<div id="conference_{{ conference.pk }}_subjects" class="question_list col-sm-8 col-lg-6">
 				{% comment %} {{ question_formset }} {% endcomment %}
 				{% for form in question_formset %}
 				<div class="question_theme input-group input-group-sm mb-3">
 					<div class="input-group-prepend">
-						<span class="input-group-text"><strong class="question_number" >{{forloop.counter}}</strong></span>
+						<span class="input-group-text"><strong
+								class="question_number">{{forloop.counter}}</strong></span>
 					</div>
-					{{ form }}
+					{% comment %} {{ form }} {% endcomment %}
+					{{ form.subject }}
 					<div class="input-group-append">
-						<button data-form-number="{{ forloop.counter0 }}" class="remove_question btn btn-outline-danger" type="button" title="Удалить вопрос">
-						<i class="fa fa-times"></i></button>
+						<button data-form-number="{{ forloop.counter0 }}" class="remove_question btn btn-outline-danger"
+							type="button" title="Удалить вопрос">
+							<i class="fa fa-times"></i></button>
 					</div>
+				</div>
+				<div id="delete_input_{{ conference.pk }}_{{ forloop.counter0 }}" class="d-none">
+					{{ form.DELETE }}{{ form.id }}
 				</div>
 				{% endfor %}
 			</div>
@@ -61,7 +67,8 @@
 		<div class="form-group row">
 			<label for="" class="sr-only">Добавить вопрос</label>
 			<div class="col-sm-6 offset-sm-4">
-				<a class="add_question btn btn-outline-secondary btn-xs" data-conference-id="{{conference.pk}}"><i class="fa fa-plus mr-2"></i>Добавить
+				<a class="add_question btn btn-outline-secondary btn-xs" data-conference-id="{{conference.pk}}"><i
+						class="fa fa-plus mr-2"></i>Добавить
 					вопрос</a>
 			</div>
 		</div>
@@ -119,7 +126,11 @@
 			</label>
 		</div>
 	</div>
-	<button type="submit" class="btn btn-primary btn-xs">Сохранить</button>
-	<a href="#multiCollapseConf{{conference.pk}}" class="btn btn-outline-primary btn-xs" data-toggle="collapse"
-		aria-expanded="false" role="button">Закрыть</a>
+	<div>
+		<button type="submit" class="save_conference_button btn btn-primary btn-xs">Сохранить</button>
+		<a href="#multiCollapseConf{{conference.pk}}" class="btn btn-outline-primary btn-xs" data-toggle="collapse"
+			aria-expanded="false" role="button">Закрыть</a>
+		<div class="d-inline-block ml-2" id="messages_{{ conference.pk }}">
+		</div>
+	</div>
 </form>

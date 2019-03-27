@@ -7,7 +7,8 @@ from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.forms import formset_factory
+from django.forms import modelformset_factory
+import pdb
 
 # Create your views here.
 # path('list/', conferences.conference_list, name='member_list'),
@@ -45,22 +46,36 @@ def conference_list(request):
     }
     return render(request, 'conferences/conferences_list.html', content)
 
-
+@login_required
 def edit_conference(request):
-    edit_conference = Conference.objects.get(id=request.POST.get('conference_id'))
-    edit_conference_form = ConferenceEditForm(instance=edit_conference)
+    # SubjectFormSet = modelformset_factory(ConferenceTheme, form=SubjectForm)
+    SubjectFormSet = modelformset_factory(ConferenceTheme, form=SubjectForm, can_delete=True)
+    edit_conference = Conference.objects.get(pk=request.POST.get('conference_id'))
     questions = ConferenceTheme.objects.filter(conference=edit_conference)
-    SubjectFormSet = formset_factory(SubjectForm, extra=1)
-    formset = SubjectFormSet(initial=[
-        {'subject': question.subject} for question in questions])
-    print('FORMSET', formset)
-    content = {
-        'conference': edit_conference,
-        # 'questions': questions,
-        'question_formset': formset,
-        'edit_conference_form': edit_conference_form
-    }
-    return render(request, 'conferences/includes/conference_edit.html', content)
+    if request.method == 'POST':
+        print('REQUEST POST', request.POST)
+        if request.POST.get('saving_conference'):
+            formset = SubjectFormSet(request.POST)
+            # pdb.set_trace()
+            if formset.is_valid():
+                formset.save()
+                success_message = {
+                    'message': '<b class="text-success">recieved</b>',
+                    'conference_id': request.POST.get('conference_id')}
+                return JsonResponse(success_message)
+            else:
+                errors = {'errors': formset.errors}
+                print('ERRORS', errors)
+                return JsonResponse(errors)
+        edit_conference_form = ConferenceEditForm(instance=edit_conference)
+        formset = SubjectFormSet(queryset=questions)
+        content = {
+            'conference': edit_conference,
+            # 'questions': questions,
+            'question_formset': formset,
+            'edit_conference_form': edit_conference_form
+        }
+        return render(request, 'conferences/includes/conference_edit.html', content)
 
 
 def delete_conference(request):

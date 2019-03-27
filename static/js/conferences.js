@@ -1,6 +1,6 @@
 "use_strict";
 $(document).ready(function () {
-    console.log('conferences');
+    // console.log('conferences');
     //add conference modal ajax
     $('#submit_conference_button').click((event) => {
         event.preventDefault();
@@ -54,17 +54,18 @@ $(document).ready(function () {
     $('td').on("click", ".add_question", (event) => {
         event.preventDefault();
         var conference_id = $(event.target).data('conference-id');
-        var lst = $(document).find(`#conference_${conference_id}_subjects`);
+        var lst_input_groups = $(`#conference_${conference_id}_subjects`).find('.input-group-text');
         var html_question = `
             <div class="question_theme input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="countQuest01"><strong class="question_number">${lst.children().length+1}</strong></span>
+                    <span class="input-group-text" id="countQuest01"><strong class="question_number">${lst_input_groups.length+1}</strong></span>
                 </div>
                 <input type="text" class="form-control" placeholder="Введите вопрос повестки дня">
                 <div class="input-group-append">
                     <button data-form-number="NEW_SUBJECT" class="remove_question btn btn-outline-danger" type="button" title="Удалить вопрос"><i class="fa fa-times"></i></button>
             </div>
             </div>`;
+        var lst = $(`#conference_${conference_id}_subjects`);
         lst.append(html_question);
         let conf_data = $('td').find(`#conference_${conference_id}_form_data`);
         for (el of conf_data.children()) {
@@ -80,30 +81,44 @@ $(document).ready(function () {
         event.preventDefault();
         let element = $(event.target);
         let lst_id = element.closest('.question_list').attr('id');
-        // console.log(lst_id);
-        pattern = /\d+/g;
+        let pattern = /\d+/g;
         let conference_id = lst_id.match(pattern);
-        // console.log('CONFERENCE ID:', conference_id[0]);
-        let form_number = element.parent().data('form-number');
-        let to_delete_message = `form-${form_number}-DELETE`;
+        let form_number = element.closest('button').data('form-number');
+        console.log('FORM_NUMBER', form_number);
         element.closest('.question_theme').remove();
-        let updated_lst = $(document).find(`#${lst_id}`).children();
+        let del_input = $(`#delete_input_${conference_id}_${form_number}`).find(`#id_form-${form_number}-DELETE`)
+        $(del_input).prop("checked", true);
+        // id_form-0-DELETE
+
+        let subject_list = $(`#${lst_id}`).find('.input-group-text');
+        // console.log(subject_list);
         //update numbers of questions in <strong> tag
-        let counter = 1;
-        for (el of updated_lst) {
-            let question_number = $(el).find('.question_number');
-            question_number.text(counter);
-            counter++;
+        let counter = 0;
+        for (el of subject_list) {
+                counter++;
+                let question_number = $(el).find('.question_number');
+                question_number.text(counter);
         }
         let conf_data = $('td').find(`#conference_${conference_id}_form_data`);
         for (el of conf_data.children()) {
             if ($(el).attr('id') == 'id_form-TOTAL_FORMS') {
                 // let val = $(el).attr('value');
-                $(el).val(counter-1);
+                $(el).val(counter);
             }
         }
-        conf_data.append(`<input type="hidden" name="to_delete_${form_number}" value="form-${form_number}-DELETE">`);
+        // conf_data.append(`<input type="hidden" name="to_delete_${form_number}" value="form-${form_number}-DELETE">`);
+        // <input type="checkbox" name="form-0-DELETE" id="id_form-0-DELETE">
+        // <input type="checkbox" name="form-0-DELETE" id="id_form-0-DELETE">
+        // conf_data.after(`<input class="d-none" type="checkbox" name="form-${form_number}-DELETE" id="id_form-${form_number}-DELETE" checked>`);
+        // conf_data.after(`<input class="d-none" type="checkbox" name="form-${form_number}-DELETE" checked>`);
 
+    });
+
+    $('td').on('click', '.save_conference_button' , (event) => {
+        event.preventDefault();
+        var conference = $(event.target).closest('td').attr('id');
+        var conference_id = conference.match( /\d+/g)[0];
+        save_conference(conference_id);
     });
 
     function edit_conference(conference_id) {
@@ -124,6 +139,31 @@ $(document).ready(function () {
                     console.log(response);
                 });
         }
+    };
+
+    function save_conference(conference_id) {
+        console.log('SAVING', conference_id);
+        data = $('td').find(`#form_${conference_id}`).serializeArray();
+        data.push({name: 'saving_conference', value: 'True'});
+        data.push({name: 'conference_id', value: conference_id});
+        console.log(data);
+        $.post('/conferences/edit/', data)
+                .done(function (response) {
+                    // handle massages
+                    $(`#messages_${conference_id}`).html(response.message);
+                    // handle error server messages
+                    if ('errors' in response) {
+                        for (err of response['errors']) {
+                            console.log(err);
+                        }
+                    }
+                    //initialize datepicker to loaded content
+                    // $('.datepicker-here').datepicker();
+                })
+                .fail(function (response) {
+                    console.log('***ERROR***');
+                    console.log(response);
+                });
     };
 
 });
