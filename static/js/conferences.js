@@ -1,11 +1,10 @@
 "use_strict";
 $(document).ready(function () {
-    // console.log('conferences');
     //add conference modal ajax
     $('#submit_conference_button').click((event) => {
         event.preventDefault();
         // console.log('click');
-        data = $('#add_new_conference_form').serializeArray();
+        let data = $('#add_new_conference_form').serializeArray();
         $.post('', data)
             .done(function (response) {
                 console.log('success');
@@ -14,13 +13,14 @@ $(document).ready(function () {
                 if ('success' in response) {
                     $('#results').html(`
                     <p class="text-success">
-                    Данные успешно сохранены, форму можно закрыть
+                        Данные успешно сохранены, форму можно закрыть
                     </p>`);
                     $('#dismiss-link').text('Закрыть форму');
                     $('#dismiss-link').click(() => {
                         location.reload()
                     });
                 }
+                //handle errors
                 for (let key in response) {
                     if (key in {'title': 1, 'date': 1, 'place': 1}) {
                         let error = response[key]
@@ -36,7 +36,6 @@ $(document).ready(function () {
                         }
                     }
                 }
-                //handle errors
             })
             .fail(function (response) {
                 console.log('***FAIL***');
@@ -58,20 +57,21 @@ $(document).ready(function () {
         var html_question = `
             <div class="question_theme input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="countQuest01"><strong class="question_number">${lst_input_groups.length+1}</strong></span>
+                    <span class="input-group-text" id="form-${lst_input_groups.length}-id"><strong class="question_number">${lst_input_groups.length+1}</strong></span>
                 </div>
-                <input type="text" class="form-control" placeholder="Введите вопрос повестки дня">
+                <input type="text" name="form-${lst_input_groups.length}-subject" id="id_form-${lst_input_groups.length}-subject" class="form-control" placeholder="Введите вопрос повестки дня">
                 <div class="input-group-append">
                     <button data-form-number="NEW_SUBJECT" class="remove_question btn btn-outline-danger" type="button" title="Удалить вопрос"><i class="fa fa-times"></i></button>
             </div>
             </div>`;
+            // <input type="text" name="form-0-subject" id="id_form-0-subject" placeholder="Введите вопрос повестки дня" class="form-control form-control-sm">
         var lst = $(`#conference_${conference_id}_subjects`);
         lst.append(html_question);
         let conf_data = $('td').find(`#conference_${conference_id}_form_data`);
         for (el of conf_data.children()) {
             if ($(el).attr('id') == 'id_form-TOTAL_FORMS') {
                 // let val = $(el).attr('value');
-                $(el).val(lst.children().length+"");
+                $(el).val(lst_input_groups.length+1+"");
             }
         }
     });
@@ -86,12 +86,13 @@ $(document).ready(function () {
         let form_number = element.closest('button').data('form-number');
         console.log('FORM_NUMBER', form_number);
         element.closest('.question_theme').remove();
+        //find django hidden input and make it checked
+        //django formsets works with hidden input data
         let del_input = $(`#delete_input_${conference_id}_${form_number}`).find(`#id_form-${form_number}-DELETE`)
         $(del_input).prop("checked", true);
         // id_form-0-DELETE
 
         let subject_list = $(`#${lst_id}`).find('.input-group-text');
-        // console.log(subject_list);
         //update numbers of questions in <strong> tag
         let counter = 0;
         for (el of subject_list) {
@@ -106,12 +107,6 @@ $(document).ready(function () {
                 $(el).val(counter);
             }
         }
-        // conf_data.append(`<input type="hidden" name="to_delete_${form_number}" value="form-${form_number}-DELETE">`);
-        // <input type="checkbox" name="form-0-DELETE" id="id_form-0-DELETE">
-        // <input type="checkbox" name="form-0-DELETE" id="id_form-0-DELETE">
-        // conf_data.after(`<input class="d-none" type="checkbox" name="form-${form_number}-DELETE" id="id_form-${form_number}-DELETE" checked>`);
-        // conf_data.after(`<input class="d-none" type="checkbox" name="form-${form_number}-DELETE" checked>`);
-
     });
 
     $('td').on('click', '.save_conference_button' , (event) => {
@@ -143,10 +138,10 @@ $(document).ready(function () {
 
     function save_conference(conference_id) {
         console.log('SAVING', conference_id);
-        data = $('td').find(`#form_${conference_id}`).serializeArray();
+        let data = $('td').find(`#form_${conference_id}`).serializeArray();
         data.push({name: 'saving_conference', value: 'True'});
         data.push({name: 'conference_id', value: conference_id});
-        console.log(data);
+        console.log('SERIALIZED FORM', data);
         $.post('/conferences/edit/', data)
                 .done(function (response) {
                     // handle massages

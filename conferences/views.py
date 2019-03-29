@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.forms import modelformset_factory
-import pdb
+# import pdb
 
 # Create your views here.
 # path('list/', conferences.conference_list, name='member_list'),
@@ -56,9 +56,21 @@ def edit_conference(request):
         print('REQUEST POST', request.POST)
         if request.POST.get('saving_conference'):
             formset = SubjectFormSet(request.POST)
-            # pdb.set_trace()
             if formset.is_valid():
+                if formset.has_changed():
+                    for form in formset:
+                        if form not in formset.initial_forms:
+                            if form.is_valid():
+                                instance = form.save(commit=False)
+                                instance.conference = edit_conference
+                                instance.save()
                 formset.save()
+                # formset.save()
+                # for form in formset:
+                #     if form not in formset.deleted_forms:
+                #         instance = form.save(commit=False)
+                #         instance.conference = edit_conference
+                #         instance.save()
                 success_message = {
                     'message': '<b class="text-success">recieved</b>',
                     'conference_id': request.POST.get('conference_id')}
