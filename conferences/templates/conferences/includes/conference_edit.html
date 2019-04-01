@@ -58,12 +58,20 @@
 							<i class="fa fa-times"></i></button>
 					</div>
 				</div>
-				<div id="delete_input_{{ conference.pk }}_{{ forloop.counter0 }}" class="d-none">
-					{{ form.DELETE }}{{ form.id }}
+				<div id="delete_input_{{ conference.pk }}_{{ forloop.counter0 }}" class="d-block">
+					{{ form.DELETE }} {{ form.id }}
 				</div>
 				{% endfor %}
 			</div>
 		</div>
+		{% comment %} <div class="empty_question d-none">
+			{{ question_formset.empty_form }}
+								<div class="input-group-append">
+						<button data-form-number="{{ forloop.counter0 }}" class="remove_question btn btn-outline-danger"
+							type="button" title="Удалить вопрос">
+							<i class="fa fa-times"></i></button>
+					</div>
+		</div> {% endcomment %}
 		<div class="form-group row">
 			<label for="" class="sr-only">Добавить вопрос</label>
 			<div class="col-sm-6 offset-sm-4">

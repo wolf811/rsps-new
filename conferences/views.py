@@ -8,7 +8,7 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.forms import modelformset_factory
-# import pdb
+import pdb
 
 # Create your views here.
 # path('list/', conferences.conference_list, name='member_list'),
@@ -50,33 +50,34 @@ def conference_list(request):
 def edit_conference(request):
     # SubjectFormSet = modelformset_factory(ConferenceTheme, form=SubjectForm)
     SubjectFormSet = modelformset_factory(ConferenceTheme, form=SubjectForm, can_delete=True)
-    edit_conference = Conference.objects.get(pk=request.POST.get('conference_id'))
+    try:
+        edit_conference = Conference.objects.get(pk=request.POST.get('conference_id'))
+    except Exception as e:
+        print ('ERROR', e)
+        return JsonResponse({'server_error': e})
     questions = ConferenceTheme.objects.filter(conference=edit_conference)
     if request.method == 'POST':
         print('REQUEST POST', request.POST)
         if request.POST.get('saving_conference'):
             formset = SubjectFormSet(request.POST)
             if formset.is_valid():
-                if formset.has_changed():
-                    for form in formset:
-                        if form not in formset.initial_forms:
-                            if form.is_valid():
-                                instance = form.save(commit=False)
-                                instance.conference = edit_conference
-                                instance.save()
+                # pdb.set_trace()
+                for form in formset:
+                    if form not in formset.initial_forms:
+                        form = SubjectForm(form.data)
+                        if form.is_valid():
+                            instance = form.save(commit=False)
+                            instance.conference = edit_conference
+                            instance.save()
+                        else:
+                            return JsonResponse({'form_errors': form.errors})
                 formset.save()
-                # formset.save()
-                # for form in formset:
-                #     if form not in formset.deleted_forms:
-                #         instance = form.save(commit=False)
-                #         instance.conference = edit_conference
-                #         instance.save()
                 success_message = {
                     'message': '<b class="text-success">recieved</b>',
                     'conference_id': request.POST.get('conference_id')}
                 return JsonResponse(success_message)
             else:
-                errors = {'errors': formset.errors}
+                errors = {'formset_errors': formset.errors, 'message': 'Ошибка сохранения'}
                 print('ERRORS', errors)
                 return JsonResponse(errors)
         edit_conference_form = ConferenceEditForm(instance=edit_conference)

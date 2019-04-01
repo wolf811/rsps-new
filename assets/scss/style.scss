@@ -45,7 +45,7 @@
 		margin-top: 0.3rem;
 	}
 }
-	
+
 /* End */
 
 body {
@@ -63,7 +63,7 @@ body {
 		padding-top: 0.5rem;
 		padding-bottom: 0.5rem;
 	}
-	
+
 	.navbar {
 		padding: 0;
 
@@ -77,13 +77,13 @@ body {
 				-ms-align-items: center;
 				align-items: center;
 			}
-			
+
 			border: none;
 			.navbar-toggler-icon {
 				background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 			}
 			.navbar-toggler-text {
-				color: #fff; 
+				color: #fff;
 				font-size: 1.2rem;
 				text-transform: uppercase;
 			}
@@ -143,7 +143,7 @@ body {
 			font-size: 0.8rem;
 		}
 	}
-	
+
 	h2 {
 		margin-bottom: 0;
 		@media (min-width: 576px) and (max-width: 991px){
@@ -230,7 +230,7 @@ main {
 	}
 	.nav-tabs {
 		.nav-link {
-			border-radius: 0; 
+			border-radius: 0;
 			color: #086da3;
 		}
 	}
@@ -274,7 +274,7 @@ main {
 		text-shadow: #290100 0 -1px 0;
 		padding: 20px 50px;
 		font-size: 1rem;
-		
+
 		&:hover {
 			background: #0a89cf !important;
 		}
@@ -376,7 +376,7 @@ main {
 			background: #fefefe !important;
 		}
 	}
-	
+
 	/* All Conferences */
 	.card-all {
 		.row > div[class*='col-'] {
@@ -462,7 +462,7 @@ main {
 	/* End Conferences */
 	.carousel-container {
 		background: #E8EEF2;
-		
+
 		.carousel {
 			height: 450px;
 			overflow: hidden;
@@ -479,7 +479,7 @@ main {
 			margin-top: 0.3rem;
 		}
 	}
-	
+
 	.registration {
 		.row {
 			border: solid 1px #e5e5e5;
@@ -518,7 +518,7 @@ main {
 				margin-top: 0.3rem;
 			}
 		}
-		
+
 	}
 
 	.bg-red {
@@ -555,14 +555,14 @@ main {
 		background-position: center center;
 		background-repeat: no-repeat;
 		background-size: cover;
-		
+
 		.card-img-overlay {
 			position: absolute;
 			top: auto;
 			bottom: 0;
 			padding: 0;
 
-			a {	
+			a {
 				display: block;
 				font-size: 1rem;
 				font-weight: bold;
@@ -622,4 +622,9 @@ main {
 .table-scroll {
 	overflow-y: auto;
 	max-height: 300px;
+}
+
+.minus-margin-top {
+	margin-top: -15px;
+	margin-bottom: 5px;
 }

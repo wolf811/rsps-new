@@ -3,7 +3,6 @@ $(document).ready(function () {
     //add conference modal ajax
     $('#submit_conference_button').click((event) => {
         event.preventDefault();
-        // console.log('click');
         let data = $('#add_new_conference_form').serializeArray();
         $.post('', data)
             .done(function (response) {
@@ -64,7 +63,6 @@ $(document).ready(function () {
                     <button data-form-number="NEW_SUBJECT" class="remove_question btn btn-outline-danger" type="button" title="Удалить вопрос"><i class="fa fa-times"></i></button>
             </div>
             </div>`;
-            // <input type="text" name="form-0-subject" id="id_form-0-subject" placeholder="Введите вопрос повестки дня" class="form-control form-control-sm">
         var lst = $(`#conference_${conference_id}_subjects`);
         lst.append(html_question);
         let conf_data = $('td').find(`#conference_${conference_id}_form_data`);
@@ -85,14 +83,15 @@ $(document).ready(function () {
         let conference_id = lst_id.match(pattern);
         let form_number = element.closest('button').data('form-number');
         console.log('FORM_NUMBER', form_number);
-        element.closest('.question_theme').remove();
+        element.closest('.question_theme').hide();
         //find django hidden input and make it checked
         //django formsets works with hidden input data
         let del_input = $(`#delete_input_${conference_id}_${form_number}`).find(`#id_form-${form_number}-DELETE`)
-        $(del_input).prop("checked", true);
+        // let del_input = $(element).closest(`#id_form-${form_number}-DELETE`);
         // id_form-0-DELETE
-
-        let subject_list = $(`#${lst_id}`).find('.input-group-text');
+        $(del_input).prop("checked", true);
+        console.log('SET CHECKED', del_input);
+        let subject_list = $(`#${lst_id}`).find('.input-group-text:visible');
         //update numbers of questions in <strong> tag
         let counter = 0;
         for (el of subject_list) {
@@ -101,12 +100,13 @@ $(document).ready(function () {
                 question_number.text(counter);
         }
         let conf_data = $('td').find(`#conference_${conference_id}_form_data`);
-        for (el of conf_data.children()) {
-            if ($(el).attr('id') == 'id_form-TOTAL_FORMS') {
-                // let val = $(el).attr('value');
-                $(el).val(counter);
-            }
-        }
+        // for (el of conf_data.children()) {
+        //     if ($(el).attr('id') == 'id_form-TOTAL_FORMS') {
+        //         // let val = $(el).attr('value');
+        //         $(el).val(counter);
+        //     }
+        // }
+        $(`#conference_${conference_id}_subjects`).find('.text-danger').remove();
     });
 
     $('td').on('click', '.save_conference_button' , (event) => {
@@ -144,19 +144,26 @@ $(document).ready(function () {
         console.log('SERIALIZED FORM', data);
         $.post('/conferences/edit/', data)
                 .done(function (response) {
+                    $(`#conference_${conference_id}_subjects`).find('.text-danger').remove();
                     // handle massages
                     $(`#messages_${conference_id}`).html(response.message);
                     // handle error server messages
-                    if ('errors' in response) {
-                        for (err of response['errors']) {
+                    if ('formset_errors' in response) {
+                        subjects = $(`#conference_${conference_id}_subjects`).find('.question_theme');
+                        for (err of response['formset_errors']) {
+                            if (err['subject']) {
+                                html_err = `<small class="text-danger minus-margin-top d-block">${err['subject']}</small>`
+                                $(subjects[response['formset_errors'].indexOf(err)]).after(html_err);
+                            }
                             console.log(err);
                         }
+                        $(`#messages_${conference_id}`).html(`<span class="text-danger">${response['message']}</span>`);
                     }
                     //initialize datepicker to loaded content
                     // $('.datepicker-here').datepicker();
                 })
                 .fail(function (response) {
-                    console.log('***ERROR***');
+                    console.log('***SERVER ERROR***');
                     console.log(response);
                 });
     };
