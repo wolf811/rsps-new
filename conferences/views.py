@@ -61,16 +61,11 @@ def edit_conference(request):
         if request.POST.get('saving_conference'):
             formset = SubjectFormSet(request.POST)
             if formset.is_valid():
-                # pdb.set_trace()
-                for form in formset:
-                    if form not in formset.initial_forms:
-                        form = SubjectForm(form.data)
-                        if form.is_valid():
-                            instance = form.save(commit=False)
-                            instance.conference = edit_conference
-                            instance.save()
-                        else:
-                            return JsonResponse({'form_errors': form.errors})
+                instances = formset.save(commit=False)
+                # print('CLEANED_DATA', formset.cleaned_data)
+                for subj in instances:
+                    subj.conference = edit_conference
+                    subj.save()
                 formset.save()
                 success_message = {
                     'message': '<b class="text-success">recieved</b>',

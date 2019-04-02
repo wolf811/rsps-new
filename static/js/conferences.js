@@ -146,7 +146,7 @@ $(document).ready(function () {
                 .done(function (response) {
                     $(`#conference_${conference_id}_subjects`).find('.text-danger').remove();
                     // handle massages
-                    $(`#messages_${conference_id}`).html(response.message);
+                    console.log(response);
                     // handle error server messages
                     if ('formset_errors' in response) {
                         subjects = $(`#conference_${conference_id}_subjects`).find('.question_theme');
@@ -158,6 +158,8 @@ $(document).ready(function () {
                             console.log(err);
                         }
                         $(`#messages_${conference_id}`).html(`<span class="text-danger">${response['message']}</span>`);
+                    } else {
+                        $(`#messages_${conference_id}`).html(response.message);
                     }
                     //initialize datepicker to loaded content
                     // $('.datepicker-here').datepicker();
