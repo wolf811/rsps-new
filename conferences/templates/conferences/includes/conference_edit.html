@@ -10,8 +10,6 @@
 			<div class="col-6 col-sm-4 col-lg-3">
 				<div class="input-group input-group-sm">
 					{{ edit_conference_form.date|addcss:"form-control datepicker-here"}}
-					{% comment %} <input type="text" class="form-control datepicker-here" placeholder="дд.мм.гггг"
-						aria-label="дд.мм.гггг" aria-describedby=""> {% endcomment %}
 					<div class="input-group-append">
 						<span class="input-group-text"><i class="fa fa-calendar"></i></span>
 					</div>
@@ -62,19 +60,6 @@
 					{{ form.DELETE }} {{ form.id }}
 				</div>
 				{% endfor %}
-				{% comment %} <div class="empty_question d-none">
-					<div class="question_theme input-group input-group-sm mb-3">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><strong class="question_number">23</strong></span>
-						</div>
-						{{ question_formset.empty_form }}
-						<div class="input-group-append">
-							<button data-form-number="{{ forloop.counter0 }}"
-								class="remove_question btn btn-outline-danger" type="button" title="Удалить вопрос">
-								<i class="fa fa-times"></i></button>
-						</div>
-					</div>
-				</div> {% endcomment %}
 			</div>
 		</div>
 			<div class="form-group row">
@@ -88,8 +73,9 @@
 
 		<h6 class='text-primary mb-4'>Участники конференции</h6>
 
-		<button type="button" class="btn btn-outline-danger btn-xs mb-3" data-toggle="modal"
-			data-target="#participantConfModal">Зарегистрировать</button>
+		<button data-conference-id="{{ conference.pk }}" type="button" class="register_members btn btn-outline-danger btn-xs mb-3">Зарегистрировать</button>
+		{% comment %} <button data-conference-id="{{ conference.pk }}" type="button" class="btn btn-outline-danger btn-xs mb-3" data-toggle="modal"
+			data-target="#participantConfModal">Зарегистрировать</button> {% endcomment %}
 
 		<div class="table-responsive table-scroll">
 			<table class="table table-list table-internal-list">

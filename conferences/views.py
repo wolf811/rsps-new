@@ -2,9 +2,11 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from mainapp.models import Conference
 from .models import ConferenceTheme
+from mainapp.models import Member
 from .forms import ConferenceForm, ConferenceEditForm, SubjectForm
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.forms import modelformset_factory
@@ -39,36 +41,38 @@ def conference_list(request):
     paginator = Paginator(conferences, 10)
     page = request.GET.get('page')
     paginated_conferences = paginator.get_page(page)
+    current_user_members = Member.objects.filter(user=request.user)
 
     content = {
         'add_new_conference_form': new_conference_form,
         'conferences': paginated_conferences,
+        'members': current_user_members
     }
     return render(request, 'conferences/conferences_list.html', content)
 
 @login_required
 def edit_conference(request):
-    # SubjectFormSet = modelformset_factory(ConferenceTheme, form=SubjectForm)
     SubjectFormSet = modelformset_factory(ConferenceTheme, form=SubjectForm, can_delete=True)
     try:
         edit_conference = Conference.objects.get(pk=request.POST.get('conference_id'))
     except Exception as e:
         print ('ERROR', e)
-        return JsonResponse({'server_error': e})
+        return JsonResponse({'server_error': e.__dict__})
     questions = ConferenceTheme.objects.filter(conference=edit_conference)
     if request.method == 'POST':
-        print('REQUEST POST', request.POST)
         if request.POST.get('saving_conference'):
+            conference_form = ConferenceEditForm(request.POST, instance=edit_conference)
+            if conference_form.is_valid():
+                conference_form.save()
             formset = SubjectFormSet(request.POST)
             if formset.is_valid():
                 instances = formset.save(commit=False)
-                # print('CLEANED_DATA', formset.cleaned_data)
                 for subj in instances:
                     subj.conference = edit_conference
                     subj.save()
                 formset.save()
                 success_message = {
-                    'message': '<b class="text-success">recieved</b>',
+                    'message': '<b class="text-success">Успешно сохранено</b>',
                     'conference_id': request.POST.get('conference_id')}
                 return JsonResponse(success_message)
             else:
@@ -77,14 +81,19 @@ def edit_conference(request):
                 return JsonResponse(errors)
         edit_conference_form = ConferenceEditForm(instance=edit_conference)
         formset = SubjectFormSet(queryset=questions)
+
         content = {
             'conference': edit_conference,
-            # 'questions': questions,
             'question_formset': formset,
-            'edit_conference_form': edit_conference_form
+            'edit_conference_form': edit_conference_form,
         }
         return render(request, 'conferences/includes/conference_edit.html', content)
 
+def update_members(request, conference_id):
+    conference = get_object_or_404(Conference, pk=conference_id)
+    if request.method == 'POST':
+        print("REQUEST POST", request.POST)
+        return JsonResponse({'status': 'ok'})
 
 def delete_conference(request):
     return 'delete conference'

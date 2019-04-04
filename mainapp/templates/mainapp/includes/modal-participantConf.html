@@ -5,47 +5,148 @@
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLabel">Участник конференции</h5>
+				<h5 class="modal-title" id="exampleModalLabel">Регистрация участников конференции <span id="modal_conference_name"><span></h5>
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
 			</div>
-			<form>
+			<div id="conference_members_register">
 				<div class="modal-body">
-					<div class="form-group">
-						<label for="" class="form-label-sm">ФИО&nbsp;<span class="text-danger">*</span></label>
-						<input type="text" class="form-control form-control-sm" required>
+					<!-- Default checked -->
+					<div class="select_existing_member custom-control custom-radio">
+						<input type="radio" class="custom-control-input" id="defaultChecked" name="defaultExampleRadios"
+							checked>
+						<label class="custom-control-label" for="defaultChecked">Выбрать из членов регионального
+							отделения</label>
 					</div>
-					<div class="form-group">
-						<label for="" class="form-label-sm">Место работы&nbsp;<span class="text-danger">*</span></label>
-						<input type="text" class="form-control form-control-sm" required>
+					<!-- Default unchecked -->
+					<div class="register_new_participant custom-control custom-radio">
+						<input type="radio" class="custom-control-input" id="defaultUnchecked"
+							name="defaultExampleRadios">
+						<label class="custom-control-label" for="defaultUnchecked">Зарегистрировать нового участника</label>
 					</div>
-					<div class="form-group">
-						<label for="" class="form-label-sm">Должность&nbsp;<span class="text-danger">*</span></label>
-						<input type="text" class="form-control form-control-sm" required>
-					</div>
-					<div class="form-row">
-						<div class="form-group col-sm">
-							<label for="" class="form-label-sm">Email&nbsp;<span class="text-danger">*</span></label>
-							<input type="text" class="form-control form-control-sm" required="">
+
+					<form id="new_participant_conference_register_new" style="display: none;">
+						<div class="form-group">
+
+							<label for="" class="form-label-sm">ФИО&nbsp;<span class="text-danger">*</span></label>
+							<input name="fio" type="text" class="form-control form-control-sm" required>
 						</div>
-						<div class="form-group col-sm">
-							<label for="" class="form-label-sm">Телефон&nbsp;<span class="text-danger">*</span></label>
-							<input type="text" class="form-control form-control-sm">
+						<div class="form-group">
+							<label for="" class="form-label-sm">Место работы&nbsp;<span
+									class="text-danger">*</span></label>
+							<input name="job" type="text" class="form-control form-control-sm" required>
 						</div>
-					</div>
-					<div class="form-group form-check">
-						<input type="checkbox" class="form-check-input" id="membRsps">
-						<label class="form-check-label" for="membRsps">Членство в РСПС</label>
-					</div>
+						<div class="form-group">
+							<label for="" class="form-label-sm">Должность&nbsp;<span
+									class="text-danger">*</span></label>
+							<input name="jobplace" type="text" class="form-control form-control-sm" required>
+						</div>
+						<div class="form-row">
+							<div class="form-group col-sm">
+								<label for="" class="form-label-sm">Email&nbsp;<span
+										class="text-danger">*</span></label>
+								<input name="email" type="text" class="form-control form-control-sm" required="">
+							</div>
+							<div class="form-group col-sm">
+								<label for="" class="form-label-sm">Телефон&nbsp;<span
+										class="text-danger">*</span></label>
+								<input name="phone" type="text" class="form-control form-control-sm">
+							</div>
+						</div>
+						<div class="form-group form-check">
+							<input name="register_as_new_member" type="checkbox" class="form-check-input" id="membRsps">
+							<label class="form-check-label" for="membRsps">Зарегистрировать как нового члена РСПС</label>
+						</div>
+					</form>
+					<form id="new_participant_conference_select_existing">
+						<div class="form-group">
+							{% comment %} TODO: show current user division {% endcomment %}
+							<label for="" class="form-label-sm">Региональное отделение&nbsp;
+							{% comment %} <span class="text-danger">*</span></label> {% endcomment %}
+							<!-- Вариант 1: касается ЛК РО (account_conf.html) - автоматический выбор <option selected>отделение...</option> и блокировкой поля select атрибутом disabled -->
+
+							<!-- <select class="form-control form-control-sm" disabled required>
+							<option>-</option>
+						  	<option selected>Астраханская область</option>
+						  	<option>Тамбовская область</option>
+						  	<option>Воронежская область</option>
+						  	<option>Московская область</option>
+						  	<option>Хабаровский край</option>
+						  	<option>Краснодарский край</option>
+						</select> -->
+
+							<!-- Вариант 2: касается ЛК Президиума - атрибута disabled у поля <select> быть не должно -->
+
+							<select class="form-control form-control-sm" disabled>
+								<option>-</option>
+								<option selected>Астраханская область</option>
+								<option>Тамбовская область</option>
+								<option>Воронежская область</option>
+								<option>Московская область</option>
+								<option>Хабаровский край</option>
+								<option>Краснодарский край</option>
+							</select>
+						</div>
+						<div class="table-scroll">
+							<table class="table table-sm table-striped table-hover">
+								<tbody>
+									<tr>
+										<th scope="row" colspan="2">
+											<div class="form-check">
+												<input type="checkbox" class="form-check-input select-all"
+													id="select_all_members">
+												<label class="form-check-label" for="selectAll1">выбрать всех</label>
+											</div>
+										</th>
+									</tr>
+
+									{% for member in members %}
+									<tr>
+										<td scope="row">
+											<div class="form-check">
+												<input name = "member_{{ member.pk }}" type="checkbox" class="form-check-input select-one"
+													id="member_{{ member.pk }}">
+												<label class="form-check-label" for="member_{{ member.pk }}">{{ member.fio }}</label>
+											</div>
+										</td>
+										<td>{{ member.city }}</td>
+									</tr>
+									{% endfor %}
+									{% comment %} <tr>
+										<td scope="row">
+											<div class="form-check">
+												<input type="checkbox" class="form-check-input select-one"
+													id="selectOne3">
+												<label class="form-check-label" for="selectOne3">Комбаров Валентин
+													Анатольевич</label>
+											</div>
+										</td>
+										<td>Москва</td>
+									</tr>
+									<tr>
+										<td scope="row">
+											<div class="form-check">
+												<input type="checkbox" class="form-check-input select-one"
+													id="selectOne4">
+												<label class="form-check-label" for="selectOne4">Комбаров Валентин
+													Анатольевич</label>
+											</div>
+										</td>
+										<td>Москва</td>
+									</tr> {% endcomment %}
+								</tbody>
+							</table>
+						</div>
+					</form>
 				</div>
+
+
 				<div class="modal-footer">
-					<button type="submit" class="btn btn-primary btn-sm">Сохранить</button>
+					<button class="save_member_registrations btn btn-primary btn-sm">Сохранить</button>
 					<button type="button" class="btn btn-link btn-sm" data-dismiss="modal">Отмена</button>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
-
-
