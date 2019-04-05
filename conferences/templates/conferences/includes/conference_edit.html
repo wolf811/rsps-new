@@ -88,9 +88,9 @@
 						<th>Действия</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="conference_{{ conference.pk }}_registrations">
 					{% for member in conference.members.all %}
-					<tr>
+					<tr id="registration_{{ member.pk }}_on_conference_{{ conference.pk }}">
 						<td>{{member.fio}}</td>
 						<td>{{member.job}}, {{member.jobplace}}</td>
 						<td>{{member.tel}}, {{member.email}}</td>
@@ -103,7 +103,7 @@
 						</td>
 						<td>
 							<div>
-								<a href="#" class="btn-action mr-3 text-primary" title="Удалить участника"><i
+								<a href="#" data-member-id="{{ member.pk }}" class="delete_registration btn-action mr-3 text-primary" title="Удалить участника"><i
 										class="fa fa-trash-o"></i></a>
 								<a href="#" class="btn-action text-primary" data-toggle="modal"
 									data-target="#participantConfModal" title="Изменить"><i

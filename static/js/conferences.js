@@ -44,7 +44,7 @@ $(document).ready(function () {
     //edit conference ajax
     $('.conference_edit').click((event) => {
         event.preventDefault();
-        var conference_id = $(event.target).parent().data('conference-id');
+        var conference_id = $(event.target).closest('a.btn-action').data('conference-id');
         edit_conference(conference_id);
         $(`#multiCollapseConf${conference_id}`).toggle();
     });
@@ -104,7 +104,6 @@ $(document).ready(function () {
     });
 
     $('.select_existing_member').click((event) => {
-        // if ($($('.select_existing_member').find("input[type='radio']")).is(':checked')) {
         if ($(".select_existing_member > input[type='radio']").is(':checked')) {
             $('#new_participant_conference_register_new').hide();
             $('#new_participant_conference_select_existing').show();
@@ -112,7 +111,6 @@ $(document).ready(function () {
     });
 
     $('.register_new_participant').click((event) => {
-        // if ($($('.register_new_participant').find("input[type='radio']")).is(':checked')) {
         if ($(".register_new_participant > input[type='radio']").is(':checked')) {
             $('#new_participant_conference_select_existing').hide();
             $('#new_participant_conference_register_new').show();
@@ -120,17 +118,52 @@ $(document).ready(function () {
     });
 
     $('td').on('click', '.register_members', (event) => {
-        var clicked = $(event.target);
+        //clear all inputs
+        let inputs = $('.modal-body').find('input');
+        for (let el of inputs) {
+            if ($(el).val() != '') {
+                $(el).val('');
+            }
+        }
+        //clear server_messages in form
+        // update checkboxes with server data
+        $('#server_messages').html('');
         var conference_id = $(event.target).closest('.btn').data('conference-id');
         var conference_title = $(`#form_${conference_id}`).find('#id_title');
+        let data = {'get_checkboxes': 'true', 'conference_id': conference_id}
+        $.post(`/conferences/${conference_id}/get_list_of_members/`, data)
+            .done(response=>{
+                console.log('CHECKBOXES', response);
+                let checkboxes = $('input[name*="member"]');
+                for (let el of checkboxes) {
+                    //clear checked
+                    $(el).prop('checked', false);
+                    //set checked via response
+                    if (response['checkboxes'].includes($(el).attr('id'))) {
+                        $(el).prop('checked', true);
+                    }
+                }
+            })
         $('#modal_conference_name').text($(conference_title).val());
         $('#modal_conference_name').attr("data-conference-id", conference_id);
         $('#participantConfModal').modal('show');
     });
 
+    //handle member delete button press
+    $('td').on('click', '.delete_registration', function(event) {
+        event.preventDefault();
+        let member_id = $(event.target)
+                            .closest('a.delete_registration')
+                            .data('member-id');
+        let conference_id = $(event.target)
+                                .closest('td.total-column')
+                                .attr('id')
+                                .split('_')[1];
+        deleteMemberRegistration(conference_id, member_id);
+    });
+
     $('.save_member_registrations').click((event)=>{
         event.preventDefault();
-        console.log('saving registrations');
         let data= []
         if ($(".register_new_participant > input[type='radio']").is(':checked')) {
             for (element of $('#new_participant_conference_register_new').serializeArray()) {
@@ -144,22 +177,61 @@ $(document).ready(function () {
             }
             data.push({name: 'register_existitng_members', value: 'True'});
         }
-        console.log(data);
         let conference_id = $('#modal_conference_name').data('conference-id');
         updateMembers(conference_id, data);
     });
 
     //update conference members
     function updateMembers(conference_id, data) {
-        console.log('updating conference', conference_id);
-        console.log('updating members' , data);
         $.post(`/conferences/${conference_id}/update_members/`, data)
             .done(function(response) {
-                console.log('server ok', response);
+                $('#new_participant_conference_register_new').find('small').remove();
+                if ('member_save_errors' in response) {
+                    for (let err of Object.keys(response['errors'])) {
+                        let form = $('#new_participant_conference_register_new');
+                        let element = form.find(`input[name=${err}]`);
+                        element.after(`<small class="text-danger">${response['errors'][err]}</small>`);
+                    }
+                } else {
+                    $('.modal-body > #server_messages').html('<p class="text-success">Успешно сохранено</p>');
+                    getListOfRegistrations(conference_id);
+                }
             })
             .fail(function(response) {
                 console.log('server not ok', response);
             });
+    };
+
+    function getListOfRegistrations(conference_id) {
+        let list_of_registrations;
+        $.post(`/conferences/${conference_id}/get_list_of_members/`)
+            .done(response => {
+                console.log('***SERVER LIST OK***');
+                list_of_registrations = response;
+                let tBody = $(`#conference_${conference_id}_registrations`);
+                $(tBody).html(list_of_registrations);
+            })
+            .fail(response =>{
+                console.log('***SERVER LIST ERROR***', response);
+            });
+        return list_of_registrations
+    };
+
+    function deleteMemberRegistration(conference_id, member_id) {
+        let data = {'unregister_member': member_id};
+        $.post(`/conferences/${conference_id}/unregister_members/`, data)
+            .done(response => {
+                if (response['status'] == 'ok') {
+                    let iAmSure = confirm('Отменить регистрацию?');
+                    if (iAmSure) {
+                        $(`#registration_${member_id}_on_conference_${conference_id}`).remove();
+                    }
+                }
+            })
+            .fail(response => {
+                console.log('***SERVER_ERR***');
+                console.log(response);
+            })
     };
 
     // $('.delete').on('click', event => {
@@ -196,18 +268,18 @@ $(document).ready(function () {
         };
         if ($(`#form_${conference_id}`).length == 0) {
             $.post('/conferences/edit/', data)
-            .done(function (response) {
-                $('#loadingmessage').hide();
-                $(`#td_${conference_id}`).html(response);
-                //initialize datepicker to loaded content
-                $('.datepicker-here').datepicker();
-                //convert date from format 'y-m-d' to 'd-m-y'
-                let date_input = $(`#td_${conference_id}`).find('.datepicker-here');
-                let date_current = $(date_input).val();
-                // console.log(date_current);
-                $(date_input).val(convert_date(date_current));
-                // console.log($(date_input));
-                // console.log(date_input);
+                .done(function (response) {
+                    $('#loadingmessage').hide();
+                    $(`#td_${conference_id}`).html(response);
+                    //initialize datepicker to loaded content
+                    $('.datepicker-here').datepicker();
+                    //convert date from format 'y-m-d' to 'd-m-y'
+                    let date_input = $(`#td_${conference_id}`).find('.datepicker-here');
+                    let date_current = $(date_input).val();
+                    // console.log(date_current);
+                    $(date_input).val(convert_date(date_current));
+                    // console.log($(date_input));
+                    // console.log(date_input);
                 })
                 .fail(function (response) {
                     console.log('***ERROR***');

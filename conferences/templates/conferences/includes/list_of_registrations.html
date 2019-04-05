@@ -1,0 +1,23 @@
+{% for member in list_of_registrations %}
+					<tr id="registration_{{ member.pk }}_on_conference_{{ conference.pk }}">
+						<td>{{member.fio}}</td>
+						<td>{{member.job}}, {{member.jobplace}}</td>
+						<td>{{member.tel}}, {{member.email}}</td>
+						<td>
+							{% if member.membership %}
+							да
+							{% else %}
+							нет
+							{% endif %}
+						</td>
+						<td>
+							<div>
+								<a href="#" data-member-id="{{ member.pk }}" class="delete_registration btn-action mr-3 text-primary" title="Удалить участника"><i
+										class="fa fa-trash-o"></i></a>
+								<a href="#" class="btn-action text-primary" data-toggle="modal"
+									data-target="#participantConfModal" title="Изменить"><i
+										class="fa fa-pencil"></i></a>
+							</div>
+						</td>
+					</tr>
+{% endfor %}

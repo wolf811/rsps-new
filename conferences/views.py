@@ -4,6 +4,7 @@ from mainapp.models import Conference
 from .models import ConferenceTheme
 from mainapp.models import Member
 from .forms import ConferenceForm, ConferenceEditForm, SubjectForm
+from members.forms import MemberForm
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
@@ -92,8 +93,59 @@ def edit_conference(request):
 def update_members(request, conference_id):
     conference = get_object_or_404(Conference, pk=conference_id)
     if request.method == 'POST':
-        print("REQUEST POST", request.POST)
+        if request.POST.get('register_existitng_members'):
+            # check if user wants to uncheck registrations
+            # if len(request.POST.get('register_existing_members')) < conference.members.count():
+            # add new registrations
+            request_members = []
+            for element in request.POST:
+                if element.startswith('member_'):
+                    member_pk = element.split('_')[1]
+                    member = get_object_or_404(Member, pk=member_pk)
+                    request_members.append(member)
+                    if member not in conference.members.all():
+                        conference.members.add(member)
+            for member in conference.members.all():
+                if member not in request_members:
+                    conference.members.remove(member)
+            return JsonResponse({'status': 'ok',
+                                 'conference_id': conference.pk})
+                    # pdb.set_trace()
+        if request.POST.get('register_new_member_adding_to_conference'):
+            print(request.POST)
+            form = MemberForm(request.POST)
+            if form.is_valid():
+                instance = form.save(commit=False)
+                instance.user = request.user
+                instance.save()
+                conference.members.add(instance)
+                return JsonResponse({'new_member_saved_and_registered_to_conference': 'True'})
+            else:
+                errors = form.errors
+                # pdb.set_trace()
+                return JsonResponse({'member_save_errors': True, 'errors': errors})
+
         return JsonResponse({'status': 'ok'})
+
+def get_list_of_members(request, conference_id):
+    conference = get_object_or_404(Conference, pk=conference_id)
+    list_of_registrations = conference.members.all()
+    if request.POST.get('get_checkboxes'):
+        return JsonResponse({'checkboxes': ['member_{}'.format(obj.pk) for obj in list_of_registrations]})
+    content = {
+        'conference': conference,
+        'list_of_registrations': list_of_registrations
+    }
+    return render(request, 'conferences/includes/list_of_registrations.html', content)
+
+def unregister_members(request, conference_id):
+    conference = get_object_or_404(Conference, pk=conference_id)
+    member = request.POST.get('unregister_member')
+    conference.members.remove(member)
+    # pdb.set_trace()
+    return JsonResponse({'status': 'ok',
+                         'deleted_member_registration': 'True',
+                         'conference_id': conference.pk})
 
 def delete_conference(request):
     return 'delete conference'
