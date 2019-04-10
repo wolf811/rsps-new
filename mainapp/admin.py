@@ -47,12 +47,22 @@ class ConferenceThemeInline(admin.StackedInline):
 class PostAdmin(admin.ModelAdmin):
     view_on_site = True
     fields = ('title', 'short_description', 'text', 'published_date')
-    list_display = ['title', 'published_date']
+    list_display = ['title', 'published_date', 'user']
     inlines = [PhotoInline]
 
     def view_on_site(self, obj):
         url = reverse('details', kwargs={'pk': obj.pk})
         return url
+
+    def save_model(self, request, instance, form, change):
+        user = request.user
+        instance = form.save(commit=False)
+        if getattr(instance, 'user', None) is None:
+            instance.user = request.user
+        instance.modified_by = user
+        instance.save()
+        form.save_m2m()
+        return instance
 
 @admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):

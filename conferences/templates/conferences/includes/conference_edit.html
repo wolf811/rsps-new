@@ -119,8 +119,9 @@
 
 		<div class="form-group">
 			<div class="form-check">
-				<input class="form-check-input" type="checkbox" id="gridCheck{{ conference.pk }}">
-				<label class="form-check-label text-success" for="gridCheck1{{ conference.pk }}">
+				{{ edit_conference_form.completed|addcss:"form-check-input"}}
+				{% comment %} <input name="conference_completed" class="form-check-input" type="checkbox" id="gridCheck{{ conference.pk }}"> {% endcomment %}
+				<label class="form-check-label text-success" for="id_completed">
 					<strong>Конференция проведена</strong>
 				</label>
 			</div>

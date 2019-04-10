@@ -48,6 +48,35 @@ $(document).ready(function () {
         edit_conference(conference_id);
         $(`#multiCollapseConf${conference_id}`).toggle();
     });
+
+    $('.remove_conference').click( (event) => {
+        event.preventDefault();
+        var conference_id = $(event.target)
+            .closest('a.remove_conference')
+            .data('conference-id');
+        console.log(conference_id);
+        let data = {'remove_conference_with_id': conference_id};
+        let confirm = prompt('Введите заглавными буквами "УДАЛИТЬ" и нажмите ОК');
+        if (confirm === 'УДАЛИТЬ') {
+            $.post('/conferences/delete/', data)
+                .done(response=>{
+                    if ('removed_conference' in response) {
+                        console.log("SUCCESS", response);
+                        var conference_name = $(`#tr_${conference_id}`)
+                            .find('.text-appercase')
+                            .text();
+                        $(`#tr_${conference_id}`).remove();
+                        alert (`Конференция ${conference_name} удалена`);
+                    }
+                })
+                .fail(response => {
+                    console.log("FAIL", response);
+                });
+        } else {
+            alert ('Удаление конференции отменено');
+        }
+    });
+
     //delegate event handler to dinamic loaded content
     $('td').on("click", ".add_question", (event) => {
         event.preventDefault();
@@ -321,5 +350,41 @@ $(document).ready(function () {
                     console.log(response);
                 });
     };
+
+    $('.post_conference').click((event)=>{
+        event.preventDefault();
+        target = $(event.target);
+        // console.log(target.closest('a.post_conference').data('conference-id'));
+        const conference_id = target.closest('a.post_conference').data('conference-id');
+        const data = {name: 'conference_id', value: conference_id};
+        $('.modal_publication').modal('show');
+        $.post(`/conferences/${conference_id}/get_publication_form/`, data)
+            .done(response=>{
+                // console.log('RESPONSE', response);
+                $('.publication_body').html(response);
+                $('.django-ckeditor-widget').css('display', 'block');
+                $('#publication_form').attr('data-conference-id', conference_id);
+                // console.log($('.publication_body'));
+            })
+            .fail(response=>{
+                console.log(response);
+            });
+    });
+
+    $('.save_conference_publication').click((event)=>{
+        event.preventDefault();
+        target = $(event.target);
+        conference_id = $('#publication_form').data('conference-id');
+        data = $('#publication_form').serializeArray();
+        data.push({name: 'save_conference_publication', value: 'True'});
+        $.post(`/conferences/${conference_id}/get_publication_form/`, data)
+            .done(response=>{
+                console.log('good', response);
+            })
+            .fail(response=>{
+                console.log('bad', response);
+            })
+        console.log('click')
+    });
 
 });

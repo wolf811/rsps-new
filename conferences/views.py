@@ -2,8 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from mainapp.models import Conference
 from .models import ConferenceTheme
-from mainapp.models import Member
+from mainapp.models import Member, Post
 from .forms import ConferenceForm, ConferenceEditForm, SubjectForm
+from mainapp.forms import PostEditForm
 from members.forms import MemberForm
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
@@ -11,6 +12,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.forms import modelformset_factory
+from django.utils import timezone
 import pdb
 
 # Create your views here.
@@ -63,8 +65,12 @@ def edit_conference(request):
     if request.method == 'POST':
         if request.POST.get('saving_conference'):
             conference_form = ConferenceEditForm(request.POST, instance=edit_conference)
+            # import pdb; pdb.set_trace()
             if conference_form.is_valid():
-                conference_form.save()
+                instance = conference_form.save()
+                instance.save()
+            else:
+                return JsonResponse({'conference_form_errors': conference_form.errors})
             formset = SubjectFormSet(request.POST)
             if formset.is_valid():
                 instances = formset.save(commit=False)
@@ -148,4 +154,45 @@ def unregister_members(request, conference_id):
                          'conference_id': conference.pk})
 
 def delete_conference(request):
-    return 'delete conference'
+    conference = get_object_or_404(Conference,
+            pk=request.POST.get('remove_conference_with_id'))
+    conference.delete()
+    return JsonResponse({'removed_conference': conference.pk})
+
+def get_publication_form(request, conference_id):
+    conference = get_object_or_404(Conference, pk=conference_id)
+    if request.POST.get('save_conference_publication'):
+        form = PostEditForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.published_date = timezone.now()
+            instance.user = request.user
+            instance.save()
+            conference.publication = instance
+            conference.save()
+            # pdb.set_trace()
+            return JsonResponse({'publication_saved': 'ok'})
+        else:
+            errors = form.errors
+            return JsonResponse({'publictation_not_saved': errors})
+    # return JsonResponse({'success': conference.pk})
+    post_data = {
+        'title': conference.title,
+        'short_description': 'Состоялась региональная конференция "{}"'.format(conference.title),
+        'text': """<p><b>Завершена региональная конференция</b></p>
+        <p><strong>Вопросы повестки дня:</strong></p>
+        {}
+        <p><strong>Участники конференции:</strong></p>
+        {}
+        """.format(
+            '<br>'.join([t.subject for t in ConferenceTheme.objects.filter(conference=conference)]),
+            '<br>'.join([member.fio for member in conference.members.all()])
+            ),
+        # 'published_date': None,
+        }
+    form = PostEditForm(initial=post_data)
+    # new_post.save()
+    content = {
+        'form': form,
+    }
+    return render(request, 'mainapp/includes/post_edit_form.html', content)

@@ -19,7 +19,7 @@ class ConferenceForm(forms.ModelForm):
 class ConferenceEditForm(forms.ModelForm):
     class Meta:
         model = Conference
-        fields = ('title', 'date', 'place')
+        fields = ('title', 'date', 'place', 'completed')
         widgets = {
             'date': forms.TextInput({
                 'placeholder': "дд.мм.гггг",

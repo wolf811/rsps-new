@@ -30,17 +30,28 @@
 				</thead>
 				<tbody>
 					{% for conference in conferences %}
-					{% if not conference.completed %}
+
 					<tr id="tr_{{ conference.pk }}">
 						<td>{{ conference.date }}</td>
 						<td>{{ conference.place }}</td>
 						<td>
 							<div class="text-appercase">{{ conference.title }}</div>
 							<div>Колличество участников:&nbsp;<strong>{{ conference.members.all|length }}</strong></div>
-							<div class="text-danger mt-2">Зарегистрируйте участников</div>
+							<div id="conference_completed_message">
+								{% if not conference.completed %}
+								<div class="text-danger mt-2">Зарегистрируйте участников</div>
+								{% else %}
+								<div class="text-info mt-2">Конференция завершена, {% if not conference.publication %}сделайте публикацию{%else%}новость опубликована{%endif%}</div>
+									{% if conference.publication %}
+										<a href="#" data-conference-id="{{ conference.pk }}" class="edit_post_conference btn btn-outline-info btn-xs">Редактировать публикацию</a>
+									{% else %}
+										<a href="#" data-conference-id="{{ conference.pk }}" class="post_conference btn btn-outline-warning btn-xs">Сделать публикацию</a>
+									{% endif %}
+								{% endif %}
+							</div>
 						</td>
 						<td>
-							<a href="#" class="btn-action mr-3 text-primary" title="Удалить конференцию"><i
+							<a href="#" data-conference-id ="{{ conference.pk }}" class="remove_conference btn-action mr-3 text-primary" title="Удалить конференцию"><i
 									class="fa fa-trash-o"></i></a>
 							<a href="#multiCollapseConf{{ conference.pk }}"
 								class="conference_edit btn-action text-primary" data-toggle="collapse"
@@ -57,7 +68,7 @@
 						</td>
 					</tr>
 
-					{% endif %}
+
 					{% endfor %}
 
 				</tbody>
@@ -94,4 +105,5 @@
 </main>
 
 {% include 'conferences/includes/conference_add_modal.html' %}
+{% include 'mainapp/includes/publication_add_modal.html' %}
 {% endblock %}

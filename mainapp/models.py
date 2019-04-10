@@ -43,28 +43,11 @@ class Member(models.Model):
     def clean(self):
         textvalidation(self.fio)
 
-
-class Conference(models.Model):
-    """docstring for Conference"""
-    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    title = models.CharField(max_length=200, verbose_name='Название конференции')
-    date = models.DateField(verbose_name='Дата проведения')
-    place = models.CharField(max_length=100, verbose_name='Место проведения')
-    completed = models.BooleanField(verbose_name='Проведена', default=False)
-    members = models.ManyToManyField(Member, verbose_name='Участники', blank=True, default=None)
-
-    class Meta:
-        verbose_name = 'Конференция'
-        verbose_name_plural = 'Конференции'
-
-    def __str__(self):
-        return '{}, {}'.format(self.title, self.date)
-
-
 class Post(models.Model):
     """model for publications"""
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=200, verbose_name='Название публикации')
-    short_description = models.CharField(max_length=100, verbose_name='Краткое описание', blank=True, default='')
+    short_description = models.CharField(max_length=200, verbose_name='Краткое описание', blank=True, default='')
     text = RichTextUploadingField(verbose_name='Текст публикации')
     published_date = models.DateTimeField(u'Дата публикации', default=timezone.now)
 
@@ -74,6 +57,25 @@ class Post(models.Model):
 
     def __str__(self):
         return 'Публикация {}, дата {}'.format(self.title, self.published_date)
+
+class Conference(models.Model):
+    """docstring for Conference"""
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    title = models.CharField(max_length=200, verbose_name='Название конференции')
+    date = models.DateField(verbose_name='Дата проведения')
+    place = models.CharField(max_length=100, verbose_name='Место проведения')
+    completed = models.BooleanField(verbose_name='Проведена', default=False)
+    members = models.ManyToManyField(Member, verbose_name='Участники', blank=True, default=None)
+    publication = models.ForeignKey(Post, null=True, on_delete=models.SET_NULL)
+
+    class Meta:
+        verbose_name = 'Конференция'
+        verbose_name_plural = 'Конференции'
+
+    def __str__(self):
+        return '{}, {}'.format(self.title, self.date)
+
+
 
 
 class Photo(models.Model):

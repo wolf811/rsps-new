@@ -1,0 +1,19 @@
+{% load formstyles %}
+<form id="publication_form">
+    {{ form.media }}
+    <div class="form-group">
+        <label for="id_title" class="col-form-label col-form-label-sm">Заголовок:&nbsp;<span
+                class="text-danger">*</span></label>
+        {{ form.title|addcss:"form-control form-control-sm" }}
+    </div>
+    <div class="form-group">
+        <label for="id_title" class="col-form-label col-form-label-sm">Краткое описание:&nbsp;<span
+                class="text-danger">*</span></label>
+        {{ form.short_description|addcss:"form-control form-control-sm" }}
+    </div>
+    <div class="form-group">
+        <label for="cke_id_text" class="col-form-label col-form-label-sm">Описание:&nbsp;<span
+                class="text-danger">*</span></label>
+        {{ form.text|safe }}
+    </div>
+</form>
