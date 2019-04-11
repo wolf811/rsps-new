@@ -171,7 +171,7 @@ def get_publication_form(request, conference_id):
             conference.publication = instance
             conference.save()
             # pdb.set_trace()
-            return JsonResponse({'publication_saved': 'ok'})
+            return JsonResponse({'message': 'Успешно сохранено'})
         else:
             errors = form.errors
             return JsonResponse({'publictation_not_saved': errors})
@@ -196,3 +196,32 @@ def get_publication_form(request, conference_id):
         'form': form,
     }
     return render(request, 'mainapp/includes/post_edit_form.html', content)
+
+def edit_conference_publication(request, publication_id):
+    publication = get_object_or_404(Post, pk=publication_id)
+    print('PUBLICATION', publication)
+    edit_publication_form = PostEditForm(instance=publication)
+    # if edit_publication_form.is_valid():
+    #     edit_publication_form.save()
+    #     return JsonResponse({'message': 'Успешно сохранено'})
+    # else:
+    #     print(edit_publication_form.errors.as_data())
+    #     return JsonResponse({'message': 'Ошибка сохранения', 'errors': edit_publication_form.errors})
+    content = {
+        'form': edit_publication_form
+    }
+    return render(request, 'mainapp/includes/post_edit_form.html', content)
+
+def delete_conference_publication(request, publication_id):
+    publication = get_object_or_404(Post, pk=publication_id)
+    print('DELETING', publication)
+    publication.delete()
+    return JsonResponse({'message': 'Удалено'})
+
+def update_conference_row(request, conference_id):
+    conference = get_object_or_404(Conference, pk=conference_id)
+    print('UPDATING_ROW', conference)
+    content = {
+        'conference': conference
+    }
+    return render(request, 'conferences/includes/conference_row.html', content)

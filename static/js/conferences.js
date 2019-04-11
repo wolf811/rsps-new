@@ -351,14 +351,27 @@ $(document).ready(function () {
                 });
     };
 
-    $('.post_conference').click((event)=>{
+    function update_row(conference_id) {
+        $.post(`/conferences/update_conference_row/${conference_id}/`)
+            .done(response=>{
+                $(`#tr_${conference_id}`).html(response);
+            })
+            .fail(response=>{
+                console.log('bad');
+            });
+        return
+    };
+
+    $('tr').on('click', '.post_conference', event=>{
         event.preventDefault();
         target = $(event.target);
+        console.log('TARGET', target);
         // console.log(target.closest('a.post_conference').data('conference-id'));
         const conference_id = target.closest('a.post_conference').data('conference-id');
         const data = {name: 'conference_id', value: conference_id};
+        $('#publication_server_messages').html('');
         $('.modal_publication').modal('show');
-        $.post(`/conferences/${conference_id}/get_publication_form/`, data)
+        $.post(`/conferences/get_publication_form/${conference_id}/`, data)
             .done(response=>{
                 // console.log('RESPONSE', response);
                 $('.publication_body').html(response);
@@ -373,18 +386,66 @@ $(document).ready(function () {
 
     $('.save_conference_publication').click((event)=>{
         event.preventDefault();
-        target = $(event.target);
-        conference_id = $('#publication_form').data('conference-id');
-        data = $('#publication_form').serializeArray();
+        let target = $(event.target);
+        let conference_id = $('#publication_form').data('conference-id');
+        let data = $('#publication_form').serializeArray();
         data.push({name: 'save_conference_publication', value: 'True'});
-        $.post(`/conferences/${conference_id}/get_publication_form/`, data)
+        $.post(`/conferences/get_publication_form/${conference_id}/`, data)
             .done(response=>{
                 console.log('good', response);
+                $('#publication_server_messages').html(
+                    `<span class="text-info">
+                                <i class="fa fa-check mr-2"></i>
+                                ${response.message}
+                    </span>`
+                );
+                update_row(conference_id);
+                return
             })
             .fail(response=>{
                 console.log('bad', response);
             })
         console.log('click')
+    });
+
+
+    $('tr').on('click', '.edit_post_conference', event=>{
+        event.preventDefault();
+        let target = $(event.target);
+        let publication_id = target.closest('a.edit_post_conference').data('publication-id');
+        let conference_id = target.closest('a.edit_post_conference').data('conference-id');
+        // console.log('EDIT PUBLICATION', publication_id);
+        // console.log('EDIT CONFERENCE', conference_id);
+        // console.log($('#publication_form').data('conference-id'));
+        // let data = $('#publication_form').serializeArray();
+        $.post(`/conferences/edit_conference_publication/${publication_id}/`)
+        .done(response=>{
+                console.log('good');
+                $('.publication_body').html(response);
+                $('#publication_form').attr('data-conference-id', conference_id);
+                $('.django-ckeditor-widget').css('display', 'block');
+                $('#publication_server_messages').html('');
+                $('.modal_publication').modal('show');
+            })
+            .fail(response=>{
+                console.log('bad', response);
+            });
+    });
+
+    $('tr').on('click', '.delete_post_conference', event=>{
+        event.preventDefault();
+        console.log('deleting');
+        let target= $(event.target);
+        let publication_id = target.closest('a.delete_post_conference').data('publication-id');
+        let conference_id = target.closest('tr').attr('id').split('_')[1];
+        $.post(`/conferences/delete_conference_publication/${publication_id}/`)
+            .done(response=>{
+                console.log('good');
+                update_row(conference_id);
+            })
+            .fail(response=>{
+                console.log('bad');
+            })
     });
 
 });
