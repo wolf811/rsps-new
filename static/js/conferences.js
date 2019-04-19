@@ -42,14 +42,14 @@ $(document).ready(function () {
             });
     });
     //edit conference ajax
-    $('.conference_edit').click((event) => {
+    $('tr').on('click', '.conference_edit', event => {
         event.preventDefault();
         var conference_id = $(event.target).closest('a.btn-action').data('conference-id');
         edit_conference(conference_id);
         $(`#multiCollapseConf${conference_id}`).toggle();
     });
 
-    $('.remove_conference').click( (event) => {
+    $('tr').on('click', '.remove_conference', event => {
         event.preventDefault();
         var conference_id = $(event.target)
             .closest('a.remove_conference')
@@ -275,7 +275,7 @@ $(document).ready(function () {
         checkBoxes.prop("checked", !checkBoxes.prop("checked"));
     });
 
-    $('td').on('click', '.save_conference_button' , (event) => {
+    $('tr').on('click', '.save_conference_button' , (event) => {
         event.preventDefault();
         var conference = $(event.target).closest('td').attr('id');
         var conference_id = conference.match( /\d+/g)[0];
@@ -297,58 +297,24 @@ $(document).ready(function () {
         };
         if ($(`#form_${conference_id}`).length == 0) {
             $.post('/conferences/edit/', data)
-                .done(function (response) {
-                    $('#loadingmessage').hide();
-                    $(`#td_${conference_id}`).html(response);
-                    //initialize datepicker to loaded content
-                    $('.datepicker-here').datepicker();
-                    //convert date from format 'y-m-d' to 'd-m-y'
-                    let date_input = $(`#td_${conference_id}`).find('.datepicker-here');
-                    let date_current = $(date_input).val();
-                    // console.log(date_current);
-                    $(date_input).val(convert_date(date_current));
-                    // console.log($(date_input));
-                    // console.log(date_input);
-                })
-                .fail(function (response) {
-                    console.log('***ERROR***');
-                    console.log(response);
-                });
+            .done(function (response) {
+                $('#loadingmessage').hide();
+                $(`#td_${conference_id}`).html(response);
+                //initialize datepicker to loaded content
+                $('.datepicker-here').datepicker();
+                //convert date from format 'y-m-d' to 'd-m-y'
+                let date_input = $(`#td_${conference_id}`).find('.datepicker-here');
+                let date_current = $(date_input).val();
+                // console.log(date_current);
+                $(date_input).val(convert_date(date_current));
+                // console.log($(date_input));
+                // console.log(date_input);
+            })
+            .fail(function (response) {
+                console.log('***ERROR***');
+                console.log(response);
+            });
         }
-    };
-
-    function save_conference(conference_id) {
-        console.log('SAVING', conference_id);
-        let data = $('td').find(`#form_${conference_id}`).serializeArray();
-        data.push({name: 'saving_conference', value: 'True'});
-        data.push({name: 'conference_id', value: conference_id});
-        console.log('SERIALIZED FORM', data);
-        $.post('/conferences/edit/', data)
-                .done(function (response) {
-                    $(`#conference_${conference_id}_subjects`).find('.text-danger').remove();
-                    // handle massages
-                    console.log(response);
-                    // handle error server messages
-                    if ('formset_errors' in response) {
-                        let subjects = $(`#conference_${conference_id}_subjects`).find('.question_theme');
-                        for (err of response['formset_errors']) {
-                            if (err['subject']) {
-                                html_err = `<small class="text-danger minus-margin-top d-block">${err['subject']}</small>`
-                                $(subjects[response['formset_errors'].indexOf(err)]).after(html_err);
-                            }
-                            console.log(err);
-                        }
-                        $(`#messages_${conference_id}`).html(`<span class="text-danger">${response['message']}</span>`);
-                    } else {
-                        $(`#messages_${conference_id}`).html(response.message);
-                    }
-                    //initialize datepicker to loaded content
-                    // $('.datepicker-here').datepicker();
-                })
-                .fail(function (response) {
-                    console.log('***SERVER ERROR***');
-                    console.log(response);
-                });
     };
 
     function update_row(conference_id) {
@@ -361,6 +327,42 @@ $(document).ready(function () {
             });
         return
     };
+
+    function save_conference(conference_id) {
+        console.log('SAVING', conference_id);
+        let data = $('td').find(`#form_${conference_id}`).serializeArray();
+        data.push({name: 'saving_conference', value: 'True'});
+        data.push({name: 'conference_id', value: conference_id});
+        console.log('SERIALIZED FORM', data);
+        $.post('/conferences/edit/', data)
+        .done(function (response) {
+            $(`#conference_${conference_id}_subjects`).find('.text-danger').remove();
+            // handle massages
+            console.log(response);
+            // handle error server messages
+            if ('formset_errors' in response) {
+                let subjects = $(`#conference_${conference_id}_subjects`).find('.question_theme');
+                for (err of response['formset_errors']) {
+                    if (err['subject']) {
+                        html_err = `<small class="text-danger minus-margin-top d-block">${err['subject']}</small>`
+                        $(subjects[response['formset_errors'].indexOf(err)]).after(html_err);
+                    }
+                    console.log(err);
+                }
+                $(`#messages_${conference_id}`).html(`<span class="text-danger">${response['message']}</span>`);
+            } else {
+                $(`#messages_${conference_id}`).html(response.message);
+                update_row(conference_id);
+            }
+            //initialize datepicker to loaded content
+                    // $('.datepicker-here').datepicker();
+                })
+                .fail(function (response) {
+                    console.log('***SERVER ERROR***');
+                    console.log(response);
+                });
+    };
+
 
     $('tr').on('click', '.post_conference', event=>{
         event.preventDefault();
@@ -389,8 +391,9 @@ $(document).ready(function () {
         let target = $(event.target);
         let conference_id = $('#publication_form').data('conference-id');
         let data = $('#publication_form').serializeArray();
-        data.push({name: 'save_conference_publication', value: 'True'});
-        $.post(`/conferences/get_publication_form/${conference_id}/`, data)
+        data.push({name: 'updated_text', value: CKEDITOR.instances.id_text.getData()})
+        console.log(data);
+        $.post(`/conferences/save_conference_publication/${conference_id}/`, data)
             .done(response=>{
                 console.log('good', response);
                 $('#publication_server_messages').html(
@@ -400,10 +403,14 @@ $(document).ready(function () {
                     </span>`
                 );
                 update_row(conference_id);
-                return
             })
             .fail(response=>{
-                console.log('bad', response);
+                console.log('saving fail', response);
+                // $('#publication_server_messages').html(
+                //     `<span class="text-info">
+                //                 ${response.responseText}
+                //     </span>`
+                // );
             })
         console.log('click')
     });
@@ -414,10 +421,6 @@ $(document).ready(function () {
         let target = $(event.target);
         let publication_id = target.closest('a.edit_post_conference').data('publication-id');
         let conference_id = target.closest('a.edit_post_conference').data('conference-id');
-        // console.log('EDIT PUBLICATION', publication_id);
-        // console.log('EDIT CONFERENCE', conference_id);
-        // console.log($('#publication_form').data('conference-id'));
-        // let data = $('#publication_form').serializeArray();
         $.post(`/conferences/edit_conference_publication/${publication_id}/`)
         .done(response=>{
                 console.log('good');
@@ -438,14 +441,19 @@ $(document).ready(function () {
         let target= $(event.target);
         let publication_id = target.closest('a.delete_post_conference').data('publication-id');
         let conference_id = target.closest('tr').attr('id').split('_')[1];
-        $.post(`/conferences/delete_conference_publication/${publication_id}/`)
-            .done(response=>{
-                console.log('good');
-                update_row(conference_id);
-            })
-            .fail(response=>{
-                console.log('bad');
-            })
+        let iAmSure = prompt('Введите заглавными буквами "УДАЛИТЬ"');
+        if (iAmSure == 'УДАЛИТЬ') {
+                $.post(`/conferences/delete_conference_publication/${publication_id}/`)
+                .done(response=>{
+                    console.log('good');
+                    update_row(conference_id);
+                })
+                .fail(response=>{
+                    console.log('bad');
+                })
+        } else {
+            alert("Удаление публикации отменено")
+        }
     });
 
 });

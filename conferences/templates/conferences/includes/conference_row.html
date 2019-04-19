@@ -7,14 +7,14 @@
 								{% if not conference.completed %}
 								<div class="text-danger mt-2">Зарегистрируйте участников</div>
 								{% else %}
-								<div class="text-info mt-2">Конференция завершена, {% if not conference.publication %}сделайте публикацию{%else%}новость опубликована{%endif%}</div>
+								<div class="text-info mt-2">Конференция завершена, {% if not conference.publication %}создайте публикацию{%else%}новость опубликована{%endif%}</div>
 									{% if conference.publication %}
 										<a href="#" data-publication-id="{{ conference.publication.pk }}"
                                                     data-conference-id="{{ conference.pk }}"
                                         class="edit_post_conference btn btn-outline-info btn-xs">Редактировать публикацию</a>
 										<a href="#" data-publication-id="{{ conference.publication.pk }}" class="delete_post_conference btn btn-outline-danger btn-xs">Удалить</a>
 									{% else %}
-										<a href="#" data-conference-id="{{ conference.pk }}" class="post_conference btn btn-outline-warning btn-xs">Сделать публикацию</a>
+										<a href="#" data-conference-id="{{ conference.pk }}" class="post_conference btn btn-outline-info btn-xs">Создать публикацию</a>
 									{% endif %}
 								{% endif %}
 							</div>

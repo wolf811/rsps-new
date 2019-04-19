@@ -11,6 +11,7 @@ urlpatterns = [
     path('<slug:conference_id>/get_list_of_members/', conferences.get_list_of_members, name='get_list_of_members'),
     path('<slug:conference_id>/unregister_members/', conferences.unregister_members, name='unregister_members'),
     path('get_publication_form/<slug:conference_id>/', conferences.get_publication_form, name='get_publication_form'),
+    path('save_conference_publication/<slug:conference_id>/', conferences.save_conference_publication, name='save_conference_publication'),
     path('edit_conference_publication/<slug:publication_id>/', conferences.edit_conference_publication, name='edit_conference_publication'),
     path('delete_conference_publication/<slug:publication_id>/', conferences.delete_conference_publication, name='delete_conference_publication'),
     path('update_conference_row/<slug:conference_id>/', conferences.update_conference_row, name='update_conference_row'),

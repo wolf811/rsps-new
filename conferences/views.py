@@ -161,41 +161,51 @@ def delete_conference(request):
 
 def get_publication_form(request, conference_id):
     conference = get_object_or_404(Conference, pk=conference_id)
-    if request.POST.get('save_conference_publication'):
-        form = PostEditForm(request.POST)
-        if form.is_valid():
-            instance = form.save(commit=False)
-            instance.published_date = timezone.now()
-            instance.user = request.user
-            instance.save()
-            conference.publication = instance
-            conference.save()
-            # pdb.set_trace()
-            return JsonResponse({'message': 'Успешно сохранено'})
-        else:
-            errors = form.errors
-            return JsonResponse({'publictation_not_saved': errors})
     # return JsonResponse({'success': conference.pk})
-    post_data = {
-        'title': conference.title,
-        'short_description': 'Состоялась региональная конференция "{}"'.format(conference.title),
-        'text': """<p><b>Завершена региональная конференция</b></p>
-        <p><strong>Вопросы повестки дня:</strong></p>
-        {}
-        <p><strong>Участники конференции:</strong></p>
-        {}
-        """.format(
-            '<br>'.join([t.subject for t in ConferenceTheme.objects.filter(conference=conference)]),
-            '<br>'.join([member.fio for member in conference.members.all()])
-            ),
-        # 'published_date': None,
-        }
-    form = PostEditForm(initial=post_data)
+    if not conference.publication:
+        post_data = {
+            'title': conference.title,
+            'short_description': 'Состоялась региональная конференция "{}"'.format(conference.title),
+            'text': """<p><b>Завершена региональная конференция</b></p>
+            <p><strong>Вопросы повестки дня:</strong></p>
+            {}
+            <p><strong>Участники конференции:</strong></p>
+            {}
+            """.format(
+                '<br>'.join([t.subject for t in ConferenceTheme.objects.filter(conference=conference)]),
+                '<br>'.join([member.fio for member in conference.members.all()])
+                ),
+            # 'published_date': None,
+            }
+        form = PostEditForm(initial=post_data)
+    else:
+        form = PostEditForm(instance=conference.publication)
     # new_post.save()
     content = {
         'form': form,
     }
     return render(request, 'mainapp/includes/post_edit_form.html', content)
+
+def save_conference_publication(request, conference_id):
+    # pdb.set_trace()
+    conference = get_object_or_404(Conference, pk=conference_id)
+    form_data = {
+        'title': request.POST.get('title'),
+        'short_description': request.POST.get('short_description'),
+        'text': request.POST.get('updated_text')
+    }
+    form = PostEditForm(form_data)
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.published_date = timezone.now()
+        instance.user = request.user
+        instance.save()
+        conference.publication = instance
+        conference.save()
+        return JsonResponse({'message': 'Успешно сохранено'})
+    else:
+        errors = form.errors
+        return JsonResponse({'publictation_not_saved': errors})
 
 def edit_conference_publication(request, publication_id):
     publication = get_object_or_404(Post, pk=publication_id)

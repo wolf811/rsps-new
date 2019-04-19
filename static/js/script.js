@@ -96,7 +96,7 @@ $(document).ready(function(){
         return cookieValue;
     }
     var csrftoken = getCookie('csrftoken');
-    console.log('CSRF_TOKEN:', csrftoken);
+    // console.log('CSRF_TOKEN:', csrftoken);
 
     function csrfSafeMethod(method) {
         // these HTTP methods do not require CSRF protection
