@@ -1,5 +1,5 @@
 {% load formstyles %}
-<form id="publication_form">
+<form id="publication_form" enctype="multipart/form-data" novalidate="">
     {{ form.media }}
     <div class="form-group">
         <label for="id_title" class="col-form-label col-form-label-sm">Заголовок:&nbsp;<span
@@ -16,5 +16,8 @@
                 class="text-danger">*</span></label>
         {{ form.text|safe }}
     </div>
-    <small class="btn btn-link btn-sm"><i class="fa fa-upload"></i>&nbsp;Загрузить фото</small>
+    {% comment %} <small class="btn btn-link btn-sm"><i class="fa fa-upload"></i>&nbsp;Загрузить фото</small> {% endcomment %}
+    <div class="text-secondary">Загрузите фотографии (можно выбрать несколько файлов, удерживая <strong>"Ctrl"</strong>)</div>
+    {% comment %} {{ upload_form.images }} {% endcomment %}
+    {{ form.images }}
 </form>

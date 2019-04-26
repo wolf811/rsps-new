@@ -79,3 +79,4 @@ class ConferenceEdmin(admin.ModelAdmin):
 # admin.site.register(Conference)
 admin.site.register(MemberRegistration)
 admin.site.register(Membership)
+admin.site.register(Photo)

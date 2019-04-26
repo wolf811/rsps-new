@@ -390,28 +390,56 @@ $(document).ready(function () {
         event.preventDefault();
         let target = $(event.target);
         let conference_id = $('#publication_form').data('conference-id');
-        let data = $('#publication_form').serializeArray();
-        data.push({name: 'updated_text', value: CKEDITOR.instances.id_text.getData()})
-        console.log(data);
-        $.post(`/conferences/save_conference_publication/${conference_id}/`, data)
-            .done(response=>{
-                console.log('good', response);
-                $('#publication_server_messages').html(
-                    `<span class="text-info">
-                                <i class="fa fa-check mr-2"></i>
-                                ${response.message}
-                    </span>`
-                );
+        // let data = $('#publication_form').serializeArray();
+        let formData = new FormData($('#publication_form')[0]);
+        // let files = $('input[type=file]')[0].files;
+        // data.push({name: 'updated_text', value: CKEDITOR.instances.id_text.getData()})
+        formData.append('updated_text', CKEDITOR.instances.id_text.getData());
+        formData.append('image_files', $('input[type=file]')[0].files[0]);
+        console.log(formData);
+        $.ajax({
+            url: `/conferences/save_conference_publication/${conference_id}/`,
+            data: formData,
+            processData: false,
+            contentType: false,
+            type: 'POST',
+            dataType: 'JSON',
+            success: function(response) {
+                console.log('SUCCESS');
+                if ('errors' in response) {
+                    $('#publication_server_messages').html(
+                        `${response.error}`
+                    );
+                    console.log(response.error);
+                } else {
+                    $('#publication_server_messages').html(
+                        `<span class="text-info">
+                                    <i class="fa fa-check mr-2"></i>
+                                    ${response.message}
+                        </span>`
+                    );
+                }
                 update_row(conference_id);
-            })
-            .fail(response=>{
-                console.log('saving fail', response);
-                // $('#publication_server_messages').html(
-                //     `<span class="text-info">
-                //                 ${response.responseText}
-                //     </span>`
-                // );
-            })
+            },
+            error: response=>{
+                console.log('ERROR', response);
+                $('#publication_server_messages').html(
+                    response.error
+                );
+            }
+        });
+        // $.post(`/conferences/save_conference_publication/${conference_id}/`, data)
+        //     .done(response=>{
+        //         console.log('good', response);
+        //     })
+        //     .fail(response=>{
+        //         console.log('saving fail', response);
+        //         // $('#publication_server_messages').html(
+        //         //     `<span class="text-info">
+        //         //                 ${response.responseText}
+        //         //     </span>`
+        //         // );
+        //     })
         console.log('click')
     });
 
@@ -454,6 +482,14 @@ $(document).ready(function () {
         } else {
             alert("Удаление публикации отменено")
         }
+    });
+
+    //hide edit conference form on close button
+    $('tr').on('click', '.close_conference_edit_form', event=>{
+        var target = $(event.target);
+        var edit_row = target.closest('.multi-collapse');
+        // $(edit_row).css('display', 'none');
+        $(edit_row).hide();
     });
 
 });

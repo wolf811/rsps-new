@@ -3,6 +3,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.core.validators import validate_image_file_extension, FileExtensionValidator
 import re
 
 
@@ -75,10 +76,23 @@ class Conference(models.Model):
     def __str__(self):
         return '{}, {}'.format(self.title, self.date)
 
-
+def file_size(value):
+    limit = 2 * 1024 * 1024
+    if value.size > limit:
+        raise ValidationError('Файл слишком велик, размер файла не должен превышать 2mb')
 
 
 class Photo(models.Model):
     """model for handling photos"""
     image = models.ImageField(u'Фото', upload_to='upload/')
+        # validators=[FileExtensionValidator(['jpg', 'JPG', 'png', 'PNG']), file_size])
+        # validators=[validate_image_file_extension, file_size])
     post = models.ForeignKey(Post, null=True, on_delete=models.CASCADE)
+
+    def clean(self):
+        file_size(self.image)
+        validate_image_file_extension(self.image)
+        return True
+
+    def __str__(self):
+        return self.image.url

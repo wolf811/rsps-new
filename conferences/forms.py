@@ -1,6 +1,6 @@
 from django import forms
 
-from mainapp.models import Conference
+from mainapp.models import Conference, Photo
 from conferences.models import ConferenceTheme
 
 class ConferenceForm(forms.ModelForm):
@@ -34,6 +34,12 @@ class SubjectForm(forms.ModelForm):
                 'class': "form-control form-control-sm",
                 'placeholder': 'Введите вопрос повестки дня',
                 }), label='')
+
+class FileUploadForm(forms.Form):
+    images = forms.ImageField(required=False, widget=forms.ClearableFileInput(attrs=
+        {'multiple': True}))
+
+class PhotoForm(forms.ModelForm):
     class Meta:
-        model = ConferenceTheme
-        exclude = ('conference',)
+        model = Photo
+        exclude = ('post',)

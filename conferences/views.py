@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from mainapp.models import Conference
+from mainapp.models import Conference, Photo
 from .models import ConferenceTheme
 from mainapp.models import Member, Post
-from .forms import ConferenceForm, ConferenceEditForm, SubjectForm
+from .forms import ConferenceForm, ConferenceEditForm, SubjectForm, FileUploadForm, PhotoForm
+from django.core.files import File
 from mainapp.forms import PostEditForm
 from members.forms import MemberForm
 from django.core.paginator import Paginator
@@ -55,7 +56,8 @@ def conference_list(request):
 
 @login_required
 def edit_conference(request):
-    SubjectFormSet = modelformset_factory(ConferenceTheme, form=SubjectForm, can_delete=True)
+    SubjectFormSet = modelformset_factory(ConferenceTheme, form=SubjectForm,
+        fields=('subject',), can_delete=True)
     try:
         edit_conference = Conference.objects.get(pk=request.POST.get('conference_id'))
     except Exception as e:
@@ -178,11 +180,13 @@ def get_publication_form(request, conference_id):
             # 'published_date': None,
             }
         form = PostEditForm(initial=post_data)
+        # upload_form = FileUploadForm()
     else:
         form = PostEditForm(instance=conference.publication)
     # new_post.save()
     content = {
         'form': form,
+        # 'upload_form': upload_form,
     }
     return render(request, 'mainapp/includes/post_edit_form.html', content)
 
@@ -194,18 +198,30 @@ def save_conference_publication(request, conference_id):
         'short_description': request.POST.get('short_description'),
         'text': request.POST.get('updated_text')
     }
-    form = PostEditForm(form_data)
+    form = PostEditForm(form_data, instance=conference.publication or None)
+    # import pdb; pdb.set_trace()
+    # pdb.set_trace()
     if form.is_valid():
         instance = form.save(commit=False)
         instance.published_date = timezone.now()
         instance.user = request.user
         instance.save()
         conference.publication = instance
+        if len(request.FILES) > 0:
+            # for f in request.FILES('images'):
+            for f in request.FILES.getlist('images'):
+                photo = Photo(image=File(f), post=instance)
+                # pdb.set_trace()
+                if photo.clean():
+                    photo.save()
+                else:
+                    return JsonResponse({'error': 'ERROR IMAGE SAVING'})
+
         conference.save()
         return JsonResponse({'message': 'Успешно сохранено'})
     else:
         errors = form.errors
-        return JsonResponse({'publictation_not_saved': errors})
+        return JsonResponse({'publication_not_saved': errors})
 
 def edit_conference_publication(request, publication_id):
     publication = get_object_or_404(Post, pk=publication_id)

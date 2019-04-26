@@ -12,6 +12,8 @@ class PostEditForm(forms.ModelForm):
         label="Текст публикации",
         widget=CKEditorWidget(config_name='minified_config')
         )
+    images = forms.ImageField(required=False, widget=forms.ClearableFileInput(attrs=
+        {'multiple': True}))
 
     class Meta:
         model = Post
