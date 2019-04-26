@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_image_file_extension, FileExtensionValidator
 import re
+import hashlib
 
 
 def textvalidation(value):
@@ -81,13 +82,13 @@ def file_size(value):
     if value.size > limit:
         raise ValidationError('Файл слишком велик, размер файла не должен превышать 2mb')
 
-
 class Photo(models.Model):
     """model for handling photos"""
     image = models.ImageField(u'Фото', upload_to='upload/')
         # validators=[FileExtensionValidator(['jpg', 'JPG', 'png', 'PNG']), file_size])
         # validators=[validate_image_file_extension, file_size])
     post = models.ForeignKey(Post, null=True, on_delete=models.CASCADE)
+    file_sha1 = models.CharField(max_length=40)
 
     def clean(self):
         file_size(self.image)
