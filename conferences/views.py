@@ -73,7 +73,10 @@ def edit_conference(request):
                     subj.save()
                 formset.save()
                 success_message = {
-                    'message': '<b class="text-success">Успешно сохранено</b>',
+                    'message': """<span class="text-success">
+                                    <i class="fa fa-check mr-2"></i>
+                                    Успешно сохранено
+                                </span>""",
                     'conference_id': request.POST.get('conference_id')}
                 return JsonResponse(success_message)
             else:

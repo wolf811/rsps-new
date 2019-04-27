@@ -6,8 +6,6 @@ $(document).ready(function () {
         let data = $('#add_new_conference_form').serializeArray();
         $.post('', data)
             .done(function (response) {
-                console.log('success');
-                console.log(response);
                 //handle successfully transferred data
                 if ('success' in response) {
                     $('#results').html(`
@@ -45,7 +43,9 @@ $(document).ready(function () {
     $('.conference_edit').click((event) => {
         event.preventDefault();
         var conference_id = $(event.target).closest('a.btn-action').data('conference-id');
+        //call edit conference function
         edit_conference(conference_id);
+        //toggle visibility of conference edit area
         $(`#multiCollapseConf${conference_id}`).toggle();
     });
     //delegate event handler to dinamic loaded content
@@ -83,6 +83,8 @@ $(document).ready(function () {
         let conference_id = lst_id.match(pattern);
         let form_number = element.closest('button').data('form-number');
         // console.log('FORM_NUMBER', form_number);
+        //hide element (not remove) because django formset must 
+        //get this element to delete by itself
         element.closest('.question_theme').hide();
         //find django hidden input and make it checked
         //django formsets works with hidden input data
@@ -103,6 +105,7 @@ $(document).ready(function () {
         $(`#conference_${conference_id}_subjects`).find('.text-danger').remove();
     });
 
+    //handle radio selection of adding existing members to conference OR new member adding form
     $('.select_existing_member').click((event) => {
         if ($(".select_existing_member > input[type='radio']").is(':checked')) {
             $('#new_participant_conference_register_new').hide();
@@ -133,7 +136,7 @@ $(document).ready(function () {
         let data = {'get_checkboxes': 'true', 'conference_id': conference_id}
         $.post(`/conferences/${conference_id}/get_list_of_members/`, data)
             .done(response=>{
-                console.log('CHECKBOXES', response);
+                // console.log('CHECKBOXES', response);
                 let checkboxes = $('input[name*="member"]');
                 for (let el of checkboxes) {
                     //clear checked
@@ -185,7 +188,9 @@ $(document).ready(function () {
     function updateMembers(conference_id, data) {
         $.post(`/conferences/${conference_id}/update_members/`, data)
             .done(function(response) {
+                //remove all previous error messages
                 $('#new_participant_conference_register_new').find('small').remove();
+                //handle member registration saving errors
                 if ('member_save_errors' in response) {
                     for (let err of Object.keys(response['errors'])) {
                         let form = $('#new_participant_conference_register_new');
@@ -193,15 +198,23 @@ $(document).ready(function () {
                         element.after(`<small class="text-danger">${response['errors'][err]}</small>`);
                     }
                 } else {
-                    $('.modal-body > #server_messages').html('<p class="text-success">Успешно сохранено</p>');
-                    getListOfRegistrations(conference_id);
+                    // no errors: add success message to modal
+                    $('.modal-footer > #server_messages').html('<img src="/static/images/ajax-loader.gif" alt="loading">');
+
+                    setTimeout(()=>{
+                        $('.modal-footer > #server_messages').html('<span class="text-success">\
+                                                <i class="fa fa-check mr-2"></i>Успешно сохранено</span>');
+                        getListOfRegistrations(conference_id);
+                    }, Math.random()*1000);
+
+                    // call a function to dynamic update list of registrations to conference
                 }
             })
             .fail(function(response) {
                 console.log('server not ok', response);
             });
     };
-
+    //get a list of registrations and update conference edit area
     function getListOfRegistrations(conference_id) {
         let list_of_registrations;
         $.post(`/conferences/${conference_id}/get_list_of_members/`)
@@ -211,7 +224,7 @@ $(document).ready(function () {
                 let tBody = $(`#conference_${conference_id}_registrations`);
                 $(tBody).html(list_of_registrations);
             })
-            .fail(response =>{
+            .fail(response => {
                 console.log('***SERVER LIST ERROR***', response);
             });
         return list_of_registrations
@@ -240,7 +253,8 @@ $(document).ready(function () {
 
     //     this.delete(targetElement.data('id'));
     //   });
-
+    
+    // little helpers: select all members
     $('#select_all_members').click(()=>{
         let checkBoxes = $('input[name*="member"]');
         checkBoxes.prop("checked", !checkBoxes.prop("checked"));
@@ -253,6 +267,7 @@ $(document).ready(function () {
         save_conference(conference_id);
     });
 
+    // convert date to datepicker format
     function convert_date(date) {
         let date_arr = date.split('-');
         let year = date_arr[0];
@@ -266,6 +281,7 @@ $(document).ready(function () {
         var data = {
             'conference_id': conference_id
         };
+        //make ajax request only if no form_id on page
         if ($(`#form_${conference_id}`).length == 0) {
             $.post('/conferences/edit/', data)
                 .done(function (response) {
@@ -289,16 +305,16 @@ $(document).ready(function () {
     };
 
     function save_conference(conference_id) {
-        console.log('SAVING', conference_id);
+        // console.log('SAVING', conference_id);
         let data = $('td').find(`#form_${conference_id}`).serializeArray();
         data.push({name: 'saving_conference', value: 'True'});
         data.push({name: 'conference_id', value: conference_id});
-        console.log('SERIALIZED FORM', data);
+        // console.log('SERIALIZED FORM', data);
         $.post('/conferences/edit/', data)
                 .done(function (response) {
                     $(`#conference_${conference_id}_subjects`).find('.text-danger').remove();
                     // handle massages
-                    console.log(response);
+                    // console.log(response);
                     // handle error server messages
                     if ('formset_errors' in response) {
                         let subjects = $(`#conference_${conference_id}_subjects`).find('.question_theme');
@@ -309,9 +325,14 @@ $(document).ready(function () {
                             }
                             console.log(err);
                         }
-                        $(`#messages_${conference_id}`).html(`<span class="text-danger">${response['message']}</span>`);
+                        $(`#messages_${conference_id}`).html(`<span class="text-danger">\
+                                                                    <i class="fa fa-times mr-2"></i>${response['message']}\
+                                                              </span>`);
                     } else {
-                        $(`#messages_${conference_id}`).html(response.message);
+                        $(`#messages_${conference_id}`).html('<img src="/static/images/ajax-loader.gif" alt="loading">');
+                        setTimeout(()=>{
+                            $(`#messages_${conference_id}`).html(response.message);
+                        }, Math.random()*1000);
                     }
                     //initialize datepicker to loaded content
                     // $('.datepicker-here').datepicker();
