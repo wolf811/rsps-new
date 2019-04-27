@@ -227,14 +227,17 @@ def edit_conference_publication(request, publication_id):
     publication = get_object_or_404(Post, pk=publication_id)
     print('PUBLICATION', publication)
     edit_publication_form = PostEditForm(instance=publication)
+    photos = Photo.objects.filter(post__pk=publication.pk)
     # if edit_publication_form.is_valid():
     #     edit_publication_form.save()
     #     return JsonResponse({'message': 'Успешно сохранено'})
     # else:
     #     print(edit_publication_form.errors.as_data())
     #     return JsonResponse({'message': 'Ошибка сохранения', 'errors': edit_publication_form.errors})
+    # import pdb; pdb.set_trace()
     content = {
-        'form': edit_publication_form
+        'form': edit_publication_form,
+        'photos': photos,
     }
     return render(request, 'mainapp/includes/post_edit_form.html', content)
 

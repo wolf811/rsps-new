@@ -10,6 +10,11 @@
       <div class="publication_body modal-body">
         <p>Modal body text goes here.</p>
       </div>
+      <div>
+      {% for img in photos %}
+        <div class="text-success">{{ img.image.url }}</div>
+      {% endfor %}
+      </div>
       <div class="modal-footer">
         <button type="button" class="save_conference_publication btn btn-primary">Сохранить</button>
         <div id="publication_server_messages"></div>
