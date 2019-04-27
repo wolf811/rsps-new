@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from mainapp.models import Conference
+from mainapp.models import Conference, Photo
 from .models import ConferenceTheme
-from mainapp.models import Member
-from .forms import ConferenceForm, ConferenceEditForm, SubjectForm
+from mainapp.models import Member, Post
+from .forms import ConferenceForm, ConferenceEditForm, SubjectForm, FileUploadForm, PhotoForm
+from django.core.files import File
+from mainapp.forms import PostEditForm
 from members.forms import MemberForm
 from django.core.paginator import Paginator
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
@@ -11,6 +13,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.forms import modelformset_factory
+from django.utils import timezone
 import pdb
 
 # Create your views here.
@@ -53,7 +56,8 @@ def conference_list(request):
 
 @login_required
 def edit_conference(request):
-    SubjectFormSet = modelformset_factory(ConferenceTheme, form=SubjectForm, can_delete=True)
+    SubjectFormSet = modelformset_factory(ConferenceTheme, form=SubjectForm,
+        fields=('subject',), can_delete=True)
     try:
         edit_conference = Conference.objects.get(pk=request.POST.get('conference_id'))
     except Exception as e:
@@ -63,8 +67,12 @@ def edit_conference(request):
     if request.method == 'POST':
         if request.POST.get('saving_conference'):
             conference_form = ConferenceEditForm(request.POST, instance=edit_conference)
+            # import pdb; pdb.set_trace()
             if conference_form.is_valid():
-                conference_form.save()
+                instance = conference_form.save()
+                instance.save()
+            else:
+                return JsonResponse({'conference_form_errors': conference_form.errors})
             formset = SubjectFormSet(request.POST)
             if formset.is_valid():
                 instances = formset.save(commit=False)
@@ -151,4 +159,101 @@ def unregister_members(request, conference_id):
                          'conference_id': conference.pk})
 
 def delete_conference(request):
-    return 'delete conference'
+    conference = get_object_or_404(Conference,
+            pk=request.POST.get('remove_conference_with_id'))
+    conference.delete()
+    return JsonResponse({'removed_conference': conference.pk})
+
+def get_publication_form(request, conference_id):
+    conference = get_object_or_404(Conference, pk=conference_id)
+    # return JsonResponse({'success': conference.pk})
+    if not conference.publication:
+        post_data = {
+            'title': conference.title,
+            'short_description': 'Состоялась региональная конференция "{}"'.format(conference.title),
+            'text': """<p><b>Завершена региональная конференция</b></p>
+            <p><strong>Вопросы повестки дня:</strong></p>
+            {}
+            <p><strong>Участники конференции:</strong></p>
+            {}
+            """.format(
+                '<br>'.join([t.subject for t in ConferenceTheme.objects.filter(conference=conference)]),
+                '<br>'.join([member.fio for member in conference.members.all()])
+                ),
+            # 'published_date': None,
+            }
+        form = PostEditForm(initial=post_data)
+        # upload_form = FileUploadForm()
+    else:
+        form = PostEditForm(instance=conference.publication)
+    # new_post.save()
+    content = {
+        'form': form,
+        # 'upload_form': upload_form,
+    }
+    return render(request, 'mainapp/includes/post_edit_form.html', content)
+
+def save_conference_publication(request, conference_id):
+    # pdb.set_trace()
+    conference = get_object_or_404(Conference, pk=conference_id)
+    form_data = {
+        'title': request.POST.get('title'),
+        'short_description': request.POST.get('short_description'),
+        'text': request.POST.get('updated_text')
+    }
+    form = PostEditForm(form_data, instance=conference.publication or None)
+    # import pdb; pdb.set_trace()
+    # pdb.set_trace()
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.published_date = timezone.now()
+        instance.user = request.user
+        instance.save()
+        conference.publication = instance
+        if len(request.FILES) > 0:
+            # for f in request.FILES('images'):
+            for f in request.FILES.getlist('images'):
+                photo = Photo(image=File(f), post=instance)
+                # pdb.set_trace()
+                if photo.clean():
+                    photo.save()
+                else:
+                    return JsonResponse({'error': 'ERROR IMAGE SAVING'})
+
+        conference.save()
+        return JsonResponse({'message': 'Успешно сохранено'})
+    else:
+        errors = form.errors
+        return JsonResponse({'publication_not_saved': errors})
+
+def edit_conference_publication(request, publication_id):
+    publication = get_object_or_404(Post, pk=publication_id)
+    print('PUBLICATION', publication)
+    edit_publication_form = PostEditForm(instance=publication)
+    photos = Photo.objects.filter(post__pk=publication.pk)
+    # if edit_publication_form.is_valid():
+    #     edit_publication_form.save()
+    #     return JsonResponse({'message': 'Успешно сохранено'})
+    # else:
+    #     print(edit_publication_form.errors.as_data())
+    #     return JsonResponse({'message': 'Ошибка сохранения', 'errors': edit_publication_form.errors})
+    # import pdb; pdb.set_trace()
+    content = {
+        'form': edit_publication_form,
+        'photos': photos,
+    }
+    return render(request, 'mainapp/includes/post_edit_form.html', content)
+
+def delete_conference_publication(request, publication_id):
+    publication = get_object_or_404(Post, pk=publication_id)
+    print('DELETING', publication)
+    publication.delete()
+    return JsonResponse({'message': 'Удалено'})
+
+def update_conference_row(request, conference_id):
+    conference = get_object_or_404(Conference, pk=conference_id)
+    print('UPDATING_ROW', conference)
+    content = {
+        'conference': conference
+    }
+    return render(request, 'conferences/includes/conference_row.html', content)

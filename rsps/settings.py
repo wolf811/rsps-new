@@ -25,7 +25,7 @@ SECRET_KEY = '647*_moxa9l%kz3^1c8via7=f1+yc8tbj4*r5o8xptvm@r0s+5'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -199,9 +199,17 @@ CKEDITOR_CONFIGS = {
                       {'name': 'Адаптивная таблица', 'element': 'div', 'attributes': {'class': 'table-responsive'}}],
         'fontSize_sizes': '8/8px;9/9px;10/10px;11/11px;12/12px;13/13px;14/14px;15/15px;16/16px;17/17px;18/18px;19/19px;20/20px;'
         '21/21px;22/22px;23/23px;24/24px;25/25px;26/26px;27/27px;28/28px;36/36px;48/48px;72/72px;1/1px;',
-    }
+    },
+    'minified_config': {
+        'toolbar': 'Custom',
+        'height': 300,
+        'width': '100%',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList']
+            ],
+    },
 }
-
 
 ####################################
 ###  DJANGO-RESIZED CONFIGURATION ##

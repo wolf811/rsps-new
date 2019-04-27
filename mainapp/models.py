@@ -3,7 +3,9 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
+from django.core.validators import validate_image_file_extension, FileExtensionValidator
 import re
+import hashlib
 
 
 def textvalidation(value):
@@ -43,28 +45,11 @@ class Member(models.Model):
     def clean(self):
         textvalidation(self.fio)
 
-
-class Conference(models.Model):
-    """docstring for Conference"""
-    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
-    title = models.CharField(max_length=200, verbose_name='Название конференции')
-    date = models.DateField(verbose_name='Дата проведения')
-    place = models.CharField(max_length=100, verbose_name='Место проведения')
-    completed = models.BooleanField(verbose_name='Проведена', default=False)
-    members = models.ManyToManyField(Member, verbose_name='Участники', blank=True, default=None)
-
-    class Meta:
-        verbose_name = 'Конференция'
-        verbose_name_plural = 'Конференции'
-
-    def __str__(self):
-        return '{}, {}'.format(self.title, self.date)
-
-
 class Post(models.Model):
     """model for publications"""
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length=200, verbose_name='Название публикации')
-    short_description = models.CharField(max_length=100, verbose_name='Краткое описание', blank=True, default='')
+    short_description = models.CharField(max_length=200, verbose_name='Краткое описание', blank=True, default='')
     text = RichTextUploadingField(verbose_name='Текст публикации')
     published_date = models.DateTimeField(u'Дата публикации', default=timezone.now)
 
@@ -75,8 +60,40 @@ class Post(models.Model):
     def __str__(self):
         return 'Публикация {}, дата {}'.format(self.title, self.published_date)
 
+class Conference(models.Model):
+    """docstring for Conference"""
+    user = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
+    title = models.CharField(max_length=200, verbose_name='Название конференции')
+    date = models.DateField(verbose_name='Дата проведения')
+    place = models.CharField(max_length=100, verbose_name='Место проведения')
+    completed = models.BooleanField(verbose_name='Проведена', default=False)
+    members = models.ManyToManyField(Member, verbose_name='Участники', blank=True, default=None)
+    publication = models.ForeignKey(Post, null=True, on_delete=models.SET_NULL)
+
+    class Meta:
+        verbose_name = 'Конференция'
+        verbose_name_plural = 'Конференции'
+
+    def __str__(self):
+        return '{}, {}'.format(self.title, self.date)
+
+def file_size(value):
+    limit = 2 * 1024 * 1024
+    if value.size > limit:
+        raise ValidationError('Файл слишком велик, размер файла не должен превышать 2mb')
 
 class Photo(models.Model):
     """model for handling photos"""
     image = models.ImageField(u'Фото', upload_to='upload/')
+        # validators=[FileExtensionValidator(['jpg', 'JPG', 'png', 'PNG']), file_size])
+        # validators=[validate_image_file_extension, file_size])
     post = models.ForeignKey(Post, null=True, on_delete=models.CASCADE)
+    file_sha1 = models.CharField(max_length=40)
+
+    def clean(self):
+        file_size(self.image)
+        validate_image_file_extension(self.image)
+        return True
+
+    def __str__(self):
+        return self.image.url

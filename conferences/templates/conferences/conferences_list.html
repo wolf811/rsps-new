@@ -30,24 +30,9 @@
 				</thead>
 				<tbody>
 					{% for conference in conferences %}
-					{% if not conference.completed %}
-					<tr id="tr_{{ conference.pk }}">
-						<td>{{ conference.date }}</td>
-						<td>{{ conference.place }}</td>
-						<td>
-							<div class="text-appercase">{{ conference.title }}</div>
-							<div>Колличество участников:&nbsp;<strong>{{ conference.members.all|length }}</strong></div>
-							<div class="text-danger mt-2">Зарегистрируйте участников</div>
-						</td>
-						<td>
-							<a href="#" class="btn-action mr-3 text-primary" title="Удалить конференцию"><i
-									class="fa fa-trash-o"></i></a>
-							<a href="#multiCollapseConf{{ conference.pk }}"
-								class="conference_edit btn-action text-primary" data-toggle="collapse"
-								data-conference-id="{{ conference.pk }}" aria-expanded="false" title="Изменить"><i
-									class="fa fa-pencil"></i></a>
-						</td>
-					</tr>
+						<tr id="tr_{{ conference.pk }}">
+							{% include 'conferences/includes/conference_row.html' %}
+						</tr>
 					{% comment %} {% include 'conferences/includes/conference_edit.html' %} {% endcomment %}
 					<tr class="multi-collapse collapse edit-list" id="multiCollapseConf{{ conference.pk }}">
 						<td id="td_{{conference.pk}}" colspan="4" class="total-column">
@@ -57,7 +42,7 @@
 						</td>
 					</tr>
 
-					{% endif %}
+
 					{% endfor %}
 
 				</tbody>
@@ -94,4 +79,5 @@
 </main>
 
 {% include 'conferences/includes/conference_add_modal.html' %}
+{% include 'mainapp/includes/publication_add_modal.html' %}
 {% endblock %}
