@@ -1,4 +1,4 @@
-{% load formstyles %}{% load filename %}
+{% load formstyles %}
 <form id="publication_form" enctype="multipart/form-data" novalidate="">
     {{ form.media }}
     <div class="form-group">
@@ -20,22 +20,7 @@
     <div class="text-secondary">Загрузите фотографии (можно выбрать несколько файлов, удерживая <strong>"Ctrl"</strong>)</div>
     {% comment %} {{ upload_form.images }} {% endcomment %}
     {{ form.images }}
-    <div>
-        <hr>
-        Загруженные файлы:
-
-            {% for img in photos %}
-            <div class="row align-items-center mb-2">
-                <div class="col-4">
-                    <a href="{{img.image.url}}" target="_blank" class="text-success">{{ img.image.file|filename }}</a>
-                </div>
-                <div class="col-2">
-                    <a href="" class="btn btn-warning btn-sm">Удалить</a><br>
-                </div>
-            </div>     
-            {% endfor %}
-   
-           
-     
-    </div>
+        <div id="uploaded_photos">
+            {% include 'mainapp/includes/uploaded_files.html' %}
+        </div>
 </form>

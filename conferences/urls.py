@@ -15,6 +15,8 @@ urlpatterns = [
     path('edit_conference_publication/<slug:publication_id>/', conferences.edit_conference_publication, name='edit_conference_publication'),
     path('delete_conference_publication/<slug:publication_id>/', conferences.delete_conference_publication, name='delete_conference_publication'),
     path('update_conference_row/<slug:conference_id>/', conferences.update_conference_row, name='update_conference_row'),
+    path('get_uploaded_files/<slug:publication_id>', conferences.get_uploaded_files),
+    path('delete_publication_photo/<slug:photo_id>', conferences.delete_publication_photo),
     path('delete/', conferences.delete_conference, name='conference_delete'),
     # path('new/', vacancies.add_new_vacancy, name='member_create'),
     # path('update/<slug:pk>', vacancies.vacancy_update, name='member_update'),

@@ -221,7 +221,8 @@ def save_conference_publication(request, conference_id):
                     return JsonResponse({'error': 'ERROR IMAGE SAVING'})
 
         conference.save()
-        return JsonResponse({'message': 'Успешно сохранено'})
+        return JsonResponse({'message': 'Успешно сохранено',
+                             'publication_id': '{}'.format(conference.publication.pk)})
     else:
         errors = form.errors
         return JsonResponse({'publication_not_saved': errors})
@@ -257,3 +258,14 @@ def update_conference_row(request, conference_id):
         'conference': conference
     }
     return render(request, 'conferences/includes/conference_row.html', content)
+
+def delete_publication_photo(request, photo_id):
+    # pdb.set_trace()
+    photo = get_object_or_404(Photo, pk=photo_id)
+    photo.delete()
+    return JsonResponse({'photo_deleted': photo_id})
+
+def get_uploaded_files(request, publication_id):
+    publication = get_object_or_404(Post, pk=publication_id)
+    photos = Photo.objects.filter(post=publication)
+    return render(request, 'mainapp/includes/uploaded_files.html', {'photos': photos})

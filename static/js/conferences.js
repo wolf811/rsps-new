@@ -112,7 +112,7 @@ $(document).ready(function () {
         let conference_id = lst_id.match(pattern);
         let form_number = element.closest('button').data('form-number');
         // console.log('FORM_NUMBER', form_number);
-        //hide element (not remove) because django formset must 
+        //hide element (not remove) because django formset must
         //get this element to delete by itself
         element.closest('.question_theme').hide();
         //find django hidden input and make it checked
@@ -282,7 +282,7 @@ $(document).ready(function () {
 
     //     this.delete(targetElement.data('id'));
     //   });
-    
+
     // little helpers: select all members
     $('#select_all_members').click(()=>{
         let checkBoxes = $('input[name*="member"]');
@@ -402,6 +402,18 @@ $(document).ready(function () {
             });
     });
 
+    function update_photo_list(publication_id) {
+        console.log('update_photos', publication_id);
+        $.post(`/conferences/get_uploaded_files/${publication_id}`)
+            .done(response=>{
+                console.log('updating_list');
+                $('#uploaded_photos').html(response);
+            })
+            .fail(response=>{
+                console.log('updating_fail');
+            });
+    };
+
     $('.save_conference_publication').click((event)=>{
         event.preventDefault();
         let target = $(event.target);
@@ -434,6 +446,7 @@ $(document).ready(function () {
                                     ${response.message}
                         </span>`
                     );
+                    update_photo_list(response.publication_id);
                 }
                 update_row(conference_id);
             },
@@ -467,7 +480,7 @@ $(document).ready(function () {
         let conference_id = target.closest('a.edit_post_conference').data('conference-id');
         $.post(`/conferences/edit_conference_publication/${publication_id}/`)
         .done(response=>{
-                console.log('good');
+            console.log('good');
                 $('.publication_body').html(response);
                 $('#publication_form').attr('data-conference-id', conference_id);
                 $('.django-ckeditor-widget').css('display', 'block');
@@ -487,7 +500,7 @@ $(document).ready(function () {
         let conference_id = target.closest('tr').attr('id').split('_')[1];
         let iAmSure = prompt('Введите заглавными буквами "УДАЛИТЬ"');
         if (iAmSure == 'УДАЛИТЬ') {
-                $.post(`/conferences/delete_conference_publication/${publication_id}/`)
+            $.post(`/conferences/delete_conference_publication/${publication_id}/`)
                 .done(response=>{
                     console.log('good');
                     update_row(conference_id);
@@ -508,4 +521,19 @@ $(document).ready(function () {
         $(edit_row).hide();
     });
 
+
+    $('.modal').on('click', '.remove_photo', function(event) {
+        event.preventDefault();
+        console.log('click');
+        var photo_id = $(event.target).closest('a.remove_photo').data('photo-id');
+        var publication_id = $(event.target).closest('a.remove_photo').data('publication-id');
+        $.post(`/conferences/delete_publication_photo/${photo_id}`)
+            .done(response=>{
+                console.log('good');
+                update_photo_list(publication_id);
+            })
+            .fail(response => {
+                console.log('bad');
+            });
+    });
 });
