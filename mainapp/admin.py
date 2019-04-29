@@ -94,13 +94,14 @@ def generate_sha(file):
 
 @admin.register(Photo)
 class PhotoAdmin(admin.ModelAdmin):
-    def save_model(self, request, obj, form, change):
-        sha = generate_sha(obj.image)
-        obj.file_sha1 = sha
-        match_qs = ReportPost.objects.filter(file_sha1=sha)
-        if match_qs.count() > 0:
-            obj.image = match_qs[0].file
-        obj.save()
+    readonly_fields = ['file_sha1', 'filesize']
+    # def save_model(self, request, obj, form, change):
+    #     sha = generate_sha(obj.image)
+    #     obj.file_sha1 = sha
+    #     match_qs = ReportPost.objects.filter(file_sha1=sha)
+    #     if match_qs.count() > 0:
+    #         obj.image = match_qs[0].file
+    #     obj.save()
 
 admin.site.register(MemberRegistration)
 admin.site.register(Membership)

@@ -193,6 +193,7 @@ def get_publication_form(request, conference_id):
     }
     return render(request, 'mainapp/includes/post_edit_form.html', content)
 
+
 def save_conference_publication(request, conference_id):
     # pdb.set_trace()
     conference = get_object_or_404(Conference, pk=conference_id)
@@ -212,20 +213,34 @@ def save_conference_publication(request, conference_id):
         conference.publication = instance
         if len(request.FILES) > 0:
             # for f in request.FILES('images'):
+            image_uploading_errors = []
             for f in request.FILES.getlist('images'):
                 photo = Photo(image=File(f), post=instance)
                 # pdb.set_trace()
                 if photo.clean():
-                    photo.save()
+                    try:
+                        photo.save()
+                    except Exception as e:
+                        print('ERROR:', e)
+                        image_uploading_errors.append('{}:{}'.format(f.name, e))
                 else:
                     return JsonResponse({'error': 'ERROR IMAGE SAVING'})
 
         conference.save()
-        return JsonResponse({'message': 'Успешно сохранено',
-                             'publication_id': '{}'.format(conference.publication.pk)})
+
+        server_message = {
+            'message': 'Публикация сохранена',
+            'publication_id': '{}'.format(conference.publication.pk),
+        }
+
+        if len(request.FILES) !=0 and len(image_uploading_errors) > 0:
+            # import pdb; pdb.set_trace()
+            server_message['image_uploading_error'] = image_uploading_errors
+
+        return JsonResponse(server_message)
     else:
         errors = form.errors
-        return JsonResponse({'publication_not_saved': errors})
+        return JsonResponse({'message': 'Публикация не сохранена'})
 
 def edit_conference_publication(request, publication_id):
     publication = get_object_or_404(Post, pk=publication_id)

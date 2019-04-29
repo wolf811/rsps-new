@@ -82,13 +82,15 @@ def file_size(value):
     if value.size > limit:
         raise ValidationError('Файл слишком велик, размер файла не должен превышать 2mb')
 
+
 class Photo(models.Model):
     """model for handling photos"""
     image = models.ImageField(u'Фото', upload_to='upload/')
         # validators=[FileExtensionValidator(['jpg', 'JPG', 'png', 'PNG']), file_size])
         # validators=[validate_image_file_extension, file_size])
     post = models.ForeignKey(Post, null=True, on_delete=models.CASCADE)
-    file_sha1 = models.CharField(max_length=40)
+    file_sha1 = models.CharField(max_length=40, unique=True)
+    filesize = models.CharField(max_length=40)
 
     def clean(self):
         file_size(self.image)
@@ -97,3 +99,20 @@ class Photo(models.Model):
 
     def __str__(self):
         return self.image.url
+
+    def save(self, *args, **kwargs):
+        super(Photo, self).save(*args, **kwargs)
+        f = self.image.file.open('rb')
+        hash = hashlib.sha1()
+        if f.multiple_chunks():
+            for chunk in f.chunks():
+                hash.update(chunk)
+        else:
+                hash.update(f.read())
+        f.close()
+        self.file_sha1 = hash.hexdigest()
+        self.filesize = self.image.size
+        #call the real save()
+        super(Photo, self).save(*args, **kwargs)
+        # models.Model.save(self, *args, **kwargs)
+        # import pdb; pdb.set_trace()
