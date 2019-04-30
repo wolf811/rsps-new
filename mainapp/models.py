@@ -78,7 +78,7 @@ class Conference(models.Model):
         return '{}, {}'.format(self.title, self.date)
 
 def file_size(value):
-    limit = 2 * 1024 * 1024
+    limit = 5 * 1024 * 1024
     if value.size > limit:
         raise ValidationError('Файл слишком велик, размер файла не должен превышать 2mb')
 
@@ -102,6 +102,13 @@ class Photo(models.Model):
 
     def save(self, *args, **kwargs):
         super(Photo, self).save(*args, **kwargs)
+        # import pdb; pdb.set_trace()
+        if self.file_sha1 == '':
+            self.calculate_sha1()
+        self.filesize = self.image.size
+        super(Photo, self).save(*args, **kwargs)
+
+    def calculate_sha1(self):
         f = self.image.file.open('rb')
         hash = hashlib.sha1()
         if f.multiple_chunks():
@@ -111,8 +118,3 @@ class Photo(models.Model):
                 hash.update(f.read())
         f.close()
         self.file_sha1 = hash.hexdigest()
-        self.filesize = self.image.size
-        #call the real save()
-        super(Photo, self).save(*args, **kwargs)
-        # models.Model.save(self, *args, **kwargs)
-        # import pdb; pdb.set_trace()

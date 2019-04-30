@@ -14,6 +14,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.forms import modelformset_factory
 from django.utils import timezone
+import hashlib
 import pdb
 
 # Create your views here.
@@ -193,6 +194,17 @@ def get_publication_form(request, conference_id):
     }
     return render(request, 'mainapp/includes/post_edit_form.html', content)
 
+def calculate_sha1(file):
+    f = file.open('rb')
+    hash = hashlib.sha1()
+    if f.multiple_chunks():
+        for chunk in f.chunks():
+            hash.update(chunk)
+    else:
+            hash.update(f.read())
+    # f.close()
+    file_sha1 = hash.hexdigest()
+    return file_sha1
 
 def save_conference_publication(request, conference_id):
     # pdb.set_trace()
@@ -211,20 +223,31 @@ def save_conference_publication(request, conference_id):
         instance.user = request.user
         instance.save()
         conference.publication = instance
+        publication_photos = Photo.objects.filter(post=conference.publication)
+        publication_sha1s = [p.file_sha1 for p in publication_photos]
         if len(request.FILES) > 0:
             # for f in request.FILES('images'):
             image_uploading_errors = []
             for f in request.FILES.getlist('images'):
                 photo = Photo(image=File(f), post=instance)
                 # pdb.set_trace()
+                temp_file = File(f)
+                temp_hash = calculate_sha1(temp_file)
+                if temp_hash in publication_sha1s:
+                    image_uploading_errors.append(
+                        '{} : {}'.format(photo.image, 'Этот файл ранее был загружен'))
+                    continue
                 if photo.clean():
                     try:
+                        # pdb.set_trace()
                         photo.save()
                     except Exception as e:
                         print('ERROR:', e)
-                        image_uploading_errors.append('{}:{}'.format(f.name, e))
+                        image_uploading_errors.append('{} : {}'.format(f.name, e))
                 else:
-                    return JsonResponse({'error': 'ERROR IMAGE SAVING'})
+                    return JsonResponse({'errors': 'ERROR IMAGE SAVING'})
+                if not f.closed:
+                    f.close()
 
         conference.save()
 
@@ -233,7 +256,7 @@ def save_conference_publication(request, conference_id):
             'publication_id': '{}'.format(conference.publication.pk),
         }
 
-        if len(request.FILES) !=0 and len(image_uploading_errors) > 0:
+        if len(request.FILES) != 0 and len(image_uploading_errors) > 0:
             # import pdb; pdb.set_trace()
             server_message['image_uploading_error'] = image_uploading_errors
 

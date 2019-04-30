@@ -436,9 +436,26 @@ $(document).ready(function () {
                 console.log('SUCCESS');
                 if ('errors' in response) {
                     $('#publication_server_messages').html(
-                        `${response.error}`
+                        `<span class="text-danger">
+                        ${response.errors}
+                        </span>`
                     );
                     console.log(response.error);
+                } else if ('image_uploading_error' in response) {
+                    $('#publication_server_messages').html(
+                        `<span class="text-info">
+                                    <i class="fa fa-check mr-2"></i>
+                                    ${response.message}
+                        </span>`
+                    );
+                    for (err of response['image_uploading_error']) {
+                        $('#publication_server_messages').append(
+                            `<br><span class="text-secondary">
+                                <i class="fa fa-exclamation mr-2"></i>
+                                ${err}
+                            </span>`
+                        );
+                        }
                 } else {
                     $('#publication_server_messages').html(
                         `<span class="text-info">
@@ -449,6 +466,7 @@ $(document).ready(function () {
                     update_photo_list(response.publication_id);
                 }
                 update_row(conference_id);
+                $('input#id_images').val("");
             },
             error: response=>{
                 console.log('ERROR', response);
@@ -527,13 +545,19 @@ $(document).ready(function () {
         console.log('click');
         var photo_id = $(event.target).closest('a.remove_photo').data('photo-id');
         var publication_id = $(event.target).closest('a.remove_photo').data('publication-id');
-        $.post(`/conferences/delete_publication_photo/${photo_id}`)
+        var iConfirm = confirm('Подтвердите удаление файла')
+        if (iConfirm) {
+            $.post(`/conferences/delete_publication_photo/${photo_id}`)
             .done(response=>{
                 console.log('good');
+                $('#publication_server_messages').html('');
                 update_photo_list(publication_id);
             })
             .fail(response => {
                 console.log('bad');
             });
+        } else {
+            alert('Удаление файла отменено');
+        }
     });
 });
