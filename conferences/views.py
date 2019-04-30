@@ -201,7 +201,7 @@ def calculate_sha1(file):
         for chunk in f.chunks():
             hash.update(chunk)
     else:
-            hash.update(f.read())
+        hash.update(f.read())
     # f.close()
     file_sha1 = hash.hexdigest()
     return file_sha1

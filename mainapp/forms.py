@@ -23,4 +23,11 @@ class PostEditForm(forms.ModelForm):
     #         'text': RichTextUploadingField(config_name='minified_config'),
     #     }
 
+class PublicationForm(forms.ModelForm):
 
+    images = forms.ImageField(required=False, widget=forms.ClearableFileInput(attrs=
+    {'multiple': True}))
+
+    class Meta:
+        model = Post
+        exclude = ('user', 'published_date')

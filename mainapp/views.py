@@ -2,6 +2,9 @@ from django.shortcuts import render
 from mainapp.models import Conference, Post
 from mainapp.models import Member, Photo
 from django.core.paginator import Paginator
+from django.views.generic.edit import CreateView
+from .forms import PublicationForm
+
 # Create your views here.
 
 def index(request):
@@ -28,21 +31,21 @@ def user(request):
 def prezidium_regional_office(request):
     title = 'РСПС - Президиум'
     content = {
-        'title': title, 
+        'title': title,
     }
     return render(request, 'mainapp/prezidium_regional_office.html', content)
 
 def prezidium_employee(request):
     title = 'РСПС - Президиум'
     content = {
-        'title': title, 
+        'title': title,
     }
     return render(request, 'mainapp/prezidium_employee.html', content)
 
 def prezidium_conf(request):
     title = 'РСПС - Президиум'
     content = {
-        'title': title, 
+        'title': title,
         #TODO: add report to unassign conferences, and filter
     }
     return render(request, 'mainapp/prezidium_conf.html', content)
@@ -50,28 +53,28 @@ def prezidium_conf(request):
 def prezidium_congress(request):
     title = 'РСПС - Президиум'
     content = {
-        'title': title, 
+        'title': title,
     }
     return render(request, 'mainapp/prezidium_congress.html', content)
 
 def account_user(request):
     title = 'РСПС - Личный кабинет'
     content = {
-        'title': title, 
+        'title': title,
     }
     return render(request, 'mainapp/account_user.html', content)
-    
+
 def account_about(request):
     title = 'РСПС - Личный кабинет'
     content = {
-        'title': title, 
+        'title': title,
     }
     return render(request, 'mainapp/account_about.html', content)
 
 def account_news(request):
     title = 'РСПС - Личный кабинет'
     content = {
-        'title': title, 
+        'title': title,
     }
     return render(request, 'mainapp/account_news.html', content)
 
@@ -80,7 +83,7 @@ def account_conf(request):
     conferences = Conference.objects.all()
     # members = Member.objects.all()
     content = {
-        'title': title, 
+        'title': title,
         'conferences': conferences,
         # 'members': members,
     }
@@ -90,7 +93,7 @@ def account_employee(request):
     title = 'РСПС - Личный кабинет'
     # employee = Employee.objects.all()
     content = {
-        'title': title, 
+        'title': title,
         # 'employee': employee,
     }
     return render(request, 'mainapp/account_employee.html', content)
@@ -128,6 +131,12 @@ def news(request):
         'posts': posts,
     }
     return render(request, 'mainapp/news.html', content)
+
+class PublicationCreate(CreateView):
+    model = Post
+    form_class = PublicationForm
+    # fields = ['title', 'short_description', 'text']
+    template_name = 'mainapp/includes/new_publication_form.html'
 
 def details(request, pk):
     post = Post.objects.get(pk=pk)
