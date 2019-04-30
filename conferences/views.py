@@ -215,8 +215,6 @@ def save_conference_publication(request, conference_id):
         'text': request.POST.get('updated_text')
     }
     form = PostEditForm(form_data, instance=conference.publication or None)
-    # import pdb; pdb.set_trace()
-    # pdb.set_trace()
     if form.is_valid():
         instance = form.save(commit=False)
         instance.published_date = timezone.now()
@@ -237,15 +235,14 @@ def save_conference_publication(request, conference_id):
                     image_uploading_errors.append(
                         '{} : {}'.format(photo.image, 'Этот файл ранее был загружен'))
                     continue
-                if photo.clean():
-                    try:
-                        # pdb.set_trace()
-                        photo.save()
-                    except Exception as e:
-                        print('ERROR:', e)
-                        image_uploading_errors.append('{} : {}'.format(f.name, e))
-                else:
-                    return JsonResponse({'errors': 'ERROR IMAGE SAVING'})
+                try:
+                    photo.clean()
+                    photo.save()
+                except Exception as e:
+                    print('ERROR:', e)
+                    image_uploading_errors.append('{} : {}'.format(f.name, e))
+                # else:
+                #     image_uploading_errors.append('{} : {}'.format(f.name, "Файл не прошел валидацию (тип файла или размер)"))
                 if not f.closed:
                     f.close()
 
