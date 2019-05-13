@@ -1,10 +1,11 @@
-{% extends 'mainapp/base.html' %}
 {% load formstyles %}
-{% block content %}
-<main class="pt-4">
-    <div class="container mx-auto">
-        <h3>Редактирование публикации</h3>
-        <form id="publication_form" enctype="multipart/form-data" novalidate="">
+{% comment %} {% block content %} {% endcomment %}
+<div class="pt-4">
+    <div class="container">
+        <h5>Заполните все поля формы</h5>
+        <form id="publication_form" enctype="multipart/form-data" novalidate="" method='post'>
+            {% csrf_token %}
+            {{ form.errors }}
             {{ form.media }}
             <div class="form-group">
                 <label for="id_title" class="col-form-label col-form-label-sm">Заголовок:&nbsp;<span
@@ -31,9 +32,9 @@
             <div id="uploaded_photos">
                 {% include 'mainapp/includes/uploaded_files.html' %}
             </div>
-            <button type="submit" class="btn btn-outline-primary my-3">Сохранить</button>
-            <a class="btn btn-outline-secondary my-3">Отмена</a>
+            {% comment %} <button type="submit" class="btn btn-outline-primary my-3">Сохранить</button>
+            <a class="btn btn-outline-secondary my-3">Отмена</a> {% endcomment %}
         </form>
     </div>
-</main>
-{% endblock content %}
+</div>
+{% comment %} {% endblock content %} {% endcomment %}

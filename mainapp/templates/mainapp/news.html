@@ -17,7 +17,8 @@
 		{% include 'mainapp/includes/account_menu_tabs.html' %}
 
 		<div class="card-all">
-		<a href="{% url 'new_publication' %}" class="new_publication btn btn-primary mb-2">Добавить публикацию</a>
+		{% comment %} <a href="{% url 'new_publication' %}" class="new_publication btn btn-primary mb-2">Добавить публикацию</a> {% endcomment %}
+		<a href="#" id="new_publication" class="new_publication btn btn-primary mb-2">Добавить публикацию</a>
 			<div class="row">  <!-- =========== Убран класс 'flex-wrap' за ненадобностью ========= -->
 				{% for publication in posts %}
 					{% include 'mainapp/includes/news-list-card.html' %}
@@ -48,5 +49,7 @@
             </div>
 	</div>
 </main>
+{% include 'mainapp/includes/publication_add_modal.html' %}
+
 <!-- End Content -->
 {% endblock %}

@@ -382,7 +382,7 @@ $(document).ready(function () {
 
     $('tr').on('click', '.post_conference', event=>{
         event.preventDefault();
-        target = $(event.target);
+        var target = $(event.target);
         console.log('TARGET', target);
         // console.log(target.closest('a.post_conference').data('conference-id'));
         const conference_id = target.closest('a.post_conference').data('conference-id');

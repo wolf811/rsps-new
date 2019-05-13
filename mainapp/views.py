@@ -4,6 +4,9 @@ from mainapp.models import Member, Photo
 from django.core.paginator import Paginator
 from django.views.generic.edit import CreateView
 from .forms import PublicationForm
+from django.core.files import File
+
+from django.http import HttpResponseRedirect, HttpResponse
 
 # Create your views here.
 
@@ -137,6 +140,34 @@ class PublicationCreate(CreateView):
     form_class = PublicationForm
     # fields = ['title', 'short_description', 'text']
     template_name = 'mainapp/includes/new_publication_form.html'
+
+    def post(self, request, *args, **kwargs):
+        # import pdb; pdb.set_trace()
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            publication = form.save(commit=False)
+            publication.user = self.request.user
+            publication.save()
+            if len(self.request.FILES) > 0:
+                for f in self.request.FILES.getlist('images'):
+                    photo = Photo(image=File(f), post=publication)
+                    # pdb.set_trace()
+                    photo.clean()
+                    photo.save()
+            return HttpResponseRedirect('/news/')
+        else:
+            return render(request, self.template_name, {'form': form})
+
+    # def form_valid(self, form):
+    #     publication = form.save(commit=False)
+    #     publication.user = self.request.user
+    #     publication.save()
+    #     return HttpResponseRedirect('/news/')
+
+    # def form_invalid(self, form):
+    #     errors = form.errors
+    #     return HttpResponse(errors)
+
 
 def details(request, pk):
     post = Post.objects.get(pk=pk)
