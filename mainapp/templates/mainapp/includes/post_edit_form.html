@@ -1,0 +1,27 @@
+{% load formstyles %}
+<form id="publication_form" enctype="multipart/form-data" novalidate="">
+    {{ form.media }}
+    <div class="form-group">
+        <label for="id_title" class="col-form-label col-form-label-sm">Заголовок:&nbsp;<span
+                class="text-danger">*</span></label>
+        {{ form.title|addcss:"form-control form-control-sm" }}
+    </div>
+    <div class="form-group">
+        <label for="id_title" class="col-form-label col-form-label-sm">Краткое описание:&nbsp;<span
+                class="text-danger">*</span></label>
+        {{ form.short_description|addcss:"form-control form-control-sm" }}
+    </div>
+    <div class="form-group">
+        <label for="cke_id_text" class="col-form-label col-form-label-sm">Описание:&nbsp;<span
+                class="text-danger">*</span></label>
+        {{ form.text|safe }}
+    </div>
+    {% comment %} <small class="btn btn-link btn-sm"><i class="fa fa-upload"></i>&nbsp;Загрузить фото</small> {% endcomment %}
+    <div class="text-secondary">Загрузите фотографии (можно выбрать несколько файлов, удерживая <strong>"Ctrl"</strong>)</div>
+    <div class="text-secondary">Размер файла не должен превышать <strong>2Mb</strong>)</div>
+    {% comment %} {{ upload_form.images }} {% endcomment %}
+    {{ form.images }}
+        <div id="uploaded_photos">
+            {% include 'mainapp/includes/uploaded_files.html' %}
+        </div>
+</form>

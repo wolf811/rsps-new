@@ -3,11 +3,11 @@ from django.urls import reverse
 from django.core.files import File
 from mainapp.models import Post, Member, Conference, Photo
 from members.models import Membership
+from conferences.models import ConferenceTheme
 from django.contrib.auth.models import User
 # from django.conf import settings
 from mixer.backend.django import mixer
 import random
-
 
 # from model_mommy.recipe import Recipe, foreign_key, seq
 
@@ -32,6 +32,15 @@ news_titles = [
     'Вебинар НАКС',
 ]
 
+conference_themes = [
+    'Избрание руководителя',
+    'Прием новых членов',
+    'Определение даты конференции',
+    'Выбор делегатов ежегодного Съезда',
+    'О мероприятиях этого года',
+    'О резолюции региональной конференции',
+]
+
 names = ['Иван', 'Сергей', 'Владимир', 'Александр', 'Валентин', 'Анатолий', 'Кирилл']
 second_names = ['Иванович', 'Сергеевич', 'Владимирович', 'Александрович', 'Валентинович', 'Анатольевич', 'Кириллович']
 last_names = ['Иванов', 'Пономаренко', 'Минаев', 'Гончаров', 'Комбаров', 'Попов', 'Кузнецов']
@@ -48,12 +57,11 @@ class Command(BaseCommand):
         Member.objects.all().delete()
         Membership.objects.all().delete()
         Conference.objects.all().delete()
+        ConferenceTheme.objects.all().delete()
 
         #make PostPhotos
         for i in range(0, len(images)):
-            #make Tags
-            mixer.blend(Conference)
-            #make Posts without pictures
+            #make Posts and Photos
             mixer.blend(Post, title=random.choice(news_titles))
             mixer.blend(Photo, image=File(open(images[i], 'rb')))
         for i in range(20):
@@ -68,6 +76,12 @@ class Command(BaseCommand):
                                                     random.randint(10, 99)),
                 user=popov_user
             )
+        for i in range (0, 20):
+            mixer.blend(Conference, user=popov_user)
+        for conf in Conference.objects.all():
+            for i in range(0, random.randint(1, 5)):
+                mixer.blend(ConferenceTheme, conference=conf,
+                    subject=random.choice(conference_themes))
         for conference in Conference.objects.all():
             conference.members.add(Member.objects.first())
 

@@ -1,4 +1,4 @@
-{% load static %}
+{% load static %}{% load sass_tags %}
 <!doctype html>
 <html lang="ru">
 <head>
@@ -10,11 +10,11 @@
 	{% block css %}
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-	
+
 	<!-- Datepicker -->
 	<link rel="stylesheet" href="{% static 'css/jquery-ui.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/datepicker.min.css' %}">
-	
+
 	<!-- Fonts -->
 	<link href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -23,15 +23,19 @@
 	<link rel="stylesheet" href="{% static 'css/flickity.min.css' %}">
 
 	<!-- My styles -->
-	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="{% sass_src 'scss/style.scss' %}">
 	{% endblock %}
 
 	<title>{{ title }}</title>
+
+	{% comment %} <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script> {% endcomment %}
+	{% comment %} <script type="text/javascript" src="{% static "ckeditor/ckeditor-init.js" %}"></script> {% endcomment %}
+	<script type="text/javascript" src="{% static "ckeditor/ckeditor/ckeditor.js" %}"></script>
 </head>
 <body>
 	{% include 'mainapp/includes/header.html' %}
 
-	{% block content%} 
+	{% block content%}
 
 	{% endblock %}
 
@@ -39,11 +43,11 @@
 
 	{% include 'mainapp/includes/modal-authorization.html' %}
 	{% include 'mainapp/includes/modal-participantConf.html' %}
-	{% include 'mainapp/includes/modal-regConference.html' %}
+	{% comment %} {% include 'mainapp/includes/modal-regConference.html' %} {% endcomment %}
 	{% include 'mainapp/includes/modal-newEmployee.html' %}
 	{% comment %} {% include 'mainapp/includes/modal-regCongress.html' %} {% endcomment %}
 	{% include 'mainapp/includes/modal-newDepartament.html' %}
-	{% include 'mainapp/includes/modal-newCongress.html' %}
+	{% comment %} {% include 'mainapp/includes/modal-newCongress.html' %} {% endcomment %}
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -59,6 +63,7 @@
 	<script src="{% static 'js/flickity.pkgd.min.js' %}"></script>
 	<!-- My scripts -->
 	<script src="{% static 'js/script.js' %}"></script>
+	<script src={% static 'js/conferences.js'%}></script>
 
 </body>
 </html>

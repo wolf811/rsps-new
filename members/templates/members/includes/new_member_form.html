@@ -19,6 +19,7 @@
 						<!-- Вариант 1: касается ЛК РО и страницы Контакты РО (regional_office_detail) - автоматический выбор <option selected>отделение...</option> и блокировкой поля select атрибутом disabled -->
 						<select class="form-control form-control-sm" disabled required>
 							<option>-</option>
+			{% comment %} #TODO: make an autochoice of subdivision to request user {% endcomment %}
 						  	<option selected>Астраханская область</option>
 						  	<option>Тамбовская область</option>
 						  	<option>Воронежская область</option>
@@ -26,9 +27,8 @@
 						  	<option>Хабаровский край</option>
 						  	<option>Краснодарский край</option>
 						</select>
-
 						<!-- Вариант 2: касается страниц без привязки к РО (пр. Главная и т.д.) - автоматический выбор <option selected>отделение...</option> и блокировкой поля select атрибутом disabled -->
-						{% comment %} #TODO: make an autochoice of subdivision to request user {% endcomment %}
+
 						<!-- <select class="form-control form-control-sm" required>
 							<option>-</option>
 						  	<option>Астраханская область</option>
@@ -63,7 +63,7 @@
 							{% comment %} <input type="text" class="form-control form-control-sm"> {% endcomment %}
 							{{ add_new_member_form.tel }}
 						</div>
-					</div>	
+					</div>
 					<div class="form-group">
 						<label for="id_job" class="form-label-sm">Место работы</label>
 						{% comment %} <input type="text" class="form-control form-control-sm"> {% endcomment %}

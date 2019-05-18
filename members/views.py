@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
 from mainapp.models import Member
 from .models import Membership, MemberRegistration
 from .forms import MemberForm, EditMemberForm
@@ -41,6 +42,7 @@ class StatusedMember:
     def get_registrations(self):
         return MemberRegistration.objects.filter(member=self.member)
 
+@login_required
 def member_list(request):
     title = 'Список членов РСПС'
     member_list = Member.objects.filter(user=request.user)

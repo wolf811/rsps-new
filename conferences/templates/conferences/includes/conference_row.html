@@ -1,0 +1,29 @@
+						<td>{{ conference.date }}</td>
+						<td>{{ conference.place }}</td>
+						<td>
+							<div class="text-appercase">{{ conference.title }}</div>
+							<div>Колличество участников:&nbsp;<strong>{{ conference.members.all|length }}</strong></div>
+							<div id="completedmessage_{{ conference.pk }}">
+								{% if not conference.completed %}
+								<div class="text-danger mt-2">Зарегистрируйте участников</div>
+								{% else %}
+								<div class="text-info mt-2">Конференция завершена, {% if not conference.publication %}создайте публикацию{%else%}новость опубликована{%endif%}</div>
+									{% if conference.publication %}
+										<a href="#" data-publication-id="{{ conference.publication.pk }}"
+                                                    data-conference-id="{{ conference.pk }}"
+                                        class="edit_post_conference btn btn-outline-info btn-xs">Редактировать публикацию</a>
+										<a href="#" data-publication-id="{{ conference.publication.pk }}" class="delete_post_conference btn btn-outline-danger btn-xs">Удалить</a>
+									{% else %}
+										<a href="#" data-conference-id="{{ conference.pk }}" class="post_conference btn btn-outline-info btn-xs">Создать публикацию</a>
+									{% endif %}
+								{% endif %}
+							</div>
+						</td>
+						<td>
+							<a href="#" data-conference-id ="{{ conference.pk }}" class="remove_conference btn-action mr-3 text-primary" title="Удалить конференцию"><i
+									class="fa fa-trash-o"></i></a>
+							<a href="#multiCollapseConf{{ conference.pk }}"
+								class="conference_edit btn-action text-primary" data-toggle="collapse"
+								data-conference-id="{{ conference.pk }}" aria-expanded="false" title="Изменить"><i
+									class="fa fa-pencil"></i></a>
+						</td>

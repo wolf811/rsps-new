@@ -96,7 +96,7 @@ $(document).ready(function(){
         return cookieValue;
     }
     var csrftoken = getCookie('csrftoken');
-    console.log('CSRF_TOKEN:', csrftoken);
+    // console.log('CSRF_TOKEN:', csrftoken);
 
     function csrfSafeMethod(method) {
         // these HTTP methods do not require CSRF protection
@@ -375,4 +375,35 @@ $(document).ready(function(){
             };
         });
     };
+
+    $(".modal-wide").on("show.bs.modal", function() {
+        var height = $(window).height() - 200;
+        $(this).find(".modal-body").css("max-height", height);
+      });
+
+    $('#new_publication').click( event => {
+        event.preventDefault();
+        console.log('click');
+        var target = $(event.target);
+        $.ajax({
+            url: '/new_publication/',
+            success: response => {
+                console.log('good');
+                // $('.publication_body').html('');
+                // $('.publication_body').on('change', '#cke_id_text', function() {
+                //     $('#cke_id_text').css('width', '100%');
+                //     $('#new_publication').trigger('click');
+                // });
+                $('.publication_body').html(response);
+                var textArea = $('#cke_id_text');
+                console.log(textArea);
+                $('#cke_id_text').css('width', '100%');
+                $('.modal_publication').modal('show');
+            },
+            error: response => {
+                console.log('bad');
+            }
+        });
+    });
+
 }); //document ready end function

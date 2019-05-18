@@ -36,6 +36,7 @@ urlpatterns = [
     path('registration/', mainapp.registration, name = 'registration'),
     path('about/', mainapp.about, name = 'about'),
     path('news/', mainapp.news, name = 'news'),
+    path('new_publication/', mainapp.PublicationCreate.as_view(), name='new_publication'),
     path('details/<slug:pk>', mainapp.details, name='details'),
     path('docs/', mainapp.docs, name = 'docs'),
     path('regional_office/', mainapp.regional_office, name = 'regional_office'),
@@ -44,6 +45,7 @@ urlpatterns = [
     path('conf/', mainapp.conf, name = 'conf'),
     path('ckeditor/', include('ckeditor_uploader.urls')),
     path('members/', include('members.urls', namespace='members')),
+    path('conferences/', include('conferences.urls', namespace='conferences')),
 ]
 if settings.DEBUG:
     urlpatterns += static(

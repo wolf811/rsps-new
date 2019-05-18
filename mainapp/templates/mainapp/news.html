@@ -7,13 +7,18 @@
 		<nav aria-label="breadcrumb">
 			<ol class="breadcrumb">
 				<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+				<li class="breadcrumb-item"><a href="{% url 'account_about' %}">Личный кабинет подразделения</a></li>
 				<li class="breadcrumb-item active" aria-current="page">Новости</li>
 			</ol>
 		</nav>
 
-		<h4 class="title-page mb-4">Новости РСПС</h4>
+		<h4 class="title-page">Личный кабинет</h4>
+
+		{% include 'mainapp/includes/account_menu_tabs.html' %}
 
 		<div class="card-all">
+		{% comment %} <a href="{% url 'new_publication' %}" class="new_publication btn btn-primary mb-2">Добавить публикацию</a> {% endcomment %}
+		<a href="#" id="new_publication" class="new_publication btn btn-primary mb-2">Добавить публикацию</a>
 			<div class="row">  <!-- =========== Убран класс 'flex-wrap' за ненадобностью ========= -->
 				{% for publication in posts %}
 					{% include 'mainapp/includes/news-list-card.html' %}
@@ -43,6 +48,8 @@
                 </nav>
             </div>
 	</div>
-</main> 
+</main>
+{% include 'mainapp/includes/publication_add_modal.html' %}
+
 <!-- End Content -->
 {% endblock %}

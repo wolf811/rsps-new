@@ -1,0 +1,83 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block content %}
+<main class="pt-4">
+	<div class="container">
+		<nav aria-label="breadcrumb">
+			<ol class="breadcrumb">
+				<li class="breadcrumb-item"><a href="{% url 'index' %}">Главная</a></li>
+				<li class="breadcrumb-item"><a href="{% url 'account_about' %}">Личный кабинет подразделения</a></li>
+				<li class="breadcrumb-item active" aria-current="page">Конференции</li>
+			</ol>
+		</nav>
+
+		<h4 class="title-page">Личный кабинет</h4>
+
+		{% include 'mainapp/includes/account_menu_tabs.html' %}
+
+		<button type="button" class="btn btn-danger btn-xl mb-4" data-toggle='modal'
+			data-target='#modal-regConference'>Добавить конференцию</button>
+
+		<div class="table-responsive">
+			<table class="table table-list">
+				<thead>
+					<tr class="active">
+						<th>Дата проведения</th>
+						<th>Место проведения</th>
+						<th>Название конференции</th>
+						<th>Действия</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for conference in conferences %}
+						<tr id="tr_{{ conference.pk }}">
+							{% include 'conferences/includes/conference_row.html' %}
+						</tr>
+					{% comment %} {% include 'conferences/includes/conference_edit.html' %} {% endcomment %}
+					<tr class="multi-collapse collapse edit-list" id="multiCollapseConf{{ conference.pk }}">
+						<td id="td_{{conference.pk}}" colspan="4" class="total-column">
+							<div id="loadingmessage">
+								<img src="{% static 'images/ajax-loader.gif' %}" alt="loading_data">
+							</div>
+						</td>
+					</tr>
+
+
+					{% endfor %}
+
+				</tbody>
+			</table>
+		</div>
+		{% if conferences.paginator.num_pages > 1  %}
+		<nav aria-label="Conferences pagination">
+			<ul class="pagination pagination-sm">
+				{% if conferences.has_previous %}
+				<li class="page-item">
+					<a class="page-link" href="?page=1#table-top" aria-label="Previous">
+						<span aria-hidden="true">&laquo;</span>
+				<li class="page-item"><a class="page-link"
+						href="?page={{conferences.previous_page_number}}#table-top">{{conferences.previous_page_number}}</a>
+				</li>
+				</a>
+				</li>
+				{% endif %}
+				<li class="page-item active disabled"><a class="page-link">{{ conferences.number }}</a></li>
+				{% if conferences.has_next %}
+				<li class="page-item"><a class="page-link"
+						href="?page={{conferences.next_page_number}}#table-top">{{ conferences.next_page_number}}</a>
+				</li>
+				<li class="page-item">
+					<a class="page-link" href="?page={{conferences.paginator.num_pages}}#table-top" aria-label="Next">
+						<span aria-hidden="true">&raquo;</span>
+					</a>
+				</li>
+				{% endif %}
+			</ul>
+		</nav>
+		{% endif %}
+	</div>
+</main>
+
+{% include 'conferences/includes/conference_add_modal.html' %}
+{% include 'mainapp/includes/publication_add_modal.html' %}
+{% endblock %}

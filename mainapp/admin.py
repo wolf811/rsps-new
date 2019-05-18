@@ -2,6 +2,7 @@ from django.contrib import admin
 from mainapp.models import Conference
 from mainapp.models import Member, Post, Photo
 from members.models import Membership, MemberRegistration
+from conferences.models import ConferenceTheme
 from django.urls import reverse
 from django.utils.html import format_html
 
@@ -37,16 +38,31 @@ class PhotoInline(admin.StackedInline):
     get_edit_link.short_description = "Изменить"
     get_edit_link.allow_tags = True
 
+class ConferenceThemeInline(admin.StackedInline):
+    model = ConferenceTheme
+    extra = 0
+    fields = ['subject']
+
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
     view_on_site = True
     fields = ('title', 'short_description', 'text', 'published_date')
-    list_display = ['title', 'published_date']
+    list_display = ['title', 'published_date', 'user']
     inlines = [PhotoInline]
 
     def view_on_site(self, obj):
         url = reverse('details', kwargs={'pk': obj.pk})
         return url
+
+    def save_model(self, request, instance, form, change):
+        user = request.user
+        instance = form.save(commit=False)
+        if getattr(instance, 'user', None) is None:
+            instance.user = request.user
+        instance.modified_by = user
+        instance.save()
+        form.save_m2m()
+        return instance
 
 @admin.register(Member)
 class MemberAdmin(admin.ModelAdmin):
@@ -54,7 +70,38 @@ class MemberAdmin(admin.ModelAdmin):
     fields = ['fio', 'job', 'jobplace', 'tel', 'email', 'user']
     inlines = [MembershipInline]
 
+@admin.register(Conference)
+class ConferenceAdmin(admin.ModelAdmin):
+    view_on_site = False
+    exclude = ()
+    inlines = [ConferenceThemeInline]
 
-admin.site.register(Conference)
+# admin.site.register(Conference)
+# admin.site.register(Photo)
+
+def generate_sha(file):
+    sha = hashlib.sha1()
+    file.seek(0)
+    while True:
+        buf = file.read(104857600)
+        if not buf:
+            break
+        sha.update(buf)
+    sha1 = sha.hexdigest()
+    file.seek(0)
+
+    return sha1
+
+@admin.register(Photo)
+class PhotoAdmin(admin.ModelAdmin):
+    readonly_fields = ['file_sha1', 'filesize']
+    # def save_model(self, request, obj, form, change):
+    #     sha = generate_sha(obj.image)
+    #     obj.file_sha1 = sha
+    #     match_qs = ReportPost.objects.filter(file_sha1=sha)
+    #     if match_qs.count() > 0:
+    #         obj.image = match_qs[0].file
+    #     obj.save()
+
 admin.site.register(MemberRegistration)
 admin.site.register(Membership)
